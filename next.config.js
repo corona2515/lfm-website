@@ -1,8 +1,8 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  output: 'standalone',
   images: {
-    unoptimized: false,
+    // Avoid runtime image optimizer dependency issues on minimal hosts.
+    unoptimized: true,
     remotePatterns: [],
   },
   // Strict mode for better development experience
