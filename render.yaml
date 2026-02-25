@@ -1,0 +1,28 @@
+# Render Blueprint for LeanFM Marketing Website
+# https://render.com/docs/blueprint-spec
+
+services:
+  - type: web
+    name: leanfm-website
+    runtime: node
+    region: oregon
+    plan: starter
+    buildCommand: npm ci && npm run build
+    startCommand: node .next/standalone/server.js
+    healthCheckPath: /
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: PORT
+        value: 3000
+      - key: SITE_URL
+        sync: false
+      - key: LEAD_WEBHOOK_URL
+        sync: false
+      - key: CONTACT_EMAIL
+        sync: false
+      - key: APP_URL
+        sync: false
+      - key: GOOGLE_ANALYTICS_ID
+        sync: false
+    autoDeploy: true

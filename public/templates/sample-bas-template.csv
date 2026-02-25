@@ -1,0 +1,7 @@
+timestamp,site,building,equipment_id,point_name,point_value,units
+2026-01-01T08:00:00Z,Sample District,Building A,AHU-01,supply_air_temp,55.2,F
+2026-01-01T08:00:00Z,Sample District,Building A,AHU-01,return_air_temp,72.8,F
+2026-01-01T08:00:00Z,Sample District,Building A,AHU-01,outdoor_air_temp,41.0,F
+2026-01-01T08:05:00Z,Sample District,Building A,AHU-01,supply_air_temp,55.6,F
+2026-01-01T08:05:00Z,Sample District,Building A,AHU-01,return_air_temp,73.0,F
+2026-01-01T08:05:00Z,Sample District,Building A,AHU-01,fan_status,1,state

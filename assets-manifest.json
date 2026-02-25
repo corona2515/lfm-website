@@ -1,0 +1,206 @@
+{
+  "version": "1.0.0",
+  "generatedAt": "2026-01-28",
+  "assets": [
+    {
+      "id": "IMG-001",
+      "filename": "public/media/IMG-001.png",
+      "description": "OnPoint dashboard overview showing the main interface with navigation and key metrics",
+      "page": "Home",
+      "section": "Hero",
+      "aspect": "16:9",
+      "width": 1920,
+      "height": 1080
+    },
+    {
+      "id": "IMG-002",
+      "filename": "public/media/IMG-002.png",
+      "description": "CSV upload interface with drag-and-drop zone and file preview",
+      "page": "Home",
+      "section": "How It Works - Step 1",
+      "aspect": "4:3",
+      "width": 800,
+      "height": 600
+    },
+    {
+      "id": "IMG-003",
+      "filename": "public/media/IMG-003.png",
+      "description": "Data point mapping interface showing BAS points being mapped to standard types",
+      "page": "Home",
+      "section": "How It Works - Step 2",
+      "aspect": "4:3",
+      "width": 800,
+      "height": 600
+    },
+    {
+      "id": "IMG-004",
+      "filename": "public/media/IMG-004.png",
+      "description": "Results dashboard showing prioritized fault list with severity indicators",
+      "page": "Home",
+      "section": "How It Works - Step 3",
+      "aspect": "4:3",
+      "width": 800,
+      "height": 600
+    },
+    {
+      "id": "IMG-005",
+      "filename": "public/media/IMG-005.png",
+      "description": "Fault detail view showing specific fault info and recommended actions",
+      "page": "Home",
+      "section": "Screenshot Band",
+      "aspect": "16:9",
+      "width": 1280,
+      "height": 720
+    },
+    {
+      "id": "IMG-006",
+      "filename": "public/media/IMG-006.png",
+      "description": "Report export preview showing PDF/CSV export options",
+      "page": "Home",
+      "section": "Screenshot Band",
+      "aspect": "16:9",
+      "width": 1280,
+      "height": 720
+    },
+    {
+      "id": "IMG-007",
+      "filename": "public/media/IMG-007.png",
+      "description": "Full OnPoint platform interface with sidebar navigation",
+      "page": "Product",
+      "section": "Hero",
+      "aspect": "16:9",
+      "width": 1920,
+      "height": 1080
+    },
+    {
+      "id": "IMG-008",
+      "filename": "public/media/IMG-008.png",
+      "description": "Building portfolio view showing multiple buildings with status",
+      "page": "Product",
+      "section": "Features - Portfolio",
+      "aspect": "16:9",
+      "width": 1280,
+      "height": 720
+    },
+    {
+      "id": "IMG-009",
+      "filename": "public/media/IMG-009.png",
+      "description": "Subscription management interface showing plan options",
+      "page": "Product",
+      "section": "Features - Subscription",
+      "aspect": "16:9",
+      "width": 1280,
+      "height": 720
+    },
+    {
+      "id": "IMG-010",
+      "filename": "public/media/IMG-010.png",
+      "description": "Prescriptiv AI analysis in progress showing real-time processing",
+      "page": "Prescriptiv",
+      "section": "Hero",
+      "aspect": "16:9",
+      "width": 1920,
+      "height": 1080
+    },
+    {
+      "id": "IMG-011",
+      "filename": "public/media/IMG-011.png",
+      "description": "Fault diagnosis breakdown showing AI reasoning",
+      "page": "Prescriptiv",
+      "section": "How It Works",
+      "aspect": "4:3",
+      "width": 800,
+      "height": 600
+    },
+    {
+      "id": "IMG-012",
+      "filename": "public/media/IMG-012.png",
+      "description": "Step 1 detailed: Upload interface with supported file formats",
+      "page": "How It Works",
+      "section": "Step 1 Detail",
+      "aspect": "16:9",
+      "width": 1280,
+      "height": 720
+    },
+    {
+      "id": "IMG-013",
+      "filename": "public/media/IMG-013.png",
+      "description": "Step 2 detailed: Mapping interface with auto-suggestions",
+      "page": "How It Works",
+      "section": "Step 2 Detail",
+      "aspect": "16:9",
+      "width": 1280,
+      "height": 720
+    },
+    {
+      "id": "IMG-014",
+      "filename": "public/media/IMG-014.png",
+      "description": "Step 3 detailed: Results view with filter and sort options",
+      "page": "How It Works",
+      "section": "Step 3 Detail",
+      "aspect": "16:9",
+      "width": 1280,
+      "height": 720
+    },
+    {
+      "id": "IMG-015",
+      "filename": "public/media/IMG-015.png",
+      "description": "Sample case study results: Office building fault summary",
+      "page": "Results",
+      "section": "Case Study 1",
+      "aspect": "16:9",
+      "width": 1280,
+      "height": 720
+    },
+    {
+      "id": "IMG-016",
+      "filename": "public/media/IMG-016.png",
+      "description": "Sample case study results: Healthcare facility analysis",
+      "page": "Results",
+      "section": "Case Study 2",
+      "aspect": "16:9",
+      "width": 1280,
+      "height": 720
+    },
+    {
+      "id": "IMG-017",
+      "filename": "public/media/IMG-017.png",
+      "description": "Sample exported report PDF preview",
+      "page": "Results",
+      "section": "Sample Output",
+      "aspect": "3:4",
+      "width": 600,
+      "height": 800
+    },
+    {
+      "id": "IMG-018",
+      "filename": "public/media/IMG-018.png",
+      "description": "Security infrastructure diagram showing data flow",
+      "page": "Security",
+      "section": "Architecture",
+      "aspect": "16:9",
+      "width": 1280,
+      "height": 720
+    },
+    {
+      "id": "IMG-019",
+      "filename": "public/media/IMG-019.png",
+      "description": "LeanFM team photo or office",
+      "page": "About",
+      "section": "Team",
+      "aspect": "16:9",
+      "width": 1280,
+      "height": 720
+    },
+    {
+      "id": "IMG-020",
+      "filename": "public/media/IMG-020.png",
+      "description": "Investor presentation cover slide",
+      "page": "Investors",
+      "section": "Hero",
+      "aspect": "16:9",
+      "width": 1920,
+      "height": 1080
+    }
+  ]
+}
