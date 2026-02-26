@@ -62,7 +62,7 @@ export function Header() {
               width={1920}
               height={453}
               priority
-              className="h-8 w-auto md:h-9"
+              className="h-8 w-auto md:h-9 logo-cta-green"
             />
           </Link>
 

@@ -66,7 +66,7 @@ export function Footer() {
                   alt="LeanFM Technologies"
                   width={1920}
                   height={453}
-                  className="h-8 w-auto"
+                  className="h-8 w-auto logo-cta-green"
                 />
               </Link>
               <p className="text-body-sm text-slate-400 max-w-xs">
