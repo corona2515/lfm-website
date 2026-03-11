@@ -6,16 +6,18 @@ import { trackEvent } from '@/lib/analytics'
 import { SITE_CONFIG } from '@/lib/constants'
 
 type FormState = 'idle' | 'submitting' | 'success' | 'error'
+type ContactIntent = 'demo' | 'investor' | 'general'
 
 interface FormData {
   name: string
   email: string
   company: string
   role: string
+  phone: string
   buildingType: string
   portfolioSize: string
   message: string
-  intent: string
+  intent: ContactIntent
 }
 
 const BUILDING_TYPES = [
@@ -28,8 +30,7 @@ const BUILDING_TYPES = [
   'Other',
 ]
 
-const INTENT_OPTIONS = [
-  { value: 'trial', label: 'Try free preview' },
+const INTENT_OPTIONS: Array<{ value: ContactIntent; label: string }> = [
   { value: 'demo', label: 'Book a demo' },
   { value: 'investor', label: 'Investor inquiry' },
   { value: 'general', label: 'General question' },
@@ -42,10 +43,11 @@ export default function ContactPage() {
     email: '',
     company: '',
     role: '',
+    phone: '',
     buildingType: '',
     portfolioSize: '',
     message: '',
-    intent: 'trial',
+    intent: 'demo',
   })
   const [errorMessage, setErrorMessage] = useState('')
 
@@ -53,11 +55,16 @@ export default function ContactPage() {
     const params = new URLSearchParams(window.location.search)
     const intentParam = params.get('intent')
 
-    if (intentParam && ['trial', 'demo', 'investor', 'general'].includes(intentParam)) {
+    if (!intentParam) {
+      return
+    }
+
+    const normalizedIntent = intentParam === 'trial' ? 'demo' : intentParam
+    if (normalizedIntent === 'demo' || normalizedIntent === 'investor' || normalizedIntent === 'general') {
       setFormData((prev) => (
-        prev.intent === intentParam
+        prev.intent === normalizedIntent
           ? prev
-          : { ...prev, intent: intentParam }
+          : { ...prev, intent: normalizedIntent }
       ))
     }
   }, [])
@@ -80,7 +87,7 @@ export default function ContactPage() {
 
       trackEvent('contact_submit', { intent: formData.intent })
       if (formData.intent === 'demo') {
-        trackEvent('demo_request', { source: 'contact_form' })
+        trackEvent('cta_demo_click', { location: 'contact_form_submit' })
       }
 
       setFormState('success')
@@ -91,7 +98,7 @@ export default function ContactPage() {
   }
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
-    setFormData(prev => ({
+    setFormData((prev) => ({
       ...prev,
       [e.target.name]: e.target.value,
     }))
@@ -99,10 +106,12 @@ export default function ContactPage() {
 
   const getSubmitLabel = () => {
     switch (formData.intent) {
-      case 'trial': return 'Request Free Access'
-      case 'demo': return 'Book Demo'
-      case 'investor': return 'Request Deck'
-      default: return 'Send Message'
+      case 'demo':
+        return 'Book Demo'
+      case 'investor':
+        return 'Request Deck'
+      default:
+        return 'Send Message'
     }
   }
 
@@ -120,7 +129,9 @@ export default function ContactPage() {
               </div>
               <h1 className="heading-2 text-white mb-4">Message received</h1>
               <p className="body-large mb-2">
-                Thanks for reaching out. We&apos;ll get back to you within one business day.
+                {formData.intent === 'demo'
+                  ? 'Thanks for reaching out. We\'ll contact you to schedule your demo.'
+                  : 'Thanks for reaching out. We\'ll get back to you within one business day.'}
               </p>
               <p className="text-body-sm text-slate-500">
                 Check your email at {formData.email} for confirmation.
@@ -134,7 +145,6 @@ export default function ContactPage() {
 
   return (
     <>
-      {/* Hero */}
       <section className="relative overflow-hidden">
         <div className="absolute inset-0 bg-grid" />
         <div className="absolute top-0 right-0 w-[500px] h-[400px] bg-cyan-500/10 rounded-full blur-3xl" />
@@ -143,20 +153,18 @@ export default function ContactPage() {
           <div className="text-center max-w-2xl mx-auto">
             <Badge className="mb-6">Contact</Badge>
             <h1 className="heading-1 text-white mb-6">
-              Let&apos;s talk
+              Book a 20-minute walkthrough
             </h1>
             <p className="body-large">
-              Questions about OnPoint? Want a demo? Looking to invest? We&apos;d love to hear from you.
+              Share a few details and our team will schedule a demo focused on your facilities portfolio.
             </p>
           </div>
         </div>
       </section>
 
-      {/* Form */}
       <section className="section pt-8">
         <div className="container-default">
           <div className="grid lg:grid-cols-3 gap-12">
-            {/* Contact Info */}
             <div className="lg:col-span-1">
               <Card className="sticky top-24">
                 <h2 className="font-semibold text-white mb-4">Get in touch</h2>
@@ -185,13 +193,11 @@ export default function ContactPage() {
               </Card>
             </div>
 
-            {/* Form */}
             <div className="lg:col-span-2">
               <form onSubmit={handleSubmit} className="space-y-6">
-                {/* Intent */}
                 <div>
                   <label className="label">What can we help with?</label>
-                  <div className="grid grid-cols-2 gap-3">
+                  <div className="grid md:grid-cols-3 gap-3">
                     {INTENT_OPTIONS.map((option) => (
                       <label
                         key={option.value}
@@ -224,7 +230,6 @@ export default function ContactPage() {
                   </div>
                 </div>
 
-                {/* Name & Email */}
                 <div className="grid md:grid-cols-2 gap-6">
                   <div>
                     <label htmlFor="name" className="label">Full name *</label>
@@ -254,7 +259,6 @@ export default function ContactPage() {
                   </div>
                 </div>
 
-                {/* Company & Role */}
                 <div className="grid md:grid-cols-2 gap-6">
                   <div>
                     <label htmlFor="company" className="label">Organization *</label>
@@ -269,39 +273,34 @@ export default function ContactPage() {
                       placeholder="Acme Properties"
                     />
                   </div>
-                  {formData.intent === 'trial' ? (
-                    <div>
-                      <label htmlFor="portfolioSize" className="label">Portfolio size *</label>
-                      <input
-                        type="text"
-                        id="portfolioSize"
-                        name="portfolioSize"
-                        required
-                        value={formData.portfolioSize}
-                        onChange={handleChange}
-                        className="input"
-                        placeholder="e.g., 5 buildings, 2M sq ft"
-                      />
-                    </div>
-                  ) : (
-                    <div>
-                      <label htmlFor="role" className="label">Job title</label>
-                      <input
-                        type="text"
-                        id="role"
-                        name="role"
-                        value={formData.role}
-                        onChange={handleChange}
-                        className="input"
-                        placeholder="Facility Manager"
-                      />
-                    </div>
-                  )}
+                  <div>
+                    <label htmlFor="role" className="label">Job title</label>
+                    <input
+                      type="text"
+                      id="role"
+                      name="role"
+                      value={formData.role}
+                      onChange={handleChange}
+                      className="input"
+                      placeholder="Facilities Director"
+                    />
+                  </div>
                 </div>
 
-                {/* Building Type & Portfolio Size */}
-                {formData.intent === 'demo' && (
-                  <div className="grid md:grid-cols-2 gap-6">
+                <div className="grid md:grid-cols-2 gap-6">
+                  <div>
+                    <label htmlFor="phone" className="label">Phone</label>
+                    <input
+                      type="tel"
+                      id="phone"
+                      name="phone"
+                      value={formData.phone}
+                      onChange={handleChange}
+                      className="input"
+                      placeholder="(555) 123-4567"
+                    />
+                  </div>
+                  {formData.intent === 'demo' ? (
                     <div>
                       <label htmlFor="buildingType" className="label">Building type</label>
                       <select
@@ -317,6 +316,7 @@ export default function ContactPage() {
                         ))}
                       </select>
                     </div>
+                  ) : (
                     <div>
                       <label htmlFor="portfolioSize" className="label">Portfolio size</label>
                       <input
@@ -329,39 +329,51 @@ export default function ContactPage() {
                         placeholder="e.g., 5 buildings, 2M sq ft"
                       />
                     </div>
-                  </div>
-                )}
+                  )}
+                </div>
 
-                {/* Message */}
-                {formData.intent !== 'trial' && (
+                {formData.intent === 'demo' && (
                   <div>
-                    <label htmlFor="message" className="label">
-                      {formData.intent === 'investor' ? 'Tell us about your firm' : 'Message'}
-                    </label>
-                    <textarea
-                      id="message"
-                      name="message"
-                      rows={4}
-                      value={formData.message}
+                    <label htmlFor="portfolioSize" className="label">Portfolio size</label>
+                    <input
+                      type="text"
+                      id="portfolioSize"
+                      name="portfolioSize"
+                      value={formData.portfolioSize}
                       onChange={handleChange}
-                      className="input resize-none"
-                      placeholder={
-                        formData.intent === 'investor'
-                          ? 'Brief description of your investment focus...'
-                          : 'How can we help?'
-                      }
+                      className="input"
+                      placeholder="e.g., 5 buildings, 2M sq ft"
                     />
                   </div>
                 )}
 
-                {/* Error message */}
+                <div>
+                  <label htmlFor="message" className="label">
+                    {formData.intent === 'investor' ? 'Tell us about your firm' : 'Message (optional)'}
+                  </label>
+                  <textarea
+                    id="message"
+                    name="message"
+                    rows={4}
+                    value={formData.message}
+                    onChange={handleChange}
+                    className="input resize-none"
+                    placeholder={
+                      formData.intent === 'investor'
+                        ? 'Brief description of your investment focus...'
+                        : formData.intent === 'demo'
+                          ? 'Anything you want us to cover in your walkthrough?'
+                          : 'How can we help?'
+                    }
+                  />
+                </div>
+
                 {formState === 'error' && (
                   <div className="p-4 rounded-lg bg-red-500/10 border border-red-500/30 text-body-sm text-red-400">
                     {errorMessage}
                   </div>
                 )}
 
-                {/* Submit */}
                 <button
                   type="submit"
                   disabled={formState === 'submitting'}

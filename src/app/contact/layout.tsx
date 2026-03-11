@@ -2,7 +2,7 @@ import type { Metadata } from 'next'
 
 export const metadata: Metadata = {
   title: 'Contact',
-  description: 'Request a free OnPoint preview, book a demo, or contact LeanFM about building fault detection and diagnosis.',
+  description: 'Book a LeanFM OnPoint demo to review hidden HVAC faults, prioritized actions, and potential energy savings.',
 }
 
 export default function ContactLayout({

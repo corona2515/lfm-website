@@ -32,10 +32,10 @@ export function Footer() {
               </p>
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
                 <TrackedButton
-                  href="/contact?intent=trial"
+                  href="/contact?intent=demo"
                   size="large"
-                  eventName="layout_cta_click"
-                  eventParams={{ location: 'footer_primary_lead_form' }}
+                  eventName="cta_demo_click"
+                  eventParams={{ location: 'footer_primary' }}
                 >
                   {CTA_LABELS.primary}
                 </TrackedButton>
@@ -43,8 +43,8 @@ export function Footer() {
                   variant="secondary"
                   href={SITE_CONFIG.appUrl}
                   size="large"
-                  eventName="layout_cta_click"
-                  eventParams={{ location: 'footer_secondary_create_account' }}
+                  eventName="cta_upload_sample_click"
+                  eventParams={{ location: 'footer_secondary' }}
                 >
                   {CTA_LABELS.secondary}
                 </TrackedButton>

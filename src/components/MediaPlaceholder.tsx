@@ -9,6 +9,7 @@ interface MediaPlaceholderProps {
   aspect?: '16:9' | '4:3' | '3:4' | '1:1' | '21:9'
   className?: string
   priority?: boolean
+  objectPosition?: 'center' | 'top' | 'left'
 }
 
 const ASPECT_RATIOS = {
@@ -25,6 +26,7 @@ export function MediaPlaceholder({
   aspect = '16:9',
   className,
   priority = false,
+  objectPosition = 'center',
 }: MediaPlaceholderProps) {
   const [imageExists, setImageExists] = useState(false)
   const [isLoading, setIsLoading] = useState(true)
@@ -73,7 +75,14 @@ export function MediaPlaceholder({
         <img
           src={imagePath}
           alt={description}
-          className="w-full h-full object-cover"
+          className={cn(
+            'w-full h-full object-cover',
+            objectPosition === 'top'
+              ? 'object-top'
+              : objectPosition === 'left'
+                ? 'object-left'
+                : 'object-center'
+          )}
           loading={priority ? 'eager' : 'lazy'}
         />
       </div>
@@ -146,12 +155,14 @@ export function Screenshot({
   description,
   aspect = '16:9',
   className,
+  objectPosition = 'center',
 }: MediaPlaceholderProps) {
   return (
     <MediaPlaceholder
       id={id}
       description={description}
       aspect={aspect}
+      objectPosition={objectPosition}
       className={cn('shadow-card', className)}
     />
   )

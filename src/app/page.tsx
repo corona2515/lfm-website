@@ -91,10 +91,10 @@ export default function HomePage() {
     offers: {
       '@type': 'Offer',
       availability: 'https://schema.org/LimitedAvailability',
-      url: `${SITE_CONFIG.url}/contact?intent=trial`,
+      url: `${SITE_CONFIG.url}/contact?intent=demo`,
       price: '0',
       priceCurrency: 'USD',
-      description: 'Start with lead-form onboarding or sample BAS data upload.',
+      description: 'Book a demo or upload a sample dataset to start review.',
     },
   }
 
@@ -141,35 +141,34 @@ export default function HomePage() {
         <div className="container-wide relative z-10 pt-24 pb-20 md:pt-32 md:pb-24">
           <div className="grid lg:grid-cols-2 gap-12 items-center">
             <div className="max-w-2xl">
-              <Badge className="mb-6 animate-fade-in">For Facilities and Energy Teams</Badge>
+              <Badge className="mb-6 animate-fade-in">For Facilities &amp; Energy Teams</Badge>
               <h1 className="heading-1 text-white mb-6 animate-fade-in-up">
-                Stop Paying for Invisible HVAC Waste
+                Find Hidden HVAC Waste Before It Hits Your Budget
               </h1>
               <p className="body-large mb-3 animate-fade-in-up delay-100">
-                AI-powered fault detection for commercial buildings.
+                AI fault detection for commercial buildings using your existing BAS data.
               </p>
               <p className="body-default mb-8 animate-fade-in-up delay-100">
-                Our OnPoint software uses our patented Prescriptiv AI technology to analyse your BAS
-                trend data, rank issues by likely impact, and give your team clear actions to reduce
-                avoidable energy spend.
+                OnPoint analyzes your trend exports, prioritizes faults by likely energy and comfort
+                impact, and gives your team clear next steps to fix what matters first.
               </p>
               <div className="flex flex-wrap gap-2 mb-8 animate-fade-in-up delay-200">
                 <span className="inline-flex items-center rounded-full border border-blue-400/40 bg-blue-500/10 px-3 py-1 text-body-xs font-semibold text-blue-200">
-                  Comfort Risks
+                  Energy Waste
                 </span>
                 <span className="inline-flex items-center rounded-full border border-red-400/40 bg-red-500/10 px-3 py-1 text-body-xs font-semibold text-red-200">
-                  Fault Alerts
+                  Comfort Risk
                 </span>
                 <span className="inline-flex items-center rounded-full border border-green-400/40 bg-green-500/10 px-3 py-1 text-body-xs font-semibold text-green-200">
-                  Savings Opportunities
+                  Maintenance Priority
                 </span>
               </div>
               <div className="flex flex-col sm:flex-row gap-4 mb-4 animate-fade-in-up delay-300">
                 <TrackedButton
-                  href="/contact?intent=trial"
+                  href="/contact?intent=demo"
                   size="large"
-                  eventName="hero_cta_click"
-                  eventParams={{ location: 'home_hero_primary_lead_form' }}
+                  eventName="cta_demo_click"
+                  eventParams={{ location: 'home_hero_primary' }}
                 >
                   {CTA_LABELS.primary}
                 </TrackedButton>
@@ -177,14 +176,17 @@ export default function HomePage() {
                   variant="secondary"
                   href={SITE_CONFIG.appUrl}
                   size="large"
-                  eventName="hero_cta_click"
-                  eventParams={{ location: 'home_hero_secondary_create_account' }}
+                  eventName="cta_upload_sample_click"
+                  eventParams={{ location: 'home_hero_secondary' }}
                 >
                   {CTA_LABELS.secondary}
                 </TrackedButton>
               </div>
               <p className="text-body-sm text-slate-400">
-                Start with a sample file. No hardware installation. No long-term contract required.
+                No new sensors. No on-site installation. Start with existing BAS exports.
+              </p>
+              <p className="text-body-sm text-slate-300 mt-2">
+                Up to 35% savings is common in buildings with undetected HVAC faults.*
               </p>
               <p className="text-body-sm mt-2">
                 <a
@@ -224,6 +226,9 @@ export default function HomePage() {
               </Card>
             ))}
           </div>
+          <p className="mt-4 text-center text-body-xs text-slate-400">
+            *Actual savings vary by building condition, controls quality, and implementation of recommended actions.
+          </p>
 
           <div className="mt-10 flex flex-wrap justify-center gap-3">
             {HOME_TRUST_SIGNALS.map((signal) => (
@@ -232,6 +237,9 @@ export default function HomePage() {
               </span>
             ))}
           </div>
+          <p className="mt-4 text-center text-body-xs text-slate-500">
+            Results are based on prior customer analyses; outcomes vary by building conditions and correction execution.
+          </p>
         </div>
       </section>
 
@@ -239,10 +247,10 @@ export default function HomePage() {
         <div className="container-default">
           <div className="text-center mb-12">
             <Badge className="mb-6">How It Works</Badge>
-            <h2 className="heading-2 text-white mb-4">Your Building Already Has the Data. We Turn It Into Action.</h2>
+            <h2 className="heading-2 text-white mb-4">From BAS Export to Action Plan in 3 Steps</h2>
             <p className="body-large max-w-2xl mx-auto">
-              Using your existing building systems, we surface energy waste, comfort risks, and
-              equipment issues — with clear next steps.
+              Upload your existing BAS trends, let LeanFM review the data, and walk away with a ranked
+              action plan your team can execute.
             </p>
           </div>
 
@@ -266,14 +274,27 @@ export default function HomePage() {
               id="IMG-002"
               description="CSV upload interface with drag-and-drop zone showing simple upload process"
               aspect="16:9"
+              objectPosition="top"
               className="border border-slate-700/70 rounded-2xl"
             />
             <Screenshot
               id="IMG-004"
               description="Results dashboard showing prioritized fault list ranked by energy impact"
               aspect="16:9"
+              objectPosition="left"
               className="border border-slate-700/70 rounded-2xl"
             />
+          </div>
+
+          <div className="mt-8 text-center">
+            <TrackedButton
+              variant="secondary"
+              href={SITE_CONFIG.appUrl}
+              eventName="cta_upload_sample_click"
+              eventParams={{ location: 'home_how_it_works_secondary' }}
+            >
+              {CTA_LABELS.secondary}
+            </TrackedButton>
           </div>
         </div>
       </section>
@@ -282,40 +303,40 @@ export default function HomePage() {
         <div className="container-default">
           <div className="text-center mb-12">
             <Badge className="mb-6">Capabilities</Badge>
-            <h2 className="heading-2 text-white mb-4">Everything your team needs to move faster</h2>
+            <h2 className="heading-2 text-white mb-4">Built for Facility Teams That Need Fast Decisions</h2>
             <p className="body-large max-w-2xl mx-auto">
               One platform for finding hidden faults, deciding what to fix first, and sharing progress with stakeholders.
             </p>
           </div>
 
           <div className="grid lg:grid-cols-[1.1fr_0.9fr] gap-8 items-start">
-            <div className="grid sm:grid-cols-2 gap-4">
+            <div className="grid md:grid-cols-2 gap-5">
               {HOME_CAPABILITIES.map((capability, index) => (
-                <Card key={capability.title} hover className="h-full">
-                  <div className={`w-2 h-2 rounded-full mb-4 ${CAPABILITY_DOT_ACCENTS[index % CAPABILITY_DOT_ACCENTS.length]}`} />
-                  <CardTitle className="mb-3">{capability.title}</CardTitle>
-                  <CardDescription>{capability.description}</CardDescription>
+                <Card key={capability.title} hover className="h-full p-5 md:p-6">
+                  <div className={`w-2 h-2 rounded-full mb-3 ${CAPABILITY_DOT_ACCENTS[index % CAPABILITY_DOT_ACCENTS.length]}`} />
+                  <CardTitle className="mb-2 text-2xl md:text-3xl leading-tight">{capability.title}</CardTitle>
+                  <CardDescription className="text-body-sm text-slate-400 leading-relaxed">{capability.description}</CardDescription>
                 </Card>
               ))}
             </div>
 
             <Card className="h-full">
-              <h3 className="heading-4 text-white mb-4">What teams validate first</h3>
               <Screenshot
                 id="IMG-005"
                 description="Fault detail view showing energy impact, severity, and step-by-step recommended actions"
                 aspect="16:9"
                 className="mb-5 border border-slate-700/70 rounded-xl"
               />
+              <h3 className="heading-4 text-white mb-4">Get Clear Fault Data</h3>
               <ul className="space-y-3 text-body-sm text-slate-300 mb-6">
                 <li>Faults are ranked by estimated impact, not noise.</li>
                 <li>Each finding includes plain-language corrective guidance.</li>
                 <li>Results can be exported and shared across teams quickly.</li>
               </ul>
               <TrackedButton
-                href="/contact?intent=trial"
-                eventName="section_cta_click"
-                eventParams={{ location: 'home_capabilities_primary_lead_form' }}
+                href="/contact?intent=demo"
+                eventName="cta_demo_click"
+                eventParams={{ location: 'home_capabilities_primary' }}
               >
                 {CTA_LABELS.primary}
               </TrackedButton>
@@ -330,7 +351,7 @@ export default function HomePage() {
             <div className="text-center mb-10">
               <h2 className="heading-2 text-white mb-4">Common questions</h2>
               <p className="body-default">
-                Clear answers on onboarding, security, and expected results.
+                Answers on savings, process, data requirements, and security.
               </p>
             </div>
 

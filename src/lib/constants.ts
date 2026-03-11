@@ -3,19 +3,18 @@ export const SITE_CONFIG = {
   title: 'LeanFM OnPoint | HVAC Fault Detection Software for BAS Data',
   description: 'HVAC fault detection software for facilities teams. Analyze BAS trend data, prioritize faults by impact, and plan what to fix first.',
   url: process.env.SITE_URL || 'https://leanfmtech.com',
-  appUrl: process.env.APP_URL || '/contact?intent=trial',
+  appUrl: process.env.APP_URL || '/start',
   contactEmail: process.env.CONTACT_EMAIL || 'info@leanfmtech.com',
 }
 
 export const NAV_LINKS = [
   { href: '/company/about', label: 'About' },
   { href: '/contact', label: 'Contact' },
-  { href: '/privacy', label: 'Privacy' },
 ] as const
 
 export const CTA_LABELS = {
-  primary: 'Get Free Fault Scan',
-  secondary: 'Upload Sample Data',
+  primary: 'Book a Demo',
+  secondary: 'Upload Sample Dataset',
 } as const
 
 export const FOOTER_LINKS = {
@@ -40,40 +39,40 @@ export const CREDIBILITY_ITEMS = [
 
 export const HOME_PROOF_METRICS = [
   {
-    value: '$245,000+/yr',
-    label: 'Energy savings by one customer with a 90k sq ft building',
+    value: 'Up to 35%',
+    label: 'Common avoidable HVAC energy waste identified',
   },
   {
-    value: 'Up to 30%',
-    label: 'Typical avoidable HVAC energy waste',
+    value: '<24 hours',
+    label: 'Typical time to first prioritized findings after clean upload',
   },
   {
-    value: '24h',
-    label: 'Quick results sorted by severity and ease of repair',
+    value: '0',
+    label: 'New sensors or site visits required',
   },
 ] as const
 
 export const HOME_TRUST_SIGNALS = [
   'No new sensors or site installation required',
-  'Built with patented CMU technology',
-  'Designed for most modern commercial buildings',
+  'Built for facilities teams using existing BAS exports',
+  'Manual review and guided walkthrough with LeanFM experts',
 ] as const
 
 export const HOME_CAPABILITIES = [
   {
-    title: 'Prioritized Fault Detection',
+    title: 'Fault Prioritization',
     description: 'Find hidden faults beyond BAS alarms and rank them by estimated impact.',
   },
   {
-    title: 'Actionable Recommendations',
+    title: 'Technician Guidance',
     description: 'Each issue includes clear next steps so teams can execute faster.',
   },
   {
-    title: 'Exportable Reports',
+    title: 'Stakeholder Reporting',
     description: 'Share findings in PDF or CSV with leadership, vendors, and maintenance teams.',
   },
   {
-    title: 'Guided Rollout',
+    title: 'Portfolio Expansion',
     description: 'Start with sample data, validate value quickly, then scale with confidence.',
   },
 ] as const
@@ -96,20 +95,20 @@ export const PROBLEM_AGITATION_POINTS = [
 export const PROCESS_STEPS = [
   {
     number: '01',
-    title: 'Export Your Trend Data.',
-    description: 'Pull a CSV from your BAS and get started in minutes.',
+    title: 'Export BAS Trend Data',
+    description: 'Export your existing points into CSV format.',
     stepLabel: 'No new hardware required',
   },
   {
     number: '02',
-    title: 'Upload Your Data.',
-    description: 'Drop in your trend file and we handle validation and setup for you.',
+    title: 'Upload Sample Dataset',
+    description: 'Complete account setup and submit your file in minutes.',
     stepLabel: 'Guided upload flow',
   },
   {
     number: '03',
-    title: 'Get a Ranked Action Plan',
-    description: 'Receive prioritized findings with specific actions so your team can fix highest-impact issues first.',
+    title: 'Review Results with LeanFM',
+    description: 'We manually test your dataset and schedule a call to walk through findings.',
     stepLabel: 'Impact-ranked results',
   },
 ] as const
@@ -167,7 +166,7 @@ export const PRICING_TIERS = [
       'No historical tracking',
     ],
     cta: 'Start With Sample Data',
-    ctaHref: '/contact?intent=trial',
+    ctaHref: '/contact?intent=demo',
     highlighted: false,
   },
   {
@@ -185,7 +184,7 @@ export const PRICING_TIERS = [
     ],
     limitations: [],
     cta: 'Get Free Fault Scan',
-    ctaHref: '/contact?intent=trial',
+    ctaHref: '/contact?intent=demo',
     highlighted: true,
   },
   {
@@ -211,32 +210,28 @@ export const PRICING_TIERS = [
 
 export const FAQ_ITEMS = [
   {
-    question: 'How much can I actually save?',
-    answer: 'Buildings with undetected HVAC faults typically waste 15-30% on energy costs. The exact savings depend on your building\'s current condition, but most customers identify significant opportunities in their first analysis.',
+    question: 'How much can we save?',
+    answer: 'Savings up to 35% are common in buildings with undetected HVAC faults. Actual savings vary based on building condition, controls quality, and implementation of recommended actions.',
   },
   {
-    question: 'Do I need a long-term contract to start?',
-    answer: 'No. You can start with a lead form or sample upload and validate value first. We discuss paid options only after you review findings and decide to move forward.',
+    question: 'Why not just use BAS alarms?',
+    answer: 'BAS alarms often miss costly issues like simultaneous heating and cooling, sensor drift, and sequence faults. OnPoint analyzes trend behavior over time and prioritizes the highest-impact issues first.',
   },
   {
-    question: 'How is this different from my BAS?',
-    answer: 'Your BAS shows you data and basic alarms. OnPoint uses Prescriptiv AI to find the hidden faults your BAS can\'t detect—like simultaneous heating and cooling, sensor drift, and control sequence issues—and tells you exactly what to fix first.',
+    question: 'What data format is required?',
+    answer: 'Upload a CSV export from your BAS that includes timestamps, point names, and values. If needed, you can download our sample template and we will confirm your file before analysis.',
   },
   {
-    question: 'Why is this so much cheaper than traditional AFDD?',
-    answer: 'Traditional solutions require sensors, installation, consultants, and months of configuration. OnPoint works with your existing BAS data—no hardware, no on-site visits, no long deployments.',
+    question: 'How quickly do we get results?',
+    answer: 'Most clean uploads are reviewed within 24 hours. After analysis, we schedule a call to walk through findings, impact, and recommended actions.',
   },
   {
-    question: 'What data do I need?',
-    answer: 'Export trend data from your BAS as a CSV. OnPoint works with all major BAS platforms, and we provide a sample CSV template placeholder so your team can verify format before uploading.',
+    question: 'How secure is our data?',
+    answer: 'All uploaded data is encrypted in transit and at rest. We only use your data to perform your analysis and do not share it with third parties.',
   },
   {
-    question: 'Is my data secure?',
-    answer: 'Yes. All data is encrypted in transit and at rest. We never share your building data.',
-  },
-  {
-    question: 'What if I\'m not technical?',
-    answer: 'OnPoint was designed for building owners and facility managers, not data scientists. Results are presented in plain language with clear recommended actions.',
+    question: 'Do we need a long-term commitment to start?',
+    answer: 'No. You can start with a demo or a sample dataset review to validate value first. We discuss broader rollout options only after you review your results.',
   },
 ] as const
 

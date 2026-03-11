@@ -5,6 +5,7 @@ interface LeadData {
   email: string
   company: string
   role?: string
+  phone?: string
   buildingType?: string
   portfolioSize?: string
   message?: string

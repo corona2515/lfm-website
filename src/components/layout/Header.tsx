@@ -85,14 +85,14 @@ export function Header() {
               variant="ghost"
               size="small"
               href={SITE_CONFIG.appUrl}
-              onClick={() => trackEvent('create_account_click', { source: 'header_desktop_create_account' })}
+              onClick={() => trackEvent('cta_upload_sample_click', { location: 'header_desktop_secondary' })}
             >
               {CTA_LABELS.secondary}
             </Button>
             <Button
               size="small"
-              href="/contact?intent=trial"
-              onClick={() => trackEvent('demo_request', { source: 'header_desktop_lead_form' })}
+              href="/contact?intent=demo"
+              onClick={() => trackEvent('cta_demo_click', { location: 'header_desktop_primary' })}
             >
               {CTA_LABELS.primary}
             </Button>
@@ -158,14 +158,14 @@ export function Header() {
               variant="ghost"
               href={SITE_CONFIG.appUrl}
               className="w-full justify-center"
-              onClick={() => trackEvent('create_account_click', { source: 'header_mobile_create_account' })}
+              onClick={() => trackEvent('cta_upload_sample_click', { location: 'header_mobile_secondary' })}
             >
               {CTA_LABELS.secondary}
             </Button>
             <Button
-              href="/contact?intent=trial"
+              href="/contact?intent=demo"
               className="w-full justify-center"
-              onClick={() => trackEvent('demo_request', { source: 'header_mobile_lead_form' })}
+              onClick={() => trackEvent('cta_demo_click', { location: 'header_mobile_primary' })}
             >
               {CTA_LABELS.primary}
             </Button>
