@@ -18,3 +18,7 @@
  ✓ Compiled /_not-found in 183ms (591 modules)
  GET /.well-known/appspecific/com.chrome.devtools.json 404 in 238ms
  ✓ Compiled /company/about in 242ms (595 modules)
+ ✓ Compiled in 690ms (598 modules)
+ ✓ Compiled in 289ms (302 modules)
+ ✓ Compiled in 386ms (598 modules)
+ ✓ Compiled in 393ms (598 modules)
