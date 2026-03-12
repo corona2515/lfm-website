@@ -1,0 +1,193 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum AdminRole {
+  ADMIN
+  OPERATOR
+}
+
+enum LeadType {
+  CONTACT
+  SAMPLE_UPLOAD
+}
+
+enum LeadStatus {
+  NEW
+  ASSIGNED
+  CONTACTED
+  QUALIFIED
+  DISQUALIFIED
+  SAMPLE_REVIEW_IN_PROGRESS
+  CLOSED_WON
+  CLOSED_LOST
+}
+
+enum LeadSyncStatus {
+  SUCCESS
+  FAILED
+  PENDING_RETRY
+}
+
+enum AuditAction {
+  LOGIN
+  LOGOUT
+  LEAD_CREATED
+  LEAD_STATUS_UPDATED
+  LEAD_ASSIGNED
+  LEAD_NOTE_CREATED
+  LEAD_SYNC_RETRIED
+  USER_CREATED
+  USER_UPDATED
+}
+
+model AdminUser {
+  id                  String           @id @default(cuid())
+  email               String           @unique
+  passwordHash        String
+  displayName         String
+  role                AdminRole        @default(OPERATOR)
+  isActive            Boolean          @default(true)
+  lastLoginAt         DateTime?
+  createdAt           DateTime         @default(now())
+  updatedAt           DateTime         @updatedAt
+  sessions            Session[]
+  notes               LeadNote[]
+  audits              AuditLog[]
+  currentAssigned     Lead[]           @relation("CurrentAssignee")
+  assignmentTargets   LeadAssignment[] @relation("AssignmentTarget")
+  assignmentActors    LeadAssignment[] @relation("AssignmentActor")
+}
+
+model Session {
+  id          String    @id @default(cuid())
+  adminUserId String
+  expiresAt   DateTime
+  createdAt   DateTime  @default(now())
+  lastSeenAt  DateTime  @default(now())
+  revokedAt   DateTime?
+  adminUser   AdminUser @relation(fields: [adminUserId], references: [id], onDelete: Cascade)
+
+  @@index([adminUserId])
+  @@index([expiresAt])
+}
+
+model Lead {
+  id                 String             @id @default(cuid())
+  leadType           LeadType
+  status             LeadStatus         @default(NEW)
+  intent             String
+  source             String
+  name               String
+  email              String
+  company            String
+  role               String?
+  phone              String?
+  buildingType       String?
+  portfolioSize      String?
+  message            String?
+  submittedAt        DateTime           @default(now())
+  currentAssigneeId  String?
+  lastContactedAt    DateTime?
+  nextFollowUpAt     DateTime?
+  qualificationNotes String?
+  closeLeadId        String?
+  closeContactId     String?
+  lastSyncAt         DateTime?
+  lastSyncError      String?
+  createdAt          DateTime           @default(now())
+  updatedAt          DateTime           @updatedAt
+  currentAssignee    AdminUser?         @relation("CurrentAssignee", fields: [currentAssigneeId], references: [id], onDelete: SetNull)
+  sampleIntakeAsset  SampleIntakeAsset?
+  notes              LeadNote[]
+  syncEvents         LeadSyncEvent[]
+  assignmentHistory  LeadAssignment[]
+  audits             AuditLog[]
+
+  @@index([submittedAt])
+  @@index([status])
+  @@index([leadType])
+  @@index([currentAssigneeId])
+}
+
+model SampleIntakeAsset {
+  id                   String   @id @default(cuid())
+  leadId               String   @unique
+  submissionId         String
+  basPlatform          String?
+  primaryConcern       String?
+  datasetFileName      String
+  datasetFileSizeBytes Int
+  datasetMimeType      String
+  localFilePath        String?
+  createdAt            DateTime @default(now())
+  updatedAt            DateTime @updatedAt
+  lead                 Lead     @relation(fields: [leadId], references: [id], onDelete: Cascade)
+
+  @@index([submissionId])
+}
+
+model LeadNote {
+  id        String    @id @default(cuid())
+  leadId     String
+  authorId   String
+  body       String
+  createdAt  DateTime  @default(now())
+  updatedAt  DateTime  @updatedAt
+  lead       Lead      @relation(fields: [leadId], references: [id], onDelete: Cascade)
+  author     AdminUser @relation(fields: [authorId], references: [id], onDelete: Cascade)
+
+  @@index([leadId, createdAt])
+}
+
+model LeadAssignment {
+  id           String    @id @default(cuid())
+  leadId        String
+  assignedToId  String
+  assignedById  String?
+  createdAt     DateTime  @default(now())
+  lead          Lead      @relation(fields: [leadId], references: [id], onDelete: Cascade)
+  assignedTo    AdminUser @relation("AssignmentTarget", fields: [assignedToId], references: [id], onDelete: Cascade)
+  assignedBy    AdminUser? @relation("AssignmentActor", fields: [assignedById], references: [id], onDelete: SetNull)
+
+  @@index([leadId, createdAt])
+}
+
+model LeadSyncEvent {
+  id                String         @id @default(cuid())
+  leadId             String
+  provider           String         @default("close")
+  status             LeadSyncStatus
+  externalLeadId     String?
+  externalContactId  String?
+  errorMessage       String?
+  payload            Json?
+  createdAt          DateTime       @default(now())
+  lead               Lead           @relation(fields: [leadId], references: [id], onDelete: Cascade)
+
+  @@index([leadId, createdAt])
+  @@index([status])
+}
+
+model AuditLog {
+  id          String      @id @default(cuid())
+  actorId      String?
+  leadId       String?
+  action       AuditAction
+  entityType   String
+  entityId     String
+  description  String
+  metadata     Json?
+  createdAt    DateTime    @default(now())
+  actor        AdminUser?  @relation(fields: [actorId], references: [id], onDelete: SetNull)
+  lead         Lead?       @relation(fields: [leadId], references: [id], onDelete: SetNull)
+
+  @@index([createdAt])
+  @@index([leadId])
+  @@index([actorId])
+}

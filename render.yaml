@@ -17,7 +17,31 @@ services:
         value: 3000
       - key: SITE_URL
         sync: false
+      - key: DATABASE_URL
+        fromDatabase:
+          name: leanfm-website-db
+          property: connectionString
+      - key: ADMIN_SESSION_SECRET
+        sync: false
       - key: LEAD_WEBHOOK_URL
+        sync: false
+      - key: SAMPLE_INTAKE_WEBHOOK_URL
+        sync: false
+      - key: CLOSE_API_KEY
+        sync: false
+      - key: CLOSE_LEAD_STATUS_ID
+        sync: false
+      - key: CLOSE_SAMPLE_UPLOAD_STATUS_ID
+        sync: false
+      - key: CLOSE_API_BASE_URL
+        sync: false
+      - key: ONPOINT_SAMPLE_INTAKE_URL
+        sync: false
+      - key: ONPOINT_SAMPLE_INTAKE_TIMEOUT_MS
+        sync: false
+      - key: ONPOINT_API_KEY
+        sync: false
+      - key: ONPOINT_API_KEY_HEADER
         sync: false
       - key: CONTACT_EMAIL
         sync: false
@@ -26,3 +50,7 @@ services:
       - key: GOOGLE_ANALYTICS_ID
         sync: false
     autoDeploy: true
+
+databases:
+  - name: leanfm-website-db
+    plan: starter

@@ -7,6 +7,18 @@ import { trackEvent } from '@/lib/analytics'
 type Step = 1 | 2 | 3 | 4
 
 type SubmissionState = 'idle' | 'submitting' | 'error'
+type CompletionState = 'account_pending_review' | 'pending_submission_exists'
+
+interface SampleIntakeApiResponse {
+  error?: string
+  code?: string
+  onboarding?: {
+    status?: string
+    accountStatus?: string
+    activationStatus?: string
+    reviewStatus?: string
+  }
+}
 
 export interface SampleIntakeFormData {
   name: string
@@ -36,15 +48,16 @@ const MAX_FILE_BYTES = 25 * 1024 * 1024
 const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
 
 const STEP_TITLES = [
-  'Organization Details',
+  'Account Details',
   'Building Context',
   'Dataset Upload',
-  'Confirmation',
+  'Review',
 ]
 
 export default function StartPage() {
   const [step, setStep] = useState<Step>(1)
   const [submissionState, setSubmissionState] = useState<SubmissionState>('idle')
+  const [completionState, setCompletionState] = useState<CompletionState>('account_pending_review')
   const [errorMessage, setErrorMessage] = useState('')
   const [formData, setFormData] = useState<SampleIntakeFormData>({
     name: '',
@@ -169,26 +182,31 @@ export default function StartPage() {
         method: 'POST',
         body: payload,
       })
+      const responseBody = (await response.json().catch(() => null)) as SampleIntakeApiResponse | null
 
       if (!response.ok) {
+        if (response.status === 409 && responseBody?.code === 'PENDING_SUBMISSION_EXISTS') {
+          setCompletionState('pending_submission_exists')
+          setSubmissionState('idle')
+          setStep(4)
+          trackEvent('sample_upload_submit_duplicate', {})
+          return
+        }
+
         let errorType = 'server_error'
         let message = 'Upload failed. Please try again.'
 
-        try {
-          const body = await response.json()
-          if (response.status === 400) {
-            errorType = 'server_validation'
-          }
-          if (typeof body?.error === 'string') {
-            message = body.error
-          }
-        } catch {
-          // No-op fallback.
+        if (response.status === 400) {
+          errorType = 'server_validation'
+        }
+        if (typeof responseBody?.error === 'string') {
+          message = responseBody.error
         }
 
         throw new Error(`${errorType}|${message}`)
       }
 
+      setCompletionState('account_pending_review')
       trackEvent('sample_upload_submit_success', {})
       trackEvent('start_step_complete', { step_number: 3 })
       setSubmissionState('idle')
@@ -212,10 +230,10 @@ export default function StartPage() {
         <div className="container-default relative pt-20 pb-8 md:pt-28 md:pb-12">
           <div className="max-w-3xl mx-auto text-center">
             <Badge className="mb-6">Sample Dataset Intake</Badge>
-            <h1 className="heading-1 text-white mb-6">Upload your sample BAS dataset</h1>
+            <h1 className="heading-1 text-white mb-6">Create your preview account and upload sample BAS data</h1>
             <p className="body-large">
-              Complete account setup, submit your CSV, and LeanFM will manually review your data then
-              schedule a walkthrough call.
+              Complete account setup, submit your CSV, and LeanFM will prepare your OnPoint workspace
+              for admin review before activating access.
             </p>
           </div>
         </div>
@@ -424,7 +442,9 @@ export default function StartPage() {
                     onClick={handleSubmit}
                     disabled={submissionState === 'submitting'}
                   >
-                    {submissionState === 'submitting' ? 'Submitting...' : 'Submit Dataset'}
+                    {submissionState === 'submitting'
+                      ? 'Creating account...'
+                      : 'Create Account & Submit Dataset'}
                   </button>
                 )}
               </div>
@@ -436,10 +456,13 @@ export default function StartPage() {
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
                 </svg>
               </div>
-              <h2 className="heading-2 text-white mb-4">Dataset received</h2>
+              <h2 className="heading-2 text-white mb-4">
+                {completionState === 'account_pending_review' ? 'Preview account created' : 'Preview already pending'}
+              </h2>
               <p className="body-large max-w-2xl mx-auto mb-8">
-                Thanks - we&apos;re reviewing your sample dataset. We&apos;ll contact you to schedule a
-                results walkthrough.
+                {completionState === 'account_pending_review'
+                  ? 'Your OnPoint preview account is pending approval and activation. We created your building workspace and queued your dataset for OnPoint admin review. We&apos;ll email you when access is ready and schedule a walkthrough.'
+                  : 'A pending OnPoint preview already exists for this email and organization. Please check your email for the original invite or contact LeanFM if you need help accessing it.'}
               </p>
               <div className="flex flex-col sm:flex-row justify-center gap-4">
                 <a

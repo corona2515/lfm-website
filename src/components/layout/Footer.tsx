@@ -3,10 +3,15 @@
 import Link from 'next/link'
 import Image from 'next/image'
 import { usePathname } from 'next/navigation'
-import { FOOTER_LINKS, SITE_CONFIG, CTA_LABELS } from '@/lib/constants'
+import { FOOTER_LINKS, CTA_LABELS } from '@/lib/constants'
 import { TrackedButton } from '@/components/analytics/TrackedButton'
 
-export function Footer() {
+interface FooterProps {
+  appUrl: string
+  contactEmail: string
+}
+
+export function Footer({ appUrl, contactEmail }: FooterProps) {
   const pathname = usePathname()
   const hideFooterCta = pathname === '/contact'
   const currentYear = new Date().getFullYear()
@@ -41,7 +46,7 @@ export function Footer() {
                 </TrackedButton>
                 <TrackedButton
                   variant="secondary"
-                  href={SITE_CONFIG.appUrl}
+                  href={appUrl}
                   size="large"
                   eventName="cta_upload_sample_click"
                   eventParams={{ location: 'footer_secondary' }}
@@ -106,10 +111,10 @@ export function Footer() {
             </p>
             <div className="flex items-center gap-6">
               <a
-                href={`mailto:${SITE_CONFIG.contactEmail}`}
+                href={`mailto:${contactEmail}`}
                 className="text-body-xs text-slate-500 hover:text-cyan-400 transition-colors"
               >
-                {SITE_CONFIG.contactEmail}
+                {contactEmail}
               </a>
             </div>
           </div>

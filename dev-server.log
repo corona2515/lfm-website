@@ -1,0 +1,20 @@
+
+> leanfm-website@1.0.0 dev
+> next dev
+
+  ▲ Next.js 14.2.21
+  - Local:        http://localhost:3000
+  - Environments: .env.local
+
+ ✓ Starting...
+ ✓ Ready in 2.5s
+ ○ Compiling / ...
+ ✓ Compiled / in 3.9s (622 modules)
+ GET / 200 in 4095ms
+ ✓ Compiled in 363ms (299 modules)
+ ✓ Compiled /admin/login in 375ms (588 modules)
+ GET /admin/login 200 in 505ms
+ GET / 200 in 66ms
+ ✓ Compiled /_not-found in 183ms (591 modules)
+ GET /.well-known/appspecific/com.chrome.devtools.json 404 in 238ms
+ ✓ Compiled /company/about in 242ms (595 modules)

@@ -89,7 +89,17 @@ Copy `.env.example` to `.env.local` and configure:
 | Variable | Description | Required |
 |----------|-------------|----------|
 | `SITE_URL` | Public site URL for meta tags | Yes |
+| `DATABASE_URL` | Postgres connection string for Prisma/admin backend | Yes for admin |
+| `ADMIN_SESSION_SECRET` | Secret used to sign admin session cookies | Yes for admin |
 | `LEAD_WEBHOOK_URL` | Webhook for lead form submissions | No |
+| `SAMPLE_INTAKE_WEBHOOK_URL` | Optional dedicated webhook for sample uploads | No |
+| `CLOSE_API_KEY` | Close CRM API key | No |
+| `CLOSE_LEAD_STATUS_ID` | Optional Close status ID for new leads | No |
+| `CLOSE_SAMPLE_UPLOAD_STATUS_ID` | Optional Close status ID override for high-intent sample uploads | No |
+| `ONPOINT_SAMPLE_INTAKE_URL` | Optional OnPoint intake endpoint for preview account provisioning | No |
+| `ONPOINT_SAMPLE_INTAKE_TIMEOUT_MS` | Optional timeout for the OnPoint intake request | No |
+| `ONPOINT_API_KEY` | Optional API key sent to the OnPoint intake endpoint | No |
+| `ONPOINT_API_KEY_HEADER` | Optional header name for the OnPoint API key | No |
 | `CONTACT_EMAIL` | Displayed contact email | No |
 | `APP_URL` | OnPoint app URL for CTAs | No |
 | `GOOGLE_ANALYTICS_ID` | GA4 measurement ID | No |

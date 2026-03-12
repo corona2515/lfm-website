@@ -1,6 +1,6 @@
 import type { Metadata } from 'next'
 import { DM_Sans, DM_Mono, Space_Grotesk } from 'next/font/google'
-import { Header, Footer } from '@/components/layout'
+import { AppChrome } from '@/components/layout/AppChrome'
 import { GoogleAnalytics } from '@/components/analytics/GoogleAnalytics'
 import { SITE_CONFIG } from '@/lib/constants'
 import './globals.css'
@@ -98,9 +98,12 @@ export default function RootLayout({
         {googleAnalyticsId ? (
           <GoogleAnalytics measurementId={googleAnalyticsId} />
         ) : null}
-        <Header />
-        <main className="flex-1 pt-18">{children}</main>
-        <Footer />
+        <AppChrome
+          appUrl={SITE_CONFIG.appUrl}
+          contactEmail={SITE_CONFIG.contactEmail}
+        >
+          {children}
+        </AppChrome>
       </body>
     </html>
   )
