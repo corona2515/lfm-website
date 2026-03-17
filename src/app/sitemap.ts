@@ -8,6 +8,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     '/company/about',
     '/contact',
     '/building-data-to-action',
+    '/powering-the-ai-economy',
     '/privacy',
   ]
 
