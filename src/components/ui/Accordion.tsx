@@ -5,7 +5,7 @@ import { cn } from '@/lib/utils'
 
 interface AccordionItemProps {
   question: string
-  answer: string
+  answer: React.ReactNode
   isOpen: boolean
   onToggle: () => void
 }
@@ -48,17 +48,17 @@ function AccordionItem({ question, answer, isOpen, onToggle }: AccordionItemProp
       <div
         className={cn(
           'overflow-hidden transition-all duration-300',
-          isOpen ? 'max-h-96 pb-6' : 'max-h-0'
+          isOpen ? 'max-h-[48rem] pb-6' : 'max-h-0'
         )}
       >
-        <p className="body-large pr-14">{answer}</p>
+        <div className="body-large pr-14">{answer}</div>
       </div>
     </div>
   )
 }
 
 interface AccordionProps {
-  items: readonly { question: string; answer: string }[]
+  items: readonly { question: string; answer: React.ReactNode }[]
   className?: string
 }
 
