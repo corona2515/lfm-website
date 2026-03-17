@@ -1,5 +1,5 @@
 import { Metadata } from 'next'
-import { Accordion, Badge, Card, CardDescription, CardTitle } from '@/components/ui'
+import { Badge, Card, CardDescription, CardTitle } from '@/components/ui'
 import { TrackedButton } from '@/components/analytics/TrackedButton'
 import { CTA_LABELS, SITE_CONFIG } from '@/lib/constants'
 
@@ -77,48 +77,6 @@ const AUDIENCE_CARDS = [
     cta: 'Explore Partnership Fit',
     eventName: 'campaign_cta_click',
     location: 'powering_data_audience_partners',
-  },
-] as const
-
-const SOURCE_ACCORDION_ITEMS = [
-  {
-    question: 'Selected sources',
-    answer: (
-      <ul className="list-disc space-y-3 pl-5 text-body-md text-slate-300">
-        <li>
-          <SourceLink href={SOURCE_URLS.commercialBuildings}>
-            DOE commercial buildings integration program
-          </SourceLink>
-        </li>
-        <li>
-          <SourceLink href={SOURCE_URLS.commercialWaste}>
-            DOE commercial building waste guidance
-          </SourceLink>
-        </li>
-        <li>
-          <SourceLink href={SOURCE_URLS.buildingControls}>DOE building controls</SourceLink>
-        </li>
-      </ul>
-    ),
-  },
-  {
-    question: 'How the proof points are framed',
-    answer: (
-      <div className="space-y-3 text-body-md text-slate-300">
-        <p>
-          The &quot;up to 30%&quot; waste and savings framing is based on DOE guidance already used in LeanFM
-          messaging for commercial buildings and controls.
-        </p>
-        <p>
-          The &quot;4M+ sq ft&quot; deployment figure is preserved from the current LeanFM page as an existing
-          product proof point.
-        </p>
-        <p>
-          &quot;Works with existing BAS/BMS&quot; is a product capability statement, not a third-party market
-          statistic.
-        </p>
-      </div>
-    ),
   },
 ] as const
 
@@ -571,21 +529,6 @@ export default function BuildingDataActionPage() {
             >
               See What Your Building Data Is Hiding
             </TrackedButton>
-          </div>
-        </div>
-      </section>
-
-      <section className="section bg-slate-900/25">
-        <div className="container-narrow">
-          <div className="rounded-2xl border border-slate-800/60 bg-slate-900/40 p-6 md:p-8">
-            <div className="mb-8 text-center">
-              <h2 className="heading-3 mb-4 text-white">Sources &amp; claim notes</h2>
-              <p className="body-default">
-                Supporting references for the market context and proof points used on this page.
-              </p>
-            </div>
-
-            <Accordion items={SOURCE_ACCORDION_ITEMS} />
           </div>
         </div>
       </section>
