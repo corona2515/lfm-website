@@ -13,7 +13,7 @@ interface FooterProps {
 
 export function Footer({ appUrl, contactEmail }: FooterProps) {
   const pathname = usePathname()
-  const hideFooterCta = pathname === '/contact' || pathname === '/powering-the-ai-economy'
+  const hideFooterCta = pathname === '/contact' || pathname === '/building-data-to-action'
   const currentYear = new Date().getFullYear()
   const footerSections = [
     { title: 'Product', links: FOOTER_LINKS.product },
