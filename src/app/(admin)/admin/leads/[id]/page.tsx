@@ -5,6 +5,7 @@ import { LeadDetailClient } from '@/components/admin/LeadDetailClient'
 import { Card } from '@/components/ui'
 import { getAdminUsers, getLeadDetail } from '@/lib/admin-data'
 import { formatLeadStatus, formatLeadType, SYNC_STATUS_LABELS } from '@/lib/lead-types'
+import { formatLifecycleValue, getOnPointLifecycleSnapshot } from '@/lib/onpoint-lifecycle'
 
 function getLatestProviderSync(
   syncEvents: Array<{
@@ -47,6 +48,7 @@ export default async function AdminLeadDetailPage({
 
   const latestOnPointSync = getLatestProviderSync(lead.syncEvents, 'onpoint')
   const latestCloseSync = getLatestProviderSync(lead.syncEvents, 'close')
+  const onPointLifecycle = getOnPointLifecycleSnapshot(latestOnPointSync?.payload)
 
   return (
     <div className="space-y-6">
@@ -74,6 +76,10 @@ export default async function AdminLeadDetailPage({
         <Card>
           <h2 className="heading-4 text-white">Building Context</h2>
           <div className="mt-4 space-y-3 text-body-sm text-slate-300">
+            <p><span className="text-slate-500">Building name:</span> {lead.buildingName || 'N/A'}</p>
+            <p><span className="text-slate-500">Address:</span> {lead.addressLine1 || 'N/A'}</p>
+            <p><span className="text-slate-500">City / State:</span> {[lead.city, lead.state].filter(Boolean).join(', ') || 'N/A'}</p>
+            <p><span className="text-slate-500">Postal code:</span> {lead.postalCode || 'N/A'}</p>
             <p><span className="text-slate-500">Building type:</span> {lead.buildingType || 'N/A'}</p>
             <p><span className="text-slate-500">Portfolio size:</span> {lead.portfolioSize || 'N/A'}</p>
             <p><span className="text-slate-500">Dataset:</span> {lead.sampleIntakeAsset?.datasetFileName || 'N/A'}</p>
@@ -90,6 +96,22 @@ export default async function AdminLeadDetailPage({
               <p className="mt-1 text-white">{latestOnPointSync ? SYNC_STATUS_LABELS[latestOnPointSync.status] : 'Not attempted'}</p>
               {latestOnPointSync?.errorMessage ? (
                 <p className="mt-1 text-body-xs text-red-300">{latestOnPointSync.errorMessage}</p>
+              ) : null}
+              {onPointLifecycle ? (
+                <div className="mt-3 space-y-1 text-body-xs text-slate-400">
+                  <p>Review: {formatLifecycleValue(onPointLifecycle.reviewStatus)}</p>
+                  <p>Activation: {formatLifecycleValue(onPointLifecycle.activationStatus)}</p>
+                  <p>Credentials: {formatLifecycleValue(onPointLifecycle.accessEmailStatus)}</p>
+                  <p>Account: {formatLifecycleValue(onPointLifecycle.accountStatus)}</p>
+                  <p>Customer ID: {onPointLifecycle.customerId || 'N/A'}</p>
+                  <p>User ID: {onPointLifecycle.userId || 'N/A'}</p>
+                  <p>Building ID: {onPointLifecycle.buildingId || 'N/A'}</p>
+                  <p>Upload ID: {onPointLifecycle.uploadId || 'N/A'}</p>
+                  <p>Updated: {onPointLifecycle.updatedAt ? new Date(onPointLifecycle.updatedAt).toLocaleString() : 'N/A'}</p>
+                  {onPointLifecycle.rejectionReason ? (
+                    <p>Rejection reason: {onPointLifecycle.rejectionReason}</p>
+                  ) : null}
+                </div>
               ) : null}
               {formatPayload(latestOnPointSync?.payload) ? (
                 <pre className="mt-2 overflow-x-auto rounded-lg border border-slate-800 bg-slate-950/70 p-3 text-body-xs text-slate-400">

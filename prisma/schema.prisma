@@ -34,6 +34,12 @@ enum LeadSyncStatus {
   PENDING_RETRY
 }
 
+enum SampleIntakeDraftStatus {
+  ACTIVE
+  ABANDONED
+  COMPLETED
+}
+
 enum AuditAction {
   LOGIN
   LOGOUT
@@ -44,6 +50,10 @@ enum AuditAction {
   LEAD_SYNC_RETRIED
   USER_CREATED
   USER_UPDATED
+  SAMPLE_INTAKE_DRAFT_CREATED
+  SAMPLE_INTAKE_DRAFT_ABANDONED
+  SAMPLE_INTAKE_DRAFT_CLOSE_SYNCED
+  SAMPLE_INTAKE_DRAFT_COMPLETED
 }
 
 model AdminUser {
@@ -88,6 +98,11 @@ model Lead {
   company            String
   role               String?
   phone              String?
+  buildingName       String?
+  addressLine1       String?
+  city               String?
+  state              String?
+  postalCode         String?
   buildingType       String?
   portfolioSize      String?
   message            String?
@@ -104,6 +119,7 @@ model Lead {
   updatedAt          DateTime           @updatedAt
   currentAssignee    AdminUser?         @relation("CurrentAssignee", fields: [currentAssigneeId], references: [id], onDelete: SetNull)
   sampleIntakeAsset  SampleIntakeAsset?
+  sourceDraft        SampleIntakeDraft?
   notes              LeadNote[]
   syncEvents         LeadSyncEvent[]
   assignmentHistory  LeadAssignment[]
@@ -124,12 +140,66 @@ model SampleIntakeAsset {
   datasetFileName      String
   datasetFileSizeBytes Int
   datasetMimeType      String
+  storageProvider      String?
+  storageBucket        String?
+  storageKey           String?
+  storageRegion        String?
+  storageEndpoint      String?
   localFilePath        String?
   createdAt            DateTime @default(now())
   updatedAt            DateTime @updatedAt
   lead                 Lead     @relation(fields: [leadId], references: [id], onDelete: Cascade)
 
   @@index([submissionId])
+}
+
+model SampleIntakeDraft {
+  id                   String                  @id @default(cuid())
+  status               SampleIntakeDraftStatus @default(ACTIVE)
+  progressStep         Int                     @default(1)
+  submissionId         String                  @unique
+  draftTokenHash       String                  @unique
+  name                 String?
+  email                String?
+  company              String?
+  role                 String?
+  phone                String?
+  buildingName         String?
+  addressLine1         String?
+  city                 String?
+  state                String?
+  postalCode           String?
+  buildingType         String?
+  portfolioSize        String?
+  basPlatform          String?
+  primaryConcern       String?
+  notes                String?
+  datasetFileName      String?
+  datasetFileSizeBytes Int?
+  datasetMimeType      String?
+  storageProvider      String?
+  storageBucket        String?
+  storageKey           String?
+  storageRegion        String?
+  storageEndpoint      String?
+  localFilePath        String?
+  closeLeadId          String?
+  closeContactId       String?
+  closeSyncStatus      LeadSyncStatus?
+  closeSyncError       String?
+  closeSyncedAt        DateTime?
+  leadId               String?                 @unique
+  lead                 Lead?                   @relation(fields: [leadId], references: [id], onDelete: SetNull)
+  lastSavedAt          DateTime                @default(now())
+  abandonedAt          DateTime?
+  completedAt          DateTime?
+  createdAt            DateTime                @default(now())
+  updatedAt            DateTime                @updatedAt
+
+  @@index([status, lastSavedAt])
+  @@index([email])
+  @@index([closeSyncStatus])
+  @@index([completedAt])
 }
 
 model LeadNote {

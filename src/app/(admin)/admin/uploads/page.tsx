@@ -4,9 +4,10 @@ import Link from 'next/link'
 import { Card } from '@/components/ui'
 import { getUploadsQueue } from '@/lib/admin-data'
 import { SYNC_STATUS_LABELS } from '@/lib/lead-types'
+import { formatLifecycleValue, getOnPointLifecycleSnapshot } from '@/lib/onpoint-lifecycle'
 
 function getLatestProviderSync(
-  syncEvents: Array<{ provider: string; status: keyof typeof SYNC_STATUS_LABELS }>,
+  syncEvents: Array<{ provider: string; status: keyof typeof SYNC_STATUS_LABELS; payload?: unknown }>,
   provider: 'onpoint' | 'close'
 ) {
   return syncEvents.find((event) => event.provider === provider)
@@ -40,6 +41,7 @@ export default async function AdminUploadsPage() {
             {uploads.map((lead) => {
               const latestOnPointSync = getLatestProviderSync(lead.syncEvents, 'onpoint')
               const latestCloseSync = getLatestProviderSync(lead.syncEvents, 'close')
+              const onPointLifecycle = getOnPointLifecycleSnapshot(latestOnPointSync?.payload)
 
               return (
                 <tr key={lead.id} className="border-t border-slate-800">
@@ -53,6 +55,11 @@ export default async function AdminUploadsPage() {
                   <td className="px-3 py-3 text-slate-300">{lead.sampleIntakeAsset?.basPlatform || 'N/A'}</td>
                   <td className="px-3 py-3 text-slate-300">
                     {latestOnPointSync ? SYNC_STATUS_LABELS[latestOnPointSync.status] : 'Not attempted'}
+                    {onPointLifecycle ? (
+                      <p className="mt-1 text-body-xs text-slate-500">
+                        {formatLifecycleValue(onPointLifecycle.reviewStatus)} / {formatLifecycleValue(onPointLifecycle.activationStatus)}
+                      </p>
+                    ) : null}
                   </td>
                   <td className="px-3 py-3 text-slate-300">
                     {latestCloseSync ? SYNC_STATUS_LABELS[latestCloseSync.status] : 'Not attempted'}

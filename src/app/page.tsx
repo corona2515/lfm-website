@@ -197,6 +197,9 @@ export default function HomePage() {
                   Download sample CSV template
                 </a>
               </p>
+              <p className="text-body-xs text-slate-500 mt-2">
+                Template format: timestamp column first, then one BAS point per remaining column.
+              </p>
             </div>
 
             <div className="animate-fade-in-up delay-200">
