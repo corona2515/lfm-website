@@ -13,7 +13,7 @@ const TEAM_MEMBERS = [
     title: 'CEO',
     bio: 'Nick Boris leads LeanFM Technologies with a focus on delivering intelligent solutions for commercial HVAC fault detection and diagnosis.',
     linkedin: 'https://www.linkedin.com/in/nicholasboris/',
-    photo: 'https://leanfmtech.com/wp-content/uploads/2025/03/nick-profile2.png',
+    photo: '/media/team/nick-boris.png',
     circularPhoto: true,
   },
   {
@@ -21,7 +21,7 @@ const TEAM_MEMBERS = [
     title: 'CTO',
     bio: 'A co-founder of LeanFM, Pine was a former facilities manager, is a brilliant software architect, researcher and entrepreneur. Dr. Liu has advanced the field of facilities and building information for years as Research Assistant Professor at Carnegie Mellon University and now as the CTO with LeanFM Technologies.',
     linkedin: 'https://www.linkedin.com/in/xliu1/',
-    photo: 'https://leanfmtech.com/wp-content/uploads/2020/11/10.-LFM-Pine.png',
+    photo: '/media/team/xuesong-liu.png',
     circularPhoto: false,
   },
   {
@@ -29,7 +29,7 @@ const TEAM_MEMBERS = [
     title: 'CIO',
     bio: 'Dr. Akinci is a leading researcher in facilities information technology and is a co-founder of the company. She has developed numerous innovations as a Professor of Civil and Environmental Engineering at Carnegie Mellon University.',
     linkedin: 'https://www.linkedin.com/in/burcu-akinci-a04b00/',
-    photo: 'https://leanfmtech.com/wp-content/uploads/2020/11/11.-LFM-Burcu.png',
+    photo: '/media/team/burcu-akinci.png',
     circularPhoto: false,
   },
 ] as const
