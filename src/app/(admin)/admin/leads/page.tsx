@@ -114,6 +114,7 @@ export default async function AdminLeadsPage({
               const latestOnPointSync = getLatestProviderSync(lead.syncEvents, 'onpoint')
               const latestCloseSync = getLatestProviderSync(lead.syncEvents, 'close')
               const onPointLifecycle = getOnPointLifecycleSnapshot(latestOnPointSync?.payload)
+              const usesOnPoint = lead.intent === 'sample_upload'
               return (
                 <tr key={lead.id} className="border-t border-slate-800">
                   <td className="px-3 py-3">
@@ -127,9 +128,9 @@ export default async function AdminLeadsPage({
                     <div className="space-y-1">
                       <p className="text-slate-200">{health}</p>
                       <p className="text-body-xs text-slate-500">
-                        OnPoint: {latestOnPointSync ? SYNC_STATUS_LABELS[latestOnPointSync.status] : 'Not attempted'}
+                        OnPoint: {usesOnPoint ? latestOnPointSync ? SYNC_STATUS_LABELS[latestOnPointSync.status] : 'Not attempted' : 'Not used'}
                       </p>
-                      {onPointLifecycle ? (
+                      {usesOnPoint && onPointLifecycle ? (
                         <p className="text-body-xs text-slate-500">
                           Lifecycle: {formatLifecycleValue(onPointLifecycle.reviewStatus)} / {formatLifecycleValue(onPointLifecycle.activationStatus)}
                         </p>

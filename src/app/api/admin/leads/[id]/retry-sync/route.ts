@@ -39,8 +39,8 @@ export async function POST(
   }
 
   if (provider === 'onpoint') {
-    if (lead.leadType !== 'SAMPLE_UPLOAD' || !lead.sampleIntakeAsset) {
-      return NextResponse.json({ error: 'OnPoint retry is only available for sample-upload leads' }, { status: 400 })
+    if (lead.leadType !== 'SAMPLE_UPLOAD' || !lead.sampleIntakeAsset || lead.intent !== 'sample_upload') {
+      return NextResponse.json({ error: 'OnPoint retry is only available for preview-account dataset uploads' }, { status: 400 })
     }
 
     try {

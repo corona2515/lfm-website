@@ -19,8 +19,8 @@ export default async function AdminUploadsPage() {
   return (
     <div className="space-y-6">
       <div>
-        <p className="text-body-xs uppercase tracking-[0.2em] text-cyan-300">Uploads</p>
-        <h1 className="heading-3 mt-2 text-white">Sample intake review queue</h1>
+        <p className="text-body-xs uppercase tracking-[0.2em] text-cyan-300">Dataset Uploads</p>
+        <h1 className="heading-3 mt-2 text-white">Dataset upload review queue</h1>
       </div>
 
       <Card className="overflow-x-auto">
@@ -42,6 +42,7 @@ export default async function AdminUploadsPage() {
               const latestOnPointSync = getLatestProviderSync(lead.syncEvents, 'onpoint')
               const latestCloseSync = getLatestProviderSync(lead.syncEvents, 'close')
               const onPointLifecycle = getOnPointLifecycleSnapshot(latestOnPointSync?.payload)
+              const usesOnPoint = lead.intent === 'sample_upload'
 
               return (
                 <tr key={lead.id} className="border-t border-slate-800">
@@ -54,8 +55,10 @@ export default async function AdminUploadsPage() {
                   <td className="px-3 py-3 text-slate-300">{lead.sampleIntakeAsset?.datasetFileName || 'N/A'}</td>
                   <td className="px-3 py-3 text-slate-300">{lead.sampleIntakeAsset?.basPlatform || 'N/A'}</td>
                   <td className="px-3 py-3 text-slate-300">
-                    {latestOnPointSync ? SYNC_STATUS_LABELS[latestOnPointSync.status] : 'Not attempted'}
-                    {onPointLifecycle ? (
+                    {usesOnPoint
+                      ? latestOnPointSync ? SYNC_STATUS_LABELS[latestOnPointSync.status] : 'Not attempted'
+                      : 'Not used'}
+                    {usesOnPoint && onPointLifecycle ? (
                       <p className="mt-1 text-body-xs text-slate-500">
                         {formatLifecycleValue(onPointLifecycle.reviewStatus)} / {formatLifecycleValue(onPointLifecycle.activationStatus)}
                       </p>

@@ -59,9 +59,11 @@ async function closeRequest<T>(
 }
 
 function buildCloseNote(lead: Lead) {
-  const isSampleUpload = lead.leadType === 'SAMPLE_UPLOAD'
+  const isDatasetUpload = lead.leadType === 'SAMPLE_UPLOAD'
+  const isSamplePreview = lead.intent === 'sample_upload'
+  const isHistoricalReport = lead.intent === 'historical_report'
   const lines = [
-    isSampleUpload ? 'High-intent website submission' : 'Website submission',
+    isDatasetUpload ? 'High-intent dataset upload submission' : 'Website submission',
     `Lead type: ${lead.leadType}`,
     `Intent: ${lead.intent}`,
     `Submitted at: ${lead.submittedAt.toISOString()}`,
@@ -70,9 +72,14 @@ function buildCloseNote(lead: Lead) {
     `Company: ${lead.company}`,
   ]
 
-  if (isSampleUpload) {
+  if (isSamplePreview) {
     lines.splice(1, 0, 'Signal: Sample dataset uploaded and preview account requested')
     lines.splice(2, 0, 'OnPoint onboarding: Pending approval and activation; building created; dataset queued for admin review')
+  } else if (isHistoricalReport) {
+    lines.splice(1, 0, 'Signal: Historical BAS dataset uploaded for a one-time paid report request')
+    lines.splice(2, 0, 'Fulfillment: Manual LeanFM historical review requested; no preview-account provisioning')
+  } else if (isDatasetUpload) {
+    lines.splice(1, 0, 'Signal: BAS dataset uploaded for manual review')
   }
 
   if (lead.role) lines.push(`Role: ${lead.role}`)
@@ -91,7 +98,7 @@ function buildCloseNote(lead: Lead) {
 
 function buildCloseDraftNote(draft: SampleIntakeDraft) {
   const lines = [
-    'Abandoned /start sample-intake draft',
+    'Abandoned dataset intake draft',
     `Last saved at: ${draft.lastSavedAt.toISOString()}`,
     `Last completed step: ${draft.progressStep}`,
     `Contact: ${draft.name || 'Unknown'}`,

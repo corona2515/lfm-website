@@ -49,6 +49,7 @@ export default async function AdminLeadDetailPage({
   const latestOnPointSync = getLatestProviderSync(lead.syncEvents, 'onpoint')
   const latestCloseSync = getLatestProviderSync(lead.syncEvents, 'close')
   const onPointLifecycle = getOnPointLifecycleSnapshot(latestOnPointSync?.payload)
+  const usesOnPoint = lead.intent === 'sample_upload'
 
   return (
     <div className="space-y-6">
@@ -93,11 +94,14 @@ export default async function AdminLeadDetailPage({
           <div className="mt-4 space-y-4 text-body-sm text-slate-300">
             <div>
               <p className="text-slate-500">OnPoint</p>
-              <p className="mt-1 text-white">{latestOnPointSync ? SYNC_STATUS_LABELS[latestOnPointSync.status] : 'Not attempted'}</p>
-              {latestOnPointSync?.errorMessage ? (
+              <p className="mt-1 text-white">{usesOnPoint ? latestOnPointSync ? SYNC_STATUS_LABELS[latestOnPointSync.status] : 'Not attempted' : 'Not used'}</p>
+              {!usesOnPoint ? (
+                <p className="mt-1 text-body-xs text-slate-400">Historical report requests skip preview-account provisioning.</p>
+              ) : null}
+              {usesOnPoint && latestOnPointSync?.errorMessage ? (
                 <p className="mt-1 text-body-xs text-red-300">{latestOnPointSync.errorMessage}</p>
               ) : null}
-              {onPointLifecycle ? (
+              {usesOnPoint && onPointLifecycle ? (
                 <div className="mt-3 space-y-1 text-body-xs text-slate-400">
                   <p>Review: {formatLifecycleValue(onPointLifecycle.reviewStatus)}</p>
                   <p>Activation: {formatLifecycleValue(onPointLifecycle.activationStatus)}</p>
@@ -113,7 +117,7 @@ export default async function AdminLeadDetailPage({
                   ) : null}
                 </div>
               ) : null}
-              {formatPayload(latestOnPointSync?.payload) ? (
+              {usesOnPoint && formatPayload(latestOnPointSync?.payload) ? (
                 <pre className="mt-2 overflow-x-auto rounded-lg border border-slate-800 bg-slate-950/70 p-3 text-body-xs text-slate-400">
                   {formatPayload(latestOnPointSync?.payload)}
                 </pre>

@@ -14,7 +14,7 @@ export default async function AdminDashboardPage() {
         <p className="text-body-xs uppercase tracking-[0.2em] text-cyan-300">Overview</p>
         <h1 className="heading-3 mt-2 text-white">Operations dashboard</h1>
         <p className="mt-2 text-body-sm text-slate-400">
-          Monitor new leads, sample-intake handoffs to OnPoint, and Close sync health without leaving the site.
+          Monitor new leads, dataset-upload reviews, preview-account handoffs to OnPoint, and Close sync health without leaving the site.
         </p>
       </div>
 

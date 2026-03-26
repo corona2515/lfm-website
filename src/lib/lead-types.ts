@@ -12,7 +12,10 @@ export interface ContactLeadInput {
   intent: string
 }
 
-export interface SampleLeadInput {
+export interface DatasetUploadLeadInput {
+  intent: string
+  source: string
+  auditDescription?: string
   name: string
   email: string
   company: string
@@ -40,20 +43,22 @@ export interface SampleLeadInput {
   submissionId: string
 }
 
+export type SampleLeadInput = Omit<DatasetUploadLeadInput, 'intent' | 'source' | 'auditDescription'>
+
 export const LEAD_STATUSES: Array<{ value: LeadStatus; label: string }> = [
   { value: 'NEW', label: 'New' },
   { value: 'ASSIGNED', label: 'Assigned' },
   { value: 'CONTACTED', label: 'Contacted' },
   { value: 'QUALIFIED', label: 'Qualified' },
   { value: 'DISQUALIFIED', label: 'Disqualified' },
-  { value: 'SAMPLE_REVIEW_IN_PROGRESS', label: 'Sample Review In Progress' },
+  { value: 'SAMPLE_REVIEW_IN_PROGRESS', label: 'Dataset Review In Progress' },
   { value: 'CLOSED_WON', label: 'Closed Won' },
   { value: 'CLOSED_LOST', label: 'Closed Lost' },
 ]
 
 export const LEAD_TYPES: Array<{ value: LeadType; label: string }> = [
   { value: 'CONTACT', label: 'Contact' },
-  { value: 'SAMPLE_UPLOAD', label: 'Sample Upload' },
+  { value: 'SAMPLE_UPLOAD', label: 'Dataset Upload' },
 ]
 
 export const SYNC_STATUS_LABELS: Record<LeadSyncStatus, string> = {
