@@ -8,6 +8,7 @@ import type { AdminUser } from '@prisma/client'
 const NAV_ITEMS = [
   { href: '/admin', label: 'Overview' },
   { href: '/admin/leads', label: 'Leads' },
+  { href: '/admin/start-drafts', label: 'Start Drafts' },
   { href: '/admin/uploads', label: 'Uploads' },
   { href: '/admin/users', label: 'Users' },
   { href: '/admin/settings', label: 'Settings' },

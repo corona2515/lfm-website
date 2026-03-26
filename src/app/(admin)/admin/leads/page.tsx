@@ -4,9 +4,10 @@ import Link from 'next/link'
 import { Card } from '@/components/ui'
 import { getAdminUsers, getLeadHealthLabel, getLeadList } from '@/lib/admin-data'
 import { formatLeadStatus, formatLeadType, LEAD_STATUSES, LEAD_TYPES, SYNC_STATUS_LABELS } from '@/lib/lead-types'
+import { formatLifecycleValue, getOnPointLifecycleSnapshot } from '@/lib/onpoint-lifecycle'
 
 function getLatestProviderSync(
-  syncEvents: Array<{ provider: string; status: keyof typeof SYNC_STATUS_LABELS }>,
+  syncEvents: Array<{ provider: string; status: keyof typeof SYNC_STATUS_LABELS; payload?: unknown }>,
   provider: 'onpoint' | 'close'
 ) {
   return syncEvents.find((event) => event.provider === provider)
@@ -112,6 +113,8 @@ export default async function AdminLeadsPage({
               const health = getLeadHealthLabel(lead)
               const latestOnPointSync = getLatestProviderSync(lead.syncEvents, 'onpoint')
               const latestCloseSync = getLatestProviderSync(lead.syncEvents, 'close')
+              const onPointLifecycle = getOnPointLifecycleSnapshot(latestOnPointSync?.payload)
+              const usesOnPoint = lead.intent === 'sample_upload'
               return (
                 <tr key={lead.id} className="border-t border-slate-800">
                   <td className="px-3 py-3">
@@ -125,8 +128,13 @@ export default async function AdminLeadsPage({
                     <div className="space-y-1">
                       <p className="text-slate-200">{health}</p>
                       <p className="text-body-xs text-slate-500">
-                        OnPoint: {latestOnPointSync ? SYNC_STATUS_LABELS[latestOnPointSync.status] : 'Not attempted'}
+                        OnPoint: {usesOnPoint ? latestOnPointSync ? SYNC_STATUS_LABELS[latestOnPointSync.status] : 'Not attempted' : 'Not used'}
                       </p>
+                      {usesOnPoint && onPointLifecycle ? (
+                        <p className="text-body-xs text-slate-500">
+                          Lifecycle: {formatLifecycleValue(onPointLifecycle.reviewStatus)} / {formatLifecycleValue(onPointLifecycle.activationStatus)}
+                        </p>
+                      ) : null}
                       <p className="text-body-xs text-slate-500">
                         Close: {latestCloseSync ? SYNC_STATUS_LABELS[latestCloseSync.status] : 'Not attempted'}
                       </p>

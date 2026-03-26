@@ -1,5 +1,5 @@
-import { readFile } from 'fs/promises'
 import type { Lead, SampleIntakeAsset } from '@prisma/client'
+import { resolveStoredSampleIntakeObject } from '@/lib/sample-intake-storage'
 
 type OnPointResponseBody = Record<string, unknown> | string | null
 
@@ -10,12 +10,15 @@ export interface ProvisionableSampleLead extends Lead {
 }
 
 export interface OnPointProvisioningResult {
+  submissionId: string
+  customerId: string
   userId: string
   buildingId: string
   uploadId: string
   accountStatus: string
   activationStatus: string
   reviewStatus: string
+  accessEmailStatus: string
   responseBody: OnPointResponseBody
 }
 
@@ -54,26 +57,31 @@ function getOnPointTimeoutMs() {
 }
 
 function getOnPointHeaders() {
+  const headers: Record<string, string> = {
+    'Content-Type': 'application/json',
+  }
   const apiKey = process.env.ONPOINT_API_KEY?.trim()
   if (!apiKey) {
-    return undefined
+    return headers
   }
 
   const headerName = process.env.ONPOINT_API_KEY_HEADER?.trim() || 'Authorization'
   if (headerName.toLowerCase() === 'authorization') {
-    return { Authorization: `Bearer ${apiKey}` }
+    headers.Authorization = `Bearer ${apiKey}`
+    return headers
   }
 
-  return { [headerName]: apiKey }
+  headers[headerName] = apiKey
+  return headers
 }
 
 function isRecord(value: unknown): value is Record<string, unknown> {
   return typeof value === 'object' && value !== null && !Array.isArray(value)
 }
 
-function appendOptionalField(formData: FormData, key: string, value: string | null | undefined) {
+function setOptionalField(payload: Record<string, unknown>, key: string, value: string | null | undefined) {
   if (value && value.trim()) {
-    formData.append(key, value)
+    payload[key] = value.trim()
   }
 }
 
@@ -119,6 +127,9 @@ function getFirstString(payload: OnPointResponseBody, candidates: string[]) {
     const value = getValueByPath(payload, candidate)
     if (typeof value === 'string' && value.trim()) {
       return value.trim()
+    }
+    if (typeof value === 'number' && Number.isFinite(value)) {
+      return String(value)
     }
   }
 
@@ -176,7 +187,7 @@ function toOnPointProvisioningError(error: unknown) {
   })
 }
 
-async function sendOnPointIntakeRequest(payload: FormData) {
+async function sendOnPointIntakeRequest(payload: Record<string, unknown>) {
   const controller = new AbortController()
   const timeout = setTimeout(() => controller.abort(), getOnPointTimeoutMs())
 
@@ -184,7 +195,7 @@ async function sendOnPointIntakeRequest(payload: FormData) {
     return await fetch(resolveOnPointIntakeUrl() as string, {
       method: 'POST',
       headers: getOnPointHeaders(),
-      body: payload,
+      body: JSON.stringify(payload),
       signal: controller.signal,
     })
   } catch (error) {
@@ -210,7 +221,7 @@ async function sendOnPointIntakeRequest(payload: FormData) {
   }
 }
 
-function buildOnPointPayload(input: { lead: ProvisionableSampleLead; datasetFile: File }) {
+function buildOnPointPayload(input: { lead: ProvisionableSampleLead }) {
   const sampleIntakeAsset = input.lead.sampleIntakeAsset
   if (!sampleIntakeAsset) {
     throw new OnPointProvisioningError({
@@ -222,59 +233,48 @@ function buildOnPointPayload(input: { lead: ProvisionableSampleLead; datasetFile
     })
   }
 
-  const payload = new FormData()
-  payload.append('submissionId', sampleIntakeAsset.submissionId)
-  payload.append('source', input.lead.source)
-  payload.append('intent', input.lead.intent)
-  payload.append('intentLevel', 'high')
-  payload.append('name', input.lead.name)
-  payload.append('email', input.lead.email)
-  payload.append('company', input.lead.company)
-  payload.append('buildingType', input.lead.buildingType || '')
-  payload.append('portfolioSize', input.lead.portfolioSize || '')
-  payload.append('approvalRequired', 'true')
-  payload.append('activationRequired', 'true')
-  payload.append('buildingName', getFallbackBuildingName(input.lead))
-  appendOptionalField(payload, 'role', input.lead.role)
-  appendOptionalField(payload, 'phone', input.lead.phone)
-  appendOptionalField(payload, 'basPlatform', sampleIntakeAsset.basPlatform)
-  appendOptionalField(payload, 'primaryConcern', sampleIntakeAsset.primaryConcern)
-  appendOptionalField(payload, 'notes', input.lead.message)
-  payload.append('dataset', input.datasetFile, input.datasetFile.name)
+  const storedObject = resolveStoredSampleIntakeObject(sampleIntakeAsset)
+  const payload: Record<string, unknown> = {
+    submissionId: sampleIntakeAsset.submissionId,
+    source: input.lead.source,
+    intent: input.lead.intent,
+    intentLevel: 'high',
+    approvalRequired: true,
+    activationRequired: true,
+    name: input.lead.name,
+    email: input.lead.email,
+    company: input.lead.company,
+    phone: input.lead.phone || '',
+    buildingName: input.lead.buildingName?.trim() || getFallbackBuildingName(input.lead),
+    addressLine1: input.lead.addressLine1 || '',
+    city: input.lead.city || '',
+    state: input.lead.state || '',
+    postalCode: input.lead.postalCode || '',
+    buildingType: input.lead.buildingType || '',
+    portfolioSize: input.lead.portfolioSize || '',
+    dataset: {
+      fileName: sampleIntakeAsset.datasetFileName,
+      fileSizeBytes: sampleIntakeAsset.datasetFileSizeBytes,
+      mimeType: sampleIntakeAsset.datasetMimeType,
+      storageProvider: storedObject.storageProvider,
+      storageBucket: storedObject.storageBucket,
+      storageKey: storedObject.storageKey,
+      storageRegion: storedObject.storageRegion,
+      storageEndpoint: storedObject.storageEndpoint,
+      localFilePath: storedObject.localFilePath,
+    },
+  }
+
+  setOptionalField(payload, 'role', input.lead.role)
+  setOptionalField(payload, 'basPlatform', sampleIntakeAsset.basPlatform)
+  setOptionalField(payload, 'primaryConcern', sampleIntakeAsset.primaryConcern)
+  setOptionalField(payload, 'notes', input.lead.message)
 
   return payload
 }
 
-export async function createDatasetFileFromSampleIntakeAsset(sampleIntakeAsset: SampleIntakeAsset) {
-  if (!sampleIntakeAsset.localFilePath) {
-    throw new OnPointProvisioningError({
-      message: 'No local dataset copy is available for this sample intake.',
-      statusCode: 409,
-      code: 'MISSING_LOCAL_DATASET_COPY',
-      userMessage: 'The original dataset file is no longer available for retry. Please ask the user to resubmit the sample.',
-      retryable: false,
-    })
-  }
-
-  try {
-    const fileBuffer = await readFile(sampleIntakeAsset.localFilePath)
-    return new File([fileBuffer], sampleIntakeAsset.datasetFileName, {
-      type: sampleIntakeAsset.datasetMimeType,
-    })
-  } catch (error) {
-    throw new OnPointProvisioningError({
-      message: error instanceof Error ? error.message : 'Unable to read stored dataset file.',
-      statusCode: 409,
-      code: 'MISSING_LOCAL_DATASET_COPY',
-      userMessage: 'The original dataset file is no longer available for retry. Please ask the user to resubmit the sample.',
-      retryable: false,
-    })
-  }
-}
-
 export async function provisionSampleIntakeInOnPoint(input: {
   lead: ProvisionableSampleLead
-  datasetFile: File
 }): Promise<OnPointProvisioningResult> {
   const intakeUrl = resolveOnPointIntakeUrl()
   if (!intakeUrl) {
@@ -327,12 +327,15 @@ export async function provisionSampleIntakeInOnPoint(input: {
   }
 
   return {
+    submissionId: getRequiredString(responseBody, ['submissionId'], 'submissionId'),
+    customerId: getRequiredString(responseBody, ['customerId', 'customer.id'], 'customerId'),
     userId: getRequiredString(responseBody, ['userId', 'user.id', 'accountUserId'], 'userId'),
     buildingId: getRequiredString(responseBody, ['buildingId', 'building.id'], 'buildingId'),
     uploadId: getRequiredString(responseBody, ['uploadId', 'datasetId', 'upload.id'], 'uploadId'),
     accountStatus: getRequiredString(responseBody, ['accountStatus', 'user.status'], 'accountStatus'),
     activationStatus: getRequiredString(responseBody, ['activationStatus', 'user.activationStatus'], 'activationStatus'),
     reviewStatus: getRequiredString(responseBody, ['reviewStatus', 'dataset.reviewStatus', 'status'], 'reviewStatus'),
+    accessEmailStatus: getRequiredString(responseBody, ['accessEmailStatus', 'emailStatus'], 'accessEmailStatus'),
     responseBody,
   }
 }

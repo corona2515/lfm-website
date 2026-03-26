@@ -4,9 +4,10 @@ import Link from 'next/link'
 import { Card } from '@/components/ui'
 import { getUploadsQueue } from '@/lib/admin-data'
 import { SYNC_STATUS_LABELS } from '@/lib/lead-types'
+import { formatLifecycleValue, getOnPointLifecycleSnapshot } from '@/lib/onpoint-lifecycle'
 
 function getLatestProviderSync(
-  syncEvents: Array<{ provider: string; status: keyof typeof SYNC_STATUS_LABELS }>,
+  syncEvents: Array<{ provider: string; status: keyof typeof SYNC_STATUS_LABELS; payload?: unknown }>,
   provider: 'onpoint' | 'close'
 ) {
   return syncEvents.find((event) => event.provider === provider)
@@ -18,8 +19,8 @@ export default async function AdminUploadsPage() {
   return (
     <div className="space-y-6">
       <div>
-        <p className="text-body-xs uppercase tracking-[0.2em] text-cyan-300">Uploads</p>
-        <h1 className="heading-3 mt-2 text-white">Sample intake review queue</h1>
+        <p className="text-body-xs uppercase tracking-[0.2em] text-cyan-300">Dataset Uploads</p>
+        <h1 className="heading-3 mt-2 text-white">Dataset upload review queue</h1>
       </div>
 
       <Card className="overflow-x-auto">
@@ -40,6 +41,8 @@ export default async function AdminUploadsPage() {
             {uploads.map((lead) => {
               const latestOnPointSync = getLatestProviderSync(lead.syncEvents, 'onpoint')
               const latestCloseSync = getLatestProviderSync(lead.syncEvents, 'close')
+              const onPointLifecycle = getOnPointLifecycleSnapshot(latestOnPointSync?.payload)
+              const usesOnPoint = lead.intent === 'sample_upload'
 
               return (
                 <tr key={lead.id} className="border-t border-slate-800">
@@ -52,7 +55,14 @@ export default async function AdminUploadsPage() {
                   <td className="px-3 py-3 text-slate-300">{lead.sampleIntakeAsset?.datasetFileName || 'N/A'}</td>
                   <td className="px-3 py-3 text-slate-300">{lead.sampleIntakeAsset?.basPlatform || 'N/A'}</td>
                   <td className="px-3 py-3 text-slate-300">
-                    {latestOnPointSync ? SYNC_STATUS_LABELS[latestOnPointSync.status] : 'Not attempted'}
+                    {usesOnPoint
+                      ? latestOnPointSync ? SYNC_STATUS_LABELS[latestOnPointSync.status] : 'Not attempted'
+                      : 'Not used'}
+                    {usesOnPoint && onPointLifecycle ? (
+                      <p className="mt-1 text-body-xs text-slate-500">
+                        {formatLifecycleValue(onPointLifecycle.reviewStatus)} / {formatLifecycleValue(onPointLifecycle.activationStatus)}
+                      </p>
+                    ) : null}
                   </td>
                   <td className="px-3 py-3 text-slate-300">
                     {latestCloseSync ? SYNC_STATUS_LABELS[latestCloseSync.status] : 'Not attempted'}

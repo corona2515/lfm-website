@@ -3,7 +3,6 @@ import { createAuditLog } from '@/lib/audit'
 import { requireApiAdminUser } from '@/lib/admin-api'
 import { syncLeadToClose } from '@/lib/close'
 import {
-  createDatasetFileFromSampleIntakeAsset,
   provisionSampleIntakeInOnPoint,
   serializeOnPointError,
   stringifyOnPointResponseBody,
@@ -40,28 +39,28 @@ export async function POST(
   }
 
   if (provider === 'onpoint') {
-    if (lead.leadType !== 'SAMPLE_UPLOAD' || !lead.sampleIntakeAsset) {
-      return NextResponse.json({ error: 'OnPoint retry is only available for sample-upload leads' }, { status: 400 })
+    if (lead.leadType !== 'SAMPLE_UPLOAD' || !lead.sampleIntakeAsset || lead.intent !== 'sample_upload') {
+      return NextResponse.json({ error: 'OnPoint retry is only available for preview-account dataset uploads' }, { status: 400 })
     }
 
     try {
-      const datasetFile = await createDatasetFileFromSampleIntakeAsset(lead.sampleIntakeAsset)
-      const result = await provisionSampleIntakeInOnPoint({
-        lead,
-        datasetFile,
-      })
+      const result = await provisionSampleIntakeInOnPoint({ lead })
 
       await createLeadSyncEvent(lead.id, {
         provider: 'onpoint',
         status: 'SUCCESS',
         payload: {
-          submissionId: lead.sampleIntakeAsset.submissionId,
+          eventType: 'submission_retried',
+          submissionId: result.submissionId,
+          customerId: result.customerId,
           userId: result.userId,
           buildingId: result.buildingId,
           uploadId: result.uploadId,
           accountStatus: result.accountStatus,
           activationStatus: result.activationStatus,
           reviewStatus: result.reviewStatus,
+          accessEmailStatus: result.accessEmailStatus,
+          updatedAt: new Date().toISOString(),
           responseBody: stringifyOnPointResponseBody(result.responseBody),
         },
       })
@@ -83,10 +82,12 @@ export async function POST(
         status: onPointError.retryable ? 'PENDING_RETRY' : 'FAILED',
         errorMessage: onPointError.detail,
         payload: {
+          eventType: 'submission_retry_failed',
           submissionId: lead.sampleIntakeAsset.submissionId,
           code: onPointError.code,
           userMessage: onPointError.userMessage,
           retryable: onPointError.retryable,
+          updatedAt: new Date().toISOString(),
           responseBody: stringifyOnPointResponseBody(onPointError.responseBody),
         },
       })

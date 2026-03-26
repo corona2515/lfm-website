@@ -99,7 +99,7 @@ export function LeadDetailClient({
           <p className="mt-1 text-body-sm text-slate-400">Update ownership, workflow status, and follow-up timing.</p>
         </div>
         <div className="flex flex-wrap gap-3">
-          {lead.leadType === 'SAMPLE_UPLOAD' ? (
+          {lead.leadType === 'SAMPLE_UPLOAD' && lead.intent === 'sample_upload' ? (
             <Button type="button" variant="secondary" onClick={() => handleRetrySync('onpoint')} disabled={isPending}>
               Retry OnPoint Intake
             </Button>

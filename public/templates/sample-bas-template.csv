@@ -1,7 +1,9 @@
-timestamp,site,building,equipment_id,point_name,point_value,units
-2026-01-01T08:00:00Z,Sample District,Building A,AHU-01,supply_air_temp,55.2,F
-2026-01-01T08:00:00Z,Sample District,Building A,AHU-01,return_air_temp,72.8,F
-2026-01-01T08:00:00Z,Sample District,Building A,AHU-01,outdoor_air_temp,41.0,F
-2026-01-01T08:05:00Z,Sample District,Building A,AHU-01,supply_air_temp,55.6,F
-2026-01-01T08:05:00Z,Sample District,Building A,AHU-01,return_air_temp,73.0,F
-2026-01-01T08:05:00Z,Sample District,Building A,AHU-01,fan_status,1,state
+Timestamp,AHU-1_SAT_F,AHU-1_RAT_F,AHU-1_MAT_F,AHU-1_OAT_F,AHU-1_SAT_SP_F,AHU-1_CHW_Valve_Pct,AHU-1_Supply_Fan_Status
+2026-01-15T08:00:00Z,55.2,72.8,60.4,41.0,55.0,64,1
+2026-01-15T08:05:00Z,55.4,72.9,60.7,41.3,55.0,66,1
+2026-01-15T08:10:00Z,55.6,73.1,61.0,41.8,55.0,68,1
+2026-01-15T08:15:00Z,55.8,73.0,61.2,42.1,55.0,65,1
+2026-01-15T08:20:00Z,56.0,72.7,61.1,42.5,55.0,61,1
+2026-01-15T08:25:00Z,55.7,72.5,60.8,42.8,55.0,58,1
+2026-01-15T08:30:00Z,55.4,72.4,60.5,43.0,55.0,55,1
+2026-01-15T08:35:00Z,55.1,72.3,60.2,43.1,55.0,52,1

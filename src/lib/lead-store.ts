@@ -1,6 +1,6 @@
 import type { LeadStatus, LeadType, Prisma } from '@prisma/client'
 import { prisma } from '@/lib/prisma'
-import type { ContactLeadInput, SampleLeadInput } from '@/lib/lead-types'
+import type { ContactLeadInput, DatasetUploadLeadInput, SampleLeadInput } from '@/lib/lead-types'
 import { createAuditLog } from '@/lib/audit'
 
 function defaultStatusForLeadType(leadType: LeadType): LeadStatus {
@@ -37,30 +37,52 @@ export async function createContactLead(data: ContactLeadInput) {
   return lead
 }
 
-export async function createSampleUploadLead(data: SampleLeadInput) {
+function datasetUploadLeadFields(data: DatasetUploadLeadInput) {
+  return {
+    intent: data.intent,
+    source: data.source,
+    name: data.name,
+    email: data.email,
+    company: data.company,
+    role: data.role || null,
+    phone: data.phone,
+    buildingName: data.buildingName,
+    addressLine1: data.addressLine1,
+    city: data.city,
+    state: data.state,
+    postalCode: data.postalCode,
+    buildingType: data.buildingType,
+    portfolioSize: data.portfolioSize,
+    message: data.notes || null,
+  }
+}
+
+function datasetUploadAssetFields(data: DatasetUploadLeadInput) {
+  return {
+    submissionId: data.submissionId,
+    basPlatform: data.basPlatform || null,
+    primaryConcern: data.primaryConcern || null,
+    datasetFileName: data.datasetFileName,
+    datasetFileSizeBytes: data.datasetFileSizeBytes,
+    datasetMimeType: data.datasetMimeType,
+    storageProvider: data.storageProvider || null,
+    storageBucket: data.storageBucket || null,
+    storageKey: data.storageKey || null,
+    storageRegion: data.storageRegion || null,
+    storageEndpoint: data.storageEndpoint || null,
+    localFilePath: data.localFilePath || null,
+  }
+}
+
+export async function createDatasetUploadLead(data: DatasetUploadLeadInput) {
   const lead = await prisma.lead.create({
     data: {
       leadType: 'SAMPLE_UPLOAD',
       status: defaultStatusForLeadType('SAMPLE_UPLOAD'),
-      intent: 'sample_upload',
-      source: 'website_start_flow',
-      name: data.name,
-      email: data.email,
-      company: data.company,
-      role: data.role || null,
-      phone: data.phone || null,
-      buildingType: data.buildingType,
-      portfolioSize: data.portfolioSize,
-      message: data.notes || null,
+      ...datasetUploadLeadFields(data),
       sampleIntakeAsset: {
         create: {
-          submissionId: data.submissionId,
-          basPlatform: data.basPlatform || null,
-          primaryConcern: data.primaryConcern || null,
-          datasetFileName: data.datasetFileName,
-          datasetFileSizeBytes: data.datasetFileSizeBytes,
-          datasetMimeType: data.datasetMimeType,
-          localFilePath: data.localFilePath || null,
+          ...datasetUploadAssetFields(data),
         },
       },
     },
@@ -74,11 +96,49 @@ export async function createSampleUploadLead(data: SampleLeadInput) {
     entityType: 'lead',
     entityId: lead.id,
     leadId: lead.id,
-    description: 'Lead captured from sample dataset intake',
+    description: data.auditDescription || 'Lead captured from dataset upload intake',
     metadata: { source: lead.source, intent: lead.intent },
   })
 
   return lead
+}
+
+export async function upsertDatasetUploadLead(input: {
+  leadId?: string | null
+  data: DatasetUploadLeadInput
+}) {
+  if (!input.leadId) {
+    return createDatasetUploadLead(input.data)
+  }
+
+  return prisma.lead.update({
+    where: { id: input.leadId },
+    data: {
+      ...datasetUploadLeadFields(input.data),
+      sampleIntakeAsset: {
+        upsert: {
+          create: {
+            ...datasetUploadAssetFields(input.data),
+          },
+          update: {
+            ...datasetUploadAssetFields(input.data),
+          },
+        },
+      },
+    },
+    include: {
+      sampleIntakeAsset: true,
+    },
+  })
+}
+
+export async function createSampleUploadLead(data: SampleLeadInput) {
+  return createDatasetUploadLead({
+    ...data,
+    intent: 'sample_upload',
+    source: 'website_start_flow',
+    auditDescription: 'Lead captured from sample dataset intake',
+  })
 }
 
 export async function updateLeadSyncState(

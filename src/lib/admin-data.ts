@@ -12,6 +12,12 @@ interface LeadListFilters {
   to?: string
 }
 
+interface SampleIntakeDraftListFilters {
+  q?: string
+  status?: string
+  closeSync?: string
+}
+
 function buildLeadWhere(filters: LeadListFilters): Prisma.LeadWhereInput {
   const where: Prisma.LeadWhereInput = {}
 
@@ -54,6 +60,46 @@ function buildLeadWhere(filters: LeadListFilters): Prisma.LeadWhereInput {
       endDate.setHours(23, 59, 59, 999)
       where.submittedAt.lte = endDate
     }
+  }
+
+  return where
+}
+
+function buildSampleIntakeDraftWhere(filters: SampleIntakeDraftListFilters): Prisma.SampleIntakeDraftWhereInput {
+  const where: Prisma.SampleIntakeDraftWhereInput = {}
+  const andFilters: Prisma.SampleIntakeDraftWhereInput[] = []
+
+  if (filters.q) {
+    andFilters.push({
+      OR: [
+      { name: { contains: filters.q, mode: 'insensitive' } },
+      { email: { contains: filters.q, mode: 'insensitive' } },
+      { company: { contains: filters.q, mode: 'insensitive' } },
+      { buildingName: { contains: filters.q, mode: 'insensitive' } },
+      { phone: { contains: filters.q, mode: 'insensitive' } },
+      ],
+    })
+  }
+
+  if (filters.status && filters.status !== 'ALL') {
+    where.status = filters.status as never
+  }
+
+  if (filters.closeSync === 'healthy') {
+    where.closeSyncStatus = 'SUCCESS'
+  } else if (filters.closeSync === 'failed') {
+    andFilters.push({
+      OR: [
+      { closeSyncStatus: 'FAILED' },
+      { closeSyncStatus: 'PENDING_RETRY' },
+      ],
+    })
+  } else if (filters.closeSync === 'missing') {
+    where.closeSyncStatus = null
+  }
+
+  if (andFilters.length > 0) {
+    where.AND = andFilters
   }
 
   return where
@@ -199,6 +245,30 @@ export async function getLeadList(filters: LeadListFilters) {
       },
     },
     orderBy: { submittedAt: 'desc' },
+    take: 100,
+  })
+}
+
+export async function getSampleIntakeDraftList(filters: SampleIntakeDraftListFilters) {
+  if (!process.env.DATABASE_URL) {
+    return []
+  }
+
+  return prisma.sampleIntakeDraft.findMany({
+    where: buildSampleIntakeDraftWhere(filters),
+    include: {
+      lead: {
+        select: {
+          id: true,
+          company: true,
+          status: true,
+        },
+      },
+    },
+    orderBy: [
+      { lastSavedAt: 'desc' },
+      { createdAt: 'desc' },
+    ],
     take: 100,
   })
 }
