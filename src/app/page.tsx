@@ -1,12 +1,16 @@
 import { Metadata } from 'next'
+import Link from 'next/link'
 import { Badge, Card, CardTitle, CardDescription, Accordion } from '@/components/ui'
 import { Screenshot } from '@/components/MediaPlaceholder'
 import { TrackedButton } from '@/components/analytics/TrackedButton'
+import { StickyCtaBar } from '@/components/home/StickyCtaBar'
 import {
   SITE_CONFIG,
   PROCESS_STEPS,
   FAQ_ITEMS,
   CTA_LABELS,
+  ENERGY_DISCLAIMER,
+  HOME_BUILT_FOR_VERTICALS,
   HOME_CAPABILITIES,
   HOME_PROOF_METRICS,
   HOME_TRUST_SIGNALS,
@@ -53,6 +57,30 @@ export default function HomePage() {
     'bg-blue-400',
     'bg-red-400',
     'bg-green-400',
+  ]
+
+  const IMPACT_DASHBOARD_ITEMS = [
+    {
+      label: 'Budget',
+      value: 'Energy spend',
+      description: 'Expose the faults quietly inflating utility bills.',
+      accent: 'from-cyan-300/30 to-cyan-500/5 border-cyan-400/35 text-cyan-200',
+      marker: 'bg-cyan-300',
+    },
+    {
+      label: 'Building',
+      value: 'Comfort + reliability',
+      description: 'Rank fixes that improve occupant comfort and equipment performance.',
+      accent: 'from-blue-300/25 to-blue-500/5 border-blue-400/35 text-blue-200',
+      marker: 'bg-blue-300',
+    },
+    {
+      label: 'Planet',
+      value: 'Avoidable CO2',
+      description: 'Reduce HVAC waste that compounds into building emissions.',
+      accent: 'from-red-300/20 to-red-500/5 border-red-400/35 text-red-200',
+      marker: 'bg-red-300',
+    },
   ]
 
   const faqSchema = {
@@ -113,7 +141,7 @@ export default function HomePage() {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(softwareSchema) }}
       />
 
-      <section className="relative overflow-hidden border-b border-slate-800/60">
+      <section id="home-hero" className="relative overflow-hidden border-b border-slate-800/60">
         <div aria-hidden="true" className="absolute inset-0 pointer-events-none">
           <video
             autoPlay
@@ -142,8 +170,8 @@ export default function HomePage() {
           <div className="grid lg:grid-cols-2 gap-12 items-center">
             <div className="max-w-2xl">
               <Badge className="mb-6 animate-fade-in">For Facilities &amp; Energy Teams</Badge>
-              <h1 className="heading-1 text-white mb-6 animate-fade-in-up">
-                Find Hidden HVAC Waste Before It Hits Your Budget
+              <h1 className="mb-6 max-w-[12ch] animate-fade-in-up font-body text-[3.4rem] font-semibold leading-[0.98] tracking-[-0.005em] text-white md:text-[4.35rem] lg:text-[4.8rem]">
+                Find the BAS faults draining your energy budget.
               </h1>
               <p className="body-large mb-3 animate-fade-in-up delay-100">
                 AI fault detection for commercial buildings using your existing BAS data.
@@ -169,6 +197,7 @@ export default function HomePage() {
                   size="large"
                   eventName="cta_demo_click"
                   eventParams={{ location: 'home_hero_primary' }}
+                  className="w-full sm:w-auto sm:min-w-[24rem] sm:whitespace-nowrap"
                 >
                   {CTA_LABELS.primary}
                 </TrackedButton>
@@ -178,6 +207,7 @@ export default function HomePage() {
                   size="large"
                   eventName="cta_upload_sample_click"
                   eventParams={{ location: 'home_hero_secondary' }}
+                  className="border-slate-600/60 bg-slate-950/20 text-slate-200/90 hover:bg-slate-900/55 hover:text-white"
                 >
                   {CTA_LABELS.secondary}
                 </TrackedButton>
@@ -186,16 +216,7 @@ export default function HomePage() {
                 No new sensors. No on-site installation. Start with existing BAS exports.
               </p>
               <p className="text-body-sm text-slate-300 mt-2">
-                Up to 35% savings is common in buildings with undetected HVAC faults.*
-              </p>
-              <p className="text-body-sm mt-2">
-                <a
-                  href="/templates/sample-bas-template.csv"
-                  download
-                  className="text-cyan-400 hover:text-cyan-300 underline underline-offset-2"
-                >
-                  Download sample CSV template
-                </a>
+                Up to 30% savings is possible in buildings with significant undetected HVAC faults.*
               </p>
               <p className="text-body-xs text-slate-500 mt-2">
                 Template format: timestamp column first, then one BAS point per remaining column.
@@ -216,6 +237,25 @@ export default function HomePage() {
 
       <section className="section bg-gradient-to-b from-slate-900/45 via-slate-900/30 to-slate-950 border-b border-slate-800/60">
         <div className="container-default">
+          <div className="mb-12 rounded-2xl border border-slate-800/70 bg-slate-900/60 px-5 py-5">
+            <div className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
+              <p className="text-body-sm font-semibold uppercase tracking-[0.18em] text-cyan-300">
+                Built for
+              </p>
+              <div className="flex flex-wrap gap-2 md:justify-end">
+                {HOME_BUILT_FOR_VERTICALS.map((vertical) => (
+                  <Link
+                    key={vertical.href}
+                    href={vertical.href}
+                    className="badge-slate px-4 py-2 transition-colors hover:border-cyan-400/45 hover:bg-slate-700/80 hover:text-white"
+                  >
+                    {vertical.label}
+                  </Link>
+                ))}
+              </div>
+            </div>
+          </div>
+
           <div className="grid md:grid-cols-3 gap-4">
             {HOME_PROOF_METRICS.map((metric, index) => (
               <Card
@@ -230,7 +270,7 @@ export default function HomePage() {
             ))}
           </div>
           <p className="mt-4 text-center text-body-xs text-slate-400">
-            *Actual savings vary by building condition, controls quality, and implementation of recommended actions.
+            {ENERGY_DISCLAIMER}
           </p>
 
           <div className="mt-10 flex flex-wrap justify-center gap-3">
@@ -348,6 +388,100 @@ export default function HomePage() {
         </div>
       </section>
 
+      <section className="section relative overflow-hidden bg-[linear-gradient(180deg,rgba(20,34,50,0.32)_0%,rgba(7,13,20,0.7)_100%)] border-y border-slate-800/60">
+        <div aria-hidden="true" className="absolute inset-0 bg-grid opacity-40" />
+        <div aria-hidden="true" className="absolute left-1/2 top-14 h-56 w-56 -translate-x-1/2 rounded-full bg-cyan-500/10 blur-3xl" />
+        <div className="container-default">
+          <div className="relative z-10 grid gap-8 lg:grid-cols-[0.8fr_1.2fr] lg:items-end">
+            <div>
+              <Badge className="mb-6">Impact</Badge>
+              <h2 className="heading-2 text-white mb-4">One fault list. Three business outcomes.</h2>
+              <p className="body-large">
+                OnPoint turns BAS trend data into an impact-ranked action plan your team can use
+                to defend budgets, protect buildings, and support emissions goals.
+              </p>
+            </div>
+
+            <div className="rounded-2xl border border-cyan-400/20 bg-slate-950/55 p-5 shadow-[0_24px_80px_rgba(2,6,23,0.32)]">
+              <div className="grid gap-3 sm:grid-cols-3">
+                <div>
+                  <p className="text-body-xs uppercase tracking-[0.18em] text-slate-500">Input</p>
+                  <p className="mt-2 font-display text-body-lg font-semibold text-white">BAS trends</p>
+                </div>
+                <div>
+                  <p className="text-body-xs uppercase tracking-[0.18em] text-slate-500">Ranked by</p>
+                  <p className="mt-2 font-display text-body-lg font-semibold text-white">Likely impact</p>
+                </div>
+                <div>
+                  <p className="text-body-xs uppercase tracking-[0.18em] text-slate-500">Output</p>
+                  <p className="mt-2 font-display text-body-lg font-semibold text-white">Fix what matters</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div className="relative z-10 mt-10 rounded-2xl border border-slate-700/70 bg-slate-950/60 p-4 md:p-6">
+            <div className="grid gap-4 md:grid-cols-3">
+              {IMPACT_DASHBOARD_ITEMS.map((item) => (
+                <div
+                  key={item.label}
+                  className={`rounded-xl border bg-gradient-to-br p-5 ${item.accent}`}
+                >
+                  <div className="mb-8 flex items-center justify-between">
+                    <span className="text-body-xs font-semibold uppercase tracking-[0.18em] text-current">
+                      {item.label}
+                    </span>
+                    <span className={`h-2.5 w-2.5 rounded-full ${item.marker}`} />
+                  </div>
+                  <p className="font-display text-2xl font-semibold leading-tight text-white">
+                    {item.value}
+                  </p>
+                  <p className="mt-3 text-body-sm leading-relaxed text-slate-300">
+                    {item.description}
+                  </p>
+                </div>
+              ))}
+            </div>
+
+            <div className="mt-4 grid gap-4 lg:grid-cols-[1fr_0.85fr]">
+              <div className="rounded-xl border border-slate-800 bg-slate-900/55 p-5">
+                <p className="text-body-xs font-semibold uppercase tracking-[0.18em] text-cyan-300">
+                  How the ranking changes the conversation
+                </p>
+                <div className="mt-5 grid gap-3 sm:grid-cols-3">
+                  {['Show the cost', 'Assign the fix', 'Track the outcome'].map((label, index) => (
+                    <div key={label} className="flex items-center gap-3 text-body-sm text-slate-300">
+                      <span className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full border border-slate-700 bg-slate-950 font-display text-body-xs text-white">
+                        {index + 1}
+                      </span>
+                      {label}
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              <div className="rounded-xl border border-cyan-400/20 bg-cyan-500/10 p-5">
+                <p className="font-display text-body-lg font-semibold text-white">
+                  Building performance is climate work.
+                </p>
+                <p className="mt-3 text-body-sm leading-relaxed text-slate-400">
+                  <a
+                    href="https://www.architecture2030.org/why-the-built-environment/why-buildings/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-cyan-300 underline underline-offset-2 hover:text-cyan-200"
+                  >
+                    Architecture 2030
+                  </a>{' '}
+                  reports the built environment is responsible for over 35% of annual global CO2
+                  emissions.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
       <section className="section bg-slate-900/15">
         <div className="container-narrow">
           <div className="rounded-2xl border border-slate-800/60 bg-slate-900/35 p-6 md:p-8">
@@ -363,6 +497,7 @@ export default function HomePage() {
         </div>
       </section>
 
+      <StickyCtaBar heroId="home-hero" />
     </>
   )
 }

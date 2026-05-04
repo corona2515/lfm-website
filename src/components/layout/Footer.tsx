@@ -3,7 +3,7 @@
 import Link from 'next/link'
 import Image from 'next/image'
 import { usePathname } from 'next/navigation'
-import { FOOTER_LINKS, CTA_LABELS } from '@/lib/constants'
+import { FOOTER_LINKS, CTA_LABELS, FOOTER_SUSTAINABILITY_LINE } from '@/lib/constants'
 import { TrackedButton } from '@/components/analytics/TrackedButton'
 
 interface FooterProps {
@@ -76,6 +76,9 @@ export function Footer({ appUrl, contactEmail }: FooterProps) {
               </Link>
               <p className="text-body-sm text-slate-400 max-w-xs">
                 Fault detection and diagnosis for building systems. Powered by Prescriptiv AI.
+              </p>
+              <p className="mt-3 text-body-sm text-cyan-300 max-w-xs">
+                {FOOTER_SUSTAINABILITY_LINE}
               </p>
             </div>
 

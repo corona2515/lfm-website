@@ -12,14 +12,33 @@ export const NAV_LINKS = [
   { href: '/contact', label: 'Contact' },
 ] as const
 
+export const PRODUCT_NAV_LINKS = [
+  { href: '/building-data-to-action', label: 'Building Data to Action' },
+  { href: '/start', label: 'Upload Sample Dataset' },
+] as const
+
+export const INDUSTRY_NAV_LINKS = [
+  { href: '/industries/k-12', label: 'K-12' },
+  { href: '/industries/museums', label: 'Museums' },
+  { href: '/industries/universities', label: 'Universities' },
+  { href: '/industries/hospitals', label: 'Hospitals' },
+  { href: '/industries/hotels', label: 'Hotels' },
+  { href: '/industries/offices', label: 'Offices' },
+] as const
+
+export const SOLUTIONS_NAV_GROUPS = [
+  { title: 'Product', links: PRODUCT_NAV_LINKS },
+  { title: 'Industries', links: INDUSTRY_NAV_LINKS },
+] as const
+
 export const CTA_LABELS = {
-  primary: 'Book a Demo',
+  primary: 'See what your BAS data is hiding',
   secondary: 'Upload Sample Dataset',
 } as const
 
 export const FOOTER_LINKS = {
-  product: [],
-  industries: [],
+  product: PRODUCT_NAV_LINKS,
+  industries: INDUSTRY_NAV_LINKS,
   company: [
     { href: '/company/about', label: 'About' },
     { href: '/contact', label: 'Contact' },
@@ -39,8 +58,8 @@ export const CREDIBILITY_ITEMS = [
 
 export const HOME_PROOF_METRICS = [
   {
-    value: 'Up to 35%',
-    label: 'Common avoidable HVAC energy waste identified',
+    value: 'Up to 30%',
+    label: 'Potential energy cost savings in buildings with significant undetected faults',
   },
   {
     value: '<24 hours',
@@ -50,6 +69,15 @@ export const HOME_PROOF_METRICS = [
     value: '0',
     label: 'New sensors or site visits required',
   },
+] as const
+
+export const HOME_BUILT_FOR_VERTICALS = [
+  { href: '/industries/k-12', label: 'K-12' },
+  { href: '/industries/museums', label: 'Museums' },
+  { href: '/industries/universities', label: 'Universities' },
+  { href: '/industries/hospitals', label: 'Hospitals' },
+  { href: '/industries/hotels', label: 'Hotels' },
+  { href: '/industries/offices', label: 'Offices' },
 ] as const
 
 export const HOME_TRUST_SIGNALS = [
@@ -76,6 +104,25 @@ export const HOME_CAPABILITIES = [
     description: 'Start with sample data, validate value quickly, then scale with confidence.',
   },
 ] as const
+
+export const HOME_IMPACT_ITEMS = [
+  {
+    title: 'Budget',
+    description: 'Find the faults quietly inflating utility spend.',
+  },
+  {
+    title: 'Building',
+    description: 'Prioritize fixes that improve comfort, reliability, and equipment performance.',
+  },
+  {
+    title: 'Planet',
+    description: 'Reduce avoidable HVAC waste that contributes to building emissions.',
+    citation: 'Architecture 2030 reports the built environment is responsible for over 35% of annual global CO2 emissions.',
+    citationHref: 'https://www.architecture2030.org/why-the-built-environment/why-buildings/',
+  },
+] as const
+
+export const FOOTER_SUSTAINABILITY_LINE = 'Decarbonizing buildings, one fault at a time.'
 
 export const PROBLEM_AGITATION_POINTS = [
   {
@@ -211,7 +258,7 @@ export const PRICING_TIERS = [
 export const FAQ_ITEMS = [
   {
     question: 'How much can we save?',
-    answer: 'Savings up to 35% are common in buildings with undetected HVAC faults. Actual savings vary based on building condition, controls quality, and implementation of recommended actions.',
+    answer: 'Savings up to 30% are possible in buildings with significant undetected HVAC faults. Actual savings vary based on building condition, controls quality, and implementation of recommended actions.',
   },
   {
     question: 'Why not just use BAS alarms?',
@@ -235,4 +282,4 @@ export const FAQ_ITEMS = [
   },
 ] as const
 
-export const ENERGY_DISCLAIMER = '* Energy savings claims are based on typical findings in buildings with undetected HVAC faults. Actual savings vary based on building condition, fault severity, and implementation of recommended actions.'
+export const ENERGY_DISCLAIMER = '* Savings vary based on building type, existing conditions, data quality, and implementation of recommended actions. The 30% figure represents potential savings in buildings with significant undetected faults. Actual results depend on your specific situation.'

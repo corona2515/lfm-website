@@ -74,15 +74,15 @@
 
   /* Buttons */
   .btn {
-    @apply inline-flex items-center justify-center gap-2 px-6 py-3 font-semibold rounded-xl transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-slate-900;
+    @apply inline-flex items-center justify-center gap-2 rounded-lg px-6 py-3 font-display font-semibold tracking-[0.005em] transition-all duration-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-cyan-300 focus-visible:ring-offset-2 focus-visible:ring-offset-slate-900 disabled:pointer-events-none disabled:opacity-60;
   }
 
   .btn-primary {
-    @apply btn bg-cyan-500 text-slate-950 hover:bg-cyan-400 focus:ring-cyan-500 shadow-sm hover:shadow-md;
+    @apply btn border border-cyan-200/45 bg-gradient-to-b from-cyan-300 via-cyan-400 to-cyan-600 text-slate-950 shadow-[0_14px_32px_rgba(27,48,28,0.34),inset_0_1px_0_rgba(255,255,255,0.48)] ring-1 ring-cyan-100/25 hover:-translate-y-0.5 hover:from-cyan-200 hover:via-cyan-300 hover:to-cyan-500 hover:shadow-[0_18px_44px_rgba(144,204,124,0.32),inset_0_1px_0_rgba(255,255,255,0.56)] active:translate-y-0 active:shadow-[0_8px_20px_rgba(27,48,28,0.28),inset_0_2px_4px_rgba(31,51,27,0.16)];
   }
 
   .btn-secondary {
-    @apply btn bg-transparent text-slate-100 border border-slate-600 hover:bg-slate-800/70 hover:border-slate-500 focus:ring-slate-500;
+    @apply btn bg-slate-950/20 text-slate-200 border border-slate-600/75 hover:bg-slate-800/55 hover:border-slate-400/80 focus:ring-slate-500;
   }
 
   .btn-ghost {

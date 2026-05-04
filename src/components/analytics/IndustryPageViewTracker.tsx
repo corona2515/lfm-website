@@ -4,7 +4,7 @@ import { useEffect } from 'react'
 import { trackEvent } from '@/lib/analytics'
 
 interface IndustryPageViewTrackerProps {
-  industry: 'k12' | 'museums' | 'higher_education'
+  industry: string
 }
 
 export function IndustryPageViewTracker({ industry }: IndustryPageViewTrackerProps) {

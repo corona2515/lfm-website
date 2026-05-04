@@ -2,10 +2,11 @@
 
 import Link from 'next/link'
 import Image from 'next/image'
+import { usePathname } from 'next/navigation'
 import { useState, useEffect } from 'react'
 import { cn } from '@/lib/utils'
 import { trackEvent } from '@/lib/analytics'
-import { NAV_LINKS, CTA_LABELS } from '@/lib/constants'
+import { NAV_LINKS, CTA_LABELS, SOLUTIONS_NAV_GROUPS } from '@/lib/constants'
 import { Button } from '@/components/ui'
 
 interface HeaderProps {
@@ -13,8 +14,11 @@ interface HeaderProps {
 }
 
 export function Header({ appUrl }: HeaderProps) {
+  const pathname = usePathname()
   const [isScrolled, setIsScrolled] = useState(false)
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
+  const isSolutionsActive =
+    pathname.startsWith('/industries') || pathname === '/building-data-to-action' || pathname === '/start'
 
   useEffect(() => {
     const handleScroll = () => {
@@ -87,6 +91,54 @@ export function Header({ appUrl }: HeaderProps) {
 
           {/* Desktop Navigation */}
           <div className="hidden lg:flex items-center gap-1">
+            <div className="group relative">
+              <button
+                type="button"
+                className={`inline-flex items-center gap-2 rounded-lg px-4 py-2 text-body-sm transition-colors hover:bg-slate-800/40 hover:text-white focus:outline-none focus-visible:ring-2 focus-visible:ring-cyan-300/70 ${
+                  isSolutionsActive ? 'text-white' : 'text-slate-300'
+                }`}
+                aria-haspopup="true"
+              >
+                Solutions
+                <svg
+                  aria-hidden="true"
+                  className="h-4 w-4 transition-transform duration-200 group-hover:rotate-180 group-focus-within:rotate-180"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                >
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 9l6 6 6-6" />
+                </svg>
+              </button>
+
+              <div className="pointer-events-none absolute left-0 top-full z-50 pt-3 opacity-0 transition-all duration-200 group-hover:pointer-events-auto group-hover:opacity-100 group-focus-within:pointer-events-auto group-focus-within:opacity-100">
+                <div className="w-[34rem] rounded-2xl border border-slate-700/80 bg-[linear-gradient(180deg,rgba(20,34,50,0.98)_0%,rgba(7,13,20,0.98)_100%)] p-4 shadow-[0_24px_80px_rgba(2,6,23,0.52)] ring-1 ring-white/5">
+                  <div className="grid grid-cols-[0.9fr_1.1fr] gap-4">
+                    {SOLUTIONS_NAV_GROUPS.map((group) => (
+                      <div key={group.title}>
+                        <p className="mb-2 px-3 text-body-xs font-semibold uppercase tracking-[0.18em] text-cyan-300/80">
+                          {group.title}
+                        </p>
+                        <div className="grid gap-1">
+                          {group.links.map((link) => (
+                            <Link
+                              key={link.href}
+                              href={link.href}
+                              className={`rounded-xl px-3 py-2.5 text-body-sm transition-colors hover:bg-slate-800/80 hover:text-white focus:outline-none focus-visible:ring-2 focus-visible:ring-cyan-300/70 ${
+                                pathname === link.href ? 'bg-slate-800/70 text-white' : 'text-slate-300'
+                              }`}
+                            >
+                              {link.label}
+                            </Link>
+                          ))}
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              </div>
+            </div>
+
             {NAV_LINKS.map((link) => (
               <Link
                 key={link.href}
@@ -190,7 +242,36 @@ export function Header({ appUrl }: HeaderProps) {
             </p>
           </div>
           <div className="max-h-[calc(100dvh-7rem)] overflow-y-auto px-3 py-3">
-            <div className="flex flex-col gap-2">
+            <div className="flex flex-col gap-4">
+              <div className="rounded-2xl border border-slate-800/80 bg-slate-950/35 p-3">
+                <p className="px-2 pb-2 text-body-xs font-semibold uppercase tracking-[0.18em] text-cyan-300/80">
+                  Solutions
+                </p>
+                {SOLUTIONS_NAV_GROUPS.map((group) => (
+                  <div key={group.title} className="py-2">
+                    <p className="px-2 pb-2 text-body-xs font-semibold uppercase tracking-[0.14em] text-slate-500">
+                      {group.title}
+                    </p>
+                    <div className="grid gap-1">
+                      {group.links.map((link) => (
+                        <Link
+                          key={link.href}
+                          href={link.href}
+                          className={`rounded-xl border px-3 py-3 text-body-md font-medium transition-all hover:border-slate-700/80 hover:bg-slate-800/75 hover:text-white ${
+                            pathname === link.href
+                              ? 'border-slate-700/80 bg-slate-800/75 text-white'
+                              : 'border-transparent text-slate-100'
+                          }`}
+                          onClick={() => setIsMobileMenuOpen(false)}
+                        >
+                          {link.label}
+                        </Link>
+                      ))}
+                    </div>
+                  </div>
+                ))}
+              </div>
+
               {NAV_LINKS.map((link) => (
                 <Link
                   key={link.href}
