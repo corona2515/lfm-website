@@ -68,10 +68,11 @@ const marketSegments = [
 ]
 
 const scaleBullets = [
-  'Works with existing building systems',
-  'Can be applied across portfolios',
-  'Value increases with more data over time',
-  'Does not require large upfront infrastructure investment',
+  'Uses existing BAS trend data',
+  'No new hardware required to start',
+  'Repeatable diagnostic workflow',
+  'Vertical-specific outbound motion',
+  'Expandable from one building to portfolios',
 ]
 
 const credibilityItems = [
@@ -346,6 +347,9 @@ export default function InvestorsPage() {
               <h2 className="heading-2 mb-5 text-white">Why This Scales</h2>
               <p className="body-large">
                 LeanFM does not require new hardware to begin delivering value. It works with data that buildings are already generating, making it applicable across a wide range of facilities.
+              </p>
+              <p className="body-large mt-5">
+                The repeatable wedge is simple: sample analysis, findings walkthrough, then paid rollout where the operational value is clear.
               </p>
             </div>
             <div className="grid gap-3 sm:grid-cols-2">

@@ -21,13 +21,13 @@ const startVariant = {
   submittingButtonLabel: 'Creating Account & Submitting Dataset...',
   completionStates: {
     account_pending_review: {
-      title: 'Preview account created',
+      title: 'Sample dataset uploaded',
       description:
-        'Your OnPoint preview account is pending staff approval and activation. We staged your building and dataset for manual review, and we’ll send credentials after setup is complete.',
+        'Your dataset is queued for LeanFM review. We staged your building and dataset so the team can prepare sample findings and follow up with next steps.',
       actions: [
         {
           href: '/contact?intent=demo',
-          label: 'Request a Sample Analysis',
+          label: 'Book a Demo',
           variant: 'primary',
           eventName: 'cta_demo_click',
           eventParams: { location: 'start_confirmation_primary' },
@@ -46,7 +46,7 @@ const startVariant = {
       actions: [
         {
           href: '/contact?intent=demo',
-          label: 'Request a Sample Analysis',
+          label: 'Book a Demo',
           variant: 'primary',
           eventName: 'cta_demo_click',
           eventParams: { location: 'start_confirmation_primary' },

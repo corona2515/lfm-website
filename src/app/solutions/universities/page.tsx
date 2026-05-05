@@ -12,8 +12,8 @@ import { TrackedButton } from '@/components/analytics/TrackedButton'
 import { StickyCtaBar } from '@/components/home/StickyCtaBar'
 import { CTA_LABELS } from '@/lib/constants'
 
-const SAMPLE_ANALYSIS_HREF = '/contact?intent=demo&source=universities'
-const TALK_TO_LEANFM_HREF = '/contact?intent=general&source=universities-talk'
+const SAMPLE_ANALYSIS_HREF = '/start'
+const TALK_TO_LEANFM_HREF = '/contact?intent=demo&source=universities_demo'
 
 export const metadata: Metadata = {
   title: 'Universities',
@@ -75,7 +75,7 @@ const practiceExamples = [
 ]
 
 const processSteps = [
-  'Request a Sample Analysis',
+  'Upload Sample Dataset',
   'Share available building system data',
   'LeanFM analyzes the data',
   'Review findings with our team',
@@ -163,7 +163,7 @@ export default function UniversitiesPage() {
                 For Universities
               </p>
               <h1 className="mb-6 max-w-[12ch] font-body text-[3.15rem] font-semibold leading-[0.98] tracking-normal text-white md:text-[4.05rem] lg:text-[4.6rem]">
-                Make Complex Campus Systems Easier to Understand and Act On
+                Bring clarity to complex campus building systems.
               </h1>
               <p className="body-large mb-7 max-w-2xl">
                 LeanFM analyzes existing building system data to uncover hidden problems that waste energy, increase costs, and impact comfort across campus buildings—often before they trigger alarms or surface clearly.
@@ -180,7 +180,7 @@ export default function UniversitiesPage() {
                 <TrackedButton
                   href={SAMPLE_ANALYSIS_HREF}
                   size="large"
-                  eventName="cta_demo_click"
+                  eventName="cta_upload_sample_click"
                   eventParams={{ location: 'universities_hero_primary' }}
                   className="w-full sm:w-auto"
                 >
@@ -190,11 +190,11 @@ export default function UniversitiesPage() {
                   variant="secondary"
                   href={TALK_TO_LEANFM_HREF}
                   size="large"
-                  eventName="cta_talk_click"
+                  eventName="cta_demo_click"
                   eventParams={{ location: 'universities_hero_secondary' }}
                   className="w-full sm:w-auto"
                 >
-                  Talk to LeanFM
+                  {CTA_LABELS.secondary}
                 </TrackedButton>
               </div>
             </div>
@@ -342,7 +342,7 @@ export default function UniversitiesPage() {
             <TrackedButton
               href={SAMPLE_ANALYSIS_HREF}
               size="large"
-              eventName="cta_demo_click"
+              eventName="cta_upload_sample_click"
               eventParams={{ location: 'universities_midpage_primary' }}
             >
               {CTA_LABELS.primary}
@@ -369,7 +369,7 @@ export default function UniversitiesPage() {
           <div className="mt-9 text-center">
             <TrackedButton
               href={SAMPLE_ANALYSIS_HREF}
-              eventName="cta_demo_click"
+              eventName="cta_upload_sample_click"
               eventParams={{ location: 'universities_process_primary' }}
             >
               {CTA_LABELS.primary}
@@ -447,7 +447,7 @@ export default function UniversitiesPage() {
             <TrackedButton
               href={SAMPLE_ANALYSIS_HREF}
               size="large"
-              eventName="cta_demo_click"
+              eventName="cta_upload_sample_click"
               eventParams={{ location: 'universities_final_primary' }}
             >
               {CTA_LABELS.primary}

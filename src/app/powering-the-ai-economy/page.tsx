@@ -32,7 +32,7 @@ const HERO_PROOF_POINTS = [
   'Prescriptiv™',
   '4M+ sq ft deployed',
   'Works with existing BAS/BMS',
-  'Up to 30% savings',
+  'Hidden HVAC waste',
 ] as const
 
 const PROBLEM_METRICS = [
@@ -82,17 +82,17 @@ const MATH_STEPS = [
   {
     step: '2',
     title: 'A large share of that load is waste, not productive demand',
-    value: 'Up to 30%',
+    value: 'Hidden waste',
     detail:
-      'DOE notes commercial buildings can waste up to 30% of the energy they consume.',
+      'Commercial buildings often hide avoidable operational waste in existing system behavior.',
     accent: 'border-blue-500/25 bg-blue-500/10',
   },
   {
     step: '3',
     title: 'Controls-driven HVAC improvement is a real demand-side lever',
-    value: '30%',
+    value: 'Meaningful',
     detail:
-      'High-performance building controls have shown 30% HVAC energy reduction in commercial buildings.',
+      'Building controls can reveal meaningful operational improvements when hidden faults are corrected.',
     accent: 'border-amber-500/25 bg-amber-500/10',
   },
   {
@@ -111,7 +111,7 @@ const ROLE_CARDS = [
       'Prescriptiv™ surfaces faults like stuck dampers, failed economizers, valve issues, and simultaneous heating and cooling at the equipment and subsystem level.',
   },
   {
-    title: 'Up to 30% energy savings',
+    title: 'Hidden waste energy savings',
     description:
       'LeanFM focuses teams on the faults most likely to reduce building energy waste and release avoidable load back to the grid.',
   },
@@ -645,8 +645,7 @@ export default function PoweringAiEconomyPage() {
 
               <p className="mt-5 text-body-xs text-slate-400">
                 Savings vary based on building type, existing conditions, data quality, and
-                implementation of recommended actions. The 30% figure represents potential savings
-                in buildings with significant undetected faults. Actual results depend on your
+                implementation of recommended actions. Actual results depend on your
                 specific situation.
               </p>
             </div>

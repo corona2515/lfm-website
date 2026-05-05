@@ -12,8 +12,8 @@ import { TrackedButton } from '@/components/analytics/TrackedButton'
 import { StickyCtaBar } from '@/components/home/StickyCtaBar'
 import { CTA_LABELS } from '@/lib/constants'
 
-const SAMPLE_ANALYSIS_HREF = '/contact?intent=demo&source=k12-schools'
-const TALK_TO_LEANFM_HREF = '/contact?intent=general&source=k12-schools-talk'
+const SAMPLE_ANALYSIS_HREF = '/start'
+const TALK_TO_LEANFM_HREF = '/contact?intent=demo&source=k12_demo'
 
 export const metadata: Metadata = {
   title: 'K-12 Schools',
@@ -73,7 +73,7 @@ const practiceExamples = [
 ]
 
 const processSteps = [
-  'Request a Sample Analysis',
+  'Upload Sample Dataset',
   'Share available building system data',
   'LeanFM analyzes the data',
   'Review findings with our team',
@@ -159,7 +159,7 @@ export default function K12SchoolsPage() {
           <div className="grid items-center gap-12 lg:grid-cols-[1.02fr_0.98fr]">
             <div className="max-w-3xl">
               <h1 className="mb-6 max-w-[12ch] font-body text-[3.15rem] font-semibold leading-[0.98] tracking-normal text-white md:text-[4.05rem] lg:text-[4.6rem]">
-                Reduce Energy Waste and Comfort Issues Across Your Schools
+                Find the hidden HVAC issues driving complaints, waste, and maintenance strain across your district.
               </h1>
               <p className="body-large mb-7 max-w-2xl">
                 LeanFM analyzes existing building system data to uncover hidden problems that waste energy, increase costs, and create comfort issues across classrooms, gyms, and district facilities—often without triggering alarms.
@@ -176,7 +176,7 @@ export default function K12SchoolsPage() {
                 <TrackedButton
                   href={SAMPLE_ANALYSIS_HREF}
                   size="large"
-                  eventName="cta_demo_click"
+                  eventName="cta_upload_sample_click"
                   eventParams={{ location: 'k12_schools_hero_primary' }}
                   className="w-full sm:w-auto"
                 >
@@ -186,11 +186,11 @@ export default function K12SchoolsPage() {
                   variant="secondary"
                   href={TALK_TO_LEANFM_HREF}
                   size="large"
-                  eventName="cta_talk_click"
+                  eventName="cta_demo_click"
                   eventParams={{ location: 'k12_schools_hero_secondary' }}
                   className="w-full sm:w-auto"
                 >
-                  Talk to LeanFM
+                  {CTA_LABELS.secondary}
                 </TrackedButton>
               </div>
             </div>
@@ -260,7 +260,7 @@ export default function K12SchoolsPage() {
                 </p>
                 <TrackedButton
                   href={SAMPLE_ANALYSIS_HREF}
-                  eventName="cta_demo_click"
+                  eventName="cta_upload_sample_click"
                   eventParams={{ location: 'k12_schools_impact_inline' }}
                 >
                   {CTA_LABELS.primary}
@@ -354,7 +354,7 @@ export default function K12SchoolsPage() {
           <div className="mt-9 text-center">
             <TrackedButton
               href={SAMPLE_ANALYSIS_HREF}
-              eventName="cta_demo_click"
+              eventName="cta_upload_sample_click"
               eventParams={{ location: 'k12_schools_process_primary' }}
             >
               {CTA_LABELS.primary}
@@ -427,7 +427,7 @@ export default function K12SchoolsPage() {
             <TrackedButton
               href={SAMPLE_ANALYSIS_HREF}
               size="large"
-              eventName="cta_demo_click"
+              eventName="cta_upload_sample_click"
               eventParams={{ location: 'k12_schools_final_primary' }}
             >
               {CTA_LABELS.primary}

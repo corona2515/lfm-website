@@ -44,8 +44,8 @@ const WORKFLOW_STEPS = [
 const IMPACT_ITEMS = [
   {
     title: 'Budget',
-    value: 'Up to 30%',
-    description: 'Potential savings in buildings with significant undetected HVAC faults.',
+    value: 'Ranked waste',
+    description: 'Hidden HVAC faults prioritized by likely cost, comfort, and operational impact.',
   },
   {
     title: 'Comfort + reliability',
@@ -298,10 +298,9 @@ export default function BuildingDataActionPage() {
 
           <div className="mt-8 grid gap-4 lg:grid-cols-2">
             <div className="rounded-xl border border-cyan-400/20 bg-cyan-500/10 p-5">
-              <p className="font-display text-body-lg font-semibold text-white">Source-backed savings claim</p>
+              <p className="font-display text-body-lg font-semibold text-white">Operational waste is measurable</p>
               <p className="mt-3 text-body-sm leading-relaxed text-slate-400">
-                DOE guidance notes commercial buildings can waste up to 30% of the energy they
-                consume.{' '}
+                DOE guidance highlights the importance of reducing commercial building energy waste through practical operational improvements.{' '}
                 <a
                   href={SOURCE_URLS.commercialWaste}
                   target="_blank"
@@ -331,10 +330,8 @@ export default function BuildingDataActionPage() {
           </div>
 
           <p className="mt-5 text-body-xs text-slate-500">
-            Savings vary based on building type, existing conditions, data quality, and
-            implementation of recommended actions. The 30% figure represents potential savings in
-            buildings with significant undetected faults. Actual results depend on your specific
-            situation.
+            Results vary based on building type, existing conditions, data quality, and
+            implementation of recommended actions. Actual outcomes depend on your specific situation.
           </p>
         </div>
       </section>

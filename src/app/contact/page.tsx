@@ -31,7 +31,7 @@ const BUILDING_TYPES = [
 ]
 
 const INTENT_OPTIONS: Array<{ value: ContactIntent; label: string }> = [
-  { value: 'demo', label: 'Request a Sample Analysis' },
+  { value: 'demo', label: 'Book a Demo' },
   { value: 'investor', label: 'Investor inquiry' },
   { value: 'general', label: 'General question' },
 ]
@@ -107,7 +107,7 @@ export default function ContactPage() {
   const getSubmitLabel = () => {
     switch (formData.intent) {
       case 'demo':
-        return 'Request Sample Analysis'
+        return 'Book Demo'
       case 'investor':
         return 'Request Deck'
       default:
@@ -153,10 +153,10 @@ export default function ContactPage() {
           <div className="text-center max-w-2xl mx-auto">
             <Badge className="mb-6">Contact</Badge>
             <h1 className="heading-1 text-white mb-6">
-              Book a 20-minute walkthrough
+              Book a demo or contact LeanFM
             </h1>
             <p className="body-large">
-              Share a few details and our team will schedule a demo focused on your facilities portfolio.
+              Share a few details and our team will follow up about your facilities portfolio, investor inquiry, or general question.
             </p>
           </div>
         </div>

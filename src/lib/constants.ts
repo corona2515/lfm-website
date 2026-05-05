@@ -37,8 +37,8 @@ export const SOLUTIONS_NAV_GROUPS = [
 ] as const
 
 export const CTA_LABELS = {
-  primary: 'Request a Sample Analysis',
-  secondary: 'Upload Sample Dataset',
+  primary: 'Upload Sample Dataset',
+  secondary: 'Book a Demo',
 } as const
 
 export const FOOTER_LINKS = {
@@ -64,8 +64,8 @@ export const CREDIBILITY_ITEMS = [
 
 export const HOME_PROOF_METRICS = [
   {
-    value: 'Up to 30%',
-    label: 'Potential energy cost savings in buildings with significant undetected faults',
+    value: 'Impact-ranked',
+    label: 'Sample findings focused on hidden faults most likely to affect cost, comfort, or equipment wear',
   },
   {
     value: '<24 hours',
@@ -140,8 +140,8 @@ export const PROBLEM_AGITATION_POINTS = [
     description: 'Facility teams are asked to reduce spend, but they rarely get a prioritized list of what to fix first.',
   },
   {
-    title: 'Enterprise AFDD demands too much',
-    description: 'Most platforms require long deployments, outside consultants, and enterprise budgets before your team gets practical guidance.',
+    title: 'Large deployments can demand too much upfront',
+    description: 'Many tools require long setup cycles, outside consultants, and enterprise budgets before your team gets practical guidance.',
   },
 ] as const
 
@@ -167,9 +167,9 @@ export const PROCESS_STEPS = [
 ] as const
 
 export const COMPARISON_ITEMS = {
-  headers: ['', 'OnPoint', 'Traditional AFDD'],
+  headers: ['', 'LeanFM', 'Traditional monitoring'],
   rows: [
-    { label: 'Cost', onpoint: 'A fraction of enterprise AFDD pricing', traditional: '$100K+ per year' },
+    { label: 'Cost', onpoint: 'Low-friction sample analysis to start', traditional: 'Large upfront commitment' },
     { label: 'Onboarding model', onpoint: 'Lead form or account + sample upload', traditional: 'Long setup cycles and integrations' },
     { label: 'Installation', onpoint: 'None required', traditional: 'Sensors, integration, consultants' },
     { label: 'Complexity', onpoint: 'Guided onboarding + clear next steps', traditional: 'Months of configuration' },
@@ -179,8 +179,8 @@ export const COMPARISON_ITEMS = {
 
 export const PRODUCT_PROMISES = [
   {
-    title: 'Save up to 30% on energy costs',
-    description: 'Hidden faults waste energy every day. Find them and fix them before they drain your budget.',
+    title: 'Find the hidden faults draining your budget',
+    description: 'Hidden HVAC faults waste energy every day. Find them and fix what matters first.',
     footnote: true,
   },
   {
@@ -264,7 +264,7 @@ export const PRICING_TIERS = [
 export const FAQ_ITEMS = [
   {
     question: 'How much can we save?',
-    answer: 'Savings up to 30% are possible in buildings with significant undetected HVAC faults. Actual savings vary based on building condition, controls quality, and implementation of recommended actions.',
+    answer: 'LeanFM does not promise a fixed savings percentage. Results depend on your building, BAS data quality, controls condition, and corrective actions taken.',
   },
   {
     question: 'Why not just use BAS alarms?',
@@ -288,4 +288,4 @@ export const FAQ_ITEMS = [
   },
 ] as const
 
-export const ENERGY_DISCLAIMER = '* Savings vary based on building type, existing conditions, data quality, and implementation of recommended actions. The 30% figure represents potential savings in buildings with significant undetected faults. Actual results depend on your specific situation.'
+export const ENERGY_DISCLAIMER = '* Results vary based on building type, existing conditions, data quality, and implementation of recommended actions. Actual outcomes depend on your specific situation.'

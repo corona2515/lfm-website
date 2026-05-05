@@ -15,8 +15,8 @@ import { TrackedButton } from '@/components/analytics/TrackedButton'
 import { StickyCtaBar } from '@/components/home/StickyCtaBar'
 import { CTA_LABELS } from '@/lib/constants'
 
-const SAMPLE_ANALYSIS_HREF = '/contact?intent=demo&source=results_sample_analysis'
-const TALK_TO_LEANFM_HREF = '/contact?intent=general&source=results_talk'
+const SAMPLE_ANALYSIS_HREF = '/start'
+const TALK_TO_LEANFM_HREF = '/contact?intent=demo&source=results_demo'
 
 export const metadata: Metadata = {
   title: 'Results',
@@ -234,10 +234,10 @@ export default function ResultsPage() {
                 Results
               </p>
               <h1 className="mb-6 max-w-[calc(100vw-2rem)] font-body text-[3.1rem] font-semibold leading-[0.98] tracking-normal text-white md:max-w-[12ch] md:text-[4.1rem] lg:text-[4.7rem]">
-                Real Findings From Complex Buildings
+                How LeanFM helped The Andy Warhol Museum uncover BAS logic faults and reduce utility spend by more than $100K per year.
               </h1>
               <p className="body-large mb-7 max-w-full md:max-w-2xl">
-                LeanFM helps facilities teams uncover hidden building system problems that waste energy, affect comfort, and strain equipment—using the data they already have.
+                The issues were already in the building data. LeanFM found the patterns, helped prioritize action, and the corrected faults produced measurable savings.
               </p>
               <ul className="mb-8 grid gap-3">
                 {heroBullets.map((bullet) => (
@@ -251,7 +251,7 @@ export default function ResultsPage() {
                 <TrackedButton
                   href={SAMPLE_ANALYSIS_HREF}
                   size="large"
-                  eventName="cta_demo_click"
+                  eventName="cta_upload_sample_click"
                   eventParams={{ location: 'results_hero_primary' }}
                   className="w-full min-w-0 sm:w-auto"
                 >
@@ -261,11 +261,11 @@ export default function ResultsPage() {
                   variant="secondary"
                   href={TALK_TO_LEANFM_HREF}
                   size="large"
-                  eventName="cta_talk_click"
+                  eventName="cta_demo_click"
                   eventParams={{ location: 'results_hero_secondary' }}
                   className="w-full min-w-0 sm:w-auto"
                 >
-                  Talk to LeanFM
+                  {CTA_LABELS.secondary}
                 </TrackedButton>
               </div>
             </div>
@@ -300,7 +300,7 @@ export default function ResultsPage() {
               </p>
               <h2 className="heading-2 mb-4 text-white">Featured Case Study: The Andy Warhol Museum</h2>
               <p className="body-large">
-                Helping a sensitive museum environment reduce waste while supporting comfort and environmental stability.
+                The seven-floor mixed-use museum required stable temperature and humidity control for sensitive artwork, visitor comfort, and staff comfort.
               </p>
             </div>
             <div className="rounded-2xl border border-cyan-400/25 bg-cyan-500/10 p-5">
@@ -330,14 +330,14 @@ export default function ResultsPage() {
               <div className="rounded-2xl border border-slate-800 bg-slate-950/60 p-6">
                 <h3 className="mb-4 font-display text-2xl font-semibold text-white">Challenge</h3>
                 <p className="body-large">
-                  The Warhol required stable environmental conditions to help protect sensitive artwork while maintaining comfort for visitors and staff. The museum also wanted to reduce HVAC-related energy costs, reduce emissions, extend equipment life, and improve system performance.
+                  After a new BAS was installed in 2021, the museum still needed to reduce HVAC energy waste, improve comfort, protect artwork, support sustainability, and extend equipment life. LeanFM analysis in 2022 found BAS logic faults that were corrected.
                 </p>
               </div>
 
               <div className="rounded-2xl border border-slate-800 bg-slate-950/60 p-6">
                 <h3 className="mb-4 font-display text-2xl font-semibold text-white">What LeanFM Found</h3>
                 <p className="body-large">
-                  LeanFM analysis identified hidden building automation system logic faults that were corrected.
+                  The museum had already invested in a BAS. The opportunity was not more hardware. It was finding the hidden logic faults and operating patterns the system was not surfacing clearly enough.
                 </p>
               </div>
             </div>
@@ -379,9 +379,9 @@ export default function ResultsPage() {
               <WarholTrendVisual />
 
               <TrackedButton
-                href="/contact?intent=demo&source=results_warhol_case_study"
+                href={SAMPLE_ANALYSIS_HREF}
                 size="large"
-                eventName="cta_demo_click"
+                eventName="cta_upload_sample_click"
                 eventParams={{ location: 'results_warhol_primary' }}
                 className="w-full"
               >
@@ -454,9 +454,9 @@ export default function ResultsPage() {
               Want to know what your data would show?
             </h2>
             <TrackedButton
-              href="/contact?intent=demo&source=results_supporting_findings"
+              href={SAMPLE_ANALYSIS_HREF}
               size="large"
-              eventName="cta_demo_click"
+              eventName="cta_upload_sample_click"
               eventParams={{ location: 'results_supporting_findings_primary' }}
             >
               {CTA_LABELS.primary}
@@ -517,7 +517,7 @@ export default function ResultsPage() {
           <div className="mt-9 text-center">
             <TrackedButton
               href={SAMPLE_ANALYSIS_HREF}
-              eventName="cta_demo_click"
+              eventName="cta_upload_sample_click"
               eventParams={{ location: 'results_process_primary' }}
             >
               {CTA_LABELS.primary}
@@ -551,9 +551,9 @@ export default function ResultsPage() {
               Send the data you already have. LeanFM will help identify hidden issues affecting energy, comfort, and system performance.
             </p>
             <TrackedButton
-              href="/contact?intent=demo&source=results_final"
+              href={SAMPLE_ANALYSIS_HREF}
               size="large"
-              eventName="cta_demo_click"
+              eventName="cta_upload_sample_click"
               eventParams={{ location: 'results_final_primary' }}
             >
               {CTA_LABELS.primary}

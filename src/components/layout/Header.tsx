@@ -165,16 +165,16 @@ export function Header({ appUrl }: HeaderProps) {
               <Button
                 variant="ghost"
                 size="small"
-                href={appUrl}
-                onClick={() => trackEvent('cta_upload_sample_click', { location: 'header_desktop_secondary' })}
+                href="/contact?intent=demo&source=header"
+                onClick={() => trackEvent('cta_demo_click', { location: 'header_desktop_secondary' })}
               >
                 {CTA_LABELS.secondary}
               </Button>
             ) : null}
             <Button
               size="small"
-              href={isInvestorsPage ? '/contact?intent=investor&source=header_investors' : '/contact?intent=demo'}
-              onClick={() => trackEvent(isInvestorsPage ? 'cta_investor_click' : 'cta_demo_click', { location: 'header_desktop_primary' })}
+              href={isInvestorsPage ? '/contact?intent=investor&source=header_investors' : appUrl}
+              onClick={() => trackEvent(isInvestorsPage ? 'cta_investor_click' : 'cta_upload_sample_click', { location: 'header_desktop_primary' })}
             >
               {isInvestorsPage ? 'Contact LeanFM' : CTA_LABELS.primary}
             </Button>
@@ -251,7 +251,7 @@ export function Header({ appUrl }: HeaderProps) {
             <p className="mt-2 max-w-xs text-body-sm text-slate-400">
               {isInvestorsPage
                 ? 'Learn more about LeanFM or contact the team directly.'
-                : 'Learn more about LeanFM or jump straight into a demo.'}
+                : 'Learn more about LeanFM or upload a sample dataset.'}
             </p>
           </div>
           <div className="max-h-[calc(100dvh-7rem)] overflow-y-auto px-3 py-3">
@@ -301,17 +301,17 @@ export function Header({ appUrl }: HeaderProps) {
                 {!isInvestorsPage ? (
                   <Button
                     variant="ghost"
-                    href={appUrl}
+                    href="/contact?intent=demo&source=header_mobile"
                     className="w-full justify-center rounded-2xl border border-slate-700/80 bg-slate-900/60"
-                    onClick={() => trackEvent('cta_upload_sample_click', { location: 'header_mobile_secondary' })}
+                    onClick={() => trackEvent('cta_demo_click', { location: 'header_mobile_secondary' })}
                   >
                     {CTA_LABELS.secondary}
                   </Button>
                 ) : null}
                 <Button
-                  href={isInvestorsPage ? '/contact?intent=investor&source=header_investors_mobile' : '/contact?intent=demo'}
+                  href={isInvestorsPage ? '/contact?intent=investor&source=header_investors_mobile' : appUrl}
                   className="w-full justify-center rounded-2xl"
-                  onClick={() => trackEvent(isInvestorsPage ? 'cta_investor_click' : 'cta_demo_click', { location: 'header_mobile_primary' })}
+                  onClick={() => trackEvent(isInvestorsPage ? 'cta_investor_click' : 'cta_upload_sample_click', { location: 'header_mobile_primary' })}
                 >
                   {isInvestorsPage ? 'Contact LeanFM' : CTA_LABELS.primary}
                 </Button>

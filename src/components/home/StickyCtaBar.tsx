@@ -13,9 +13,9 @@ interface StickyCtaBarProps {
 
 export function StickyCtaBar({
   heroId,
-  href = '/contact?intent=demo',
-  location = 'sticky_home_primary',
-  message = 'Hidden building system problems can waste energy, money, and comfort before alarms catch them.',
+  href = '/start',
+  location = 'sticky_upload_primary',
+  message = 'Hidden BAS faults can waste energy, money, comfort, and maintenance time before alarms catch them.',
 }: StickyCtaBarProps) {
   const [isVisible, setIsVisible] = useState(false)
 
@@ -60,7 +60,7 @@ export function StickyCtaBar({
         <TrackedButton
           href={href}
           size="small"
-          eventName="cta_demo_click"
+          eventName="cta_upload_sample_click"
           eventParams={{ location }}
           className="w-full shrink-0 sm:w-auto"
         >

@@ -5,7 +5,8 @@ import { TrackedButton } from '@/components/analytics/TrackedButton'
 import { StickyCtaBar } from '@/components/home/StickyCtaBar'
 import { CTA_LABELS, SITE_CONFIG } from '@/lib/constants'
 
-const SAMPLE_ANALYSIS_HREF = '/contact?intent=demo&source=home_sample_analysis'
+const SAMPLE_ANALYSIS_HREF = '/start'
+const BOOK_DEMO_HREF = '/contact?intent=demo&source=home_book_demo'
 
 export const metadata: Metadata = {
   title: 'LeanFM Technologies | Find Hidden Building System Problems',
@@ -14,9 +15,10 @@ export const metadata: Metadata = {
 }
 
 const heroBullets = [
-  'Identify hidden inefficiencies your system doesn’t flag',
-  'Reduce energy waste without major capital upgrades',
-  'Focus your team on the issues that actually matter',
+  'No new sensors',
+  'No site visit required to start',
+  'Sample findings typically reviewed within 24 hours after clean upload',
+  'Built for facilities, energy, and operations teams',
 ]
 
 const credibilityItems = [
@@ -26,16 +28,58 @@ const credibilityItems = [
 ]
 
 const problemIssues = [
-  'Equipment running unnecessarily',
   'Simultaneous heating and cooling',
-  'Schedule and control issues',
-  'Sensor drift',
+  'Drifting sensors',
+  'Overridden sequences',
+  'Excessive runtime',
+  'Short cycling',
+  'Control logic problems',
 ]
 
 const solutionBullets = [
-  'No new hardware required',
-  'Works with your existing building system data',
-  'Focused on actionable results, not dashboards',
+  'Finds hidden operating patterns',
+  'Connects faults to energy, comfort, and maintenance impact',
+  'Ranks what matters first',
+  'Produces clear corrective guidance',
+]
+
+const basComparison = [
+  {
+    title: 'BAS alarms',
+    items: ['Catch obvious failures', 'Alert on thresholds', 'Often generate noise', 'Do not always rank impact'],
+  },
+  {
+    title: 'LeanFM',
+    items: [
+      'Finds hidden operating patterns',
+      'Connects faults to energy, comfort, and maintenance impact',
+      'Ranks what matters first',
+      'Produces clear corrective guidance',
+    ],
+  },
+]
+
+const beforeAfter = [
+  {
+    title: 'Before LeanFM',
+    items: [
+      'Teams react to complaints and alarms',
+      'Issues are scattered across BAS data',
+      'Maintenance priorities are unclear',
+      'Energy waste is hard to prove',
+      'Leadership sees costs, not causes',
+    ],
+  },
+  {
+    title: 'After LeanFM',
+    items: [
+      'Hidden faults are surfaced',
+      'Issues are ranked by impact',
+      'Teams know what to fix first',
+      'Findings can be shared with vendors and leadership',
+      'Waste becomes visible and actionable',
+    ],
+  },
 ]
 
 const processSteps = [
@@ -184,10 +228,10 @@ export default function HomePage() {
           <div className="grid items-center gap-12 lg:grid-cols-[1.02fr_0.98fr]">
             <div className="max-w-3xl">
               <h1 className="mb-6 max-w-[12ch] font-body text-[3.2rem] font-semibold leading-[0.98] tracking-normal text-white md:text-[4.2rem] lg:text-[4.85rem]">
-                Find the Problems Your Building System Is Missing
+                Your building is wasting money in ways your BAS is not catching.
               </h1>
               <p className="body-large mb-7 max-w-2xl">
-                LeanFM analyzes existing building system data to uncover hidden problems that waste energy, drive up costs, and create comfort issues—often before they trigger alarms.
+                LeanFM analyzes your existing building automation data to find hidden HVAC faults, rank them by impact, and show your team what to fix first.
               </p>
               <ul className="mb-8 grid gap-3">
                 {heroBullets.map((bullet) => (
@@ -201,7 +245,7 @@ export default function HomePage() {
                 <TrackedButton
                   href={SAMPLE_ANALYSIS_HREF}
                   size="large"
-                  eventName="cta_demo_click"
+                  eventName="cta_upload_sample_click"
                   eventParams={{ location: 'home_hero_primary' }}
                   className="w-full sm:w-auto"
                 >
@@ -209,13 +253,13 @@ export default function HomePage() {
                 </TrackedButton>
                 <TrackedButton
                   variant="secondary"
-                  href="#how-it-works"
+                  href={BOOK_DEMO_HREF}
                   size="large"
-                  eventName="cta_how_it_works_click"
+                  eventName="cta_demo_click"
                   eventParams={{ location: 'home_hero_secondary' }}
                   className="w-full sm:w-auto"
                 >
-                  See How It Works
+                  {CTA_LABELS.secondary}
                 </TrackedButton>
               </div>
             </div>
@@ -246,18 +290,18 @@ export default function HomePage() {
         <div className="container-default">
           <div className="grid gap-10 lg:grid-cols-[0.9fr_1.1fr] lg:items-start">
             <div>
-              <h2 className="heading-2 mb-5 text-white">Most Building Systems Miss the Real Problems</h2>
+              <h2 className="heading-2 mb-5 text-white">Why your BAS may not be telling you the whole story.</h2>
               <div className="space-y-5 text-body-lg leading-relaxed text-slate-300">
                 <p>
-                  Your building automation system is useful when something obvious breaks. But many expensive problems do not trigger clear alarms.
+                  Most BAS alarms are designed to flag obvious failures or out-of-range conditions. Many expensive problems do not look like alarms.
                 </p>
                 <p className="font-display text-2xl font-semibold leading-snug text-cyan-200">
-                  The costliest problems are often the ones nobody is being alerted about.
+                  They show up as patterns over time.
                 </p>
                 <p>
-                  Equipment can run when it should be off. Heating and cooling can happen at the same time. Schedules can drift. Sensors can become inaccurate. Control issues can quietly waste energy and create comfort complaints for months.
+                  Simultaneous heating and cooling, drifting sensors, overridden sequences, excessive runtime, short cycling, and control logic problems can compound quietly before anyone sees a clear alarm.
                 </p>
-                <p>LeanFM helps make those hidden problems visible.</p>
+                <p>LeanFM looks across trend behavior to find those patterns and prioritize the issues most likely to affect energy, comfort, and equipment wear.</p>
               </div>
             </div>
 
@@ -275,11 +319,37 @@ export default function HomePage() {
 
       <section className="section-large border-y border-slate-800/70 bg-slate-900/35">
         <div className="container-default">
+          <div className="mb-10 max-w-3xl">
+            <h2 className="heading-2 mb-4 text-white">BAS alarms show failures. LeanFM shows what is costing you.</h2>
+            <p className="body-large">
+              These issues exist whether or not they trigger alarms. The first step is not a major project. It is a sample analysis.
+            </p>
+          </div>
+          <div className="grid gap-5 md:grid-cols-2">
+            {basComparison.map((column) => (
+              <div key={column.title} className="rounded-2xl border border-slate-800 bg-slate-950/55 p-6">
+                <h3 className="mb-5 font-display text-2xl font-semibold text-white">{column.title}</h3>
+                <div className="space-y-3">
+                  {column.items.map((item) => (
+                    <div key={item} className="flex gap-3 text-body-md text-slate-200">
+                      <CheckCircle2 className="mt-0.5 h-5 w-5 shrink-0 text-cyan-300" aria-hidden="true" />
+                      <span>{item}</span>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="section-large border-y border-slate-800/70 bg-slate-900/35">
+        <div className="container-default">
           <div className="grid gap-10 lg:grid-cols-[1.05fr_0.95fr] lg:items-center">
             <div>
-              <h2 className="heading-2 mb-5 text-white">We Find What Your System Isn’t Showing You</h2>
+              <h2 className="heading-2 mb-5 text-white">Find the costly issues hiding in your BAS data</h2>
               <p className="body-large max-w-2xl">
-                LeanFM uses your existing building system data to find hidden issues, separate noise from real priorities, and turn the results into clear findings your team can act on.
+                Hidden faults compound quietly. Every month of delay can mean more waste, more complaints, and more wear. LeanFM separates signal from noise and turns existing BAS data into clear corrective priorities.
               </p>
             </div>
             <div className="space-y-3">
@@ -315,7 +385,7 @@ export default function HomePage() {
           <div className="mt-9 text-center">
             <TrackedButton
               href={SAMPLE_ANALYSIS_HREF}
-              eventName="cta_demo_click"
+              eventName="cta_upload_sample_click"
               eventParams={{ location: 'home_how_it_works_primary' }}
             >
               {CTA_LABELS.primary}
@@ -345,6 +415,32 @@ export default function HomePage() {
         </div>
       </section>
 
+      <section className="section-large bg-slate-950">
+        <div className="container-default">
+          <div className="mb-10 max-w-3xl">
+            <h2 className="heading-2 mb-4 text-white">Before and After LeanFM</h2>
+            <p className="body-large">
+              LeanFM turns scattered BAS behavior into a short list of issues facilities teams, vendors, and leadership can act on.
+            </p>
+          </div>
+          <div className="grid gap-5 md:grid-cols-2">
+            {beforeAfter.map((group) => (
+              <div key={group.title} className="rounded-2xl border border-slate-800 bg-slate-900/55 p-6">
+                <h3 className="mb-5 font-display text-2xl font-semibold text-white">{group.title}</h3>
+                <div className="space-y-3">
+                  {group.items.map((item) => (
+                    <div key={item} className="flex gap-3 text-body-md text-slate-200">
+                      <CheckCircle2 className="mt-0.5 h-5 w-5 shrink-0 text-cyan-300" aria-hidden="true" />
+                      <span>{item}</span>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
       <section className="border-b border-slate-800/70 bg-slate-950">
         <div className="container-default py-12 md:py-16">
           <div className="rounded-2xl border border-cyan-400/25 bg-cyan-500/10 p-7 text-center md:p-10">
@@ -354,7 +450,7 @@ export default function HomePage() {
             <TrackedButton
               href={SAMPLE_ANALYSIS_HREF}
               size="large"
-              eventName="cta_demo_click"
+              eventName="cta_upload_sample_click"
               eventParams={{ location: 'home_midpage_primary' }}
             >
               {CTA_LABELS.primary}
@@ -415,14 +511,14 @@ export default function HomePage() {
       <section className="border-t border-slate-800/70 bg-slate-900/50">
         <div className="container-default py-14 md:py-20">
           <div className="mx-auto max-w-2xl text-center">
-            <h2 className="heading-2 mb-5 text-white">See What Your Building Is Missing</h2>
+            <h2 className="heading-2 mb-5 text-white">Upload a sample dataset and see what your BAS is missing</h2>
             <p className="body-large mb-8">
-              Send existing building system data. We’ll analyze it, identify hidden issues, and walk you through what matters.
+              Send existing BAS trend data. We’ll analyze it for hidden HVAC faults, energy waste, comfort risks, and control issues, then walk you through what matters first.
             </p>
             <TrackedButton
               href={SAMPLE_ANALYSIS_HREF}
               size="large"
-              eventName="cta_demo_click"
+              eventName="cta_upload_sample_click"
               eventParams={{ location: 'home_final_primary' }}
             >
               {CTA_LABELS.primary}
@@ -434,7 +530,7 @@ export default function HomePage() {
       <StickyCtaBar
         heroId="home-hero"
         href={SAMPLE_ANALYSIS_HREF}
-        message="Hidden building system problems can waste energy, money, and comfort before alarms catch them."
+        message="Hidden BAS faults can waste energy, money, comfort, and maintenance time before alarms catch them."
       />
     </>
   )

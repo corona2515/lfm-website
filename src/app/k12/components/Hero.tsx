@@ -19,7 +19,7 @@ export function Hero() {
               For K-12 Schools
             </p>
             <h1 className="max-w-4xl text-4xl font-semibold leading-[1.04] tracking-[-0.02em] text-brand-ink md:text-6xl">
-              Your district&apos;s BAS may be hiding the faults that drive up to 30% of your energy waste.
+              Your district&apos;s BAS may be hiding the faults that drive hidden energy waste.
             </h1>
             <p className="mt-6 max-w-3xl text-lg leading-8 text-brand-muted md:text-xl">
               OnPoint turns existing BAS trend exports into a ranked fix list for energy, comfort, and maintenance priorities, so your team can see which faults to investigate first. No new sensors. No instructional disruption. No capital project required to start.
@@ -52,7 +52,7 @@ export function Hero() {
               ))}
             </ul>
             <p className="mt-4 max-w-3xl text-sm leading-6 text-brand-muted">
-              Savings vary based on building type, existing conditions, data quality, and implementation of recommended actions. The 30% figure represents potential savings in buildings with significant undetected faults.
+              Results vary based on building type, existing conditions, data quality, and implementation of recommended actions.
             </p>
           </div>
           <div className="mx-auto w-full max-w-md lg:max-w-none">

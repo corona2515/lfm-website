@@ -33,22 +33,22 @@ export function Footer({ appUrl, contactEmail }: FooterProps) {
                 See what your building system is missing
               </h2>
               <p className="body-large mb-8">
-                Send existing building system data and get a walkthrough of hidden issues that may be wasting energy, money, or comfort.
+                Upload existing BAS trend data and get a walkthrough of hidden faults that may be wasting energy, money, comfort, or maintenance time.
               </p>
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
                 <TrackedButton
-                  href="/contact?intent=demo"
+                  href={appUrl}
                   size="large"
-                  eventName="cta_demo_click"
+                  eventName="cta_upload_sample_click"
                   eventParams={{ location: 'footer_primary' }}
                 >
                   {CTA_LABELS.primary}
                 </TrackedButton>
                 <TrackedButton
                   variant="secondary"
-                  href={appUrl}
+                  href="/contact?intent=demo&source=footer"
                   size="large"
-                  eventName="cta_upload_sample_click"
+                  eventName="cta_demo_click"
                   eventParams={{ location: 'footer_secondary' }}
                 >
                   {CTA_LABELS.secondary}

@@ -12,8 +12,8 @@ import { TrackedButton } from '@/components/analytics/TrackedButton'
 import { StickyCtaBar } from '@/components/home/StickyCtaBar'
 import { CTA_LABELS } from '@/lib/constants'
 
-const SAMPLE_ANALYSIS_HREF = '/contact?intent=demo&source=museums'
-const TALK_TO_LEANFM_HREF = '/contact?intent=general&source=museums-talk'
+const SAMPLE_ANALYSIS_HREF = '/start'
+const TALK_TO_LEANFM_HREF = '/contact?intent=demo&source=museums_demo'
 
 export const metadata: Metadata = {
   title: 'Museums',
@@ -73,7 +73,7 @@ const practiceExamples = [
 ]
 
 const processSteps = [
-  'Request a Sample Analysis',
+  'Upload Sample Dataset',
   'Share available building system data',
   'LeanFM analyzes the data',
   'Review findings with our team',
@@ -161,7 +161,7 @@ export default function MuseumsPage() {
                 For Museums
               </p>
               <h1 className="mb-6 max-w-[12ch] font-body text-[3.15rem] font-semibold leading-[0.98] tracking-normal text-white md:text-[4.05rem] lg:text-[4.6rem]">
-                Protect Sensitive Environments by Catching Hidden System Issues Early
+                Protect sensitive environments by finding the subtle system issues your BAS may miss.
               </h1>
               <p className="body-large mb-7 max-w-2xl">
                 LeanFM analyzes existing building system data to uncover hidden problems that can impact environmental stability, energy use, and system performance—often before they trigger alarms or become visible.
@@ -178,7 +178,7 @@ export default function MuseumsPage() {
                 <TrackedButton
                   href={SAMPLE_ANALYSIS_HREF}
                   size="large"
-                  eventName="cta_demo_click"
+                  eventName="cta_upload_sample_click"
                   eventParams={{ location: 'museums_hero_primary' }}
                   className="w-full sm:w-auto"
                 >
@@ -188,11 +188,11 @@ export default function MuseumsPage() {
                   variant="secondary"
                   href={TALK_TO_LEANFM_HREF}
                   size="large"
-                  eventName="cta_talk_click"
+                  eventName="cta_demo_click"
                   eventParams={{ location: 'museums_hero_secondary' }}
                   className="w-full sm:w-auto"
                 >
-                  Talk to LeanFM
+                  {CTA_LABELS.secondary}
                 </TrackedButton>
               </div>
             </div>
@@ -336,7 +336,7 @@ export default function MuseumsPage() {
             <TrackedButton
               href={SAMPLE_ANALYSIS_HREF}
               size="large"
-              eventName="cta_demo_click"
+              eventName="cta_upload_sample_click"
               eventParams={{ location: 'museums_midpage_primary' }}
             >
               {CTA_LABELS.primary}
@@ -363,7 +363,7 @@ export default function MuseumsPage() {
           <div className="mt-9 text-center">
             <TrackedButton
               href={SAMPLE_ANALYSIS_HREF}
-              eventName="cta_demo_click"
+              eventName="cta_upload_sample_click"
               eventParams={{ location: 'museums_process_primary' }}
             >
               {CTA_LABELS.primary}
@@ -441,7 +441,7 @@ export default function MuseumsPage() {
             <TrackedButton
               href={SAMPLE_ANALYSIS_HREF}
               size="large"
-              eventName="cta_demo_click"
+              eventName="cta_upload_sample_click"
               eventParams={{ location: 'museums_final_primary' }}
             >
               {CTA_LABELS.primary}

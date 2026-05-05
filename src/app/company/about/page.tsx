@@ -4,14 +4,14 @@ import { Badge, Card } from '@/components/ui'
 export const metadata: Metadata = {
   title: 'About',
   description:
-    'LeanFM Technologies is an international SaaS company serving operational facility managers in the built environment.',
+    'LeanFM Technologies helps facilities teams find hidden building system issues using existing BAS data.',
 }
 
 const TEAM_MEMBERS = [
   {
     name: 'Nick Boris',
     title: 'CEO',
-    bio: 'Nick Boris leads LeanFM Technologies with a focus on delivering intelligent solutions for commercial HVAC fault detection and diagnosis.',
+    bio: 'Nick Boris leads LeanFM Technologies with a focus on helping facilities, energy, and operations teams find hidden HVAC waste and prioritize what to fix first.',
     linkedin: 'https://www.linkedin.com/in/nicholasboris/',
     photo: '/media/team/nick-boris.png',
     circularPhoto: true,
@@ -46,12 +46,11 @@ export default function AboutPage() {
             <Badge className="mb-6">Company</Badge>
             <h1 className="heading-1 text-white mb-6">About Lean FM Technologies</h1>
             <p className="body-large">
-              LeanFM Technologies is an international SaaS company serving operational facility
-              managers in the built environment. We provide the most advanced, groundbreaking
-              solutions for AFDD to uncover root causes and insights relating to HVAC faults.
-              LeanFM Prescriptiv™ is used in hospitals, universities, hotels, office buildings,
-              or anywhere that uses a HVAC system. Clients receive measurable results and
-              experience the benefits to their operations and facilities.
+              LeanFM Technologies is a building system intelligence company helping facilities
+              teams find hidden HVAC faults, energy waste, comfort risks, and control issues
+              using the BAS data they already have. Our work turns scattered system behavior
+              into prioritized findings teams can review with leadership, vendors, and
+              maintenance staff.
             </p>
           </div>
         </div>

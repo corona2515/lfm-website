@@ -14,8 +14,8 @@ import { TrackedButton } from '@/components/analytics/TrackedButton'
 import { StickyCtaBar } from '@/components/home/StickyCtaBar'
 import { CTA_LABELS } from '@/lib/constants'
 
-const SAMPLE_ANALYSIS_HREF = '/contact?intent=demo&source=how_it_works_sample_analysis'
-const TALK_TO_LEANFM_HREF = '/contact?intent=general&source=how_it_works_talk'
+const SAMPLE_ANALYSIS_HREF = '/start'
+const TALK_TO_LEANFM_HREF = '/contact?intent=demo&source=how_it_works_demo'
 
 export const metadata: Metadata = {
   title: 'How It Works',
@@ -30,7 +30,7 @@ const heroBullets = [
 ]
 
 const processSteps = [
-  'Request a Sample Analysis',
+  'Upload sample data',
   'Identify useful data',
   'Share available exports',
   'LeanFM analyzes hidden issues',
@@ -40,8 +40,8 @@ const processSteps = [
 
 const detailedSteps = [
   {
-    title: '1. Request a Sample Analysis',
-    body: 'Start by telling us about your building, facility type, and available system data. You do not need to know every technical detail before reaching out.',
+    title: '1. Upload Sample Data',
+    body: 'Start by telling us about your building, facility type, and available BAS trend data. You do not need to know every technical detail before reaching out.',
     label: 'Useful details',
     items: [
       'Building type',
@@ -213,7 +213,7 @@ export default function HowItWorksPage() {
                 <TrackedButton
                   href={SAMPLE_ANALYSIS_HREF}
                   size="large"
-                  eventName="cta_demo_click"
+                  eventName="cta_upload_sample_click"
                   eventParams={{ location: 'how_it_works_hero_primary' }}
                   className="w-full min-w-0 sm:w-auto"
                 >
@@ -223,16 +223,37 @@ export default function HowItWorksPage() {
                   variant="secondary"
                   href={TALK_TO_LEANFM_HREF}
                   size="large"
-                  eventName="cta_talk_click"
+                  eventName="cta_demo_click"
                   eventParams={{ location: 'how_it_works_hero_secondary' }}
                   className="w-full min-w-0 sm:w-auto"
                 >
-                  Talk to LeanFM
+                  {CTA_LABELS.secondary}
                 </TrackedButton>
               </div>
             </div>
 
             <ProcessVisual />
+          </div>
+        </div>
+      </section>
+
+      <section className="section-large border-y border-slate-800/70 bg-slate-900/35">
+        <div className="container-default">
+          <div className="grid gap-10 lg:grid-cols-[0.82fr_1.18fr] lg:items-start">
+            <div>
+              <h2 className="heading-2 mb-5 text-white">Why your BAS may not be telling you the whole story.</h2>
+              <p className="body-large">
+                BAS alarms are usually built around thresholds and obvious failures. LeanFM looks across trend behavior to find patterns that point to hidden HVAC faults, energy waste, comfort risk, and equipment wear.
+              </p>
+            </div>
+            <div className="grid gap-3 sm:grid-cols-2">
+              {['Threshold alarms miss gradual waste', 'Patterns appear across time and equipment', 'Noise makes priorities hard to rank', 'Clear corrective guidance helps teams act'].map((item) => (
+                <div key={item} className="flex min-h-20 items-center gap-3 rounded-xl border border-slate-800 bg-slate-950/55 p-4">
+                  <CheckCircle2 className="h-5 w-5 shrink-0 text-cyan-300" aria-hidden="true" />
+                  <p className="text-body-md font-medium text-slate-100">{item}</p>
+                </div>
+              ))}
+            </div>
           </div>
         </div>
       </section>
@@ -374,12 +395,12 @@ export default function HowItWorksPage() {
           <div className="mx-auto max-w-2xl text-center">
             <h2 className="heading-2 mb-5 text-white">Start With the Data You Already Have</h2>
             <p className="body-large mb-8">
-              Request a Sample Analysis and LeanFM will help identify hidden issues affecting energy, comfort, and system performance.
+              Upload existing BAS trend data and LeanFM will help identify hidden issues affecting energy, comfort, and system performance.
             </p>
             <TrackedButton
-              href="/contact?intent=demo&source=how_it_works_final"
+              href={SAMPLE_ANALYSIS_HREF}
               size="large"
-              eventName="cta_demo_click"
+              eventName="cta_upload_sample_click"
               eventParams={{ location: 'how_it_works_final_primary' }}
             >
               {CTA_LABELS.primary}

@@ -114,7 +114,7 @@ export function SavingsEstimator() {
         </div>
 
         <p className="text-sm leading-6 text-brand-muted">
-          Based on the midpoint of a $0.50-$1.20 per square foot annual range observed in prior K-12 audits, with an adjustable waste range capped at 30%. Actual results vary by building condition, controls quality, data quality, and execution.
+          Based on the midpoint of a $0.50-$1.20 per square foot annual range observed in prior K-12 audits, Actual results vary by building condition, controls quality, data quality, and execution.
         </p>
 
         <K12Button asChild size="lg">

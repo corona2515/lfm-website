@@ -15,8 +15,8 @@ import { TrackedButton } from '@/components/analytics/TrackedButton'
 import { StickyCtaBar } from '@/components/home/StickyCtaBar'
 import { CTA_LABELS } from '@/lib/constants'
 
-const SAMPLE_ANALYSIS_HREF = '/contact?intent=demo&source=what_we_find_sample_analysis'
-const TALK_TO_LEANFM_HREF = '/contact?intent=general&source=what_we_find'
+const SAMPLE_ANALYSIS_HREF = '/start'
+const TALK_TO_LEANFM_HREF = '/contact?intent=demo&source=what_we_find_demo'
 
 export const metadata: Metadata = {
   title: 'What We Find',
@@ -39,66 +39,67 @@ const missedReasons = [
 
 const issueCategories = [
   {
-    title: 'Unnecessary Runtime',
-    description: 'Equipment running when it should be off or operating longer than needed.',
+    title: 'Heating and cooling at the same time',
+    description: 'Your system may be paying to heat and cool the same space simultaneously.',
+    examples: [
+      'Zones heating while cooling is active',
+      'Systems compensating for conflicting signals',
+    ],
+    impact: 'Energy waste, comfort instability, unnecessary equipment wear',
+    Icon: Snowflake,
+  },
+  {
+    title: 'Equipment running longer than needed',
+    description: 'Fans, pumps, or units may be operating when the building does not need them.',
     examples: [
       'Systems running nights or weekends',
       'Equipment operating in unoccupied spaces',
       'Extended runtime beyond schedules',
     ],
-    impact: 'Wasted energy, increased operating costs, unnecessary equipment wear',
+    impact: 'Higher utility costs and avoidable wear',
     Icon: Clock3,
   },
   {
-    title: 'Simultaneous Heating and Cooling',
-    description: 'Heating and cooling systems working against each other.',
-    examples: [
-      'Zones heating while cooling is active',
-      'Systems compensating for conflicting signals',
-    ],
-    impact: 'Significant energy waste and inconsistent comfort',
-    Icon: Snowflake,
-  },
-  {
-    title: 'Scheduling and Control Issues',
-    description: 'System schedules or control logic not aligned with how the building is actually used.',
-    examples: [
-      'Schedules not matching occupancy',
-      'Control sequences not behaving as intended',
-      'Inconsistent operation across similar spaces',
-    ],
-    impact: 'Energy waste, comfort complaints, inefficient system behavior',
-    Icon: Settings2,
-  },
-  {
-    title: 'Sensor Inaccuracies and Drift',
-    description: 'Sensors that gradually become inaccurate over time.',
+    title: 'Sensors causing bad decisions',
+    description: 'A drifting or faulty sensor can make the system respond to the wrong conditions.',
     examples: [
       'Temperature readings slightly off',
       'Sensors drifting enough to impact control decisions',
     ],
-    impact: 'Systems responding incorrectly, comfort issues, hidden inefficiencies',
+    impact: 'Comfort complaints, wasted energy, and misdiagnosed problems',
     Icon: Gauge,
   },
   {
-    title: 'Comfort-Impacting Faults',
-    description: 'Issues that affect occupant comfort without triggering clear alarms.',
+    title: 'Control logic faults',
+    description: 'The BAS may be following rules that no longer match how the building actually operates.',
+    examples: [
+      'Control sequences not behaving as intended',
+      'Schedules or overrides changing system behavior',
+      'Inconsistent operation across similar spaces',
+    ],
+    impact: 'Hidden waste, unstable operation, and recurring complaints',
+    Icon: Settings2,
+  },
+  {
+    title: 'Comfort drift',
+    description: 'Spaces can slowly move outside preferred conditions without triggering obvious alarms.',
     examples: [
       'Uneven temperatures across spaces',
       'Fluctuating conditions',
       'Inconsistent system response',
     ],
-    impact: 'Complaints, reduced satisfaction, operational friction',
+    impact: 'Tenant, staff, student, visitor, or artifact risk depending on vertical',
     Icon: Thermometer,
   },
   {
-    title: 'Unnecessary System Strain',
-    description: 'Systems working harder than necessary due to inefficiencies.',
+    title: 'Maintenance priorities buried in noise',
+    description: 'Teams often have too many alerts and not enough clarity.',
     examples: [
-      'Equipment cycling more than needed',
-      'Systems compensating for underlying issues',
+      'Recurring alerts without impact ranking',
+      'Issues scattered across BAS data',
+      'Energy waste that is hard to prove',
     ],
-    impact: 'Increased wear, higher maintenance costs, reduced system lifespan',
+    impact: 'The wrong problems get fixed first',
     Icon: Wrench,
   },
 ]
@@ -186,7 +187,7 @@ export default function WhatWeFindPage() {
                 <TrackedButton
                   href={SAMPLE_ANALYSIS_HREF}
                   size="large"
-                  eventName="cta_demo_click"
+                  eventName="cta_upload_sample_click"
                   eventParams={{ location: 'what_we_find_hero_primary' }}
                   className="w-full min-w-0 sm:w-auto"
                 >
@@ -196,11 +197,11 @@ export default function WhatWeFindPage() {
                   variant="secondary"
                   href={TALK_TO_LEANFM_HREF}
                   size="large"
-                  eventName="cta_talk_click"
+                  eventName="cta_demo_click"
                   eventParams={{ location: 'what_we_find_hero_secondary' }}
                   className="w-full min-w-0 sm:w-auto"
                 >
-                  Talk to LeanFM
+                  {CTA_LABELS.secondary}
                 </TrackedButton>
               </div>
             </div>
@@ -250,9 +251,9 @@ export default function WhatWeFindPage() {
       <section className="section-large bg-slate-950">
         <div className="container-default">
           <div className="mb-12 max-w-3xl">
-            <h2 className="heading-2 mb-4 text-white">Hidden Issues That Add Up</h2>
+            <h2 className="heading-2 mb-4 text-white">Hidden issues that become buyer pain</h2>
             <p className="body-large">
-              These are the types of problems LeanFM helps surface from existing building system data.
+              LeanFM turns technical BAS behavior into issues a facilities, operations, or finance team can understand and prioritize.
             </p>
           </div>
           <div className="grid gap-4 lg:grid-cols-2">
@@ -354,12 +355,12 @@ export default function WhatWeFindPage() {
       <section className="border-y border-slate-800/70 bg-cyan-500/10">
         <div className="container-default py-14 text-center md:py-16">
           <h2 className="mx-auto mb-6 max-w-2xl font-display text-3xl font-semibold leading-tight text-white md:text-4xl">
-            Want to See What This Looks Like in Your Building?
+            Want to see which of these are hiding in your building?
           </h2>
           <TrackedButton
-            href="/contact?intent=demo&source=what_we_find_midpage"
+            href={SAMPLE_ANALYSIS_HREF}
             size="large"
-            eventName="cta_demo_click"
+            eventName="cta_upload_sample_click"
             eventParams={{ location: 'what_we_find_midpage_primary' }}
           >
             {CTA_LABELS.primary}
@@ -375,9 +376,9 @@ export default function WhatWeFindPage() {
               Send the data you already have. LeanFM will help identify hidden issues affecting energy, comfort, and system performance.
             </p>
             <TrackedButton
-              href="/contact?intent=demo&source=what_we_find_final"
+              href={SAMPLE_ANALYSIS_HREF}
               size="large"
-              eventName="cta_demo_click"
+              eventName="cta_upload_sample_click"
               eventParams={{ location: 'what_we_find_final_primary' }}
             >
               {CTA_LABELS.primary}
