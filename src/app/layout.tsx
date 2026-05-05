@@ -97,7 +97,6 @@ export default function RootLayout({
           <GoogleAnalytics measurementId={googleAnalyticsId} />
         ) : null}
         <AppChrome
-          appUrl={SITE_CONFIG.appUrl}
           contactEmail={SITE_CONFIG.contactEmail}
         >
           {children}

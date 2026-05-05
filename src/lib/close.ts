@@ -73,8 +73,8 @@ function buildCloseNote(lead: Lead) {
   ]
 
   if (isSamplePreview) {
-    lines.splice(1, 0, 'Signal: Sample dataset uploaded and preview account requested')
-    lines.splice(2, 0, 'OnPoint onboarding: Pending approval and activation; building created; dataset queued for admin review')
+    lines.splice(1, 0, 'Signal: Sample dataset uploaded for Sample Analysis')
+    lines.splice(2, 0, 'OnPoint intake: Pending review; building created; dataset queued for admin review')
   } else if (isHistoricalReport) {
     lines.splice(1, 0, 'Signal: Historical BAS dataset uploaded for a one-time paid report request')
     lines.splice(2, 0, 'Fulfillment: Manual LeanFM historical review requested; no preview-account provisioning')

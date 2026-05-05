@@ -21,6 +21,7 @@ export interface IndustryPageContent {
   }
   painPoints: string[]
   findings: string[]
+  findingDescriptions?: Record<string, string>
   outcomes: Array<{
     title: string
     description: string
@@ -154,7 +155,7 @@ export const INDUSTRY_PAGES: Record<IndustrySlug, IndustryPageContent> = {
     description:
       'OnPoint helps healthcare facilities teams use existing BAS data to prioritize HVAC faults that affect cost, comfort, and reliability.',
     hero: {
-      headline: 'Find hidden HVAC faults in buildings that cannot afford uncertainty.',
+      headline: 'Find hidden HVAC issues in healthcare buildings where reliability and comfort cannot be left to guesswork.',
       body: 'OnPoint ranks BAS fault signals so healthcare facilities teams can focus on issues most likely to affect energy use, reliability, and occupied environments.',
       proof: 'Useful for non-invasive analysis of existing trend exports before teams commit to deeper investigation.',
     },
@@ -169,6 +170,16 @@ export const INDUSTRY_PAGES: Record<IndustrySlug, IndustryPageContent> = {
       'Sensor drift',
       'Schedule and setback issues',
     ],
+    findingDescriptions: {
+      'Conflicting heating and cooling':
+        'Heating and cooling can work against each other while rooms still appear within acceptable ranges.',
+      'Unstable air handling behavior':
+        'Air handlers may cycle, reset, or compensate in ways that deserve review before reliability suffers.',
+      'Sensor drift':
+        'Small sensor errors can push healthcare facilities toward incorrect control decisions.',
+      'Schedule and setback issues':
+        'Occupied, unoccupied, and setback behavior can drift from how the facility actually operates.',
+    },
     outcomes: [
       {
         title: 'Protect reliability',
@@ -193,7 +204,7 @@ export const INDUSTRY_PAGES: Record<IndustrySlug, IndustryPageContent> = {
     description:
       'OnPoint helps hotel facilities teams find BAS faults that can drive energy waste, comfort complaints, and equipment wear.',
     hero: {
-      headline: 'Cut through HVAC faults that hurt guest comfort and utility spend.',
+      headline: 'Find the hidden HVAC issues affecting guest comfort, utility spend, and equipment strain.',
       body: 'OnPoint uses existing BAS exports to rank hidden HVAC issues by likely energy, comfort, and equipment impact.',
       proof: 'Built for buildings where comfort expectations are high and operating margins matter.',
     },
@@ -208,6 +219,16 @@ export const INDUSTRY_PAGES: Record<IndustrySlug, IndustryPageContent> = {
       'Stuck valves and dampers',
       'Economizer and ventilation faults',
     ],
+    findingDescriptions: {
+      'After-hours conditioning':
+        'Guest rooms, common areas, and back-of-house spaces may be conditioned longer than needed.',
+      'Simultaneous heating and cooling':
+        'Systems may pay to heat and cool the same areas while guest comfort remains inconsistent.',
+      'Stuck valves and dampers':
+        'Equipment can remain in positions that waste energy and increase wear before a clear alarm appears.',
+      'Economizer and ventilation faults':
+        'Outdoor air and ventilation behavior may increase utility spend when controls are not aligned with conditions.',
+    },
     outcomes: [
       {
         title: 'Improve guest experience',
@@ -272,7 +293,7 @@ export function getIndustryPage(slug: string) {
 }
 
 export function getIndustryDemoHref(page: IndustryPageContent) {
-  return `/contact?intent=demo&source=${page.ctaSource}`
+  return `/contact?intent=sample-analysis&source=${page.ctaSource}`
 }
 
 export const INDUSTRY_PRIMARY_CTA = CTA_LABELS.primary

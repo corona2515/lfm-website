@@ -11,7 +11,7 @@ import { TrackedButton } from '@/components/analytics/TrackedButton'
 import { StickyCtaBar } from '@/components/home/StickyCtaBar'
 import { CTA_LABELS } from '@/lib/constants'
 
-const SAMPLE_ANALYSIS_HREF = '/start'
+const SAMPLE_ANALYSIS_HREF = '/contact?intent=sample-analysis&source=sample_analysis'
 const TALK_TO_LEANFM_HREF = '/contact?intent=demo&source=sample_analysis_demo'
 
 export const metadata: Metadata = {
@@ -25,29 +25,6 @@ const heroBullets = [
   'No on-site installation required to start',
   'You do not need to know exactly what is wrong',
   'Clear findings and next steps',
-]
-
-const audiences = [
-  {
-    title: 'K-12 schools',
-    description:
-      'Find hidden issues across classrooms, gyms, offices, and district facilities before they drive up costs or comfort complaints.',
-  },
-  {
-    title: 'Universities',
-    description:
-      'Help facilities teams prioritize problems across different campus buildings, systems, schedules, and operating needs.',
-  },
-  {
-    title: 'Commercial real estate',
-    description:
-      'Identify hidden issues that affect tenant comfort, operating costs, and portfolio performance.',
-  },
-  {
-    title: 'Museums',
-    description:
-      'Support comfort, reliability, and careful system operation in sensitive public and collection spaces.',
-  },
 ]
 
 const dataTypes = [
@@ -79,15 +56,8 @@ const deliverables = [
   'Walkthrough call with LeanFM',
 ]
 
-const usefulnessCards = [
-  'Prioritized, not overwhelming',
-  'Based on existing data',
-  'Focused on operational action',
-  'Useful for both facilities and leadership',
-]
-
 const processSteps = [
-  'Upload a sample dataset',
+  'Request a Sample Analysis',
   'Share available building system data',
   'LeanFM analyzes the data',
   'Review findings with our team',
@@ -171,10 +141,10 @@ export default function SampleAnalysisPage() {
           <div className="grid items-center gap-12 lg:grid-cols-[1.02fr_0.98fr]">
             <div className="max-w-3xl">
               <h1 className="mb-6 max-w-[12ch] font-body text-[3.2rem] font-semibold leading-[0.98] tracking-normal text-white md:text-[4.2rem] lg:text-[4.8rem]">
-                See what your building system is missing.
+                See what your BAS data is already telling you.
               </h1>
               <p className="body-large mb-7 max-w-2xl">
-                Send us existing BAS trend data. We analyze it for hidden faults, energy waste, comfort risks, and control issues—then walk you through the findings.
+                Send existing trend data from your building automation system. LeanFM reviews it for hidden faults, energy waste, comfort risks, and control issues—then walks your team through what deserves attention first.
               </p>
               <ul className="mb-8 grid gap-3">
                 {heroBullets.map((bullet) => (
@@ -188,7 +158,7 @@ export default function SampleAnalysisPage() {
                 <TrackedButton
                   href={SAMPLE_ANALYSIS_HREF}
                   size="large"
-                  eventName="cta_upload_sample_click"
+                  eventName="cta_sample_analysis_click"
                   eventParams={{ location: 'sample_analysis_hero_primary' }}
                   className="w-full sm:w-auto"
                 >
@@ -235,22 +205,6 @@ export default function SampleAnalysisPage() {
         </div>
       </section>
 
-      <section className="section-large border-y border-slate-800/70 bg-slate-900/35">
-        <div className="container-default">
-          <div className="mb-10 max-w-2xl">
-            <h2 className="heading-2 mb-4 text-white">Built for Facilities Teams Managing Complex Buildings</h2>
-          </div>
-          <div className="grid gap-4 md:grid-cols-2">
-            {audiences.map((audience) => (
-              <div key={audience.title} className="rounded-xl border border-slate-800 bg-slate-950/55 p-6">
-                <h3 className="mb-3 font-display text-2xl font-semibold text-white">{audience.title}</h3>
-                <p className="text-body-md leading-relaxed text-slate-300">{audience.description}</p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
       <section className="section-large bg-slate-950">
         <div className="container-default">
           <div className="grid gap-10 lg:grid-cols-[0.8fr_1.2fr] lg:items-start">
@@ -271,27 +225,6 @@ export default function SampleAnalysisPage() {
                 <div key={dataType} className="flex items-center gap-3 rounded-xl border border-slate-800 bg-slate-900/60 p-4">
                   <Upload className="h-5 w-5 shrink-0 text-cyan-300" aria-hidden="true" />
                   <p className="text-body-md font-medium text-slate-100">{dataType}</p>
-                </div>
-              ))}
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <section className="section-large border-y border-slate-800/70 bg-slate-900/35">
-        <div className="container-default">
-          <div className="grid gap-10 lg:grid-cols-[0.82fr_1.18fr] lg:items-start">
-            <div>
-              <h2 className="heading-2 mb-5 text-white">Why your BAS may not be telling you the whole story.</h2>
-              <p className="body-large">
-                Most BAS alarms are designed to flag obvious failures or out-of-range conditions. Many expensive problems do not look like alarms. They show up as patterns over time.
-              </p>
-            </div>
-            <div className="grid gap-3 sm:grid-cols-2">
-              {['Simultaneous heating and cooling', 'Drifting sensors', 'Overridden sequences', 'Excessive runtime', 'Short cycling', 'Control logic problems'].map((item) => (
-                <div key={item} className="flex min-h-20 items-center gap-3 rounded-xl border border-slate-800 bg-slate-950/55 p-4">
-                  <Search className="h-5 w-5 shrink-0 text-cyan-300" aria-hidden="true" />
-                  <p className="text-body-md font-medium text-slate-100">{item}</p>
                 </div>
               ))}
             </div>
@@ -335,31 +268,10 @@ export default function SampleAnalysisPage() {
         </div>
       </section>
 
-      <section className="section-large border-y border-slate-800/70 bg-slate-900/35">
-        <div className="container-default">
-          <div className="grid gap-10 lg:grid-cols-[0.82fr_1.18fr] lg:items-start">
-            <div>
-              <h2 className="heading-2 mb-4 text-white">What Makes a Sample Analysis Useful</h2>
-              <p className="body-large">
-                Most building teams already have more data than they can realistically review. LeanFM helps separate signal from noise so your team can see which issues are worth attention first.
-              </p>
-            </div>
-            <div className="grid gap-3 sm:grid-cols-2">
-              {usefulnessCards.map((card) => (
-                <div key={card} className="rounded-xl border border-cyan-400/20 bg-cyan-500/10 p-5">
-                  <CheckCircle2 className="mb-5 h-6 w-6 text-cyan-300" aria-hidden="true" />
-                  <p className="font-display text-body-lg font-semibold leading-snug text-white">{card}</p>
-                </div>
-              ))}
-            </div>
-          </div>
-        </div>
-      </section>
-
       <section className="section-large bg-slate-950">
         <div className="container-default">
           <div className="mb-12 text-center">
-            <h2 className="heading-2 mb-4 text-white">Simple Process. No New Hardware.</h2>
+            <h2 className="heading-2 mb-4 text-white">What Happens After You Request</h2>
           </div>
           <div className="grid gap-4 md:grid-cols-5">
             {processSteps.map((step, index) => (
@@ -371,27 +283,6 @@ export default function SampleAnalysisPage() {
               </div>
             ))}
           </div>
-          <div className="mt-9 text-center">
-            <TrackedButton
-              href={SAMPLE_ANALYSIS_HREF}
-              eventName="cta_upload_sample_click"
-              eventParams={{ location: 'sample_analysis_process_primary' }}
-            >
-              {CTA_LABELS.primary}
-            </TrackedButton>
-          </div>
-        </div>
-      </section>
-
-      <section className="section-large border-y border-slate-800/70 bg-slate-900/35">
-        <div className="container-narrow text-center">
-          <h2 className="heading-2 mb-5 text-white">Small Hidden Issues Can Become Expensive Problems</h2>
-          <p className="body-large">
-            Hidden system issues waste energy, create comfort complaints, increase maintenance workload, and cause equipment to work harder than necessary. Finding them early gives facilities teams a clearer path to action.
-          </p>
-          <p className="body-large mt-5">
-            At scale, making these issues visible helps reduce building energy waste and unnecessary strain on the grid.
-          </p>
         </div>
       </section>
 
@@ -411,12 +302,12 @@ export default function SampleAnalysisPage() {
           <div className="mx-auto max-w-2xl text-center">
             <h2 className="heading-2 mb-5 text-white">Find Out What Your Building Data Is Already Telling You</h2>
             <p className="body-large mb-8">
-              Upload the data you already have. We’ll help show which hidden issues are wasting energy, affecting comfort, or putting unnecessary strain on equipment.
+              Request a Sample Analysis and LeanFM will help determine whether your existing BAS data contains issues worth acting on.
             </p>
             <TrackedButton
               href={SAMPLE_ANALYSIS_HREF}
               size="large"
-              eventName="cta_upload_sample_click"
+              eventName="cta_sample_analysis_click"
               eventParams={{ location: 'sample_analysis_final_primary' }}
             >
               {CTA_LABELS.primary}
@@ -428,7 +319,7 @@ export default function SampleAnalysisPage() {
       <StickyCtaBar
         heroId="sample-analysis-hero"
         href={SAMPLE_ANALYSIS_HREF}
-        message="Upload existing BAS trend data and see which hidden issues are worth attention first."
+        message="Request a Sample Analysis to see which hidden BAS issues may be worth attention first."
       />
     </>
   )

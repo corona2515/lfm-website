@@ -6,7 +6,7 @@ import { trackEvent } from '@/lib/analytics'
 import { SITE_CONFIG } from '@/lib/constants'
 
 type FormState = 'idle' | 'submitting' | 'success' | 'error'
-type ContactIntent = 'demo' | 'investor' | 'general'
+type ContactIntent = 'sample-analysis' | 'demo' | 'investor' | 'general'
 
 interface FormData {
   name: string
@@ -21,19 +21,26 @@ interface FormData {
 }
 
 const BUILDING_TYPES = [
-  'Office',
+  'K-12 district',
+  'University / campus',
+  'Museum / cultural institution',
+  'Commercial real estate',
   'Healthcare',
-  'Education',
-  'Retail',
-  'Industrial',
-  'Mixed-use',
+  'Hotel / hospitality',
   'Other',
 ]
 
 const INTENT_OPTIONS: Array<{ value: ContactIntent; label: string }> = [
+  { value: 'sample-analysis', label: 'Request a Sample Analysis' },
   { value: 'demo', label: 'Book a Demo' },
-  { value: 'investor', label: 'Investor inquiry' },
-  { value: 'general', label: 'General question' },
+  { value: 'investor', label: 'Investor Inquiry' },
+]
+
+const WHAT_HAPPENS_NEXT = [
+  'We review your inquiry',
+  'We confirm whether your building data is a fit',
+  'We schedule a short walkthrough or data review',
+  'If useful, we start with a Sample Analysis',
 ]
 
 export default function ContactPage() {
@@ -47,7 +54,7 @@ export default function ContactPage() {
     buildingType: '',
     portfolioSize: '',
     message: '',
-    intent: 'demo',
+    intent: 'sample-analysis',
   })
   const [errorMessage, setErrorMessage] = useState('')
 
@@ -60,7 +67,7 @@ export default function ContactPage() {
     }
 
     const normalizedIntent = intentParam === 'trial' ? 'demo' : intentParam
-    if (normalizedIntent === 'demo' || normalizedIntent === 'investor' || normalizedIntent === 'general') {
+    if (normalizedIntent === 'sample-analysis' || normalizedIntent === 'demo' || normalizedIntent === 'investor' || normalizedIntent === 'general') {
       setFormData((prev) => (
         prev.intent === normalizedIntent
           ? prev
@@ -86,6 +93,9 @@ export default function ContactPage() {
       }
 
       trackEvent('contact_submit', { intent: formData.intent })
+      if (formData.intent === 'sample-analysis') {
+        trackEvent('cta_sample_analysis_click', { location: 'contact_form_submit' })
+      }
       if (formData.intent === 'demo') {
         trackEvent('cta_demo_click', { location: 'contact_form_submit' })
       }
@@ -106,10 +116,12 @@ export default function ContactPage() {
 
   const getSubmitLabel = () => {
     switch (formData.intent) {
+      case 'sample-analysis':
+        return 'Request Sample Analysis'
       case 'demo':
         return 'Book Demo'
       case 'investor':
-        return 'Request Deck'
+        return 'Send Investor Inquiry'
       default:
         return 'Send Message'
     }
@@ -130,7 +142,9 @@ export default function ContactPage() {
               <h1 className="heading-2 text-white mb-4">Message received</h1>
               <p className="body-large mb-2">
                 {formData.intent === 'demo'
-                  ? 'Thanks for reaching out. We\'ll contact you to schedule your sample analysis walkthrough.'
+                  ? 'Thanks for reaching out. We\'ll contact you to schedule your demo.'
+                  : formData.intent === 'sample-analysis'
+                    ? 'Thanks for reaching out. We’ll contact you about the best next step for a Sample Analysis.'
                   : 'Thanks for reaching out. We\'ll get back to you within one business day.'}
               </p>
               <p className="text-body-sm text-slate-500">
@@ -153,10 +167,10 @@ export default function ContactPage() {
           <div className="text-center max-w-2xl mx-auto">
             <Badge className="mb-6">Contact</Badge>
             <h1 className="heading-1 text-white mb-6">
-              Book a demo or contact LeanFM
+              Request a Sample Analysis or contact LeanFM
             </h1>
             <p className="body-large">
-              Share a few details and our team will follow up about your facilities portfolio, investor inquiry, or general question.
+              Share a few details and our team will follow up about your building data, demo request, or investor inquiry.
             </p>
           </div>
         </div>
@@ -171,6 +185,18 @@ export default function ContactPage() {
                 <p className="text-body-sm text-slate-400 mb-6">
                   Fill out the form and we&apos;ll respond within one business day.
                 </p>
+                <div className="mb-6 rounded-xl border border-slate-800 bg-slate-950/50 p-4">
+                  <p className="mb-3 text-body-xs font-semibold uppercase tracking-[0.16em] text-cyan-300">
+                    What happens next
+                  </p>
+                  <ul className="space-y-2">
+                    {WHAT_HAPPENS_NEXT.map((item) => (
+                      <li key={item} className="text-body-xs leading-relaxed text-slate-400">
+                        {item}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
 
                 <div className="space-y-4">
                   <div>
@@ -300,7 +326,7 @@ export default function ContactPage() {
                       placeholder="(555) 123-4567"
                     />
                   </div>
-                  {formData.intent === 'demo' ? (
+                  {formData.intent === 'sample-analysis' || formData.intent === 'demo' ? (
                     <div>
                       <label htmlFor="buildingType" className="label">Building type</label>
                       <select
@@ -332,7 +358,7 @@ export default function ContactPage() {
                   )}
                 </div>
 
-                {formData.intent === 'demo' && (
+                {(formData.intent === 'sample-analysis' || formData.intent === 'demo') && (
                   <div>
                     <label htmlFor="portfolioSize" className="label">Portfolio size</label>
                     <input
@@ -361,8 +387,10 @@ export default function ContactPage() {
                     placeholder={
                       formData.intent === 'investor'
                         ? 'Brief description of your investment focus...'
-                        : formData.intent === 'demo'
-                          ? 'Anything you want us to cover in your walkthrough?'
+                        : formData.intent === 'sample-analysis'
+                          ? 'What are you trying to understand from your building data?'
+                          : formData.intent === 'demo'
+                            ? 'Anything you want us to cover in your walkthrough?'
                           : 'How can we help?'
                     }
                   />

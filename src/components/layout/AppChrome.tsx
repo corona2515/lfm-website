@@ -5,11 +5,10 @@ import { Footer, Header } from '@/components/layout'
 
 interface AppChromeProps {
   children: React.ReactNode
-  appUrl: string
   contactEmail: string
 }
 
-export function AppChrome({ children, appUrl, contactEmail }: AppChromeProps) {
+export function AppChrome({ children, contactEmail }: AppChromeProps) {
   const pathname = usePathname()
   const isAdminRoute = pathname.startsWith('/admin')
 
@@ -19,9 +18,9 @@ export function AppChrome({ children, appUrl, contactEmail }: AppChromeProps) {
 
   return (
     <>
-      <Header appUrl={appUrl} />
+      <Header />
       <main className="flex-1 pt-18">{children}</main>
-      <Footer appUrl={appUrl} contactEmail={contactEmail} />
+      <Footer contactEmail={contactEmail} />
     </>
   )
 }

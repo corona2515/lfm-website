@@ -2,10 +2,10 @@ import { DatasetIntakeFlow, type DatasetIntakeVariant } from '@/components/intak
 
 const startVariant = {
   hero: {
-    badge: 'Sample Dataset Intake',
-    title: 'Create your preview account and upload sample BAS data',
+    badge: 'Sample Analysis',
+    title: 'Start your Sample Analysis',
     description:
-      'Complete account setup, upload your CSV, and LeanFM will prepare your OnPoint workspace for manual review and activation.',
+      'Share a few details about your building and upload available BAS trend data. LeanFM will review the data and follow up with next steps.',
   },
   analyticsPrefix: 'sample_upload',
   stepEventPrefix: 'start',
@@ -17,13 +17,13 @@ const startVariant = {
     code: 'PENDING_SUBMISSION_EXISTS',
     completionState: 'pending_submission_exists',
   },
-  submitButtonLabel: 'Create Account & Submit Dataset',
-  submittingButtonLabel: 'Creating Account & Submitting Dataset...',
+  submitButtonLabel: 'Submit Dataset for Review',
+  submittingButtonLabel: 'Submitting Dataset...',
   completionStates: {
     account_pending_review: {
       title: 'Sample dataset uploaded',
       description:
-        'Your dataset is queued for LeanFM review. We staged your building and dataset so the team can prepare sample findings and follow up with next steps.',
+        'Your dataset is queued for LeanFM review. The team will review your building context and follow up with next steps.',
       actions: [
         {
           href: '/contact?intent=demo',
@@ -40,9 +40,9 @@ const startVariant = {
       ],
     },
     pending_submission_exists: {
-      title: 'Preview already pending',
+      title: 'Sample Analysis already pending',
       description:
-        'A pending OnPoint preview already exists for this email and building. Please check your email for the original invite or contact LeanFM if you need help accessing it.',
+        'A pending Sample Analysis already exists for this email and building. Please check your email for the original follow-up or contact LeanFM if you need help.',
       actions: [
         {
           href: '/contact?intent=demo',

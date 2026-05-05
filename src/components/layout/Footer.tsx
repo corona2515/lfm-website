@@ -7,13 +7,24 @@ import { FOOTER_LINKS, CTA_LABELS, FOOTER_SUSTAINABILITY_LINE } from '@/lib/cons
 import { TrackedButton } from '@/components/analytics/TrackedButton'
 
 interface FooterProps {
-  appUrl: string
   contactEmail: string
 }
 
-export function Footer({ appUrl, contactEmail }: FooterProps) {
+export function Footer({ contactEmail }: FooterProps) {
   const pathname = usePathname()
-  const hideFooterCta = pathname === '/contact' || pathname === '/building-data-to-action' || pathname === '/investors'
+  const hideFooterCta =
+    pathname === '/' ||
+    pathname === '/contact' ||
+    pathname === '/building-data-to-action' ||
+    pathname === '/investors' ||
+    pathname === '/sample-analysis' ||
+    pathname === '/how-it-works' ||
+    pathname === '/what-we-find' ||
+    pathname === '/results' ||
+    pathname === '/start' ||
+    pathname === '/company/about' ||
+    pathname.startsWith('/solutions') ||
+    pathname.startsWith('/industries')
   const currentYear = new Date().getFullYear()
   const footerSections = [
     { title: 'Product', links: FOOTER_LINKS.product },
@@ -30,16 +41,16 @@ export function Footer({ appUrl, contactEmail }: FooterProps) {
           <div className="container-default py-16">
             <div className="text-center max-w-2xl mx-auto">
               <h2 className="heading-2 text-white mb-4">
-                See what your building system is missing
+                Ready to review existing building data?
               </h2>
               <p className="body-large mb-8">
-                Upload existing BAS trend data and get a walkthrough of hidden faults that may be wasting energy, money, comfort, or maintenance time.
+                Start with a focused review of existing building system data and get a walkthrough of the hidden issues that may deserve attention first.
               </p>
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
                 <TrackedButton
-                  href={appUrl}
+                  href="/contact?intent=sample-analysis&source=footer"
                   size="large"
-                  eventName="cta_upload_sample_click"
+                  eventName="cta_sample_analysis_click"
                   eventParams={{ location: 'footer_primary' }}
                 >
                   {CTA_LABELS.primary}

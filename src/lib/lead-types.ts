@@ -20,7 +20,7 @@ export interface DatasetUploadLeadInput {
   email: string
   company: string
   role?: string
-  phone: string
+  phone?: string
   buildingName: string
   addressLine1: string
   city: string

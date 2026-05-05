@@ -14,7 +14,7 @@ import { TrackedButton } from '@/components/analytics/TrackedButton'
 import { StickyCtaBar } from '@/components/home/StickyCtaBar'
 import { CTA_LABELS } from '@/lib/constants'
 
-const SAMPLE_ANALYSIS_HREF = '/start'
+const SAMPLE_ANALYSIS_HREF = '/contact?intent=sample-analysis&source=how_it_works'
 const TALK_TO_LEANFM_HREF = '/contact?intent=demo&source=how_it_works_demo'
 
 export const metadata: Metadata = {
@@ -30,17 +30,17 @@ const heroBullets = [
 ]
 
 const processSteps = [
-  'Upload sample data',
+  'Request a Sample Analysis',
   'Identify useful data',
-  'Share available exports',
-  'LeanFM analyzes hidden issues',
+  'Share existing BAS data',
+  'Analyze hidden operating patterns',
   'Review prioritized findings',
-  'Decide what to address first',
+  'Decide what to fix first',
 ]
 
 const detailedSteps = [
   {
-    title: '1. Upload Sample Data',
+    title: '1. Request a Sample Analysis',
     body: 'Start by telling us about your building, facility type, and available BAS trend data. You do not need to know every technical detail before reaching out.',
     label: 'Useful details',
     items: [
@@ -55,16 +55,20 @@ const detailedSteps = [
     title: '2. Identify the Useful Data',
     body: 'LeanFM helps determine which available exports are useful for analysis. This may include trend data, runtime data, temperatures, setpoints, schedules, sensor readings, and equipment-level data.',
     reassurance: 'If you are not sure what you have, we can help you figure it out.',
+    label: 'Useful data',
+    items: ['Trend data', 'Runtime data', 'Setpoints', 'Schedules'],
     Icon: Search,
   },
   {
-    title: '3. Share Available Building System Data',
+    title: '3. Share Existing BAS Data',
     body: 'A Sample Analysis starts with existing data from your building system. The goal is to use what is already available before adding complexity.',
     reassurance: 'No new hardware is required for the initial analysis.',
+    label: 'Low-friction start',
+    items: ['Existing exports', 'No new hardware', 'No BAS replacement', 'No site visit required to begin'],
     Icon: Upload,
   },
   {
-    title: '4. LeanFM Looks for Hidden Problems',
+    title: '4. Analyze Hidden Operating Patterns',
     body: 'LeanFM analyzes system behavior over time to identify patterns that traditional alarms often miss.',
     label: 'Examples',
     items: [
@@ -81,12 +85,31 @@ const detailedSteps = [
     title: '5. Review Findings With Our Team',
     body: 'You receive a prioritized issue summary with plain-English explanations, supporting evidence, estimated operational impact where available, and recommended next steps.',
     reassurance: 'The goal is to help your team understand what matters first.',
+    label: 'Review package',
+    items: ['Prioritized issue summary', 'Supporting evidence', 'Estimated impact where available', 'Recommended next steps'],
     Icon: ClipboardCheck,
   },
   {
     title: '6. Decide What to Fix First',
     body: 'LeanFM does not replace your facilities team, BAS, or controls vendor. It helps clarify which issues deserve attention so your team and partners can act with better information.',
+    label: 'Next steps',
+    items: ['Confirm priorities', 'Coordinate with internal teams', 'Share findings with vendors', 'Decide what to address first'],
     Icon: CheckCircle2,
+  },
+]
+
+const whoDoesWhat = [
+  {
+    title: 'Your team',
+    description: 'Provides available data and building context.',
+  },
+  {
+    title: 'LeanFM',
+    description: 'Analyzes patterns and prepares findings.',
+  },
+  {
+    title: 'Together',
+    description: 'Review issues, prioritize action, and determine next steps.',
   },
 ]
 
@@ -213,7 +236,7 @@ export default function HowItWorksPage() {
                 <TrackedButton
                   href={SAMPLE_ANALYSIS_HREF}
                   size="large"
-                  eventName="cta_upload_sample_click"
+                  eventName="cta_sample_analysis_click"
                   eventParams={{ location: 'how_it_works_hero_primary' }}
                   className="w-full min-w-0 sm:w-auto"
                 >
@@ -308,18 +331,28 @@ export default function HowItWorksPage() {
                         ))}
                       </div>
                     </div>
-                  ) : (
-                    <div className="rounded-xl border border-cyan-400/20 bg-cyan-500/10 p-5">
-                      <p className="font-display text-2xl font-semibold leading-snug text-white">
-                        Practical next step
-                      </p>
-                      <p className="mt-3 text-body-md leading-relaxed text-slate-300">
-                        Keep the process focused on the information that helps your team decide what deserves attention.
-                      </p>
-                    </div>
-                  )}
+                  ) : null}
                 </div>
               </article>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="section-large bg-slate-950">
+        <div className="container-default">
+          <div className="mb-10 max-w-3xl">
+            <h2 className="heading-2 mb-4 text-white">Who Does What?</h2>
+            <p className="body-large">
+              The process is designed to keep work clear between your team and LeanFM.
+            </p>
+          </div>
+          <div className="grid gap-4 md:grid-cols-3">
+            {whoDoesWhat.map((item) => (
+              <div key={item.title} className="rounded-xl border border-slate-800 bg-slate-900/60 p-5">
+                <h3 className="mb-3 font-display text-2xl font-semibold text-white">{item.title}</h3>
+                <p className="text-body-md leading-relaxed text-slate-300">{item.description}</p>
+              </div>
             ))}
           </div>
         </div>
@@ -395,12 +428,12 @@ export default function HowItWorksPage() {
           <div className="mx-auto max-w-2xl text-center">
             <h2 className="heading-2 mb-5 text-white">Start With the Data You Already Have</h2>
             <p className="body-large mb-8">
-              Upload existing BAS trend data and LeanFM will help identify hidden issues affecting energy, comfort, and system performance.
+              Request a Sample Analysis and LeanFM will help identify hidden issues affecting energy, comfort, and system performance.
             </p>
             <TrackedButton
               href={SAMPLE_ANALYSIS_HREF}
               size="large"
-              eventName="cta_upload_sample_click"
+              eventName="cta_sample_analysis_click"
               eventParams={{ location: 'how_it_works_final_primary' }}
             >
               {CTA_LABELS.primary}

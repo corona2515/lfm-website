@@ -82,9 +82,10 @@ export default function IndustryPage({ params }: IndustryPageProps) {
     notFound()
   }
 
-  const demoHref = getIndustryDemoHref(page)
+  const sampleAnalysisHref = getIndustryDemoHref(page)
+  const demoHref = `/contact?intent=demo&source=${page.ctaSource}-demo`
   const relatedIndustries = INDUSTRY_SLUGS
-    .filter((slug) => slug !== page.slug)
+    .filter((slug) => slug !== page.slug && !['hospitals', 'hotels'].includes(slug))
     .map((slug) => INDUSTRY_PAGES[slug as IndustrySlug])
 
   const pageSchema = {
@@ -126,18 +127,18 @@ export default function IndustryPage({ params }: IndustryPageProps) {
               </p>
               <div className="flex flex-col gap-4 sm:flex-row">
                 <TrackedButton
-                  href={demoHref}
+                  href={sampleAnalysisHref}
                   size="large"
-                  eventName="cta_demo_click"
+                  eventName="cta_sample_analysis_click"
                   eventParams={{ location: `${page.analyticsKey}_hero_primary` }}
                 >
                   {INDUSTRY_PRIMARY_CTA}
                 </TrackedButton>
                 <TrackedButton
                   variant="secondary"
-                  href="/start"
+                  href={demoHref}
                   size="large"
-                  eventName="cta_upload_sample_click"
+                  eventName="cta_demo_click"
                   eventParams={{ location: `${page.analyticsKey}_hero_secondary` }}
                 >
                   {CTA_LABELS.secondary}
@@ -148,7 +149,7 @@ export default function IndustryPage({ params }: IndustryPageProps) {
             <div className="rounded-2xl border border-slate-700/70 bg-slate-950/55 p-3 shadow-[0_28px_90px_rgba(2,6,23,0.45)]">
               <Screenshot
                 id="IMG-004"
-                description={`OnPoint dashboard ranking HVAC faults for ${page.label} buildings`}
+                description={`OnPoint ranked HVAC findings for ${page.label} buildings`}
                 aspect="16:9"
                 objectPosition="left"
                 className="rounded-xl border border-slate-700/70"
@@ -240,8 +241,8 @@ export default function IndustryPage({ params }: IndustryPageProps) {
                   <div className="mb-5 h-1.5 w-14 rounded-full bg-gradient-to-r from-cyan-300 to-blue-400" />
                   <p className="font-display text-xl font-semibold text-white">{finding}</p>
                   <p className="mt-3 text-body-sm leading-relaxed text-slate-400">
-                    Flag patterns that can affect energy use, comfort, reliability, or operating
-                    attention.
+                    {page.findingDescriptions?.[finding] ??
+                      'Flag patterns that can affect energy use, comfort, reliability, or operating attention.'}
                   </p>
                 </div>
               ))}
@@ -307,16 +308,16 @@ export default function IndustryPage({ params }: IndustryPageProps) {
         <div className="container-narrow">
           <div className="rounded-2xl border border-slate-700/70 bg-gradient-to-br from-slate-900/95 to-slate-900/75 p-8 text-center shadow-card md:p-12">
             <h2 className="heading-2 mb-4 text-white">
-              See what your {page.label} BAS data is hiding.
+              See what your building data is already showing.
             </h2>
             <p className="body-large mb-8">
               Start with existing exports. OnPoint will rank the hidden HVAC faults most worth your
               team&apos;s attention.
             </p>
             <TrackedButton
-              href={demoHref}
+              href={sampleAnalysisHref}
               size="large"
-              eventName="cta_demo_click"
+              eventName="cta_sample_analysis_click"
               eventParams={{ location: `${page.analyticsKey}_final_primary` }}
             >
               {INDUSTRY_PRIMARY_CTA}
@@ -327,9 +328,9 @@ export default function IndustryPage({ params }: IndustryPageProps) {
 
       <StickyCtaBar
         heroId="industry-hero"
-        href={demoHref}
+        href={sampleAnalysisHref}
         location={`${page.analyticsKey}_sticky_primary`}
-        message={`See what your ${page.label} BAS data is hiding.`}
+        message="See what your building data is already showing."
       />
     </>
   )

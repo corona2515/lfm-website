@@ -11,7 +11,7 @@ const TEAM_MEMBERS = [
   {
     name: 'Nick Boris',
     title: 'CEO',
-    bio: 'Nick Boris leads LeanFM Technologies with a focus on helping facilities, energy, and operations teams find hidden HVAC waste and prioritize what to fix first.',
+    bio: 'Nick Boris leads LeanFM Technologies with a focus on commercializing practical building system intelligence for facilities, energy, and operations teams.',
     linkedin: 'https://www.linkedin.com/in/nicholasboris/',
     photo: '/media/team/nick-boris.png',
     circularPhoto: true,
@@ -19,7 +19,7 @@ const TEAM_MEMBERS = [
   {
     name: 'Xuesong (Pine) Liu, Ph.D.',
     title: 'CTO',
-    bio: 'A co-founder of LeanFM, Pine was a former facilities manager, is a brilliant software architect, researcher and entrepreneur. Dr. Liu has advanced the field of facilities and building information for years as Research Assistant Professor at Carnegie Mellon University and now as the CTO with LeanFM Technologies.',
+    bio: 'Dr. Liu is a co-founder of LeanFM, former facilities manager, software architect, researcher, and entrepreneur. His work connects building operations, data systems, and applied facilities research.',
     linkedin: 'https://www.linkedin.com/in/xliu1/',
     photo: '/media/team/xuesong-liu.png',
     circularPhoto: false,
@@ -27,7 +27,7 @@ const TEAM_MEMBERS = [
   {
     name: 'Burcu Akinci',
     title: 'CIO',
-    bio: 'Dr. Akinci is a leading researcher in facilities information technology and is a co-founder of the company. She has developed numerous innovations as a Professor of Civil and Environmental Engineering at Carnegie Mellon University.',
+    bio: 'Dr. Akinci is a co-founder of LeanFM and a Carnegie Mellon professor whose research has advanced facilities information technology, building data, and infrastructure management.',
     linkedin: 'https://www.linkedin.com/in/burcu-akinci-a04b00/',
     photo: '/media/team/burcu-akinci.png',
     circularPhoto: false,
@@ -44,14 +44,17 @@ export default function AboutPage() {
         <div className="container-default relative pt-20 pb-16 md:pt-28 md:pb-20">
           <div className="max-w-4xl">
             <Badge className="mb-6">Company</Badge>
-            <h1 className="heading-1 text-white mb-6">About Lean FM Technologies</h1>
-            <p className="body-large">
-              LeanFM Technologies is a building system intelligence company helping facilities
-              teams find hidden HVAC faults, energy waste, comfort risks, and control issues
-              using the BAS data they already have. Our work turns scattered system behavior
-              into prioritized findings teams can review with leadership, vendors, and
-              maintenance staff.
-            </p>
+            <h1 className="heading-1 text-white mb-6">
+              We help facilities teams find the building problems hiding in their system data.
+            </h1>
+            <div className="space-y-5 body-large">
+              <p>
+                LeanFM Technologies helps owners, operators, and facilities teams uncover hidden HVAC faults, energy waste, comfort risks, and control issues using data their buildings already generate.
+              </p>
+              <p>
+                Born from Carnegie Mellon research and real-world facilities expertise, LeanFM focuses on making building system intelligence practical: clear findings, prioritized issues, and action your team can understand.
+              </p>
+            </div>
           </div>
         </div>
       </section>

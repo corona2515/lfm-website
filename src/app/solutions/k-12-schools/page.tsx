@@ -12,7 +12,7 @@ import { TrackedButton } from '@/components/analytics/TrackedButton'
 import { StickyCtaBar } from '@/components/home/StickyCtaBar'
 import { CTA_LABELS } from '@/lib/constants'
 
-const SAMPLE_ANALYSIS_HREF = '/start'
+const SAMPLE_ANALYSIS_HREF = '/contact?intent=sample-analysis&source=k12'
 const TALK_TO_LEANFM_HREF = '/contact?intent=demo&source=k12_demo'
 
 export const metadata: Metadata = {
@@ -73,11 +73,26 @@ const practiceExamples = [
 ]
 
 const processSteps = [
-  'Upload Sample Dataset',
+  'Request a Sample Analysis',
   'Share available building system data',
   'LeanFM analyzes the data',
   'Review findings with our team',
   'Decide what to address first',
+]
+
+const buyerPriorities = [
+  {
+    title: 'Facilities Director',
+    description: 'Clearer maintenance priorities across classrooms, gyms, offices, and district facilities.',
+  },
+  {
+    title: 'Business Manager',
+    description: 'Better visibility into avoidable operating costs before they keep compounding.',
+  },
+  {
+    title: 'Superintendent',
+    description: 'Fewer distractions and better stewardship of public resources.',
+  },
 ]
 
 const deliverables = [
@@ -176,7 +191,7 @@ export default function K12SchoolsPage() {
                 <TrackedButton
                   href={SAMPLE_ANALYSIS_HREF}
                   size="large"
-                  eventName="cta_upload_sample_click"
+                  eventName="cta_sample_analysis_click"
                   eventParams={{ location: 'k12_schools_hero_primary' }}
                   className="w-full sm:w-auto"
                 >
@@ -260,7 +275,7 @@ export default function K12SchoolsPage() {
                 </p>
                 <TrackedButton
                   href={SAMPLE_ANALYSIS_HREF}
-                  eventName="cta_upload_sample_click"
+                  eventName="cta_sample_analysis_click"
                   eventParams={{ location: 'k12_schools_impact_inline' }}
                 >
                   {CTA_LABELS.primary}
@@ -351,19 +366,29 @@ export default function K12SchoolsPage() {
               </div>
             ))}
           </div>
-          <div className="mt-9 text-center">
-            <TrackedButton
-              href={SAMPLE_ANALYSIS_HREF}
-              eventName="cta_upload_sample_click"
-              eventParams={{ location: 'k12_schools_process_primary' }}
-            >
-              {CTA_LABELS.primary}
-            </TrackedButton>
-          </div>
         </div>
       </section>
 
       <section className="section-large bg-slate-950">
+        <div className="container-default">
+          <div className="mb-10 max-w-2xl">
+            <h2 className="heading-2 mb-4 text-white">Useful for the People Accountable for District Operations</h2>
+            <p className="body-large">
+              A Sample Analysis gives facilities, finance, and district leadership a shared view of hidden issues worth attention.
+            </p>
+          </div>
+          <div className="grid gap-4 md:grid-cols-3">
+            {buyerPriorities.map((priority) => (
+              <div key={priority.title} className="rounded-xl border border-slate-800 bg-slate-900/60 p-5">
+                <p className="font-display text-xl font-semibold text-white">{priority.title}</p>
+                <p className="mt-3 text-body-sm leading-relaxed text-slate-400">{priority.description}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="section-large border-y border-slate-800/70 bg-slate-900/35">
         <div className="container-default">
           <div className="grid gap-10 lg:grid-cols-[0.82fr_1.18fr] lg:items-start">
             <div>
@@ -384,7 +409,7 @@ export default function K12SchoolsPage() {
         </div>
       </section>
 
-      <section className="section-large border-y border-slate-800/70 bg-slate-900/35">
+      <section className="section-large bg-slate-950">
         <div className="container-default">
           <div className="mb-10 max-w-2xl">
             <h2 className="heading-2 mb-4 text-white">What This Means for Your District</h2>
@@ -427,7 +452,7 @@ export default function K12SchoolsPage() {
             <TrackedButton
               href={SAMPLE_ANALYSIS_HREF}
               size="large"
-              eventName="cta_upload_sample_click"
+              eventName="cta_sample_analysis_click"
               eventParams={{ location: 'k12_schools_final_primary' }}
             >
               {CTA_LABELS.primary}

@@ -7,6 +7,7 @@ import { CTA_LABELS, SITE_CONFIG } from '@/lib/constants'
 
 const PAGE_PATH = '/building-data-to-action'
 const PAGE_URL = `${SITE_CONFIG.url}${PAGE_PATH}`
+const SAMPLE_ANALYSIS_HREF = '/contact?intent=sample-analysis&source=building-data-to-action'
 const DEMO_HREF = '/contact?intent=demo&source=building-data-to-action'
 
 const SOURCE_URLS = {
@@ -60,15 +61,24 @@ const IMPACT_ITEMS = [
 ] as const
 
 const AUDIENCE_ITEMS = [
-  'Building owners',
-  'Facilities teams',
-  'Energy leaders',
+  {
+    title: 'Building owners',
+    description: 'See which hidden HVAC issues may be affecting operating costs and asset performance.',
+  },
+  {
+    title: 'Facilities teams',
+    description: 'Get a practical fix list instead of another dashboard full of noise.',
+  },
+  {
+    title: 'Energy leaders',
+    description: 'Identify operational waste that can be addressed without starting with capital projects.',
+  },
 ] as const
 
 export const metadata: Metadata = {
-  title: 'Turn BAS Data Into Ranked HVAC Action',
+  title: 'OnPoint by LeanFM',
   description:
-    'OnPoint turns existing BAS and BMS data into prioritized HVAC actions for building owners, operators, and facilities teams.',
+    'OnPoint analyzes existing BAS exports to surface hidden HVAC faults, estimate likely impact, and help teams decide what to fix first.',
   keywords: [
     'building energy waste',
     'HVAC fault detection',
@@ -83,7 +93,7 @@ export const metadata: Metadata = {
     canonical: PAGE_PATH,
   },
   openGraph: {
-    title: 'Turn BAS Data Into Ranked HVAC Action | LeanFM Technologies',
+    title: 'OnPoint by LeanFM | LeanFM Technologies',
     description:
       'Your BAS already has the evidence. OnPoint ranks what to fix first.',
     url: PAGE_URL,
@@ -98,7 +108,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Turn BAS Data Into Ranked HVAC Action | LeanFM Technologies',
+    title: 'OnPoint by LeanFM | LeanFM Technologies',
     description:
       'OnPoint helps building teams find hidden HVAC faults and prioritize what to fix first.',
     images: ['/og-image.png'],
@@ -108,7 +118,7 @@ export const metadata: Metadata = {
 const pageSchema = {
   '@context': 'https://schema.org',
   '@type': 'WebPage',
-  name: 'Turn BAS Data Into Ranked HVAC Action',
+  name: 'OnPoint by LeanFM',
   description:
     'LeanFM shows how OnPoint turns BAS and BMS data into prioritized HVAC actions for commercial building teams.',
   url: PAGE_URL,
@@ -146,33 +156,31 @@ export default function BuildingDataActionPage() {
         <div className="container-wide relative z-10 pt-24 pb-16 md:pt-32 md:pb-20">
           <div className="grid gap-10 lg:grid-cols-[0.92fr_1.08fr] lg:items-center">
             <div className="max-w-2xl">
-              <Badge className="mb-6 animate-fade-in">BAS Data to Action</Badge>
+              <Badge className="mb-6 animate-fade-in">OnPoint by LeanFM</Badge>
               <h1 className="mb-6 max-w-3xl animate-fade-in-up font-body text-[3rem] font-semibold leading-[1.03] tracking-[-0.005em] text-white md:text-[4.25rem]">
-                Your BAS already has the evidence. OnPoint ranks what to fix first.
+                Turn BAS data into ranked HVAC action.
               </h1>
               <p className="body-large mb-4 max-w-2xl animate-fade-in-up delay-100">
-                Upload existing BAS exports and see the hidden HVAC faults most likely to waste
-                energy, hurt comfort, or create maintenance risk.
+                OnPoint analyzes existing BAS exports to surface hidden HVAC faults, estimate likely impact, and help teams decide what to fix first.
               </p>
               <p className="body-default mb-8 max-w-2xl animate-fade-in-up delay-200">
-                No new hardware. No rip-and-replace. Just a clearer path from trend data to
-                impact-ranked action.
+                OnPoint is LeanFM’s building system intelligence product for turning trend data into clear operational priorities.
               </p>
 
               <div className="flex flex-col gap-4 sm:flex-row animate-fade-in-up delay-300">
                 <TrackedButton
-                  href={DEMO_HREF}
+                  href={SAMPLE_ANALYSIS_HREF}
                   size="large"
-                  eventName="cta_demo_click"
+                  eventName="cta_sample_analysis_click"
                   eventParams={{ location: 'building_data_hero_primary' }}
                 >
                   {CTA_LABELS.primary}
                 </TrackedButton>
                 <TrackedButton
                   variant="secondary"
-                  href="/start"
+                  href={DEMO_HREF}
                   size="large"
-                  eventName="cta_upload_sample_click"
+                  eventName="cta_demo_click"
                   eventParams={{ location: 'building_data_hero_secondary' }}
                 >
                   {CTA_LABELS.secondary}
@@ -184,7 +192,7 @@ export default function BuildingDataActionPage() {
               <div className="rounded-2xl border border-slate-700/70 bg-slate-950/55 p-3 shadow-[0_28px_90px_rgba(2,6,23,0.45)]">
                 <Screenshot
                   id="IMG-004"
-                  description="OnPoint dashboard showing prioritized fault list ranked by energy impact"
+                  description="OnPoint prioritized findings showing HVAC fault list ranked by energy impact"
                   aspect="16:9"
                   objectPosition="left"
                   className="border border-slate-700/70 rounded-xl"
@@ -350,10 +358,10 @@ export default function BuildingDataActionPage() {
 
             <div className="grid gap-4 sm:grid-cols-3">
               {AUDIENCE_ITEMS.map((audience) => (
-                <div key={audience} className="rounded-xl border border-slate-800 bg-slate-950/55 p-5">
-                  <p className="font-display text-xl font-semibold text-white">{audience}</p>
+                <div key={audience.title} className="rounded-xl border border-slate-800 bg-slate-950/55 p-5">
+                  <p className="font-display text-xl font-semibold text-white">{audience.title}</p>
                   <p className="mt-3 text-body-sm leading-relaxed text-slate-400">
-                    Get a ranked view of the HVAC issues most worth acting on.
+                    {audience.description}
                   </p>
                 </div>
               ))}
@@ -366,16 +374,16 @@ export default function BuildingDataActionPage() {
         <div className="container-narrow">
           <div className="rounded-2xl border border-slate-700/70 bg-gradient-to-br from-slate-900/95 to-slate-900/75 p-8 text-center shadow-card md:p-12">
             <h2 className="heading-2 mb-4 text-white">
-              See what your BAS data is hiding.
+              Turn your BAS data into a ranked fix list.
             </h2>
             <p className="body-large mb-8">
               Start with the exports you already have. OnPoint will show where hidden HVAC faults
               are most likely costing you.
             </p>
             <TrackedButton
-              href={DEMO_HREF}
+              href={SAMPLE_ANALYSIS_HREF}
               size="large"
-              eventName="cta_demo_click"
+              eventName="cta_sample_analysis_click"
               eventParams={{ location: 'building_data_final_primary' }}
             >
               {CTA_LABELS.primary}
@@ -386,7 +394,7 @@ export default function BuildingDataActionPage() {
 
       <StickyCtaBar
         heroId="building-data-hero"
-        href={DEMO_HREF}
+        href={SAMPLE_ANALYSIS_HREF}
         location="building_data_sticky_primary"
         message="Your BAS already has the evidence. OnPoint ranks what to fix first."
       />

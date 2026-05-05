@@ -160,10 +160,6 @@ export function validateDatasetIntakePayload(payload: DatasetIntakePayload): str
     return 'Missing required fields: name, email, and company are required.'
   }
 
-  if (!payload.phone) {
-    return 'Phone is required.'
-  }
-
   if (!payload.buildingName || !payload.addressLine1 || !payload.city || !payload.state || !payload.postalCode) {
     return 'Building name and full address are required.'
   }

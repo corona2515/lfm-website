@@ -154,17 +154,17 @@ export interface DatasetIntakeVariant {
 }
 
 const BUILDING_TYPES = [
-  'Office',
+  'K-12 district',
+  'University / campus',
+  'Museum / cultural institution',
+  'Commercial real estate',
   'Healthcare',
-  'Education',
-  'Retail',
-  'Industrial',
-  'Mixed-use',
+  'Hotel / hospitality',
   'Other',
 ]
 
 const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
-const STEP_TITLES = ['Account Details', 'Building Context', 'Dataset Upload', 'Review']
+const STEP_TITLES = ['Contact Details', 'Building Context', 'Upload File', 'Review and Submit']
 const DRAFT_TOKEN_HEADER = 'x-leanfm-sample-intake-draft-token'
 const AUTOSAVE_DEBOUNCE_MS = 700
 
@@ -198,8 +198,7 @@ function isStepOneEligible(formData: DatasetIntakeFormData) {
     formData.name.trim() &&
     formData.email.trim() &&
     EMAIL_REGEX.test(formData.email) &&
-    formData.company.trim() &&
-    formData.phone.trim()
+    formData.company.trim()
   )
 }
 
@@ -504,8 +503,8 @@ export function DatasetIntakeFlow({ variant }: { variant: DatasetIntakeVariant }
 
   const validateStep = (currentStep: Step): string | null => {
     if (currentStep === 1) {
-      if (!formData.name.trim() || !formData.email.trim() || !formData.company.trim() || !formData.phone.trim()) {
-        return 'Please complete full name, work email, organization, and phone.'
+      if (!formData.name.trim() || !formData.email.trim() || !formData.company.trim()) {
+        return 'Please complete full name, work email, and organization.'
       }
       if (!EMAIL_REGEX.test(formData.email)) {
         return 'Please enter a valid work email address.'
@@ -637,7 +636,7 @@ export function DatasetIntakeFlow({ variant }: { variant: DatasetIntakeVariant }
 
       const saved = await saveDraftToServer(nextFormData, step)
       if (!saved) {
-        throw new Error('The dataset uploaded, but we could not save it to your draft yet. Please wait a moment and try again.')
+        throw new Error('The dataset uploaded, but we could not save your progress yet. Please wait a moment and try again.')
       }
 
       setDatasetUploadState('uploaded')
@@ -695,7 +694,7 @@ export function DatasetIntakeFlow({ variant }: { variant: DatasetIntakeVariant }
 
     const saved = await saveDraftToServer(formData, 4)
     if (!saved || !draftTokenRef.current) {
-      setErrorMessage('We saved your progress locally, but could not sync the latest draft yet. Please retry in a moment.')
+      setErrorMessage('We saved your progress locally, but could not sync the latest changes yet. Please retry in a moment.')
       trackEvent(`${variant.analyticsPrefix}_submit_error`, { error_type: 'draft_sync_required' })
       return
     }
@@ -809,15 +808,15 @@ export function DatasetIntakeFlow({ variant }: { variant: DatasetIntakeVariant }
           <Card className="mb-8">
             <div className="mb-6 flex flex-col gap-3 border-b border-slate-800/80 pb-5 md:flex-row md:items-center md:justify-between">
               <div>
-                <p className="text-body-sm text-white">Progress is saved automatically.</p>
+                <p className="text-body-sm text-white">Your progress will save as you move through the form.</p>
                 <p className="mt-1 text-body-xs text-slate-400">
-                  Status: {saveStateLabel(saveState)}{lastSavedAt ? ` · ${new Date(lastSavedAt).toLocaleTimeString()}` : ''}
+                  Progress: {saveStateLabel(saveState)}{lastSavedAt ? ` · ${new Date(lastSavedAt).toLocaleTimeString()}` : ''}
                 </p>
               </div>
               {draftToken ? (
-                <p className="text-body-xs text-slate-500">Draft linked for same-browser resume and follow-up protection.</p>
+                <p className="text-body-xs text-slate-500">You can return in this browser if you need to finish later.</p>
               ) : (
-                <p className="text-body-xs text-slate-500">Server draft starts after required contact info is entered.</p>
+                <p className="text-body-xs text-slate-500">We only ask for what is needed to review your sample dataset.</p>
               )}
             </div>
 
@@ -872,7 +871,7 @@ export function DatasetIntakeFlow({ variant }: { variant: DatasetIntakeVariant }
                     <input id="role" name="role" className="input" value={formData.role} onChange={(e) => updateFormData((current) => ({ ...current, role: e.target.value }))} placeholder="Facilities Director" />
                   </div>
                   <div className="md:col-span-2">
-                    <label htmlFor="phone" className="label">Phone *</label>
+                    <label htmlFor="phone" className="label">Phone optional</label>
                     <input id="phone" name="phone" type="tel" className="input" value={formData.phone} onChange={(e) => updateFormData((current) => ({ ...current, phone: e.target.value }))} placeholder="(555) 123-4567" />
                   </div>
                 </div>
@@ -910,15 +909,15 @@ export function DatasetIntakeFlow({ variant }: { variant: DatasetIntakeVariant }
                     <input id="postalCode" className="input" value={formData.postalCode} onChange={(e) => updateFormData((current) => ({ ...current, postalCode: e.target.value }))} placeholder="60601" />
                   </div>
                   <div>
-                    <label htmlFor="portfolioSize" className="label">Portfolio size *</label>
+                    <label htmlFor="portfolioSize" className="label">Approximate square footage / number of buildings *</label>
                     <input id="portfolioSize" className="input" value={formData.portfolioSize} onChange={(e) => updateFormData((current) => ({ ...current, portfolioSize: e.target.value }))} placeholder="e.g., 5 buildings, 2M sq ft" />
                   </div>
                   <div>
-                    <label htmlFor="basPlatform" className="label">BAS platform</label>
+                    <label htmlFor="basPlatform" className="label">BAS vendor if known</label>
                     <input id="basPlatform" className="input" value={formData.basPlatform} onChange={(e) => updateFormData((current) => ({ ...current, basPlatform: e.target.value }))} placeholder="Niagara, Metasys, WebCTRL, etc." />
                   </div>
                   <div>
-                    <label htmlFor="primaryConcern" className="label">Primary concern</label>
+                    <label htmlFor="primaryConcern" className="label">What you want to understand</label>
                     <input id="primaryConcern" className="input" value={formData.primaryConcern} onChange={(e) => updateFormData((current) => ({ ...current, primaryConcern: e.target.value }))} placeholder="Energy spend, comfort complaints, equipment reliability" />
                   </div>
                 </div>
@@ -936,7 +935,7 @@ export function DatasetIntakeFlow({ variant }: { variant: DatasetIntakeVariant }
                           <p className="text-body-sm font-semibold text-white">{formData.dataset.fileName}</p>
                           <p className="mt-2 text-body-xs text-slate-400">{datasetSummary}</p>
                           <p className="mt-1 text-body-xs text-slate-500">
-                            {datasetUploadState === 'uploading' ? 'Uploading dataset...' : 'Dataset uploaded and saved to your draft.'}
+                            {datasetUploadState === 'uploading' ? 'Uploading dataset...' : 'Dataset uploaded. Your progress is saved.'}
                           </p>
                           <div className="mt-4 flex flex-wrap gap-3">
                             <button type="button" className="btn-secondary" onClick={() => fileInputRef.current?.click()}>Replace File</button>
@@ -960,15 +959,14 @@ export function DatasetIntakeFlow({ variant }: { variant: DatasetIntakeVariant }
                   </div>
 
                   <div className="rounded-2xl border border-cyan-500/20 bg-slate-950/70 p-5">
-                    <p className="text-body-sm font-semibold text-white">CSV formatting help</p>
+                    <p className="text-body-sm font-semibold text-white">Accepted formats and examples</p>
                     <p className="mt-3 text-body-sm text-slate-400">
-                      Use the sample template to match the expected time-series BAS structure: one timestamp column first,
-                      then one column per trended point. We recommend 2-5 minute intervals, but we do not require a hard size
-                      limit on the file you upload.
+                      Accepted format: CSV. Useful files include BAS trend exports, point histories, temperatures, setpoints,
+                      schedules, runtime logs, and equipment-level exports.
                     </p>
                     <a href="/templates/sample-bas-template.csv" download className="btn-secondary mt-5 inline-flex">Download Sample CSV</a>
                     <p className="mt-4 text-body-xs text-slate-500">
-                      More data usually helps us assess fit faster, even if we only use part of it for the initial review.
+                      LeanFM uses uploaded data only to perform the requested review and prepare next steps.
                     </p>
                   </div>
                 </div>

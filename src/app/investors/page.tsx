@@ -46,7 +46,7 @@ const marketDrivers = [
 
 const tractionHighlights = [
   'The Andy Warhol Museum, part of Carnegie Museums of Pittsburgh',
-  'Healthcare systems such as Cleveland Clinic and Mayo Clinic',
+  'Historical healthcare facility analyses',
   'Large commercial and mixed-use buildings',
 ]
 
@@ -73,6 +73,12 @@ const scaleBullets = [
   'Repeatable diagnostic workflow',
   'Vertical-specific outbound motion',
   'Expandable from one building to portfolios',
+]
+
+const businessModelItems = [
+  'Sample Analysis as the first commercial offer',
+  'Findings walkthrough to validate operational value',
+  'Paid rollout for buildings or portfolios where the value is clear',
 ]
 
 const credibilityItems = [
@@ -168,6 +174,24 @@ export default function InvestorsPage() {
         <div className="container-default">
           <div className="grid gap-10 lg:grid-cols-[0.86fr_1.14fr] lg:items-start">
             <div>
+              <h2 className="heading-2 mb-5 text-white">The Wedge: Sample Analysis</h2>
+              <p className="body-large">
+                LeanFM does not need a long enterprise implementation to begin showing value. The first commercial step is a focused Sample Analysis using existing BAS trend data.
+              </p>
+            </div>
+            <div className="rounded-2xl border border-cyan-400/20 bg-cyan-500/10 p-6">
+              <p className="font-display text-2xl font-semibold leading-snug text-white">
+                Data review, findings walkthrough, then paid rollout where the value is clear.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section className="section-large bg-slate-950">
+        <div className="container-default">
+          <div className="grid gap-10 lg:grid-cols-[0.86fr_1.14fr] lg:items-start">
+            <div>
               <h2 className="heading-2 mb-5 text-white">A Large, Persistent Problem in the Built Environment</h2>
               <div className="space-y-5 text-body-lg leading-relaxed text-slate-300">
                 <p>
@@ -186,6 +210,24 @@ export default function InvestorsPage() {
                 <div key={bullet} className="rounded-xl border border-slate-800 bg-slate-900/60 p-5">
                   <Search className="mb-5 h-6 w-6 text-cyan-300" aria-hidden="true" />
                   <p className="font-display text-body-lg font-semibold leading-snug text-white">{bullet}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section className="section-large border-y border-slate-800/70 bg-slate-900/35">
+        <div className="container-default">
+          <div className="grid gap-10 lg:grid-cols-[0.86fr_1.14fr] lg:items-start">
+            <div>
+              <BarChart3 className="mb-5 h-7 w-7 text-cyan-300" aria-hidden="true" />
+              <h2 className="heading-2 mb-5 text-white">Business Model</h2>
+            </div>
+            <div className="grid gap-3">
+              {businessModelItems.map((item) => (
+                <div key={item} className="rounded-xl border border-slate-800 bg-slate-950/55 p-5">
+                  <p className="font-display text-body-lg font-semibold leading-snug text-white">{item}</p>
                 </div>
               ))}
             </div>

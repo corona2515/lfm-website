@@ -15,7 +15,7 @@ import { TrackedButton } from '@/components/analytics/TrackedButton'
 import { StickyCtaBar } from '@/components/home/StickyCtaBar'
 import { CTA_LABELS } from '@/lib/constants'
 
-const SAMPLE_ANALYSIS_HREF = '/start'
+const SAMPLE_ANALYSIS_HREF = '/contact?intent=sample-analysis&source=results'
 const TALK_TO_LEANFM_HREF = '/contact?intent=demo&source=results_demo'
 
 export const metadata: Metadata = {
@@ -73,18 +73,18 @@ const proofCards = [
 
 const supportingExamples = [
   {
-    name: 'Cleveland Clinic Avon',
-    context: '70K sq ft hospital buildings | Trane BAS',
+    name: 'Healthcare facility example',
+    context: 'Hospital buildings with Trane BAS',
     findings: [
       '39 biased temperature and pressure sensors',
       'Overcooling followed by reheat',
       'CO2 sensors not fully utilized',
-      '31.4% energy savings reported in one month',
+      'Short-term energy reduction reported in the historical case material',
     ],
   },
   {
-    name: 'Mayo Clinic Rochester Methodist Hospital',
-    context: '1.4M sq ft across 4 buildings | JCI BAS',
+    name: 'Large hospital campus example',
+    context: '1.4M sq ft across 4 buildings with JCI BAS',
     findings: [
       'Software and hardware faults in AHUs and VAVs',
       '9.7-14.4% energy waste identified',
@@ -93,8 +93,8 @@ const supportingExamples = [
     ],
   },
   {
-    name: 'Limak Cyprus Deluxe Hotel',
-    context: '270K sq ft resort/casino | Siemens BAS',
+    name: 'Resort and casino example',
+    context: '270K sq ft hospitality facility with Siemens BAS',
     findings: [
       '11 days of BAS data analyzed',
       '$12,000/month in energy waste diagnosed',
@@ -103,8 +103,8 @@ const supportingExamples = [
     ],
   },
   {
-    name: 'Shenzhen International Free-Trade Center',
-    context: '550K sq ft office building | Honeywell BAS',
+    name: 'Large office building example',
+    context: '550K sq ft office facility with Honeywell BAS',
     findings: [
       '13 days of data analyzed',
       'Incorrectly installed relays identified',
@@ -214,9 +214,6 @@ function WarholTrendVisual() {
           </div>
         ))}
       </div>
-      <p className="mt-5 text-body-xs leading-relaxed text-slate-500">
-        Recreated in LeanFM site style from the case study direction. This is not the original case study slide design.
-      </p>
     </div>
   )
 }
@@ -251,7 +248,7 @@ export default function ResultsPage() {
                 <TrackedButton
                   href={SAMPLE_ANALYSIS_HREF}
                   size="large"
-                  eventName="cta_upload_sample_click"
+                  eventName="cta_sample_analysis_click"
                   eventParams={{ location: 'results_hero_primary' }}
                   className="w-full min-w-0 sm:w-auto"
                 >
@@ -301,11 +298,6 @@ export default function ResultsPage() {
               <h2 className="heading-2 mb-4 text-white">Featured Case Study: The Andy Warhol Museum</h2>
               <p className="body-large">
                 The seven-floor mixed-use museum required stable temperature and humidity control for sensitive artwork, visitor comfort, and staff comfort.
-              </p>
-            </div>
-            <div className="rounded-2xl border border-cyan-400/25 bg-cyan-500/10 p-5">
-              <p className="font-display text-xl font-semibold leading-snug text-white">
-                This is the clearest public-facing proof point and should be visually dominant on the page.
               </p>
             </div>
           </div>
@@ -378,15 +370,6 @@ export default function ResultsPage() {
 
               <WarholTrendVisual />
 
-              <TrackedButton
-                href={SAMPLE_ANALYSIS_HREF}
-                size="large"
-                eventName="cta_upload_sample_click"
-                eventParams={{ location: 'results_warhol_primary' }}
-                className="w-full"
-              >
-                {CTA_LABELS.primary}
-              </TrackedButton>
             </div>
           </div>
         </div>
@@ -444,23 +427,8 @@ export default function ResultsPage() {
                     </li>
                   ))}
                 </ul>
-                {/* Internal implementation note: confirm client approval before promoting older examples as standalone public case studies. */}
               </article>
             ))}
-          </div>
-
-          <div className="mt-12 rounded-2xl border border-cyan-400/25 bg-cyan-500/10 p-7 text-center md:p-10">
-            <h2 className="mb-6 font-display text-3xl font-semibold leading-tight text-white md:text-4xl">
-              Want to know what your data would show?
-            </h2>
-            <TrackedButton
-              href={SAMPLE_ANALYSIS_HREF}
-              size="large"
-              eventName="cta_upload_sample_click"
-              eventParams={{ location: 'results_supporting_findings_primary' }}
-            >
-              {CTA_LABELS.primary}
-            </TrackedButton>
           </div>
         </div>
       </section>
@@ -514,15 +482,6 @@ export default function ResultsPage() {
               </div>
             ))}
           </div>
-          <div className="mt-9 text-center">
-            <TrackedButton
-              href={SAMPLE_ANALYSIS_HREF}
-              eventName="cta_upload_sample_click"
-              eventParams={{ location: 'results_process_primary' }}
-            >
-              {CTA_LABELS.primary}
-            </TrackedButton>
-          </div>
         </div>
       </section>
 
@@ -553,7 +512,7 @@ export default function ResultsPage() {
             <TrackedButton
               href={SAMPLE_ANALYSIS_HREF}
               size="large"
-              eventName="cta_upload_sample_click"
+              eventName="cta_sample_analysis_click"
               eventParams={{ location: 'results_final_primary' }}
             >
               {CTA_LABELS.primary}

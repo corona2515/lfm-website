@@ -12,7 +12,7 @@ import { TrackedButton } from '@/components/analytics/TrackedButton'
 import { StickyCtaBar } from '@/components/home/StickyCtaBar'
 import { CTA_LABELS } from '@/lib/constants'
 
-const SAMPLE_ANALYSIS_HREF = '/start'
+const SAMPLE_ANALYSIS_HREF = '/contact?intent=sample-analysis&source=universities'
 const TALK_TO_LEANFM_HREF = '/contact?intent=demo&source=universities_demo'
 
 export const metadata: Metadata = {
@@ -74,8 +74,16 @@ const practiceExamples = [
   'Sensors drifting enough to impact comfort and system performance',
 ]
 
+const campusSpecificExamples = [
+  'Academic buildings running on outdated schedules',
+  'Residence halls with comfort drift',
+  'Labs or specialty spaces with tighter operating needs',
+  'Older buildings behaving differently than newer ones',
+  'Repeated issues across similar equipment',
+]
+
 const processSteps = [
-  'Upload Sample Dataset',
+  'Request a Sample Analysis',
   'Share available building system data',
   'LeanFM analyzes the data',
   'Review findings with our team',
@@ -180,7 +188,7 @@ export default function UniversitiesPage() {
                 <TrackedButton
                   href={SAMPLE_ANALYSIS_HREF}
                   size="large"
-                  eventName="cta_upload_sample_click"
+                  eventName="cta_sample_analysis_click"
                   eventParams={{ location: 'universities_hero_primary' }}
                   className="w-full sm:w-auto"
                 >
@@ -335,6 +343,19 @@ export default function UniversitiesPage() {
             </div>
           </div>
 
+          <div className="mt-10 rounded-2xl border border-slate-800 bg-slate-900/55 p-6">
+            <h3 className="mb-5 font-display text-2xl font-semibold text-white">
+              Campus-specific patterns worth checking
+            </h3>
+            <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-5">
+              {campusSpecificExamples.map((example) => (
+                <p key={example} className="border-l border-cyan-400/40 pl-4 text-body-sm leading-relaxed text-slate-300">
+                  {example}
+                </p>
+              ))}
+            </div>
+          </div>
+
           <div className="mt-12 rounded-2xl border border-cyan-400/25 bg-cyan-500/10 p-7 text-center md:p-10">
             <h2 className="mb-6 font-display text-3xl font-semibold leading-tight text-white md:text-4xl">
               Want to see this across your campus?
@@ -342,7 +363,7 @@ export default function UniversitiesPage() {
             <TrackedButton
               href={SAMPLE_ANALYSIS_HREF}
               size="large"
-              eventName="cta_upload_sample_click"
+              eventName="cta_sample_analysis_click"
               eventParams={{ location: 'universities_midpage_primary' }}
             >
               {CTA_LABELS.primary}
@@ -365,15 +386,6 @@ export default function UniversitiesPage() {
                 <p className="font-display text-body-lg font-semibold leading-snug text-white">{step}</p>
               </div>
             ))}
-          </div>
-          <div className="mt-9 text-center">
-            <TrackedButton
-              href={SAMPLE_ANALYSIS_HREF}
-              eventName="cta_upload_sample_click"
-              eventParams={{ location: 'universities_process_primary' }}
-            >
-              {CTA_LABELS.primary}
-            </TrackedButton>
           </div>
         </div>
       </section>
@@ -447,7 +459,7 @@ export default function UniversitiesPage() {
             <TrackedButton
               href={SAMPLE_ANALYSIS_HREF}
               size="large"
-              eventName="cta_upload_sample_click"
+              eventName="cta_sample_analysis_click"
               eventParams={{ location: 'universities_final_primary' }}
             >
               {CTA_LABELS.primary}

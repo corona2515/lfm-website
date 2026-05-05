@@ -15,7 +15,7 @@ import { TrackedButton } from '@/components/analytics/TrackedButton'
 import { StickyCtaBar } from '@/components/home/StickyCtaBar'
 import { CTA_LABELS } from '@/lib/constants'
 
-const SAMPLE_ANALYSIS_HREF = '/start'
+const SAMPLE_ANALYSIS_HREF = '/contact?intent=sample-analysis&source=what_we_find'
 const TALK_TO_LEANFM_HREF = '/contact?intent=demo&source=what_we_find_demo'
 
 export const metadata: Metadata = {
@@ -45,7 +45,9 @@ const issueCategories = [
       'Zones heating while cooling is active',
       'Systems compensating for conflicting signals',
     ],
+    missed: 'Each control loop may look acceptable on its own, while the combined behavior wastes energy.',
     impact: 'Energy waste, comfort instability, unnecessary equipment wear',
+    surfaces: 'LeanFM surfaces the zones and operating periods where heating and cooling appear to overlap.',
     Icon: Snowflake,
   },
   {
@@ -56,7 +58,9 @@ const issueCategories = [
       'Equipment operating in unoccupied spaces',
       'Extended runtime beyond schedules',
     ],
+    missed: 'Schedules and overrides can drift slowly, especially across buildings with changing occupancy.',
     impact: 'Higher utility costs and avoidable wear',
+    surfaces: 'LeanFM identifies runtime patterns that do not match likely building need.',
     Icon: Clock3,
   },
   {
@@ -66,7 +70,9 @@ const issueCategories = [
       'Temperature readings slightly off',
       'Sensors drifting enough to impact control decisions',
     ],
+    missed: 'A sensor can be wrong enough to affect control decisions without crossing an alarm threshold.',
     impact: 'Comfort complaints, wasted energy, and misdiagnosed problems',
+    surfaces: 'LeanFM flags sensor behavior that may be causing the BAS to respond to the wrong conditions.',
     Icon: Gauge,
   },
   {
@@ -77,7 +83,9 @@ const issueCategories = [
       'Schedules or overrides changing system behavior',
       'Inconsistent operation across similar spaces',
     ],
+    missed: 'The BAS may be following configured logic, even when that logic no longer matches building use.',
     impact: 'Hidden waste, unstable operation, and recurring complaints',
+    surfaces: 'LeanFM highlights logic patterns that deserve review by facilities teams or controls vendors.',
     Icon: Settings2,
   },
   {
@@ -88,7 +96,9 @@ const issueCategories = [
       'Fluctuating conditions',
       'Inconsistent system response',
     ],
+    missed: 'Conditions can move gradually enough that they become complaints before they become alarms.',
     impact: 'Tenant, staff, student, visitor, or artifact risk depending on vertical',
+    surfaces: 'LeanFM shows where comfort-related conditions are drifting or behaving inconsistently.',
     Icon: Thermometer,
   },
   {
@@ -99,7 +109,9 @@ const issueCategories = [
       'Issues scattered across BAS data',
       'Energy waste that is hard to prove',
     ],
+    missed: 'Teams see too much noise and not enough context about which issue matters first.',
     impact: 'The wrong problems get fixed first',
+    surfaces: 'LeanFM turns scattered signals into a prioritized list your team can review.',
     Icon: Wrench,
   },
 ]
@@ -187,7 +199,7 @@ export default function WhatWeFindPage() {
                 <TrackedButton
                   href={SAMPLE_ANALYSIS_HREF}
                   size="large"
-                  eventName="cta_upload_sample_click"
+                  eventName="cta_sample_analysis_click"
                   eventParams={{ location: 'what_we_find_hero_primary' }}
                   className="w-full min-w-0 sm:w-auto"
                 >
@@ -251,13 +263,13 @@ export default function WhatWeFindPage() {
       <section className="section-large bg-slate-950">
         <div className="container-default">
           <div className="mb-12 max-w-3xl">
-            <h2 className="heading-2 mb-4 text-white">Hidden issues that become buyer pain</h2>
+            <h2 className="heading-2 mb-4 text-white">Hidden Issues That Become Real Operating Problems</h2>
             <p className="body-large">
               LeanFM turns technical BAS behavior into issues a facilities, operations, or finance team can understand and prioritize.
             </p>
           </div>
           <div className="grid gap-4 lg:grid-cols-2">
-            {issueCategories.map(({ title, description, examples, impact, Icon }) => (
+            {issueCategories.map(({ title, description, examples, missed, impact, surfaces, Icon }) => (
               <article key={title} className="rounded-2xl border border-slate-800 bg-slate-900/60 p-6">
                 <div className="mb-5 flex items-start gap-4">
                   <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl border border-cyan-400/30 bg-cyan-500/10">
@@ -271,7 +283,7 @@ export default function WhatWeFindPage() {
                 <div className="grid gap-5 md:grid-cols-[1fr_0.92fr]">
                   <div>
                     <p className="mb-3 text-body-xs font-semibold uppercase tracking-[0.16em] text-slate-500">
-                      Examples
+                      What it looks like
                     </p>
                     <ul className="space-y-2">
                       {examples.map((example) => (
@@ -282,11 +294,25 @@ export default function WhatWeFindPage() {
                       ))}
                     </ul>
                   </div>
-                  <div className="rounded-xl border border-cyan-400/20 bg-cyan-500/10 p-4">
-                    <p className="mb-2 text-body-xs font-semibold uppercase tracking-[0.16em] text-cyan-300">
-                      Impact
-                    </p>
-                    <p className="text-body-sm leading-relaxed text-slate-100">{impact}</p>
+                  <div className="space-y-3">
+                    <div className="rounded-xl border border-slate-800 bg-slate-950/55 p-4">
+                      <p className="mb-2 text-body-xs font-semibold uppercase tracking-[0.16em] text-slate-500">
+                        Why it gets missed
+                      </p>
+                      <p className="text-body-sm leading-relaxed text-slate-200">{missed}</p>
+                    </div>
+                    <div className="rounded-xl border border-cyan-400/20 bg-cyan-500/10 p-4">
+                      <p className="mb-2 text-body-xs font-semibold uppercase tracking-[0.16em] text-cyan-300">
+                        What it can cost
+                      </p>
+                      <p className="text-body-sm leading-relaxed text-slate-100">{impact}</p>
+                    </div>
+                    <div className="rounded-xl border border-slate-800 bg-slate-950/55 p-4">
+                      <p className="mb-2 text-body-xs font-semibold uppercase tracking-[0.16em] text-slate-500">
+                        What LeanFM surfaces
+                      </p>
+                      <p className="text-body-sm leading-relaxed text-slate-200">{surfaces}</p>
+                    </div>
                   </div>
                 </div>
               </article>
@@ -352,33 +378,17 @@ export default function WhatWeFindPage() {
         </div>
       </section>
 
-      <section className="border-y border-slate-800/70 bg-cyan-500/10">
-        <div className="container-default py-14 text-center md:py-16">
-          <h2 className="mx-auto mb-6 max-w-2xl font-display text-3xl font-semibold leading-tight text-white md:text-4xl">
-            Want to see which of these are hiding in your building?
-          </h2>
-          <TrackedButton
-            href={SAMPLE_ANALYSIS_HREF}
-            size="large"
-            eventName="cta_upload_sample_click"
-            eventParams={{ location: 'what_we_find_midpage_primary' }}
-          >
-            {CTA_LABELS.primary}
-          </TrackedButton>
-        </div>
-      </section>
-
       <section className="border-t border-slate-800/70 bg-slate-900/50">
         <div className="container-default py-14 md:py-20">
           <div className="mx-auto max-w-2xl text-center">
-            <h2 className="heading-2 mb-5 text-white">See What Your System Is Missing</h2>
+            <h2 className="heading-2 mb-5 text-white">Find Which Issues Are Hiding in Your Building</h2>
             <p className="body-large mb-8">
               Send the data you already have. LeanFM will help identify hidden issues affecting energy, comfort, and system performance.
             </p>
             <TrackedButton
               href={SAMPLE_ANALYSIS_HREF}
               size="large"
-              eventName="cta_upload_sample_click"
+              eventName="cta_sample_analysis_click"
               eventParams={{ location: 'what_we_find_final_primary' }}
             >
               {CTA_LABELS.primary}

@@ -12,7 +12,7 @@ import { TrackedButton } from '@/components/analytics/TrackedButton'
 import { StickyCtaBar } from '@/components/home/StickyCtaBar'
 import { CTA_LABELS } from '@/lib/constants'
 
-const SAMPLE_ANALYSIS_HREF = '/start'
+const SAMPLE_ANALYSIS_HREF = '/contact?intent=sample-analysis&source=museums'
 const TALK_TO_LEANFM_HREF = '/contact?intent=demo&source=museums_demo'
 
 export const metadata: Metadata = {
@@ -73,7 +73,7 @@ const practiceExamples = [
 ]
 
 const processSteps = [
-  'Upload Sample Dataset',
+  'Request a Sample Analysis',
   'Share available building system data',
   'LeanFM analyzes the data',
   'Review findings with our team',
@@ -178,7 +178,7 @@ export default function MuseumsPage() {
                 <TrackedButton
                   href={SAMPLE_ANALYSIS_HREF}
                   size="large"
-                  eventName="cta_upload_sample_click"
+                  eventName="cta_sample_analysis_click"
                   eventParams={{ location: 'museums_hero_primary' }}
                   className="w-full sm:w-auto"
                 >
@@ -336,7 +336,7 @@ export default function MuseumsPage() {
             <TrackedButton
               href={SAMPLE_ANALYSIS_HREF}
               size="large"
-              eventName="cta_upload_sample_click"
+              eventName="cta_sample_analysis_click"
               eventParams={{ location: 'museums_midpage_primary' }}
             >
               {CTA_LABELS.primary}
@@ -359,15 +359,6 @@ export default function MuseumsPage() {
                 <p className="font-display text-body-lg font-semibold leading-snug text-white">{step}</p>
               </div>
             ))}
-          </div>
-          <div className="mt-9 text-center">
-            <TrackedButton
-              href={SAMPLE_ANALYSIS_HREF}
-              eventName="cta_upload_sample_click"
-              eventParams={{ location: 'museums_process_primary' }}
-            >
-              {CTA_LABELS.primary}
-            </TrackedButton>
           </div>
         </div>
       </section>
@@ -414,6 +405,17 @@ export default function MuseumsPage() {
         </div>
       </section>
 
+      <section className="border-y border-cyan-400/20 bg-cyan-500/10">
+        <div className="container-default py-8">
+          <div className="grid gap-4 lg:grid-cols-[0.45fr_1fr] lg:items-center">
+            <h2 className="font-display text-body-lg font-semibold text-white">Warhol proof point</h2>
+            <p className="text-body-md leading-relaxed text-cyan-50">
+              The Andy Warhol Museum case study showed $100K+ in ongoing annual savings after LeanFM helped identify BAS logic faults that were corrected.
+            </p>
+          </div>
+        </div>
+      </section>
+
       <section className="border-b border-slate-800/70 bg-slate-950">
         <div className="container-wide py-7">
           <div className="grid gap-5 lg:grid-cols-[0.65fr_1.35fr] lg:items-center">
@@ -441,7 +443,7 @@ export default function MuseumsPage() {
             <TrackedButton
               href={SAMPLE_ANALYSIS_HREF}
               size="large"
-              eventName="cta_upload_sample_click"
+              eventName="cta_sample_analysis_click"
               eventParams={{ location: 'museums_final_primary' }}
             >
               {CTA_LABELS.primary}

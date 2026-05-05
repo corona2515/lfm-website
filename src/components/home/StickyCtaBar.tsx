@@ -13,8 +13,8 @@ interface StickyCtaBarProps {
 
 export function StickyCtaBar({
   heroId,
-  href = '/start',
-  location = 'sticky_upload_primary',
+  href = '/contact?intent=sample-analysis&source=sticky',
+  location = 'sticky_sample_analysis_primary',
   message = 'Hidden BAS faults can waste energy, money, comfort, and maintenance time before alarms catch them.',
 }: StickyCtaBarProps) {
   const [isVisible, setIsVisible] = useState(false)
@@ -60,7 +60,7 @@ export function StickyCtaBar({
         <TrackedButton
           href={href}
           size="small"
-          eventName="cta_upload_sample_click"
+          eventName="cta_sample_analysis_click"
           eventParams={{ location }}
           className="w-full shrink-0 sm:w-auto"
         >

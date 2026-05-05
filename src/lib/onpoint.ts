@@ -143,7 +143,7 @@ function getRequiredString(payload: OnPointResponseBody, candidates: string[], f
       message: `OnPoint intake response is missing ${fieldName}.`,
       statusCode: 502,
       code: 'INVALID_ONPOINT_RESPONSE',
-      userMessage: 'We could not finish creating your preview account right now. Please try again or contact LeanFM.',
+      userMessage: 'We could not finish starting your Sample Analysis right now. Please try again or contact LeanFM.',
       retryable: true,
       responseBody: payload,
     })
@@ -182,7 +182,7 @@ function toOnPointProvisioningError(error: unknown) {
     message: error instanceof Error ? error.message : 'Unknown OnPoint intake error.',
     statusCode: 502,
     code: 'ONPOINT_REQUEST_FAILED',
-    userMessage: 'We could not create your preview account right now. Please try again or contact LeanFM.',
+    userMessage: 'We could not start your Sample Analysis right now. Please try again or contact LeanFM.',
     retryable: true,
   })
 }
@@ -204,7 +204,7 @@ async function sendOnPointIntakeRequest(payload: Record<string, unknown>) {
         message: 'OnPoint intake request timed out.',
         statusCode: 504,
         code: 'ONPOINT_TIMEOUT',
-        userMessage: 'We could not create your preview account right now. Please try again or contact LeanFM.',
+        userMessage: 'We could not start your Sample Analysis right now. Please try again or contact LeanFM.',
         retryable: true,
       })
     }
@@ -213,7 +213,7 @@ async function sendOnPointIntakeRequest(payload: Record<string, unknown>) {
       message: error instanceof Error ? error.message : 'OnPoint intake request failed.',
       statusCode: 502,
       code: 'ONPOINT_REQUEST_FAILED',
-      userMessage: 'We could not create your preview account right now. Please try again or contact LeanFM.',
+      userMessage: 'We could not start your Sample Analysis right now. Please try again or contact LeanFM.',
       retryable: true,
     })
   } finally {
@@ -228,7 +228,7 @@ function buildOnPointPayload(input: { lead: ProvisionableSampleLead }) {
       message: 'Sample intake asset is not attached to the lead.',
       statusCode: 500,
       code: 'MISSING_SAMPLE_ASSET',
-      userMessage: 'We could not create your preview account right now. Please try again or contact LeanFM.',
+      userMessage: 'We could not start your Sample Analysis right now. Please try again or contact LeanFM.',
       retryable: true,
     })
   }
@@ -282,7 +282,7 @@ export async function provisionSampleIntakeInOnPoint(input: {
       message: 'ONPOINT_SAMPLE_INTAKE_URL is not configured.',
       statusCode: 500,
       code: 'ONPOINT_NOT_CONFIGURED',
-      userMessage: 'We could not create your preview account right now. Please try again or contact LeanFM.',
+      userMessage: 'We could not start your Sample Analysis right now. Please try again or contact LeanFM.',
       retryable: true,
     })
   }
@@ -299,7 +299,7 @@ export async function provisionSampleIntakeInOnPoint(input: {
         message: `OnPoint intake duplicate: ${errorMessage}`,
         statusCode: 409,
         code: errorCode,
-        userMessage: 'A pending preview already exists for this email and organization. Please check your email or contact LeanFM for help.',
+        userMessage: 'A pending Sample Analysis already exists for this email and organization. Please check your email or contact LeanFM for help.',
         retryable: false,
         responseBody,
       })
@@ -310,7 +310,7 @@ export async function provisionSampleIntakeInOnPoint(input: {
         message: `OnPoint intake validation failed: ${errorMessage}`,
         statusCode: 400,
         code: errorCode || 'ONPOINT_VALIDATION_FAILED',
-        userMessage: errorMessage || 'We could not validate your onboarding request. Please review your details and try again.',
+        userMessage: errorMessage || 'We could not validate your Sample Analysis request. Please review your details and try again.',
         retryable: false,
         responseBody,
       })
@@ -320,7 +320,7 @@ export async function provisionSampleIntakeInOnPoint(input: {
       message: `OnPoint intake failed with ${response.status}: ${errorMessage}`,
       statusCode: response.status >= 500 ? 502 : response.status,
       code: errorCode || 'ONPOINT_INTAKE_FAILED',
-      userMessage: 'We could not create your preview account right now. Please try again or contact LeanFM.',
+      userMessage: 'We could not start your Sample Analysis right now. Please try again or contact LeanFM.',
       retryable: true,
       responseBody,
     })

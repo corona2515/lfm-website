@@ -11,7 +11,7 @@ import { TrackedButton } from '@/components/analytics/TrackedButton'
 import { StickyCtaBar } from '@/components/home/StickyCtaBar'
 import { CTA_LABELS } from '@/lib/constants'
 
-const SAMPLE_ANALYSIS_HREF = '/start'
+const SAMPLE_ANALYSIS_HREF = '/contact?intent=sample-analysis&source=cre'
 const TALK_TO_LEANFM_HREF = '/contact?intent=demo&source=cre_demo'
 
 export const metadata: Metadata = {
@@ -74,7 +74,7 @@ const practiceExamples = [
 ]
 
 const processSteps = [
-  'Upload Sample Dataset',
+  'Request a Sample Analysis',
   'Share available building system data',
   'LeanFM analyzes the data',
   'Review findings with our team',
@@ -179,7 +179,7 @@ export default function CommercialRealEstatePage() {
                 <TrackedButton
                   href={SAMPLE_ANALYSIS_HREF}
                   size="large"
-                  eventName="cta_upload_sample_click"
+                  eventName="cta_sample_analysis_click"
                   eventParams={{ location: 'cre_hero_primary' }}
                   className="w-full sm:w-auto"
                 >
@@ -261,6 +261,9 @@ export default function CommercialRealEstatePage() {
                 <p className="body-large">
                   Across multiple buildings, these issues compound quickly and are rarely visible in one place.
                 </p>
+                <p className="body-large">
+                  Hidden HVAC waste affects more than the utility bill. It can affect tenant comfort, engineer workload, operating expense, renewal risk, and asset performance.
+                </p>
               </div>
             </div>
             <div className="grid gap-3 sm:grid-cols-2">
@@ -337,7 +340,7 @@ export default function CommercialRealEstatePage() {
             <TrackedButton
               href={SAMPLE_ANALYSIS_HREF}
               size="large"
-              eventName="cta_upload_sample_click"
+              eventName="cta_sample_analysis_click"
               eventParams={{ location: 'cre_midpage_primary' }}
             >
               {CTA_LABELS.primary}
@@ -360,15 +363,6 @@ export default function CommercialRealEstatePage() {
                 <p className="font-display text-body-lg font-semibold leading-snug text-white">{step}</p>
               </div>
             ))}
-          </div>
-          <div className="mt-9 text-center">
-            <TrackedButton
-              href={SAMPLE_ANALYSIS_HREF}
-              eventName="cta_upload_sample_click"
-              eventParams={{ location: 'cre_process_primary' }}
-            >
-              {CTA_LABELS.primary}
-            </TrackedButton>
           </div>
         </div>
       </section>
@@ -442,7 +436,7 @@ export default function CommercialRealEstatePage() {
             <TrackedButton
               href={SAMPLE_ANALYSIS_HREF}
               size="large"
-              eventName="cta_upload_sample_click"
+              eventName="cta_sample_analysis_click"
               eventParams={{ location: 'cre_final_primary' }}
             >
               {CTA_LABELS.primary}

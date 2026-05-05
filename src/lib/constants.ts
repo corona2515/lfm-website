@@ -19,7 +19,6 @@ export const PRODUCT_NAV_LINKS = [
   { href: '/what-we-find', label: 'What We Find' },
   { href: '/results', label: 'Results' },
   { href: '/building-data-to-action', label: 'Building Data to Action' },
-  { href: '/start', label: 'Upload Sample Dataset' },
 ] as const
 
 export const INDUSTRY_NAV_LINKS = [
@@ -27,8 +26,6 @@ export const INDUSTRY_NAV_LINKS = [
   { href: '/solutions/museums', label: 'Museums' },
   { href: '/solutions/universities', label: 'Universities' },
   { href: '/solutions/commercial-real-estate', label: 'Commercial Real Estate' },
-  { href: '/industries/hospitals', label: 'Hospitals' },
-  { href: '/industries/hotels', label: 'Hotels' },
 ] as const
 
 export const SOLUTIONS_NAV_GROUPS = [
@@ -37,8 +34,9 @@ export const SOLUTIONS_NAV_GROUPS = [
 ] as const
 
 export const CTA_LABELS = {
-  primary: 'Upload Sample Dataset',
+  primary: 'Request a Sample Analysis',
   secondary: 'Book a Demo',
+  upload: 'Upload Sample Dataset',
 } as const
 
 export const FOOTER_LINKS = {
@@ -78,12 +76,10 @@ export const HOME_PROOF_METRICS = [
 ] as const
 
 export const HOME_BUILT_FOR_VERTICALS = [
-  { href: '/k12', label: 'K-12' },
-  { href: '/industries/museums', label: 'Museums' },
-  { href: '/industries/universities', label: 'Universities' },
-  { href: '/industries/hospitals', label: 'Hospitals' },
-  { href: '/industries/hotels', label: 'Hotels' },
-  { href: '/industries/offices', label: 'Offices' },
+  { href: '/solutions/k-12-schools', label: 'K-12 Schools' },
+  { href: '/solutions/museums', label: 'Museums' },
+  { href: '/solutions/universities', label: 'Universities' },
+  { href: '/solutions/commercial-real-estate', label: 'Commercial Real Estate' },
 ] as const
 
 export const HOME_TRUST_SIGNALS = [
@@ -248,7 +244,7 @@ export const PRICING_TIERS = [
     period: '',
     features: [
       'Unlimited uploads',
-      'Multi-building dashboard',
+      'Multi-building reporting',
       'Automated weekly/monthly reports',
       'Historical tracking',
       'Team accounts',

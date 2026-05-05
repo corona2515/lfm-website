@@ -9,11 +9,7 @@ import { trackEvent } from '@/lib/analytics'
 import { NAV_LINKS, CTA_LABELS, SOLUTIONS_NAV_GROUPS } from '@/lib/constants'
 import { Button } from '@/components/ui'
 
-interface HeaderProps {
-  appUrl: string
-}
-
-export function Header({ appUrl }: HeaderProps) {
+export function Header() {
   const pathname = usePathname()
   const [isScrolled, setIsScrolled] = useState(false)
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
@@ -173,8 +169,8 @@ export function Header({ appUrl }: HeaderProps) {
             ) : null}
             <Button
               size="small"
-              href={isInvestorsPage ? '/contact?intent=investor&source=header_investors' : appUrl}
-              onClick={() => trackEvent(isInvestorsPage ? 'cta_investor_click' : 'cta_upload_sample_click', { location: 'header_desktop_primary' })}
+              href={isInvestorsPage ? '/contact?intent=investor&source=header_investors' : '/contact?intent=sample-analysis&source=header'}
+              onClick={() => trackEvent(isInvestorsPage ? 'cta_investor_click' : 'cta_sample_analysis_click', { location: 'header_desktop_primary' })}
             >
               {isInvestorsPage ? 'Contact LeanFM' : CTA_LABELS.primary}
             </Button>
@@ -251,7 +247,7 @@ export function Header({ appUrl }: HeaderProps) {
             <p className="mt-2 max-w-xs text-body-sm text-slate-400">
               {isInvestorsPage
                 ? 'Learn more about LeanFM or contact the team directly.'
-                : 'Learn more about LeanFM or upload a sample dataset.'}
+                : 'Learn more about LeanFM or request a sample analysis.'}
             </p>
           </div>
           <div className="max-h-[calc(100dvh-7rem)] overflow-y-auto px-3 py-3">
@@ -309,9 +305,9 @@ export function Header({ appUrl }: HeaderProps) {
                   </Button>
                 ) : null}
                 <Button
-                  href={isInvestorsPage ? '/contact?intent=investor&source=header_investors_mobile' : appUrl}
+                  href={isInvestorsPage ? '/contact?intent=investor&source=header_investors_mobile' : '/contact?intent=sample-analysis&source=header_mobile'}
                   className="w-full justify-center rounded-2xl"
-                  onClick={() => trackEvent(isInvestorsPage ? 'cta_investor_click' : 'cta_upload_sample_click', { location: 'header_mobile_primary' })}
+                  onClick={() => trackEvent(isInvestorsPage ? 'cta_investor_click' : 'cta_sample_analysis_click', { location: 'header_mobile_primary' })}
                 >
                   {isInvestorsPage ? 'Contact LeanFM' : CTA_LABELS.primary}
                 </Button>

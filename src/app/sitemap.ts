@@ -7,7 +7,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
 
   const routes = [
     '/',
-    '/k12',
     '/sample-analysis',
     '/how-it-works',
     '/what-we-find',
@@ -21,9 +20,10 @@ export default function sitemap(): MetadataRoute.Sitemap {
     '/investors',
     '/contact',
     '/building-data-to-action',
-    '/powering-the-ai-economy',
     '/privacy',
-    ...INDUSTRY_SLUGS.filter((slug) => slug !== 'k-12').map((slug) => `/industries/${slug}`),
+    ...INDUSTRY_SLUGS
+      .filter((slug) => !['k-12', 'hospitals', 'hotels'].includes(slug))
+      .map((slug) => `/industries/${slug}`),
   ]
 
   return routes.map((route) => ({
