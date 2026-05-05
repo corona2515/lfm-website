@@ -13,7 +13,7 @@ interface FooterProps {
 
 export function Footer({ appUrl, contactEmail }: FooterProps) {
   const pathname = usePathname()
-  const hideFooterCta = pathname === '/contact' || pathname === '/building-data-to-action'
+  const hideFooterCta = pathname === '/contact' || pathname === '/building-data-to-action' || pathname === '/investors'
   const currentYear = new Date().getFullYear()
   const footerSections = [
     { title: 'Product', links: FOOTER_LINKS.product },
@@ -30,10 +30,10 @@ export function Footer({ appUrl, contactEmail }: FooterProps) {
           <div className="container-default py-16">
             <div className="text-center max-w-2xl mx-auto">
               <h2 className="heading-2 text-white mb-4">
-                Ready to see what hidden HVAC faults are costing you?
+                See what your building system is missing
               </h2>
               <p className="body-large mb-8">
-                Start with sample BAS data and get prioritized diagnostics with recommended next actions.
+                Send existing building system data and get a walkthrough of hidden issues that may be wasting energy, money, or comfort.
               </p>
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
                 <TrackedButton
@@ -75,7 +75,7 @@ export function Footer({ appUrl, contactEmail }: FooterProps) {
                 />
               </Link>
               <p className="text-body-sm text-slate-400 max-w-xs">
-                Fault detection and diagnosis for building systems. Powered by Prescriptiv AI.
+                Building intelligence for finding hidden system problems using existing building data.
               </p>
               <p className="mt-3 text-body-sm text-cyan-300 max-w-xs">
                 {FOOTER_SUSTAINABILITY_LINE}

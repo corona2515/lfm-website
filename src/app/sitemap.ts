@@ -7,13 +7,23 @@ export default function sitemap(): MetadataRoute.Sitemap {
 
   const routes = [
     '/',
+    '/k12',
+    '/sample-analysis',
+    '/how-it-works',
+    '/what-we-find',
+    '/results',
+    '/solutions/k-12-schools',
+    '/solutions/commercial-real-estate',
+    '/solutions/universities',
+    '/solutions/museums',
     '/start',
     '/company/about',
+    '/investors',
     '/contact',
     '/building-data-to-action',
     '/powering-the-ai-economy',
     '/privacy',
-    ...INDUSTRY_SLUGS.map((slug) => `/industries/${slug}`),
+    ...INDUSTRY_SLUGS.filter((slug) => slug !== 'k-12').map((slug) => `/industries/${slug}`),
   ]
 
   return routes.map((route) => ({

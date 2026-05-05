@@ -18,7 +18,16 @@ export function Header({ appUrl }: HeaderProps) {
   const [isScrolled, setIsScrolled] = useState(false)
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
   const isSolutionsActive =
-    pathname.startsWith('/industries') || pathname === '/building-data-to-action' || pathname === '/start'
+    pathname.startsWith('/solutions') ||
+    pathname.startsWith('/industries') ||
+    pathname === '/k12' ||
+    pathname === '/sample-analysis' ||
+    pathname === '/how-it-works' ||
+    pathname === '/what-we-find' ||
+    pathname === '/results' ||
+    pathname === '/building-data-to-action' ||
+    pathname === '/start'
+  const isInvestorsPage = pathname === '/investors'
 
   useEffect(() => {
     const handleScroll = () => {
@@ -99,7 +108,7 @@ export function Header({ appUrl }: HeaderProps) {
                 }`}
                 aria-haspopup="true"
               >
-                Solutions
+                Explore
                 <svg
                   aria-hidden="true"
                   className="h-4 w-4 transition-transform duration-200 group-hover:rotate-180 group-focus-within:rotate-180"
@@ -152,20 +161,22 @@ export function Header({ appUrl }: HeaderProps) {
 
           {/* Desktop CTAs */}
           <div className="hidden lg:flex items-center gap-2">
+            {!isInvestorsPage ? (
+              <Button
+                variant="ghost"
+                size="small"
+                href={appUrl}
+                onClick={() => trackEvent('cta_upload_sample_click', { location: 'header_desktop_secondary' })}
+              >
+                {CTA_LABELS.secondary}
+              </Button>
+            ) : null}
             <Button
-              variant="ghost"
               size="small"
-              href={appUrl}
-              onClick={() => trackEvent('cta_upload_sample_click', { location: 'header_desktop_secondary' })}
+              href={isInvestorsPage ? '/contact?intent=investor&source=header_investors' : '/contact?intent=demo'}
+              onClick={() => trackEvent(isInvestorsPage ? 'cta_investor_click' : 'cta_demo_click', { location: 'header_desktop_primary' })}
             >
-              {CTA_LABELS.secondary}
-            </Button>
-            <Button
-              size="small"
-              href="/contact?intent=demo"
-              onClick={() => trackEvent('cta_demo_click', { location: 'header_desktop_primary' })}
-            >
-              {CTA_LABELS.primary}
+              {isInvestorsPage ? 'Contact LeanFM' : CTA_LABELS.primary}
             </Button>
           </div>
 
@@ -238,14 +249,16 @@ export function Header({ appUrl }: HeaderProps) {
               Navigation
             </p>
             <p className="mt-2 max-w-xs text-body-sm text-slate-400">
-              Learn more about LeanFM or jump straight into a demo.
+              {isInvestorsPage
+                ? 'Learn more about LeanFM or contact the team directly.'
+                : 'Learn more about LeanFM or jump straight into a demo.'}
             </p>
           </div>
           <div className="max-h-[calc(100dvh-7rem)] overflow-y-auto px-3 py-3">
             <div className="flex flex-col gap-4">
               <div className="rounded-2xl border border-slate-800/80 bg-slate-950/35 p-3">
                 <p className="px-2 pb-2 text-body-xs font-semibold uppercase tracking-[0.18em] text-cyan-300/80">
-                  Solutions
+                  Explore
                 </p>
                 {SOLUTIONS_NAV_GROUPS.map((group) => (
                   <div key={group.title} className="py-2">
@@ -285,20 +298,22 @@ export function Header({ appUrl }: HeaderProps) {
             </div>
             <div className="mt-4 border-t border-slate-800/80 px-2 pt-4">
               <div className="flex flex-col gap-3">
+                {!isInvestorsPage ? (
+                  <Button
+                    variant="ghost"
+                    href={appUrl}
+                    className="w-full justify-center rounded-2xl border border-slate-700/80 bg-slate-900/60"
+                    onClick={() => trackEvent('cta_upload_sample_click', { location: 'header_mobile_secondary' })}
+                  >
+                    {CTA_LABELS.secondary}
+                  </Button>
+                ) : null}
                 <Button
-                  variant="ghost"
-                  href={appUrl}
-                  className="w-full justify-center rounded-2xl border border-slate-700/80 bg-slate-900/60"
-                  onClick={() => trackEvent('cta_upload_sample_click', { location: 'header_mobile_secondary' })}
-                >
-                  {CTA_LABELS.secondary}
-                </Button>
-                <Button
-                  href="/contact?intent=demo"
+                  href={isInvestorsPage ? '/contact?intent=investor&source=header_investors_mobile' : '/contact?intent=demo'}
                   className="w-full justify-center rounded-2xl"
-                  onClick={() => trackEvent('cta_demo_click', { location: 'header_mobile_primary' })}
+                  onClick={() => trackEvent(isInvestorsPage ? 'cta_investor_click' : 'cta_demo_click', { location: 'header_mobile_primary' })}
                 >
-                  {CTA_LABELS.primary}
+                  {isInvestorsPage ? 'Contact LeanFM' : CTA_LABELS.primary}
                 </Button>
               </div>
             </div>

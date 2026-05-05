@@ -1,7 +1,7 @@
 export const SITE_CONFIG = {
   name: 'LeanFM',
-  title: 'LeanFM OnPoint | HVAC Fault Detection Software for BAS Data',
-  description: 'HVAC fault detection software for facilities teams. Analyze BAS trend data, prioritize faults by impact, and plan what to fix first.',
+  title: 'LeanFM Technologies | Find Hidden Building System Problems',
+  description: 'LeanFM analyzes existing building system data to uncover hidden problems that waste energy, drive up costs, and create comfort issues.',
   url: process.env.SITE_URL || 'https://leanfmtech.com',
   appUrl: process.env.APP_URL || '/start',
   contactEmail: process.env.CONTACT_EMAIL || 'info@leanfmtech.com',
@@ -9,21 +9,26 @@ export const SITE_CONFIG = {
 
 export const NAV_LINKS = [
   { href: '/company/about', label: 'About' },
+  { href: '/investors', label: 'Investors' },
   { href: '/contact', label: 'Contact' },
 ] as const
 
 export const PRODUCT_NAV_LINKS = [
+  { href: '/sample-analysis', label: 'Sample Analysis' },
+  { href: '/how-it-works', label: 'How It Works' },
+  { href: '/what-we-find', label: 'What We Find' },
+  { href: '/results', label: 'Results' },
   { href: '/building-data-to-action', label: 'Building Data to Action' },
   { href: '/start', label: 'Upload Sample Dataset' },
 ] as const
 
 export const INDUSTRY_NAV_LINKS = [
-  { href: '/industries/k-12', label: 'K-12' },
-  { href: '/industries/museums', label: 'Museums' },
-  { href: '/industries/universities', label: 'Universities' },
+  { href: '/solutions/k-12-schools', label: 'K-12 Schools' },
+  { href: '/solutions/museums', label: 'Museums' },
+  { href: '/solutions/universities', label: 'Universities' },
+  { href: '/solutions/commercial-real-estate', label: 'Commercial Real Estate' },
   { href: '/industries/hospitals', label: 'Hospitals' },
   { href: '/industries/hotels', label: 'Hotels' },
-  { href: '/industries/offices', label: 'Offices' },
 ] as const
 
 export const SOLUTIONS_NAV_GROUPS = [
@@ -32,7 +37,7 @@ export const SOLUTIONS_NAV_GROUPS = [
 ] as const
 
 export const CTA_LABELS = {
-  primary: 'See what your BAS data is hiding',
+  primary: 'Request a Sample Analysis',
   secondary: 'Upload Sample Dataset',
 } as const
 
@@ -41,6 +46,7 @@ export const FOOTER_LINKS = {
   industries: INDUSTRY_NAV_LINKS,
   company: [
     { href: '/company/about', label: 'About' },
+    { href: '/investors', label: 'Investors' },
     { href: '/contact', label: 'Contact' },
   ],
   legal: [
@@ -72,7 +78,7 @@ export const HOME_PROOF_METRICS = [
 ] as const
 
 export const HOME_BUILT_FOR_VERTICALS = [
-  { href: '/industries/k-12', label: 'K-12' },
+  { href: '/k12', label: 'K-12' },
   { href: '/industries/museums', label: 'Museums' },
   { href: '/industries/universities', label: 'Universities' },
   { href: '/industries/hospitals', label: 'Hospitals' },
@@ -122,7 +128,7 @@ export const HOME_IMPACT_ITEMS = [
   },
 ] as const
 
-export const FOOTER_SUSTAINABILITY_LINE = 'Decarbonizing buildings, one fault at a time.'
+export const FOOTER_SUSTAINABILITY_LINE = 'Helping buildings operate smarter and waste less energy.'
 
 export const PROBLEM_AGITATION_POINTS = [
   {

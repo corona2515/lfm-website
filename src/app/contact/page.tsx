@@ -31,7 +31,7 @@ const BUILDING_TYPES = [
 ]
 
 const INTENT_OPTIONS: Array<{ value: ContactIntent; label: string }> = [
-  { value: 'demo', label: 'Book a demo' },
+  { value: 'demo', label: 'Request a Sample Analysis' },
   { value: 'investor', label: 'Investor inquiry' },
   { value: 'general', label: 'General question' },
 ]
@@ -107,7 +107,7 @@ export default function ContactPage() {
   const getSubmitLabel = () => {
     switch (formData.intent) {
       case 'demo':
-        return 'Book Demo'
+        return 'Request Sample Analysis'
       case 'investor':
         return 'Request Deck'
       default:
@@ -130,7 +130,7 @@ export default function ContactPage() {
               <h1 className="heading-2 text-white mb-4">Message received</h1>
               <p className="body-large mb-2">
                 {formData.intent === 'demo'
-                  ? 'Thanks for reaching out. We\'ll contact you to schedule your demo.'
+                  ? 'Thanks for reaching out. We\'ll contact you to schedule your sample analysis walkthrough.'
                   : 'Thanks for reaching out. We\'ll get back to you within one business day.'}
               </p>
               <p className="text-body-sm text-slate-500">

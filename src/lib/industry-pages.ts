@@ -265,7 +265,7 @@ export const INDUSTRY_PAGES: Record<IndustrySlug, IndustryPageContent> = {
   },
 }
 
-export const INDUSTRY_SLUGS = Object.keys(INDUSTRY_PAGES) as IndustrySlug[]
+export const INDUSTRY_SLUGS = Object.keys(INDUSTRY_PAGES).filter((slug) => slug !== 'k-12') as IndustrySlug[]
 
 export function getIndustryPage(slug: string) {
   return INDUSTRY_PAGES[slug as IndustrySlug]

@@ -15,7 +15,7 @@ export function StickyCtaBar({
   heroId,
   href = '/contact?intent=demo',
   location = 'sticky_home_primary',
-  message = 'Hidden BAS faults can drain your budget before alarms catch them.',
+  message = 'Hidden building system problems can waste energy, money, and comfort before alarms catch them.',
 }: StickyCtaBarProps) {
   const [isVisible, setIsVisible] = useState(false)
 

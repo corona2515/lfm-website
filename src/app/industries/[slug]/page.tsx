@@ -1,6 +1,6 @@
 import { Metadata } from 'next'
 import Link from 'next/link'
-import { notFound } from 'next/navigation'
+import { notFound, redirect } from 'next/navigation'
 import { Badge, Card } from '@/components/ui'
 import { TrackedButton } from '@/components/analytics/TrackedButton'
 import { IndustryPageViewTracker } from '@/components/analytics/IndustryPageViewTracker'
@@ -27,6 +27,14 @@ export function generateStaticParams() {
 }
 
 export function generateMetadata({ params }: IndustryPageProps): Metadata {
+  if (params.slug === 'k-12') {
+    return {
+      alternates: {
+        canonical: '/k12',
+      },
+    }
+  }
+
   const page = getIndustryPage(params.slug)
 
   if (!page) {
@@ -64,6 +72,10 @@ export function generateMetadata({ params }: IndustryPageProps): Metadata {
 }
 
 export default function IndustryPage({ params }: IndustryPageProps) {
+  if (params.slug === 'k-12') {
+    redirect('/k12')
+  }
+
   const page = getIndustryPage(params.slug)
 
   if (!page) {

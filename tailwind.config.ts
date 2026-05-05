@@ -9,6 +9,17 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
+        brand: {
+          primary: '#0F4C5C',
+          primaryDark: '#0A3742',
+          accent: '#FB8B24',
+          ink: '#0B1220',
+          muted: '#6B7280',
+          surface: '#FFFFFF',
+          surfaceAlt: '#F7F8FA',
+          border: '#E5E7EB',
+          success: '#16A34A',
+        },
         // Primary palette - Brand blue gray
         slate: {
           950: '#070d14',
@@ -73,6 +84,8 @@ const config: Config = {
         '30': '7.5rem',
       },
       animation: {
+        'accordion-down': 'accordionDown 0.2s ease-out',
+        'accordion-up': 'accordionUp 0.2s ease-out',
         'fade-in': 'fadeIn 0.5s ease-out',
         'fade-in-up': 'fadeInUp 0.6s ease-out',
         'fade-in-down': 'fadeInDown 0.6s ease-out',
@@ -82,6 +95,14 @@ const config: Config = {
         'pulse-glow': 'pulseGlow 2s ease-in-out infinite',
       },
       keyframes: {
+        accordionDown: {
+          from: { height: '0' },
+          to: { height: 'var(--radix-accordion-content-height)' },
+        },
+        accordionUp: {
+          from: { height: 'var(--radix-accordion-content-height)' },
+          to: { height: '0' },
+        },
         fadeIn: {
           '0%': { opacity: '0' },
           '100%': { opacity: '1' },
