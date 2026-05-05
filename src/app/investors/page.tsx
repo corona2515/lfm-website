@@ -244,9 +244,6 @@ export default function InvestorsPage() {
                 <p className="body-large">
                   LeanFM analyzes existing building system data to identify patterns that indicate inefficiencies, faults, and operational issues.
                 </p>
-                <p className="body-large">
-                  Rather than relying on alarms or manual review, LeanFM focuses on how systems behave over time.
-                </p>
                 <p className="font-display text-2xl font-semibold leading-snug text-cyan-200">
                   LeanFM focuses on how systems behave over time, not just whether something has failed.
                 </p>
@@ -333,9 +330,6 @@ export default function InvestorsPage() {
               <p className="body-large">
                 These buildings represent a large portion of global energy consumption and ongoing operational spend.
               </p>
-              <p className="font-display text-2xl font-semibold leading-snug text-cyan-200">
-                These segments represent a large and ongoing need for improved operational visibility and efficiency.
-              </p>
             </div>
           </div>
           <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-5">
@@ -389,9 +383,6 @@ export default function InvestorsPage() {
               <h2 className="heading-2 mb-5 text-white">Why This Scales</h2>
               <p className="body-large">
                 LeanFM does not require new hardware to begin delivering value. It works with data that buildings are already generating, making it applicable across a wide range of facilities.
-              </p>
-              <p className="body-large mt-5">
-                The repeatable wedge is simple: sample analysis, findings walkthrough, then paid rollout where the operational value is clear.
               </p>
             </div>
             <div className="grid gap-3 sm:grid-cols-2">

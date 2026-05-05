@@ -3,13 +3,11 @@ import {
   BarChart3,
   Building2,
   CheckCircle2,
-  ClipboardCheck,
   Landmark,
   LineChart,
   MapPin,
   Search,
   ShieldCheck,
-  Sparkles,
 } from 'lucide-react'
 import { TrackedButton } from '@/components/analytics/TrackedButton'
 import { StickyCtaBar } from '@/components/home/StickyCtaBar'
@@ -123,13 +121,6 @@ const repeatedPatterns = [
   'Control sequence issues',
   'Underused sensors',
   'Unnecessary equipment strain',
-]
-
-const startSteps = [
-  'Share existing building system data',
-  'LeanFM analyzes for hidden issues',
-  'Review prioritized findings',
-  'Decide what to address first',
 ]
 
 const credibilityItems = [
@@ -293,7 +284,7 @@ export default function ResultsPage() {
           <div className="mb-12 grid gap-6 lg:grid-cols-[0.82fr_1.18fr] lg:items-end">
             <div>
               <p className="mb-4 text-body-xs font-semibold uppercase tracking-[0.18em] text-cyan-300">
-                Primary proof point
+                Featured case study
               </p>
               <h2 className="heading-2 mb-4 text-white">Featured Case Study: The Andy Warhol Museum</h2>
               <p className="body-large">
@@ -409,9 +400,6 @@ export default function ResultsPage() {
           <div className="grid gap-4 lg:grid-cols-2">
             {supportingExamples.map((example) => (
               <article key={example.name} className="rounded-2xl border border-slate-800 bg-slate-950/55 p-6">
-                <p className="mb-4 text-body-xs font-semibold uppercase tracking-[0.18em] text-cyan-300">
-                  Historical example
-                </p>
                 <div className="mb-5 flex items-start gap-3">
                   <Building2 className="mt-1 h-6 w-6 shrink-0 text-cyan-300" aria-hidden="true" />
                   <div>
@@ -467,24 +455,6 @@ export default function ResultsPage() {
         </div>
       </section>
 
-      <section className="section-large bg-slate-950">
-        <div className="container-default">
-          <div className="mb-12 text-center">
-            <h2 className="heading-2 mb-4 text-white">Start With a Sample Analysis</h2>
-          </div>
-          <div className="grid gap-4 md:grid-cols-4">
-            {startSteps.map((step, index) => (
-              <div key={step} className="rounded-xl border border-slate-800 bg-slate-900/60 p-5">
-                <span className="mb-5 inline-flex h-10 w-10 items-center justify-center rounded-full border border-cyan-400/40 bg-cyan-500/10 font-display font-semibold text-cyan-200">
-                  {index + 1}
-                </span>
-                <p className="font-display text-body-lg font-semibold leading-snug text-white">{step}</p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
       <section className="border-y border-slate-800/70 bg-slate-900/40">
         <div className="container-wide py-7">
           <div className="grid gap-5 lg:grid-cols-[0.65fr_1.35fr] lg:items-center">
@@ -505,9 +475,9 @@ export default function ResultsPage() {
       <section className="border-t border-slate-800/70 bg-slate-900/50">
         <div className="container-default py-14 md:py-20">
           <div className="mx-auto max-w-2xl text-center">
-            <h2 className="heading-2 mb-5 text-white">See What Your Building Data Can Reveal</h2>
+            <h2 className="heading-2 mb-5 text-white">Use the Warhol Case Study as a Starting Point</h2>
             <p className="body-large mb-8">
-              Send the data you already have. LeanFM will help identify hidden issues affecting energy, comfort, and system performance.
+              Request a Sample Analysis to find out whether your existing building data contains hidden issues worth reviewing.
             </p>
             <TrackedButton
               href={SAMPLE_ANALYSIS_HREF}

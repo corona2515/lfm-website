@@ -383,7 +383,7 @@ export default function WhatWeFindPage() {
           <div className="mx-auto max-w-2xl text-center">
             <h2 className="heading-2 mb-5 text-white">Find Which Issues Are Hiding in Your Building</h2>
             <p className="body-large mb-8">
-              Send the data you already have. LeanFM will help identify hidden issues affecting energy, comfort, and system performance.
+              Request a Sample Analysis to learn which operating patterns may be creating waste, comfort problems, or unnecessary equipment strain.
             </p>
             <TrackedButton
               href={SAMPLE_ANALYSIS_HREF}

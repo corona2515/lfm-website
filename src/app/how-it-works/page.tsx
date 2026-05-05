@@ -426,7 +426,7 @@ export default function HowItWorksPage() {
       <section className="border-t border-slate-800/70 bg-slate-900/50">
         <div className="container-default py-14 md:py-20">
           <div className="mx-auto max-w-2xl text-center">
-            <h2 className="heading-2 mb-5 text-white">Start With the Data You Already Have</h2>
+            <h2 className="heading-2 mb-5 text-white">Use Existing Data to Find the Next Priority</h2>
             <p className="body-large mb-8">
               Request a Sample Analysis and LeanFM will help identify hidden issues affecting energy, comfort, and system performance.
             </p>
@@ -446,7 +446,7 @@ export default function HowItWorksPage() {
         heroId="how-it-works-hero"
         href={SAMPLE_ANALYSIS_HREF}
         location="how_it_works_sticky_primary"
-        message="Start with existing building system data and see which hidden issues deserve attention first."
+        message="Use existing building system data to see which hidden issues deserve attention first."
       />
     </>
   )

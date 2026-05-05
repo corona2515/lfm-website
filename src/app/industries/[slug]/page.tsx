@@ -308,11 +308,11 @@ export default function IndustryPage({ params }: IndustryPageProps) {
         <div className="container-narrow">
           <div className="rounded-2xl border border-slate-700/70 bg-gradient-to-br from-slate-900/95 to-slate-900/75 p-8 text-center shadow-card md:p-12">
             <h2 className="heading-2 mb-4 text-white">
-              See what your building data is already showing.
+              Turn Existing BAS Evidence Into the Next Fix List
             </h2>
             <p className="body-large mb-8">
-              Start with existing exports. OnPoint will rank the hidden HVAC faults most worth your
-              team&apos;s attention.
+              Request a Sample Analysis and LeanFM will help identify the hidden HVAC faults most
+              worth your team&apos;s attention.
             </p>
             <TrackedButton
               href={sampleAnalysisHref}
@@ -330,7 +330,7 @@ export default function IndustryPage({ params }: IndustryPageProps) {
         heroId="industry-hero"
         href={sampleAnalysisHref}
         location={`${page.analyticsKey}_sticky_primary`}
-        message="See what your building data is already showing."
+        message="Request a Sample Analysis to rank the hidden HVAC faults most worth attention."
       />
     </>
   )

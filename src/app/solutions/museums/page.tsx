@@ -436,9 +436,9 @@ export default function MuseumsPage() {
       <section className="border-t border-slate-800/70 bg-slate-900/50">
         <div className="container-default py-14 md:py-20">
           <div className="mx-auto max-w-2xl text-center">
-            <h2 className="heading-2 mb-5 text-white">See What Your Systems Are Missing</h2>
+            <h2 className="heading-2 mb-5 text-white">Protect Sensitive Spaces With Better System Clarity</h2>
             <p className="body-large mb-8">
-              Send the data you already have. We’ll help show which hidden issues may be affecting environmental stability and system performance.
+              Request a Sample Analysis to identify hidden issues that may be affecting environmental stability and system performance.
             </p>
             <TrackedButton
               href={SAMPLE_ANALYSIS_HREF}

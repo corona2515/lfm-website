@@ -452,9 +452,9 @@ export default function UniversitiesPage() {
       <section className="border-t border-slate-800/70 bg-slate-900/50">
         <div className="container-default py-14 md:py-20">
           <div className="mx-auto max-w-2xl text-center">
-            <h2 className="heading-2 mb-5 text-white">See What Your Campus Systems Are Missing</h2>
+            <h2 className="heading-2 mb-5 text-white">Bring Hidden Campus Issues Into Focus</h2>
             <p className="body-large mb-8">
-              Send the data you already have. We’ll help show which hidden issues are affecting energy use, comfort, and system performance across your campus.
+              Request a Sample Analysis to identify hidden issues affecting energy use, comfort, and system performance across your campus.
             </p>
             <TrackedButton
               href={SAMPLE_ANALYSIS_HREF}

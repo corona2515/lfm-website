@@ -377,7 +377,7 @@ export default function BuildingDataActionPage() {
               Turn your BAS data into a ranked fix list.
             </h2>
             <p className="body-large mb-8">
-              Start with the exports you already have. OnPoint will show where hidden HVAC faults
+              Use the exports you already have. OnPoint will show where hidden HVAC faults
               are most likely costing you.
             </p>
             <TrackedButton

@@ -445,9 +445,9 @@ export default function K12SchoolsPage() {
       <section className="border-t border-slate-800/70 bg-slate-900/50">
         <div className="container-default py-14 md:py-20">
           <div className="mx-auto max-w-2xl text-center">
-            <h2 className="heading-2 mb-5 text-white">See What Your Schools Are Missing</h2>
+            <h2 className="heading-2 mb-5 text-white">Find the Issues Draining District Resources</h2>
             <p className="body-large mb-8">
-              Send the data you already have. We’ll help show which hidden issues are driving energy waste, comfort complaints, or unnecessary system strain.
+              Request a Sample Analysis to identify hidden building system issues affecting energy, comfort, and maintenance priorities across your schools.
             </p>
             <TrackedButton
               href={SAMPLE_ANALYSIS_HREF}
