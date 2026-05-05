@@ -408,7 +408,7 @@ export default function MuseumsPage() {
       <section className="border-y border-cyan-400/20 bg-cyan-500/10">
         <div className="container-default py-8">
           <div className="grid gap-4 lg:grid-cols-[0.45fr_1fr] lg:items-center">
-            <h2 className="font-display text-body-lg font-semibold text-white">Warhol proof point</h2>
+            <h2 className="font-display text-body-lg font-semibold text-white">The Andy Warhol Museum: documented savings from hidden BAS logic faults</h2>
             <p className="text-body-md leading-relaxed text-cyan-50">
               The Andy Warhol Museum case study showed $100K+ in ongoing annual savings after LeanFM helped identify BAS logic faults that were corrected.
             </p>

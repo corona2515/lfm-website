@@ -230,15 +230,15 @@ function formatDatasetSummary(dataset: SavedDataset | null) {
 function saveStateLabel(saveState: SaveState) {
   switch (saveState) {
     case 'saving':
-      return 'Saving'
+      return 'Saving...'
     case 'saved':
-      return 'Saved'
+      return 'Progress saved'
     case 'saved_local':
-      return 'Saved locally'
+      return 'Progress saved in this browser'
     case 'save_failed':
-      return 'Save failed'
+      return "We'll keep trying to save your progress"
     default:
-      return 'Not saved yet'
+      return ''
   }
 }
 
@@ -809,9 +809,11 @@ export function DatasetIntakeFlow({ variant }: { variant: DatasetIntakeVariant }
             <div className="mb-6 flex flex-col gap-3 border-b border-slate-800/80 pb-5 md:flex-row md:items-center md:justify-between">
               <div>
                 <p className="text-body-sm text-white">Your progress will save as you move through the form.</p>
-                <p className="mt-1 text-body-xs text-slate-400">
-                  Progress: {saveStateLabel(saveState)}{lastSavedAt ? ` · ${new Date(lastSavedAt).toLocaleTimeString()}` : ''}
-                </p>
+                {saveState !== 'idle' ? (
+                  <p className="mt-1 text-body-xs text-slate-400">
+                    {saveStateLabel(saveState)}{lastSavedAt ? ` · ${new Date(lastSavedAt).toLocaleTimeString()}` : ''}
+                  </p>
+                ) : null}
               </div>
               {draftToken ? (
                 <p className="text-body-xs text-slate-500">You can return in this browser if you need to finish later.</p>

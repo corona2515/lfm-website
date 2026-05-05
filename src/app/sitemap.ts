@@ -22,7 +22,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     '/building-data-to-action',
     '/privacy',
     ...INDUSTRY_SLUGS
-      .filter((slug) => !['k-12', 'hospitals', 'hotels'].includes(slug))
+      .filter((slug) => slug !== 'k-12')
       .map((slug) => `/industries/${slug}`),
   ]
 

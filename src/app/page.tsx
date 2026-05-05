@@ -357,18 +357,29 @@ export default function HomePage() {
       <section className="border-t border-slate-800/70 bg-slate-900/50">
         <div className="container-default py-14 md:py-20">
           <div className="mx-auto max-w-2xl text-center">
-            <h2 className="heading-2 mb-5 text-white">Find out what your building system is missing</h2>
+            <h2 className="heading-2 mb-5 text-white">Find out what your BAS data is already showing.</h2>
             <p className="body-large mb-8">
-              Request a Sample Analysis and LeanFM will show whether your existing building data contains hidden issues worth attention.
+              Request a Sample Analysis and LeanFM will help determine whether your existing building data contains hidden issues worth attention.
             </p>
-            <TrackedButton
-              href={SAMPLE_ANALYSIS_HREF}
-              size="large"
-              eventName="cta_sample_analysis_click"
-              eventParams={{ location: 'home_final_primary' }}
-            >
-              {CTA_LABELS.primary}
-            </TrackedButton>
+            <div className="flex flex-col justify-center gap-3 sm:flex-row">
+              <TrackedButton
+                href={SAMPLE_ANALYSIS_HREF}
+                size="large"
+                eventName="cta_sample_analysis_click"
+                eventParams={{ location: 'home_final_primary' }}
+              >
+                {CTA_LABELS.primary}
+              </TrackedButton>
+              <TrackedButton
+                variant="secondary"
+                href="/what-we-find"
+                size="large"
+                eventName="cta_what_we_find_click"
+                eventParams={{ location: 'home_final_secondary' }}
+              >
+                See What We Find
+              </TrackedButton>
+            </div>
           </div>
         </div>
       </section>

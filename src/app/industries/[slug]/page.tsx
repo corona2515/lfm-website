@@ -85,7 +85,7 @@ export default function IndustryPage({ params }: IndustryPageProps) {
   const sampleAnalysisHref = getIndustryDemoHref(page)
   const demoHref = `/contact?intent=demo&source=${page.ctaSource}-demo`
   const relatedIndustries = INDUSTRY_SLUGS
-    .filter((slug) => slug !== page.slug && !['hospitals', 'hotels'].includes(slug))
+    .filter((slug) => slug !== page.slug)
     .map((slug) => INDUSTRY_PAGES[slug as IndustrySlug])
 
   const pageSchema = {

@@ -4,8 +4,6 @@ export type IndustrySlug =
   | 'k-12'
   | 'museums'
   | 'universities'
-  | 'hospitals'
-  | 'hotels'
   | 'offices'
 
 export interface IndustryPageContent {
@@ -146,104 +144,6 @@ export const INDUSTRY_PAGES: Record<IndustrySlug, IndustryPageContent> = {
       },
     ],
     ctaSource: 'industry-universities',
-  },
-  hospitals: {
-    slug: 'hospitals',
-    analyticsKey: 'hospitals',
-    label: 'Hospitals',
-    title: 'Hospital BAS Fault Detection',
-    description:
-      'OnPoint helps healthcare facilities teams use existing BAS data to prioritize HVAC faults that affect cost, comfort, and reliability.',
-    hero: {
-      headline: 'Find hidden HVAC issues in healthcare buildings where reliability and comfort cannot be left to guesswork.',
-      body: 'OnPoint ranks BAS fault signals so healthcare facilities teams can focus on issues most likely to affect energy use, reliability, and occupied environments.',
-      proof: 'Useful for non-invasive analysis of existing trend exports before teams commit to deeper investigation.',
-    },
-    painPoints: [
-      'Reliable operation matters, but teams are overloaded with alarms and work orders.',
-      'Energy waste can persist because comfort and uptime take priority.',
-      'Controls issues need evidence before they become maintenance priorities.',
-    ],
-    findings: [
-      'Conflicting heating and cooling',
-      'Unstable air handling behavior',
-      'Sensor drift',
-      'Schedule and setback issues',
-    ],
-    findingDescriptions: {
-      'Conflicting heating and cooling':
-        'Heating and cooling can work against each other while rooms still appear within acceptable ranges.',
-      'Unstable air handling behavior':
-        'Air handlers may cycle, reset, or compensate in ways that deserve review before reliability suffers.',
-      'Sensor drift':
-        'Small sensor errors can push healthcare facilities toward incorrect control decisions.',
-      'Schedule and setback issues':
-        'Occupied, unoccupied, and setback behavior can drift from how the facility actually operates.',
-    },
-    outcomes: [
-      {
-        title: 'Protect reliability',
-        description: 'Identify controls behavior that may deserve review before it becomes a larger operational issue.',
-      },
-      {
-        title: 'Reduce waste carefully',
-        description: 'Find savings opportunities without starting from disruptive hardware changes.',
-      },
-      {
-        title: 'Focus maintenance effort',
-        description: 'Rank likely impact so teams can decide what deserves technician or vendor time first.',
-      },
-    ],
-    ctaSource: 'industry-hospitals',
-  },
-  hotels: {
-    slug: 'hotels',
-    analyticsKey: 'hotels',
-    label: 'Hotels',
-    title: 'Hotel BAS Fault Detection',
-    description:
-      'OnPoint helps hotel facilities teams find BAS faults that can drive energy waste, comfort complaints, and equipment wear.',
-    hero: {
-      headline: 'Find the hidden HVAC issues affecting guest comfort, utility spend, and equipment strain.',
-      body: 'OnPoint uses existing BAS exports to rank hidden HVAC issues by likely energy, comfort, and equipment impact.',
-      proof: 'Built for buildings where comfort expectations are high and operating margins matter.',
-    },
-    painPoints: [
-      'Guest comfort issues can appear before root causes are obvious.',
-      'Common areas, guest rooms, and back-of-house schedules create complex patterns.',
-      'Utility spend rises when faults stay buried in trend data.',
-    ],
-    findings: [
-      'After-hours conditioning',
-      'Simultaneous heating and cooling',
-      'Stuck valves and dampers',
-      'Economizer and ventilation faults',
-    ],
-    findingDescriptions: {
-      'After-hours conditioning':
-        'Guest rooms, common areas, and back-of-house spaces may be conditioned longer than needed.',
-      'Simultaneous heating and cooling':
-        'Systems may pay to heat and cool the same areas while guest comfort remains inconsistent.',
-      'Stuck valves and dampers':
-        'Equipment can remain in positions that waste energy and increase wear before a clear alarm appears.',
-      'Economizer and ventilation faults':
-        'Outdoor air and ventilation behavior may increase utility spend when controls are not aligned with conditions.',
-    },
-    outcomes: [
-      {
-        title: 'Improve guest experience',
-        description: 'Give teams better evidence behind comfort and reliability issues.',
-      },
-      {
-        title: 'Control operating cost',
-        description: 'Prioritize HVAC waste that may be quietly increasing utility bills.',
-      },
-      {
-        title: 'Reduce equipment stress',
-        description: 'Surface behavior that keeps systems fighting themselves or running longer than needed.',
-      },
-    ],
-    ctaSource: 'industry-hotels',
   },
   offices: {
     slug: 'offices',
