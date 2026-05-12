@@ -11,6 +11,7 @@ import {
 } from 'lucide-react'
 import { TrackedButton } from '@/components/analytics/TrackedButton'
 import { StickyCtaBar } from '@/components/home/StickyCtaBar'
+import { FinalCTASection, PhotoPlaceholder, VisualTimeline } from '@/components/visual/LeanFmVisuals'
 import { CTA_LABELS } from '@/lib/constants'
 
 const SAMPLE_ANALYSIS_HREF = '/contact?intent=sample-analysis&source=results'
@@ -129,26 +130,49 @@ const credibilityItems = [
   'Evidence-based recommendations, not generic advice',
 ]
 
+const warholTimeline = [
+  {
+    year: '2021',
+    title: 'New BAS installed',
+    description: 'The museum had already invested in a newer building automation system.',
+  },
+  {
+    year: '2022',
+    title: 'Logic faults found',
+    description: 'LeanFM analysis found BAS logic faults hiding in existing data.',
+  },
+  {
+    year: '2023',
+    title: '$56,386 reported',
+    description: 'The case study documented reported first-year savings after correction.',
+  },
+  {
+    year: '2024',
+    title: '$101,383 reported',
+    description: 'The case study documented reported second-year savings.',
+  },
+]
+
 function ResultsHeroVisual() {
   return (
-    <div className="relative mx-auto w-[calc(100vw-2rem)] max-w-xl min-w-0 overflow-hidden rounded-2xl border border-slate-700/70 bg-slate-950/75 p-5 shadow-[0_28px_90px_rgba(2,6,23,0.42)] sm:w-full">
+    <div className="relative mx-auto w-[calc(100vw-2rem)] max-w-xl min-w-0 overflow-hidden rounded-2xl border border-sky-100 bg-white/90 p-5 shadow-[0_24px_80px_rgba(30,64,175,0.14)] sm:w-full">
       <div aria-hidden="true" className="absolute inset-0 rounded-2xl bg-[radial-gradient(circle_at_20%_10%,rgba(144,204,124,0.16),transparent_32%),radial-gradient(circle_at_85%_85%,rgba(59,130,246,0.12),transparent_36%)]" />
       <div className="relative">
-        <p className="mb-4 text-body-xs font-semibold uppercase tracking-[0.18em] text-slate-500">
+        <p className="mb-4 text-body-xs font-semibold uppercase tracking-[0.18em] text-sky-700">
           Building data to findings
         </p>
         <div className="grid gap-3 sm:grid-cols-3">
           {['Existing data', 'Hidden faults', 'Clear action'].map((label, index) => (
-            <div key={label} className="rounded-xl border border-slate-800 bg-slate-900/70 p-4">
-              <span className="mb-5 flex h-9 w-9 items-center justify-center rounded-full border border-cyan-400/30 bg-cyan-500/10 font-display text-body-sm font-semibold text-cyan-200">
+            <div key={label} className="rounded-xl border border-sky-100 bg-sky-50/70 p-4">
+              <span className="mb-5 flex h-9 w-9 items-center justify-center rounded-full border border-emerald-200 bg-emerald-50 font-display text-body-sm font-semibold text-emerald-700">
                 {index + 1}
               </span>
-              <p className="font-display text-body-lg font-semibold text-white">{label}</p>
+              <p className="font-display text-body-lg font-semibold text-slate-950">{label}</p>
             </div>
           ))}
         </div>
-        <div className="mt-5 rounded-xl border border-cyan-400/25 bg-cyan-500/10 p-4">
-          <p className="text-body-xs font-semibold uppercase tracking-[0.18em] text-cyan-300">
+        <div className="mt-5 rounded-xl border border-emerald-200 bg-emerald-50 p-4">
+          <p className="text-body-xs font-semibold uppercase tracking-[0.18em] text-emerald-800">
             Case study signal
           </p>
           <div className="mt-4 grid gap-2">
@@ -157,9 +181,9 @@ function ResultsHeroVisual() {
               ['Reported savings', 'Warhol case study'],
               ['Operational impact', 'Reduced utility use'],
             ].map(([label, value]) => (
-              <div key={label} className="flex items-center justify-between rounded-lg bg-slate-950/55 px-3 py-2">
-                <span className="text-body-sm text-white">{label}</span>
-                <span className="text-body-xs text-slate-400">{value}</span>
+              <div key={label} className="flex items-center justify-between rounded-lg bg-white px-3 py-2 shadow-sm">
+                <span className="text-body-sm text-slate-900">{label}</span>
+                <span className="text-body-xs text-slate-500">{value}</span>
               </div>
             ))}
           </div>
@@ -180,27 +204,27 @@ function WarholTrendVisual() {
   ]
 
   return (
-    <div className="rounded-2xl border border-slate-700/70 bg-slate-950/75 p-5">
+    <div className="rounded-2xl border border-sky-100 bg-white p-5 shadow-[0_14px_45px_rgba(30,64,175,0.08)]">
       <div className="mb-6 flex items-start justify-between gap-4">
         <div>
-          <p className="text-body-xs font-semibold uppercase tracking-[0.18em] text-cyan-300">
+          <p className="text-body-xs font-semibold uppercase tracking-[0.18em] text-sky-700">
             Trend-style view
           </p>
-          <h3 className="mt-2 font-display text-2xl font-semibold text-white">
+          <h3 className="mt-2 font-display text-2xl font-semibold text-slate-950">
             Reduced utility usage over time
           </h3>
         </div>
-        <LineChart className="h-7 w-7 text-cyan-300" aria-hidden="true" />
+        <LineChart className="h-7 w-7 text-sky-700" aria-hidden="true" />
       </div>
       <div className="space-y-4">
         {rows.map(([period, system, width]) => (
           <div key={`${period}-${system}`}>
             <div className="mb-2 flex items-center justify-between gap-3">
-              <span className="text-body-sm font-medium text-slate-200">{system}</span>
+              <span className="text-body-sm font-medium text-slate-800">{system}</span>
               <span className="text-body-xs text-slate-500">{period}</span>
             </div>
-            <div className="h-3 overflow-hidden rounded-full bg-slate-900">
-              <span className={`block h-full rounded-full bg-gradient-to-r from-cyan-400 to-cyan-200 ${width}`} />
+            <div className="h-3 overflow-hidden rounded-full bg-sky-100">
+              <span className={`block h-full rounded-full bg-gradient-to-r from-sky-500 to-emerald-400 ${width}`} />
             </div>
           </div>
         ))}
@@ -212,30 +236,28 @@ function WarholTrendVisual() {
 export default function ResultsPage() {
   return (
     <>
-      <section id="results-hero" className="relative overflow-hidden border-b border-slate-800/70 bg-slate-950">
-        <div aria-hidden="true" className="absolute inset-0 bg-grid opacity-70" />
-        <div aria-hidden="true" className="absolute right-0 top-0 h-[34rem] w-[34rem] rounded-full bg-cyan-500/10 blur-3xl" />
+      <section id="results-hero" className="relative overflow-hidden border-b border-sky-100 bg-[linear-gradient(135deg,#f8fcff_0%,#eef8ff_48%,#f4fbef_100%)]">
+        <div aria-hidden="true" className="absolute inset-0 bg-grid opacity-35" />
+        <div aria-hidden="true" className="absolute -left-24 top-20 h-72 w-72 rounded-full bg-emerald-200/45 blur-3xl" />
+        <div aria-hidden="true" className="absolute right-0 top-0 h-[34rem] w-[34rem] rounded-full bg-sky-200/55 blur-3xl" />
         <div className="container-wide relative z-10 pt-28 pb-16 md:pt-36 md:pb-20">
           <div className="grid min-w-0 items-center gap-12 lg:grid-cols-[1.02fr_0.98fr]">
             <div className="w-[calc(100vw-2rem)] min-w-0 max-w-3xl sm:w-auto">
-              <p className="mb-5 text-body-xs font-semibold uppercase tracking-[0.2em] text-cyan-300">
-                Results
-              </p>
-              <h1 className="mb-6 max-w-[calc(100vw-2rem)] font-body text-[3.1rem] font-semibold leading-[0.98] tracking-normal text-white md:max-w-[12ch] md:text-[4.1rem] lg:text-[4.7rem]">
-                How LeanFM helped The Andy Warhol Museum uncover BAS logic faults and reduce utility spend by more than $100K per year.
+              <h1 className="mb-6 max-w-[11ch] font-body text-[2.35rem] font-semibold leading-[1.02] tracking-normal text-slate-950 sm:text-[3.1rem] sm:leading-[0.98] md:max-w-[12ch] md:text-[4.1rem] lg:text-[4.7rem]">
+                The Andy Warhol Museum: hidden BAS logic faults, documented savings.
               </h1>
-              <p className="body-large mb-7 max-w-full md:max-w-2xl">
-                The issues were already in the building data. LeanFM found the patterns, helped prioritize action, and the corrected faults produced measurable savings.
+              <p className="body-large mb-7 max-w-[29ch] text-slate-700 sm:max-w-full md:max-w-2xl">
+                A newer BAS does not guarantee every costly operating issue is visible. LeanFM helped surface logic faults hiding in the data.
               </p>
               <ul className="mb-8 grid gap-3">
                 {heroBullets.map((bullet) => (
-                  <li key={bullet} className="flex gap-3 text-body-md text-slate-200">
-                    <CheckCircle2 className="mt-0.5 h-5 w-5 shrink-0 text-cyan-300" aria-hidden="true" />
+                  <li key={bullet} className="flex gap-3 text-body-md text-slate-800">
+                    <CheckCircle2 className="mt-0.5 h-5 w-5 shrink-0 text-emerald-600" aria-hidden="true" />
                     <span>{bullet}</span>
                   </li>
                 ))}
               </ul>
-              <div className="flex flex-col gap-3 sm:flex-row">
+              <div className="flex max-w-[22rem] flex-col gap-3 sm:max-w-none sm:flex-row">
                 <TrackedButton
                   href={SAMPLE_ANALYSIS_HREF}
                   size="large"
@@ -251,27 +273,51 @@ export default function ResultsPage() {
                   size="large"
                   eventName="cta_demo_click"
                   eventParams={{ location: 'results_hero_secondary' }}
-                  className="w-full min-w-0 sm:w-auto"
+                  className="w-full min-w-0 border-slate-300 bg-white text-slate-900 hover:border-slate-400 hover:bg-slate-50 sm:w-auto"
                 >
                   {CTA_LABELS.secondary}
                 </TrackedButton>
               </div>
             </div>
 
-            <ResultsHeroVisual />
+            <div className="space-y-4">
+              <PhotoPlaceholder
+                label="The Andy Warhol Museum exterior or museum/gallery environment photo"
+                alt="Museum building or gallery environment representing The Andy Warhol Museum case study"
+                src="/media/leanfm-images/museum-building-ivy.jpg"
+                aspect="video"
+                className="border-white shadow-[0_24px_90px_rgba(30,64,175,0.18)]"
+                imageClassName="object-[50%_42%]"
+                overlay={false}
+              />
+              <div className="grid gap-3 sm:grid-cols-2">
+                {[
+                  '88,000 sq ft',
+                  'New BAS in 2021',
+                  'LeanFM analysis in 2022',
+                  '$56,386 reported first-year savings',
+                  '$101,383 reported second-year savings',
+                  '$100K+ ongoing annual savings shown in case study',
+                ].map((stat) => (
+                  <div key={stat} className="rounded-xl border border-sky-100 bg-white/85 p-4 shadow-sm">
+                    <p className="font-display text-body-lg font-semibold text-slate-950">{stat}</p>
+                  </div>
+                ))}
+              </div>
+            </div>
           </div>
         </div>
       </section>
 
-      <section className="section-large bg-slate-950">
+      <section className="section-large bg-white">
         <div className="container-default">
           <div className="grid gap-8 lg:grid-cols-[0.9fr_1.1fr] lg:items-start">
-            <h2 className="heading-2 text-white">Proof That Hidden Issues Are Already in the Data</h2>
-            <div className="space-y-5 text-body-lg leading-relaxed text-slate-300">
+            <h2 className="heading-2 text-slate-950">Proof That Hidden Issues Are Already in the Data</h2>
+            <div className="space-y-5 text-body-lg leading-relaxed text-slate-700">
               <p>
                 Many building system problems do not appear as obvious alarms. LeanFM looks for patterns across system data to help teams identify what is wasting energy, affecting comfort, or creating unnecessary system strain.
               </p>
-              <p className="font-display text-2xl font-semibold leading-snug text-cyan-200">
+              <p className="font-display text-2xl font-semibold leading-snug text-emerald-700">
                 The goal is not more data. The goal is clearer action.
               </p>
             </div>
@@ -279,15 +325,27 @@ export default function ResultsPage() {
         </div>
       </section>
 
-      <section className="section-large border-y border-slate-800/70 bg-slate-900/35">
+      <section className="section-large border-y border-sky-100 bg-[linear-gradient(135deg,#f8fcff_0%,#eef8ff_50%,#f4fbef_100%)]">
+        <div className="container-default">
+          <div className="mb-10 max-w-3xl">
+            <h2 className="heading-2 mb-4 text-slate-950">The case study timeline</h2>
+            <p className="body-large text-slate-700">
+              The sequence matters: a new BAS was already in place, but correctable logic faults were still visible in the data.
+            </p>
+          </div>
+          <VisualTimeline items={warholTimeline} variant="light" />
+        </div>
+      </section>
+
+      <section className="section-large bg-white">
         <div className="container-wide">
           <div className="mb-12 grid gap-6 lg:grid-cols-[0.82fr_1.18fr] lg:items-end">
             <div>
-              <p className="mb-4 text-body-xs font-semibold uppercase tracking-[0.18em] text-cyan-300">
+              <p className="mb-4 text-body-xs font-semibold uppercase tracking-[0.18em] text-sky-700">
                 Featured case study
               </p>
-              <h2 className="heading-2 mb-4 text-white">Featured Case Study: The Andy Warhol Museum</h2>
-              <p className="body-large">
+              <h2 className="heading-2 mb-4 text-slate-950">Featured Case Study: The Andy Warhol Museum</h2>
+              <p className="body-large text-slate-700">
                 The seven-floor mixed-use museum required stable temperature and humidity control for sensitive artwork, visitor comfort, and staff comfort.
               </p>
             </div>
@@ -295,47 +353,47 @@ export default function ResultsPage() {
 
           <div className="grid gap-6 xl:grid-cols-[0.92fr_1.08fr]">
             <div className="space-y-6">
-              <div className="rounded-2xl border border-slate-800 bg-slate-950/60 p-6">
+              <div className="rounded-2xl border border-sky-100 bg-white p-6 shadow-[0_14px_45px_rgba(30,64,175,0.08)]">
                 <div className="mb-6 flex items-center gap-3">
-                  <Landmark className="h-6 w-6 text-cyan-300" aria-hidden="true" />
-                  <h3 className="font-display text-2xl font-semibold text-white">Project Details</h3>
+                  <Landmark className="h-6 w-6 text-sky-700" aria-hidden="true" />
+                  <h3 className="font-display text-2xl font-semibold text-slate-950">Project Details</h3>
                 </div>
                 <div className="grid gap-3 sm:grid-cols-2">
                   {projectDetails.map(([label, value]) => (
-                    <div key={label} className="rounded-xl border border-slate-800 bg-slate-900/60 p-4">
-                      <p className="text-body-xs font-semibold uppercase tracking-[0.16em] text-slate-500">{label}</p>
-                      <p className="mt-2 text-body-md font-medium text-slate-100">{value}</p>
+                    <div key={label} className="rounded-xl border border-sky-100 bg-sky-50/70 p-4">
+                      <p className="text-body-xs font-semibold uppercase tracking-[0.16em] text-sky-700">{label}</p>
+                      <p className="mt-2 text-body-md font-medium text-slate-950">{value}</p>
                     </div>
                   ))}
                 </div>
               </div>
 
-              <div className="rounded-2xl border border-slate-800 bg-slate-950/60 p-6">
-                <h3 className="mb-4 font-display text-2xl font-semibold text-white">Challenge</h3>
-                <p className="body-large">
+              <div className="rounded-2xl border border-sky-100 bg-white p-6 shadow-[0_14px_45px_rgba(30,64,175,0.08)]">
+                <h3 className="mb-4 font-display text-2xl font-semibold text-slate-950">Challenge</h3>
+                <p className="body-large text-slate-700">
                   After a new BAS was installed in 2021, the museum still needed to reduce HVAC energy waste, improve comfort, protect artwork, support sustainability, and extend equipment life. LeanFM analysis in 2022 found BAS logic faults that were corrected.
                 </p>
               </div>
 
-              <div className="rounded-2xl border border-slate-800 bg-slate-950/60 p-6">
-                <h3 className="mb-4 font-display text-2xl font-semibold text-white">What LeanFM Found</h3>
-                <p className="body-large">
+              <div className="rounded-2xl border border-sky-100 bg-white p-6 shadow-[0_14px_45px_rgba(30,64,175,0.08)]">
+                <h3 className="mb-4 font-display text-2xl font-semibold text-slate-950">What LeanFM Found</h3>
+                <p className="body-large text-slate-700">
                   The museum had already invested in a BAS. The opportunity was not more hardware. It was finding the hidden logic faults and operating patterns the system was not surfacing clearly enough.
                 </p>
               </div>
             </div>
 
             <div className="space-y-6">
-              <div className="rounded-2xl border border-cyan-400/25 bg-cyan-500/10 p-6">
+              <div className="rounded-2xl border border-emerald-200 bg-emerald-50 p-6 shadow-[0_14px_45px_rgba(16,185,129,0.08)]">
                 <div className="mb-6 flex items-center gap-3">
-                  <BarChart3 className="h-6 w-6 text-cyan-300" aria-hidden="true" />
-                  <h3 className="font-display text-2xl font-semibold text-white">Case Study Results</h3>
+                  <BarChart3 className="h-6 w-6 text-emerald-700" aria-hidden="true" />
+                  <h3 className="font-display text-2xl font-semibold text-slate-950">Case Study Results</h3>
                 </div>
                 <div className="grid gap-4 md:grid-cols-3">
                   {warholResults.map((result) => (
-                    <div key={result.label} className="rounded-xl border border-cyan-400/20 bg-slate-950/55 p-5">
-                      <p className="font-display text-3xl font-semibold text-white">{result.value}</p>
-                      <p className="mt-2 text-body-sm leading-relaxed text-slate-300">{result.label}</p>
+                    <div key={result.label} className="rounded-xl border border-emerald-200 bg-white p-5 shadow-sm">
+                      <p className="font-display text-3xl font-semibold text-slate-950">{result.value}</p>
+                      <p className="mt-2 text-body-sm leading-relaxed text-slate-600">{result.label}</p>
                     </div>
                   ))}
                 </div>
@@ -345,16 +403,16 @@ export default function ResultsPage() {
                     'Reported savings based on the provided case study',
                     'Corrected logic faults that were already visible in the data',
                   ].map((item) => (
-                    <li key={item} className="flex gap-3 text-body-md text-slate-200">
-                      <CheckCircle2 className="mt-0.5 h-5 w-5 shrink-0 text-cyan-300" aria-hidden="true" />
+                    <li key={item} className="flex gap-3 text-body-md text-slate-800">
+                      <CheckCircle2 className="mt-0.5 h-5 w-5 shrink-0 text-emerald-600" aria-hidden="true" />
                       <span>{item}</span>
                     </li>
                   ))}
                 </ul>
-                <p className="mt-6 font-display text-xl font-semibold leading-snug text-cyan-200">
+                <p className="mt-6 font-display text-xl font-semibold leading-snug text-emerald-800">
                   The important point is not just the savings—it is that correctable logic faults were already visible in the data.
                 </p>
-                <p className="mt-5 text-body-sm leading-relaxed text-slate-400">
+                <p className="mt-5 text-body-sm leading-relaxed text-slate-600">
                   Results are from this specific case study. Actual outcomes depend on building conditions, available data, and corrective actions taken.
                 </p>
               </div>
@@ -366,32 +424,32 @@ export default function ResultsPage() {
         </div>
       </section>
 
-      <section className="section-large bg-slate-950">
+      <section className="section-large border-y border-sky-100 bg-[linear-gradient(135deg,#f8fcff_0%,#eef8ff_50%,#f4fbef_100%)]">
         <div className="container-default">
           <div className="mb-10">
-            <h2 className="heading-2 mb-4 text-white">What This Proves</h2>
+            <h2 className="heading-2 mb-4 text-slate-950">What This Proves</h2>
           </div>
           <div className="grid gap-4 md:grid-cols-2">
             {proofCards.map((card) => (
-              <div key={card.title} className="rounded-2xl border border-slate-800 bg-slate-900/60 p-6">
-                <ShieldCheck className="mb-5 h-6 w-6 text-cyan-300" aria-hidden="true" />
-                <h3 className="mb-3 font-display text-2xl font-semibold leading-tight text-white">{card.title}</h3>
-                <p className="text-body-md leading-relaxed text-slate-300">{card.copy}</p>
+              <div key={card.title} className="rounded-2xl border border-sky-100 bg-white/90 p-6 shadow-[0_14px_45px_rgba(30,64,175,0.08)]">
+                <ShieldCheck className="mb-5 h-6 w-6 text-sky-700" aria-hidden="true" />
+                <h3 className="mb-3 font-display text-2xl font-semibold leading-tight text-slate-950">{card.title}</h3>
+                <p className="text-body-md leading-relaxed text-slate-700">{card.copy}</p>
               </div>
             ))}
           </div>
         </div>
       </section>
 
-      <section className="section-large border-y border-slate-800/70 bg-slate-900/35">
+      <section className="section-large bg-white">
         <div className="container-default">
           <div className="mb-10 max-w-3xl">
-            <h2 className="heading-2 mb-4 text-white">Examples of Issues LeanFM Has Identified</h2>
+            <h2 className="heading-2 mb-4 text-slate-950">Examples of Issues LeanFM Has Identified</h2>
             <div className="space-y-4">
-              <p className="body-large">
+              <p className="body-large text-slate-700">
                 Across complex buildings, LeanFM has identified recurring patterns that traditional alarm workflows can miss.
               </p>
-              <p className="font-display text-2xl font-semibold leading-snug text-cyan-200">
+              <p className="font-display text-2xl font-semibold leading-snug text-emerald-700">
                 Additional historical examples from complex facilities include:
               </p>
             </div>
@@ -399,18 +457,18 @@ export default function ResultsPage() {
 
           <div className="grid gap-4 lg:grid-cols-2">
             {supportingExamples.map((example) => (
-              <article key={example.name} className="rounded-2xl border border-slate-800 bg-slate-950/55 p-6">
+              <article key={example.name} className="rounded-2xl border border-sky-100 bg-white p-6 shadow-[0_14px_45px_rgba(30,64,175,0.08)]">
                 <div className="mb-5 flex items-start gap-3">
-                  <Building2 className="mt-1 h-6 w-6 shrink-0 text-cyan-300" aria-hidden="true" />
+                  <Building2 className="mt-1 h-6 w-6 shrink-0 text-sky-700" aria-hidden="true" />
                   <div>
-                    <h3 className="font-display text-2xl font-semibold leading-tight text-white">{example.name}</h3>
-                    <p className="mt-2 text-body-sm leading-relaxed text-slate-400">{example.context}</p>
+                    <h3 className="font-display text-2xl font-semibold leading-tight text-slate-950">{example.name}</h3>
+                    <p className="mt-2 text-body-sm leading-relaxed text-slate-600">{example.context}</p>
                   </div>
                 </div>
                 <ul className="space-y-2">
                   {example.findings.map((finding) => (
-                    <li key={finding} className="flex gap-3 text-body-sm leading-relaxed text-slate-200">
-                      <CheckCircle2 className="mt-0.5 h-4 w-4 shrink-0 text-cyan-300" aria-hidden="true" />
+                    <li key={finding} className="flex gap-3 text-body-sm leading-relaxed text-slate-700">
+                      <CheckCircle2 className="mt-0.5 h-4 w-4 shrink-0 text-emerald-600" aria-hidden="true" />
                       <span>{finding}</span>
                     </li>
                   ))}
@@ -421,17 +479,17 @@ export default function ResultsPage() {
         </div>
       </section>
 
-      <section className="section-large bg-slate-950">
+      <section className="section-large border-y border-sky-100 bg-[linear-gradient(135deg,#f8fcff_0%,#eef8ff_50%,#f4fbef_100%)]">
         <div className="container-default">
           <div className="grid gap-10 lg:grid-cols-[0.82fr_1.18fr] lg:items-start">
             <div>
-              <h2 className="heading-2 mb-4 text-white">The Same Hidden Problems Show Up Across Building Types</h2>
+              <h2 className="heading-2 mb-4 text-slate-950">The Same Hidden Problems Show Up Across Building Types</h2>
             </div>
             <div className="grid gap-3 sm:grid-cols-2">
               {repeatedPatterns.map((pattern) => (
-                <div key={pattern} className="flex min-h-20 items-center gap-3 rounded-xl border border-slate-800 bg-slate-900/60 p-4">
-                  <Search className="h-5 w-5 shrink-0 text-cyan-300" aria-hidden="true" />
-                  <p className="text-body-md font-medium text-slate-100">{pattern}</p>
+                <div key={pattern} className="flex min-h-20 items-center gap-3 rounded-xl border border-sky-100 bg-white/90 p-4 shadow-sm">
+                  <Search className="h-5 w-5 shrink-0 text-sky-700" aria-hidden="true" />
+                  <p className="text-body-md font-medium text-slate-950">{pattern}</p>
                 </div>
               ))}
             </div>
@@ -439,15 +497,15 @@ export default function ResultsPage() {
         </div>
       </section>
 
-      <section className="section-large border-y border-slate-800/70 bg-slate-900/35">
+      <section className="section-large bg-white">
         <div className="container-default">
           <div className="grid gap-8 lg:grid-cols-[0.9fr_1.1fr] lg:items-start">
-            <h2 className="heading-2 text-white">Every Building Is Different</h2>
-            <div className="space-y-5 text-body-lg leading-relaxed text-slate-300">
+            <h2 className="heading-2 text-slate-950">Every Building Is Different</h2>
+            <div className="space-y-5 text-body-lg leading-relaxed text-slate-700">
               <p>
-                LeanFM does not promise a fixed savings percentage because every building is different. Results depend on system configuration, available data, operating conditions, and which corrective actions are taken.
+                Every building is different — system configuration, available data, operating conditions, and the corrective actions taken all matter. That is why LeanFM backs every engagement with a money-back ROI guarantee: if we do not identify HVAC issues worth at least 3x your engagement fee, you get your money back.
               </p>
-              <p className="font-display text-2xl font-semibold leading-snug text-cyan-200">
+              <p className="font-display text-2xl font-semibold leading-snug text-emerald-700">
                 But the pattern is consistent: hidden issues often exist in the data before they are obvious in the building.
               </p>
             </div>
@@ -455,15 +513,15 @@ export default function ResultsPage() {
         </div>
       </section>
 
-      <section className="border-y border-slate-800/70 bg-slate-900/40">
+      <section className="border-y border-sky-100 bg-sky-50/70">
         <div className="container-wide py-7">
           <div className="grid gap-5 lg:grid-cols-[0.65fr_1.35fr] lg:items-center">
-            <h2 className="font-display text-body-lg font-semibold text-white">
+            <h2 className="font-display text-body-lg font-semibold text-slate-950">
               Built From Real Building Data
             </h2>
             <div className="grid gap-3 md:grid-cols-3">
               {credibilityItems.map((item) => (
-                <p key={item} className="border-l border-slate-700 pl-4 text-body-sm leading-relaxed text-slate-300">
+                <p key={item} className="border-l border-sky-200 pl-4 text-body-sm leading-relaxed text-slate-700">
                   {item}
                 </p>
               ))}
@@ -472,24 +530,13 @@ export default function ResultsPage() {
         </div>
       </section>
 
-      <section className="border-t border-slate-800/70 bg-slate-900/50">
-        <div className="container-default py-14 md:py-20">
-          <div className="mx-auto max-w-2xl text-center">
-            <h2 className="heading-2 mb-5 text-white">Use the Warhol Case Study as a Starting Point</h2>
-            <p className="body-large mb-8">
-              Request a Sample Analysis to find out whether your existing building data contains hidden issues worth reviewing.
-            </p>
-            <TrackedButton
-              href={SAMPLE_ANALYSIS_HREF}
-              size="large"
-              eventName="cta_sample_analysis_click"
-              eventParams={{ location: 'results_final_primary' }}
-            >
-              {CTA_LABELS.primary}
-            </TrackedButton>
-          </div>
-        </div>
-      </section>
+      <FinalCTASection
+        headline="Use the Warhol case study as a starting point."
+        body="Request a Sample Analysis to find out whether your existing building data contains hidden issues worth reviewing."
+        primaryHref={SAMPLE_ANALYSIS_HREF}
+        primaryLocation="results_final_primary"
+        secondaryLocation="results_final_secondary"
+      />
 
       <StickyCtaBar
         heroId="results-hero"

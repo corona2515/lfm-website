@@ -35,7 +35,7 @@ export const SOLUTIONS_NAV_GROUPS = [
 
 export const CTA_LABELS = {
   primary: 'Request a Sample Analysis',
-  secondary: 'Book a Demo',
+  secondary: 'Talk to LeanFM',
   upload: 'Upload Sample Dataset',
 } as const
 
@@ -48,13 +48,15 @@ export const FOOTER_LINKS = {
     { href: '/contact', label: 'Contact' },
   ],
   legal: [
+    { href: '/terms', label: 'Terms' },
     { href: '/privacy', label: 'Privacy Policy' },
   ],
 } as const
 
 export const CREDIBILITY_ITEMS = [
+  'Backed by our money-back ROI guarantee',
   '3M+ BAS data points processed',
-  'Founded by CMU PhDs',
+  'Developed from research at Carnegie Mellon University',
   'IFMA Forty Under 40 Award',
   'Serving K-12, museums, and higher education',
   'Pittsburgh, PA',
@@ -66,6 +68,7 @@ export const HOME_PROOF_METRICS = [
     label: 'Sample findings focused on hidden faults most likely to affect cost, comfort, or equipment wear',
   },
   {
+    // TODO(nick): time-promise policy pending — see brand strategy §12
     value: '<24 hours',
     label: 'Typical time to first prioritized findings after clean upload',
   },
@@ -151,7 +154,7 @@ export const PROCESS_STEPS = [
   {
     number: '02',
     title: 'Upload Sample Dataset',
-    description: 'Complete account setup and submit your file in minutes.',
+    description: 'Complete account setup and submit your BAS data export.',
     stepLabel: 'Guided upload flow',
   },
   {
@@ -185,8 +188,8 @@ export const PRODUCT_PROMISES = [
     footnote: false,
   },
   {
-    title: 'Built for staged rollout while we scale',
-    description: 'We are stress testing with guided onboarding so teams can validate value without overcommitting.',
+    title: 'Backed by our money-back ROI guarantee',
+    description: 'Find 3x or more in energy savings worth more than your engagement fee — or we refund it.',
     footnote: false,
   },
   {
@@ -196,71 +199,10 @@ export const PRODUCT_PROMISES = [
   },
 ] as const
 
-export const PRICING_TIERS = [
-  {
-    name: 'Free',
-    subtitle: 'Preview',
-    description: 'See the value before you pay',
-    price: '$0',
-    period: '',
-    features: [
-      'Upload one BAS data file',
-      'Map up to 100 data points',
-      'Preview top 5 detected faults',
-      'Sample recommended actions',
-    ],
-    limitations: [
-      'Results truncated',
-      'No export',
-      'No historical tracking',
-    ],
-    cta: 'Start With Sample Data',
-    ctaHref: '/contact?intent=demo',
-    highlighted: false,
-  },
-  {
-    name: 'Unlock',
-    subtitle: 'One-time',
-    description: 'Full results for your dataset',
-    price: 'Pay per analysis',
-    period: '',
-    features: [
-      'Complete fault detection',
-      'All recommended actions',
-      'Severity prioritization',
-      'Export to PDF/CSV',
-      '30-day access to results',
-    ],
-    limitations: [],
-    cta: 'Get Free Fault Scan',
-    ctaHref: '/contact?intent=demo',
-    highlighted: true,
-  },
-  {
-    name: 'Subscribe',
-    subtitle: 'Continuous',
-    description: 'Ongoing insights for your portfolio',
-    price: 'Monthly',
-    period: '',
-    features: [
-      'Unlimited uploads',
-      'Multi-building reporting',
-      'Automated weekly/monthly reports',
-      'Historical tracking',
-      'Team accounts',
-      'Priority support',
-    ],
-    limitations: [],
-    cta: 'Talk to Sales',
-    ctaHref: '/contact?intent=demo',
-    highlighted: false,
-  },
-] as const
-
 export const FAQ_ITEMS = [
   {
     question: 'How much can we save?',
-    answer: 'LeanFM does not promise a fixed savings percentage. Results depend on your building, BAS data quality, controls condition, and corrective actions taken.',
+    answer: 'LeanFM backs every engagement with a money-back ROI guarantee: if our analysis does not identify HVAC issues with combined estimated annual operational impact of at least 3x your engagement fee, we refund the fee. Most clients see 3–5x or more once recommended corrective actions are implemented. Full guarantee mechanics live on our Terms page.',
   },
   {
     question: 'Why not just use BAS alarms?',
@@ -272,7 +214,12 @@ export const FAQ_ITEMS = [
   },
   {
     question: 'How quickly do we get results?',
+    // TODO(nick): time-promise policy pending — see brand strategy §12
     answer: 'Most clean uploads are reviewed within 24 hours. After analysis, we schedule a call to walk through findings, impact, and recommended actions.',
+  },
+  {
+    question: 'Do you really guarantee savings?',
+    answer: 'Yes. If LeanFM does not identify HVAC issues worth at least 3x the engagement fee in estimated annual operational impact, you get your money back. The guarantee is conditional on you implementing the corrective actions in your findings report — we cannot guarantee savings on issues that go unaddressed. Full terms are on our Terms page.',
   },
   {
     question: 'How secure is our data?',
@@ -283,5 +230,3 @@ export const FAQ_ITEMS = [
     answer: 'No. You can start with a demo or a sample dataset review to validate value first. We discuss broader rollout options only after you review your results.',
   },
 ] as const
-
-export const ENERGY_DISCLAIMER = '* Results vary based on building type, existing conditions, data quality, and implementation of recommended actions. Actual outcomes depend on your specific situation.'

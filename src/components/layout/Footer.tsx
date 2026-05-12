@@ -34,16 +34,16 @@ export function Footer({ contactEmail }: FooterProps) {
   ].filter((section) => section.links.length > 0)
 
   return (
-    <footer className="bg-slate-900 border-t border-slate-800">
+    <footer className="border-t border-sky-100 bg-[linear-gradient(180deg,#f8fcff_0%,#eef8ff_100%)]">
       {!hideFooterCta ? (
         <>
           {/* CTA Section */}
           <div className="container-default py-16">
             <div className="text-center max-w-2xl mx-auto">
-              <h2 className="heading-2 text-white mb-4">
+              <h2 className="heading-2 mb-4 text-slate-950">
                 Ready to review existing building data?
               </h2>
-              <p className="body-large mb-8">
+              <p className="body-large mb-8 text-slate-700">
                 Start with a focused review of existing building system data and get a walkthrough of the hidden issues that may deserve attention first.
               </p>
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
@@ -71,7 +71,7 @@ export function Footer({ contactEmail }: FooterProps) {
       ) : null}
 
       {/* Links Section */}
-      <div className="border-t border-slate-800">
+      <div className="border-t border-sky-100">
         <div className="container-default py-12">
           <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8 lg:gap-12">
             {/* Brand */}
@@ -83,19 +83,20 @@ export function Footer({ contactEmail }: FooterProps) {
                   width={1920}
                   height={453}
                   className="h-8 w-auto logo-cta-green"
+                  style={{ height: '2rem', width: 'auto', maxWidth: '10rem' }}
                 />
               </Link>
-              <p className="text-body-sm text-slate-400 max-w-xs">
+              <p className="text-body-sm text-slate-600 max-w-xs">
                 Building intelligence for finding hidden system problems using existing building data.
               </p>
-              <p className="mt-3 text-body-sm text-cyan-300 max-w-xs">
+              <p className="mt-3 text-body-sm text-emerald-700 max-w-xs">
                 {FOOTER_SUSTAINABILITY_LINE}
               </p>
             </div>
 
             {footerSections.map((section) => (
               <div key={section.title}>
-                <h3 className="text-body-sm font-semibold text-white mb-4 uppercase tracking-wider">
+                <h3 className="text-body-sm font-semibold text-slate-950 mb-4 uppercase tracking-wider">
                   {section.title}
                 </h3>
                 <ul className="space-y-3">
@@ -103,7 +104,7 @@ export function Footer({ contactEmail }: FooterProps) {
                     <li key={link.href}>
                       <Link
                         href={link.href}
-                        className="text-body-sm text-slate-400 hover:text-cyan-400 transition-colors"
+                        className="text-body-sm text-slate-600 transition-colors hover:text-emerald-700"
                       >
                         {link.label}
                       </Link>
@@ -117,7 +118,7 @@ export function Footer({ contactEmail }: FooterProps) {
       </div>
 
       {/* Bottom Bar */}
-      <div className="border-t border-slate-800">
+      <div className="border-t border-sky-100">
         <div className="container-default py-6">
           <div className="flex flex-col md:flex-row justify-between items-center gap-4">
             <p className="text-body-xs text-slate-500">
@@ -126,7 +127,7 @@ export function Footer({ contactEmail }: FooterProps) {
             <div className="flex items-center gap-6">
               <a
                 href={`mailto:${contactEmail}`}
-                className="text-body-xs text-slate-500 hover:text-cyan-400 transition-colors"
+                className="text-body-xs text-slate-500 transition-colors hover:text-emerald-700"
               >
                 {contactEmail}
               </a>

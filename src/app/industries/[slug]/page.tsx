@@ -6,7 +6,7 @@ import { TrackedButton } from '@/components/analytics/TrackedButton'
 import { IndustryPageViewTracker } from '@/components/analytics/IndustryPageViewTracker'
 import { Screenshot } from '@/components/MediaPlaceholder'
 import { StickyCtaBar } from '@/components/home/StickyCtaBar'
-import { CTA_LABELS, ENERGY_DISCLAIMER, SITE_CONFIG } from '@/lib/constants'
+import { CTA_LABELS, SITE_CONFIG } from '@/lib/constants'
 import {
   getIndustryDemoHref,
   getIndustryPage,
@@ -272,8 +272,6 @@ export default function IndustryPage({ params }: IndustryPageProps) {
               </Card>
             ))}
           </div>
-
-          <p className="mt-6 text-body-xs text-slate-500">{ENERGY_DISCLAIMER}</p>
         </div>
       </section>
 

@@ -10,6 +10,8 @@
 - Prefer onboarding-path language over speed language.
 - Keep pricing details in sales conversations until scale readiness.
 
+> _Note (2026-05-12): time-promise restriction pending review — Nick to confirm whether to lift now that operational confidence supports the Savings Guarantee. See LeanFM Brand Strategy 2026 v1 §12._
+
 ---
 
 ## 1. Allowed Claims (Expanded)
@@ -17,7 +19,7 @@
 ### Performance Claims (Verified)
 | Claim | Context | Required Disclaimer |
 |-------|---------|---------------------|
-| "Save up to 30% on energy costs" | Energy savings from fault detection | Yes - See Section 3 |
+| "Up to 30% of energy spend wasted by hidden HVAC faults" | Problem-size framing | No |
 | "Processed 3M+ data points and delivered prioritized findings" | Platform experience | Yes - processing and review timing varies |
 | "Guided onboarding during staged rollout" | Current delivery model | No |
 | "Start with lead form or account + sample upload" | Setup/onboarding model | No |
@@ -121,15 +123,48 @@
 | "Breakthrough" | "Effective" |
 | "Cutting-edge" | "Modern" |
 | "Next-generation" | [Just describe what it does] |
-| "AI-powered" | "Prescriptiv AI" (our specific term) |
+| "AI-powered" | "Prescriptiv analytics engine" |
 
-#### Accuracy & Guarantee Claims
+### Guarantee Claims (Approved 2026-05-12)
+
+LeanFM now offers a money-back ROI Savings Guarantee. The following marketing-surface language is approved:
+
+| Approved Phrase | Where to Use |
+|---|---|
+| "3–5x ROI in energy savings" / "Backed by our money-back guarantee." | Homepage proof bar, segment pages |
+| "Money-back ROI Guarantee" | Short standalone reference |
+| "3x ROI or your money back." | Punchier callout variant |
+| "Find 3x or more in savings — or we make it right." | Sales decks, longer-form variants |
+
+**Prohibited variants:**
+- Any guaranteed dollar amount per building (e.g., "We guarantee $50K+ savings per building")
+- Any phrasing implying savings are automatic without the customer implementing the recommended corrective actions
+- Inline "See terms" / asterisks / parenthetical hedges on marketing surfaces
+
+The binding terms — mechanism, conditions, voiding events, claim process — live on `/terms` and are linked from the global site footer. They do not need to be repeated inline on marketing pages.
+
+### 30% Energy Waste Claim (Reframed 2026-05-12)
+
+The "30%" figure is retained but **reframed from a savings promise to a problem-size statement.**
+
+**Approved framing (no disclaimer required):**
+- "Hidden HVAC faults can quietly waste up to 30% of building energy spend."
+- "Up to 30% of energy spend wasted by hidden HVAC faults."
+- "Buildings with undetected faults can waste up to 30% of their energy budget."
+
+**Prohibited variants (would require a disclaimer and conflict with the no-hedges rule):**
+- "Save up to 30% on energy costs"
+- "Reduce your energy bill by 30%"
+- "30% savings guaranteed"
+- Any phrasing that promises a specific percentage of savings to the customer
+
+**Why this works:** The problem-size framing is an industry statement (well-established in AFDD literature and DOE/PNNL reports). It does not promise the customer they will save 30%. It frames the size of the prize, with the 3–5x ROI guarantee carrying the actual offer. No disclaimer needed because nothing is promised to a specific customer.
+
+#### Accuracy Claims
 | Forbidden | Why |
 |-----------|-----|
 | "100% accurate" | Unverifiable |
 | "No false positives" | Cannot guarantee |
-| "Guaranteed savings" | Results vary |
-| "Guaranteed ROI" | Results vary |
 | "Always catches" | Cannot guarantee |
 | "Never misses" | Cannot guarantee |
 | "Instant" results | Use onboarding-path language instead |
@@ -172,18 +207,6 @@ These phrases, even when meant positively, can imply past problems:
 ---
 
 ## 3. Required Disclaimers
-
-### When Claiming 30% Savings
-**The Claim:** "Save up to 30% on energy costs"
-
-**Required Disclaimer (must appear on same page):**
-> "Savings vary based on building type, existing conditions, data quality, and implementation of recommended actions. The 30% figure represents potential savings in buildings with significant undetected faults. Actual results depend on your specific situation."
-
-**Placement Rules:**
-- Must appear within reasonable proximity to the claim
-- Footer placement acceptable on landing pages
-- Asterisk acceptable if disclaimer is clearly visible
-- Cannot be hidden or require scrolling to find
 
 ### When Discussing Onboarding Timing
 **Claims like:** "Guided onboarding while we scale" / "Timing varies by data quality and onboarding volume"
@@ -424,7 +447,7 @@ When writing for building owners and investors, structure content as:
 - [ ] No forbidden phrases from Section 2 appear anywhere
 - [ ] No mentions of: "rebuilt," "previous version," "old approach"
 - [ ] No mentions of: BIM, 3D, patents, visualization, digital twin
-- [ ] 30% savings claim has required disclaimer on same page
+- [ ] 30% claim is framed as problem-size, not customer savings promise
 - [ ] No hard timing claims ("minutes," "under an hour," "instant")
 - [ ] No superlatives: "industry-leading," "best-in-class," "revolutionary"
 - [ ] No accuracy guarantees: "100%," "always," "never misses"
@@ -433,7 +456,7 @@ When writing for building owners and investors, structure content as:
 
 #### Terminology Consistency
 - [ ] "OnPoint" for platform name (not "Onpoint" or "On Point")
-- [ ] "Prescriptiv AI" for AI engine (not "AI-powered" or "machine learning")
+- [ ] "Prescriptiv analytics engine" (not "AI-powered" or "machine learning")
 - [ ] "Automated" not "automatic"
 - [ ] Use onboarding-path language, not speed claims
 - [ ] 3-step process: Lead Form/Account > Sample Upload > Guided Findings

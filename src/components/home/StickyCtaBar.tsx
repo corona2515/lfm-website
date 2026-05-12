@@ -48,13 +48,13 @@ export function StickyCtaBar({
 
   return (
     <div
-      className={`fixed inset-x-0 bottom-0 z-40 border-t border-slate-700/80 bg-slate-950/92 px-4 py-3 shadow-[0_-18px_50px_rgba(2,6,23,0.45)] backdrop-blur-xl transition-all duration-300 supports-[padding:max(0px)]:pb-[max(0.75rem,env(safe-area-inset-bottom))] ${
+      className={`fixed inset-x-0 bottom-0 z-40 border-t border-sky-200 bg-white/98 px-4 py-3 shadow-[0_-18px_50px_rgba(30,64,175,0.18)] backdrop-blur-xl transition-all duration-300 supports-[padding:max(0px)]:pb-[max(0.75rem,env(safe-area-inset-bottom))] ${
         isVisible ? 'translate-y-0 opacity-100' : 'pointer-events-none translate-y-full opacity-0'
       }`}
       aria-hidden={!isVisible}
     >
       <div className="mx-auto flex max-w-5xl flex-col items-stretch gap-3 sm:flex-row sm:items-center sm:justify-between">
-        <p className="text-center text-body-sm font-medium text-slate-200 sm:text-left">
+        <p className="text-center text-body-sm font-semibold text-slate-900 sm:text-left">
           {message}
         </p>
         <TrackedButton

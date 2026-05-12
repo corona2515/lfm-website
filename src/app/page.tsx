@@ -1,8 +1,16 @@
 import { Metadata } from 'next'
-import Link from 'next/link'
-import { ArrowRight, CheckCircle2 } from 'lucide-react'
+import { BadgeCheck, CheckCircle2, GraduationCap, TrendingDown } from 'lucide-react'
 import { TrackedButton } from '@/components/analytics/TrackedButton'
 import { StickyCtaBar } from '@/components/home/StickyCtaBar'
+import {
+  BasVsLeanFMComparison,
+  CaseStudyProofBand,
+  DataToActionFlow,
+  DiagnosticInsightCard,
+  FinalCTASection,
+  IssuePatternCard,
+  VerticalPhotoCard,
+} from '@/components/visual/LeanFmVisuals'
 import { CTA_LABELS, SITE_CONFIG } from '@/lib/constants'
 
 const SAMPLE_ANALYSIS_HREF = '/contact?intent=sample-analysis&source=home_sample_analysis'
@@ -15,147 +23,106 @@ export const metadata: Metadata = {
 
 const heroBullets = [
   'No new hardware required',
-  'Uses existing BAS trend data',
+  'Uses existing HVAC trend data',
   'Finds problems that may not trigger alarms',
   'Produces clear, prioritized findings',
 ]
 
-const credibilityItems = [
-  'Carnegie Mellon-originated technology',
-  'Deployed with organizations including The Warhol Museum, Penn State, and Carnegie Mellon',
-  'Built for facilities teams managing complex buildings',
-]
-
-const basComparison = [
+const proofItems = [
   {
-    title: 'BAS alarms',
-    items: ['Catch obvious failures', 'Alert on thresholds', 'Often generate noise', 'Do not always rank impact'],
+    title: 'Up to 30% of energy spend wasted',
+    body: 'Hidden HVAC faults that BAS alarms miss can quietly drain up to 30% of building energy spend.',
+    Icon: TrendingDown,
   },
   {
-    title: 'LeanFM',
-    items: [
-      'Finds hidden operating patterns',
-      'Connects faults to energy, comfort, and maintenance impact',
-      'Ranks what matters first',
-      'Produces clear corrective guidance',
-    ],
+    title: '3–5x ROI in energy savings',
+    body: 'Backed by our money-back guarantee.',
+    Icon: BadgeCheck,
+  },
+  {
+    title: 'Developed at Carnegie Mellon',
+    body: 'LeanFM’s methodology was developed from research at Carnegie Mellon University.',
+    Icon: GraduationCap,
   },
 ]
 
-const processSteps = [
+const issuePreview = [
   {
-    number: '01',
-    title: 'Share Data',
-    description: 'Upload trend data from your building system.',
+    title: 'Heating and cooling at the same time',
+    looksLike: 'Blue cooling and orange heating behavior overlap during occupied periods.',
+    missed: 'Each loop may appear normal while the combined behavior wastes energy.',
+    cost: 'Energy waste, comfort instability, and unnecessary equipment wear.',
+    surfaces: 'LeanFM highlights the zones and times where the conflict appears in trend data.',
+    impacts: ['Energy waste', 'Comfort instability', 'Equipment wear'],
+    visual: 'conflict' as const,
   },
   {
-    number: '02',
-    title: 'We Analyze It',
-    description: 'LeanFM identifies hidden issues and inefficiencies.',
+    title: 'Equipment running longer than needed',
+    looksLike: 'Actual runtime extends beyond the occupied schedule or expected building use.',
+    missed: 'Overrides and schedules can drift without creating an alarm condition.',
+    cost: 'Higher utility costs, avoidable runtime, and premature wear.',
+    surfaces: 'LeanFM compares runtime patterns against schedules and building context.',
+    impacts: ['Utility cost', 'Unnecessary runtime', 'Wear'],
+    visual: 'runtime' as const,
   },
   {
-    number: '03',
-    title: 'Review Findings',
-    description: 'We walk you through what matters and what to do next.',
+    title: 'Sensors causing bad decisions',
+    looksLike: 'Reported sensor values drift away from actual operating conditions.',
+    missed: 'A sensor can be wrong enough to affect control without crossing a threshold.',
+    cost: 'Bad control decisions, comfort complaints, and misdiagnosed problems.',
+    surfaces: 'LeanFM flags sensor behavior that may be driving the wrong response.',
+    impacts: ['Bad control decisions', 'Comfort complaints', 'Misdiagnosis'],
+    visual: 'sensor' as const,
   },
-]
-
-const findings = [
-  'Simultaneous heating and cooling',
-  'Equipment running when it shouldn’t',
-  'Scheduling and control issues',
-  'Sensor inaccuracies',
-  'Comfort-impacting faults',
+  {
+    title: 'Control logic faults',
+    looksLike: 'The BAS follows a sequence that no longer matches building operation.',
+    missed: 'The system may be doing exactly what it was configured to do, even when the logic is wrong.',
+    cost: 'Recurring issues, hidden waste, and unstable operation.',
+    surfaces: 'LeanFM identifies control patterns worth review by facilities or controls teams.',
+    impacts: ['Recurring issues', 'Hidden waste', 'Unstable operation'],
+    visual: 'logic' as const,
+  },
 ]
 
 const verticals = [
   {
     title: 'K-12 Schools',
-    description: 'Find hidden waste across classrooms, gyms, offices, and district facilities.',
+    pain: 'Find hidden HVAC issues driving complaints, budget pressure, and maintenance strain across district buildings.',
     href: '/solutions/k-12-schools',
-  },
-  {
-    title: 'Universities',
-    description: 'Help facilities teams prioritize issues across diverse campus buildings.',
-    href: '/solutions/universities',
-  },
-  {
-    title: 'Commercial Real Estate',
-    description: 'Find hidden issues that affect tenant comfort, operating costs, and portfolio performance.',
-    href: '/solutions/commercial-real-estate',
+    photoLabel: 'K-12 school building exterior or classroom hallway',
+    photoSrc: '/media/leanfm-images/k12-hvac-inspection.jpg',
+    photoAlt: 'Facilities technician inspecting HVAC equipment at a building',
+    imageClassName: 'object-[58%_50%]',
   },
   {
     title: 'Museums',
-    description: 'Support comfort, reliability, and careful operation in sensitive public spaces.',
+    pain: 'Protect sensitive environments by finding subtle system drift and hidden control issues.',
     href: '/solutions/museums',
+    photoLabel: 'Museum gallery or environmental control area',
+    photoSrc: '/media/leanfm-images/museum-building-ivy.jpg',
+    photoAlt: 'Institutional museum building exterior with ivy',
+    imageClassName: 'object-[48%_45%]',
+  },
+  {
+    title: 'Universities',
+    pain: 'Bring clarity to complex campus systems, schedules, and building portfolios.',
+    href: '/solutions/universities',
+    photoLabel: 'University campus building or central plant',
+    photoSrc: '/media/leanfm-images/university-students-library.jpg',
+    photoAlt: 'Students walking in front of a university building',
+    imageClassName: 'object-[45%_50%]',
+  },
+  {
+    title: 'Commercial Real Estate',
+    pain: 'Identify hidden HVAC waste affecting operating costs, tenant comfort, and asset performance.',
+    href: '/solutions/commercial-real-estate',
+    photoLabel: 'Commercial office building exterior, lobby, or mechanical space',
+    photoSrc: '/media/leanfm-images/commercial-office-exterior.jpg',
+    photoAlt: 'People walking outside a commercial office building',
+    imageClassName: 'object-[52%_50%]',
   },
 ]
-
-function SignalToActionVisual() {
-  const rawSignals = ['Runtime', 'Setpoints', 'Schedules', 'Sensors']
-  const surfacedIssues = ['Control issue', 'Wasted runtime', 'Comfort risk']
-  const actions = ['Prioritize', 'Assign', 'Resolve']
-
-  return (
-    <div className="relative mx-auto max-w-xl rounded-2xl border border-slate-700/70 bg-slate-950/70 p-5 shadow-[0_28px_90px_rgba(2,6,23,0.42)]">
-      <div aria-hidden="true" className="absolute inset-0 rounded-2xl bg-[radial-gradient(circle_at_20%_10%,rgba(144,204,124,0.16),transparent_32%),radial-gradient(circle_at_85%_85%,rgba(59,130,246,0.12),transparent_36%)]" />
-      <div className="relative grid gap-4">
-        <div>
-          <p className="text-body-xs font-semibold uppercase tracking-[0.18em] text-slate-500">
-            Existing data
-          </p>
-          <div className="mt-3 grid grid-cols-2 gap-2">
-            {rawSignals.map((signal) => (
-              <div key={signal} className="rounded-lg border border-slate-800 bg-slate-900/80 px-3 py-3 text-body-sm text-slate-300">
-                <span className="mr-2 inline-block h-2 w-2 rounded-full bg-slate-500" />
-                {signal}
-              </div>
-            ))}
-          </div>
-        </div>
-
-        <div className="flex items-center gap-3 text-slate-500">
-          <div className="h-px flex-1 bg-slate-800" />
-          <ArrowRight className="h-4 w-4 text-cyan-300" aria-hidden="true" />
-          <div className="h-px flex-1 bg-slate-800" />
-        </div>
-
-        <div className="rounded-xl border border-cyan-400/25 bg-cyan-500/10 p-4">
-          <p className="text-body-xs font-semibold uppercase tracking-[0.18em] text-cyan-300">
-            Hidden problems surfaced
-          </p>
-          <div className="mt-4 space-y-2">
-            {surfacedIssues.map((issue, index) => (
-              <div key={issue} className="flex items-center justify-between rounded-lg bg-slate-950/55 px-3 py-2">
-                <span className="text-body-sm text-white">{issue}</span>
-                <span className="text-body-xs text-slate-400">Priority {index + 1}</span>
-              </div>
-            ))}
-          </div>
-        </div>
-
-        <div className="flex items-center gap-3 text-slate-500">
-          <div className="h-px flex-1 bg-slate-800" />
-          <ArrowRight className="h-4 w-4 text-cyan-300" aria-hidden="true" />
-          <div className="h-px flex-1 bg-slate-800" />
-        </div>
-
-        <div>
-          <p className="text-body-xs font-semibold uppercase tracking-[0.18em] text-slate-500">
-            Clear actions
-          </p>
-          <div className="mt-3 grid grid-cols-3 gap-2">
-            {actions.map((action) => (
-              <div key={action} className="rounded-lg border border-slate-800 bg-slate-900/85 px-3 py-3 text-center text-body-sm font-semibold text-slate-100">
-                {action}
-              </div>
-            ))}
-          </div>
-        </div>
-      </div>
-    </div>
-  )
-}
 
 export default function HomePage() {
   const organizationSchema = {
@@ -174,33 +141,34 @@ export default function HomePage() {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationSchema) }}
       />
 
-      <section id="home-hero" className="relative overflow-hidden border-b border-slate-800/70 bg-slate-950">
-        <div aria-hidden="true" className="absolute inset-0 bg-grid opacity-70" />
-        <div aria-hidden="true" className="absolute right-0 top-0 h-[34rem] w-[34rem] rounded-full bg-cyan-500/10 blur-3xl" />
-        <div className="container-wide relative z-10 pt-28 pb-16 md:pt-36 md:pb-20">
-          <div className="grid items-center gap-12 lg:grid-cols-[1.02fr_0.98fr]">
-            <div className="max-w-3xl">
-              <h1 className="mb-6 max-w-[12ch] font-body text-[3.2rem] font-semibold leading-[0.98] tracking-normal text-white md:text-[4.2rem] lg:text-[4.85rem]">
-                Your building is wasting money in ways your BAS isn’t catching.
+      <section id="home-hero" className="relative overflow-hidden border-b border-sky-100 bg-[linear-gradient(135deg,#f8fcff_0%,#eef8ff_48%,#f4fbef_100%)]">
+        <div aria-hidden="true" className="absolute inset-0 bg-grid opacity-35" />
+        <div aria-hidden="true" className="absolute -left-24 top-20 h-72 w-72 rounded-full bg-emerald-200/45 blur-3xl" />
+        <div aria-hidden="true" className="absolute right-0 top-0 h-[36rem] w-[36rem] rounded-full bg-sky-200/55 blur-3xl" />
+        <div className="container-wide relative z-10 pt-24 pb-14 md:pt-36 md:pb-20">
+          <div className="grid min-w-0 max-w-full items-center gap-10 overflow-hidden lg:grid-cols-[1.02fr_0.98fr] lg:gap-12 lg:overflow-visible">
+            <div className="w-full min-w-0 max-w-[22rem] sm:max-w-2xl md:max-w-3xl">
+              <h1 className="mb-6 max-w-[20rem] break-words font-body text-[1.95rem] font-semibold leading-[1.04] tracking-normal text-slate-950 sm:max-w-[12ch] sm:text-[3.2rem] sm:leading-[0.98] md:text-[4.2rem] lg:text-[4.85rem]">
+                Your HVAC system is wasting money in ways your BAS isn’t catching.
               </h1>
-              <p className="body-large mb-7 max-w-2xl">
-                LeanFM analyzes your existing building system data to uncover hidden HVAC faults, rank them by impact, and show your team what to fix first.
+              <p className="body-large mb-7 max-w-[22rem] text-slate-700 sm:max-w-2xl">
+                LeanFM analyzes existing HVAC trend data to uncover hidden faults, rank them by impact, and show your team what to fix first.
               </p>
-              <ul className="mb-8 grid gap-3">
+              <ul className="mb-8 grid gap-3 sm:grid-cols-2">
                 {heroBullets.map((bullet) => (
-                  <li key={bullet} className="flex gap-3 text-body-md text-slate-200">
-                    <CheckCircle2 className="mt-0.5 h-5 w-5 shrink-0 text-cyan-300" aria-hidden="true" />
+                  <li key={bullet} className="flex gap-3 text-body-md text-slate-800">
+                    <CheckCircle2 className="mt-0.5 h-5 w-5 shrink-0 text-emerald-600" aria-hidden="true" />
                     <span>{bullet}</span>
                   </li>
                 ))}
               </ul>
-              <div className="flex flex-col gap-3 sm:flex-row">
+              <div className="flex max-w-[22rem] flex-col gap-3 sm:max-w-none sm:flex-row">
                 <TrackedButton
                   href={SAMPLE_ANALYSIS_HREF}
                   size="large"
                   eventName="cta_sample_analysis_click"
                   eventParams={{ location: 'home_hero_primary' }}
-                  className="w-full sm:w-auto"
+                  className="w-full min-w-0 sm:w-auto"
                 >
                   {CTA_LABELS.primary}
                 </TrackedButton>
@@ -210,184 +178,157 @@ export default function HomePage() {
                   size="large"
                   eventName="cta_how_it_works_click"
                   eventParams={{ location: 'home_hero_secondary' }}
-                  className="w-full sm:w-auto"
+                  className="w-full min-w-0 border-slate-300 bg-white text-slate-900 hover:border-slate-400 hover:bg-slate-50 sm:w-auto"
                 >
                   See How It Works
                 </TrackedButton>
               </div>
             </div>
 
-            <SignalToActionVisual />
-          </div>
-        </div>
-      </section>
-
-      <section className="border-b border-slate-800/70 bg-slate-900/40">
-        <div className="container-wide py-7">
-          <div className="grid gap-5 lg:grid-cols-[0.65fr_1.35fr] lg:items-center">
-            <h2 className="font-display text-body-lg font-semibold text-white">
-              Trusted in complex buildings
-            </h2>
-            <div className="grid gap-3 md:grid-cols-3">
-              {credibilityItems.map((item) => (
-                <p key={item} className="border-l border-slate-700 pl-4 text-body-sm leading-relaxed text-slate-300">
-                  {item}
-                </p>
-              ))}
+            <div className="relative w-full min-w-0 max-w-[22rem] sm:max-w-none">
+              <div className="absolute -inset-6 rounded-[2rem] bg-sky-300/20 blur-3xl" aria-hidden="true" />
+              <DiagnosticInsightCard variant="light" className="relative max-w-[22rem] sm:max-w-none" />
+              <div className="pointer-events-none mt-4 flex flex-wrap gap-2">
+                {['Runtime', 'Setpoints', 'Schedules', 'Sensors', 'Alarms', 'Temperatures'].map((chip) => (
+                  <span key={chip} className="rounded-full border border-sky-100 bg-white px-3 py-1 text-body-xs text-slate-600 shadow-sm">
+                    {chip}
+                  </span>
+                ))}
+              </div>
             </div>
           </div>
         </div>
       </section>
 
-      <section className="section-large border-y border-slate-800/70 bg-slate-900/35">
+      <section className="relative overflow-hidden bg-[linear-gradient(180deg,#f8fafc_0%,#eef3f8_100%)]">
+        <div className="container-wide py-8">
+          <div className="grid gap-4 md:grid-cols-3">
+            {proofItems.map((item) => {
+              const Icon = item.Icon
+
+              return (
+                <div
+                  key={item.title}
+                  className={
+                    'group relative w-full min-w-0 max-w-full overflow-hidden rounded-2xl border border-slate-200 bg-white p-5 shadow-[0_14px_45px_rgba(15,23,42,0.07)]'
+                  }
+                >
+                  <div aria-hidden="true" className="absolute inset-x-0 top-0 h-1 bg-[linear-gradient(90deg,rgba(144,204,124,0.75),rgba(34,211,238,0.55))]" />
+                  <div className="relative grid min-w-0 grid-cols-[2.75rem_minmax(0,1fr)] items-start gap-4">
+                    <div
+                      className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl border border-slate-200 bg-slate-50 text-slate-700"
+                    >
+                      <Icon className="h-5 w-5" aria-hidden="true" />
+                    </div>
+                    <div className="min-w-0 max-w-[calc(100vw-7rem)] sm:max-w-full">
+                      <p className="break-words text-body-md font-semibold text-slate-950">
+                        {item.title}
+                      </p>
+                      <p className="mt-2 break-words text-body-sm leading-relaxed text-slate-600">
+                        {item.body}
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              )
+            })}
+          </div>
+        </div>
+      </section>
+
+      <section className="section-large relative overflow-hidden border-b border-sky-100 bg-white">
+        <div aria-hidden="true" className="absolute inset-0 bg-grid opacity-15" />
+        <div className="container-default relative z-10">
+          <div className="mb-10 max-w-3xl">
+            <h2 className="heading-2 mb-4 text-slate-950">Why your building automation system may miss hidden HVAC waste.</h2>
+            <p className="body-large text-slate-700">
+              Most building automation alarms are designed to flag obvious failures or out-of-range conditions. Many costly HVAC issues do not look like alarms. They show up as patterns over time.
+            </p>
+          </div>
+          <BasVsLeanFMComparison variant="light" />
+        </div>
+      </section>
+
+      <section id="how-it-works" className="section-large scroll-mt-24 bg-[linear-gradient(135deg,#f8fcff_0%,#eef8ff_58%,#f4fbef_100%)]">
         <div className="container-default">
           <div className="mb-10 max-w-3xl">
-            <h2 className="heading-2 mb-4 text-white">Why BAS alarms miss hidden waste</h2>
-            <p className="body-large">
-              Most BAS alarms flag obvious failures or out-of-range conditions. Expensive problems often show up as operating patterns over time: simultaneous heating and cooling, drifting sensors, overridden sequences, excessive runtime, short cycling, and control logic problems.
+            <h2 className="heading-2 mb-4 text-slate-950">From building data to clear action.</h2>
+            <p className="text-body-lg leading-relaxed text-slate-600">
+              LeanFM does not start with new hardware. It starts with the system data your building already produces.
             </p>
           </div>
-          <div className="grid gap-5 md:grid-cols-2">
-            {basComparison.map((column) => (
-              <div key={column.title} className="rounded-2xl border border-slate-800 bg-slate-950/55 p-6">
-                <h3 className="mb-5 font-display text-2xl font-semibold text-white">{column.title}</h3>
-                <div className="space-y-3">
-                  {column.items.map((item) => (
-                    <div key={item} className="flex gap-3 text-body-md text-slate-200">
-                      <CheckCircle2 className="mt-0.5 h-5 w-5 shrink-0 text-cyan-300" aria-hidden="true" />
-                      <span>{item}</span>
-                    </div>
-                  ))}
-                </div>
-              </div>
+          <DataToActionFlow variant="light" />
+        </div>
+      </section>
+
+      <section className="section-large bg-white">
+        <div className="container-default">
+          <div className="mb-10 max-w-3xl">
+            <h2 className="heading-2 mb-4 text-slate-950">The platform behind the findings</h2>
+            <p className="text-body-lg leading-relaxed text-slate-600">
+              LeanFM delivers findings through <strong>OnPoint</strong>, our software platform, powered by the <em>Prescriptiv</em> analytics engine developed from research at Carnegie Mellon University. Your team reviews prioritized issues in plain English — no new hardware, no dashboards to decipher.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <section className="section-large bg-white">
+        <div className="container-wide">
+          <div className="mb-10 flex flex-col gap-5 md:flex-row md:items-end md:justify-between">
+            <div className="max-w-3xl">
+              <h2 className="heading-2 mb-4 text-slate-950">What LeanFM finds</h2>
+              <p className="text-body-lg leading-relaxed text-slate-600">
+                The issues are technical underneath, but the operating impact is easy to recognize: waste, comfort risk, wear, and unclear priorities.
+              </p>
+            </div>
+            <TrackedButton
+              href="/what-we-find"
+              variant="secondary"
+              eventName="cta_what_we_find_click"
+              eventParams={{ location: 'home_issue_preview' }}
+            >
+              See What We Find
+            </TrackedButton>
+          </div>
+          <div className="grid gap-4 lg:grid-cols-2">
+            {issuePreview.map((issue) => (
+              <IssuePatternCard key={issue.title} issue={issue} variant="light" />
             ))}
           </div>
         </div>
       </section>
 
-      <section id="how-it-works" className="section-large bg-slate-950 scroll-mt-24">
-        <div className="container-default">
-          <div className="mb-12 text-center">
-            <h2 className="heading-2 mb-4 text-white">Simple Process. Clear Results.</h2>
-          </div>
+      <CaseStudyProofBand variant="light" />
 
-          <div className="grid gap-5 md:grid-cols-3">
-            {processSteps.map((step) => (
-              <div key={step.number} className="rounded-xl border border-slate-800 bg-slate-900/55 p-6">
-                <span className="mb-5 inline-flex h-11 w-11 items-center justify-center rounded-full border border-cyan-400/40 bg-cyan-500/10 font-display font-semibold text-cyan-200">
-                  {step.number}
-                </span>
-                <h3 className="mb-3 font-display text-2xl font-semibold text-white">{step.title}</h3>
-                <p className="text-body-md leading-relaxed text-slate-300">{step.description}</p>
-              </div>
-            ))}
+      <section className="section-large bg-slate-50">
+        <div className="container-wide">
+          <div className="mb-10 max-w-3xl">
+            <h2 className="heading-2 mb-4 text-slate-950">Built for complex buildings</h2>
+            <p className="text-body-lg leading-relaxed text-slate-600">
+              LeanFM is built for teams managing real facilities, complex schedules, comfort expectations, and operating budgets.
+            </p>
           </div>
-
-        </div>
-      </section>
-
-      <section className="section-large border-y border-slate-800/70 bg-slate-900/35">
-        <div className="container-default">
-          <div className="grid gap-10 lg:grid-cols-[0.8fr_1.2fr] lg:items-start">
-            <div>
-              <h2 className="heading-2 mb-4 text-white">What LeanFM Finds</h2>
-              <p className="body-large">
-                LeanFM looks for the hidden operating patterns that waste energy, affect comfort, strain equipment, and bury maintenance priorities in noise.
-              </p>
-            </div>
-            <div className="grid gap-3 sm:grid-cols-2">
-              {findings.map((finding) => (
-                <div key={finding} className="flex min-h-20 items-center gap-3 rounded-xl border border-slate-800 bg-slate-950/55 p-4">
-                  <CheckCircle2 className="h-5 w-5 shrink-0 text-cyan-300" aria-hidden="true" />
-                  <p className="text-body-md font-medium text-slate-100">{finding}</p>
-                </div>
-              ))}
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <section className="section-large bg-slate-950">
-        <div className="container-default">
-          <div className="grid gap-8 lg:grid-cols-[0.82fr_1.18fr] lg:items-center">
-            <div>
-              <p className="mb-4 text-body-xs font-semibold uppercase tracking-[0.18em] text-cyan-300">
-                Warhol case study
-              </p>
-              <h2 className="heading-2 mb-4 text-white">A newer BAS can still miss costly logic faults</h2>
-              <p className="body-large">
-                The Andy Warhol Museum had already invested in a new BAS. LeanFM still found BAS logic faults hiding in the data, and the case study showed more than $100K in ongoing annual savings after those faults were corrected.
-              </p>
-            </div>
-            <div className="grid gap-4 sm:grid-cols-3">
-              {['New BAS in 2021', '$56,386 reported first-year savings', '$101,383 reported second-year savings'].map((item) => (
-                <div key={item} className="rounded-xl border border-cyan-400/20 bg-cyan-500/10 p-5">
-                  <p className="font-display text-body-lg font-semibold leading-snug text-white">{item}</p>
-                </div>
-              ))}
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <section className="section-large border-y border-slate-800/70 bg-slate-900/35">
-        <div className="container-default">
-          <div className="mb-10 max-w-2xl">
-            <h2 className="heading-2 mb-4 text-white">Built for Complex Buildings</h2>
-          </div>
-          <div className="grid gap-4 md:grid-cols-2">
+          <div className="grid gap-5 md:grid-cols-2 lg:grid-cols-4">
             {verticals.map((vertical) => (
-              <Link
-                key={vertical.href}
-                href={vertical.href}
-                className="group rounded-xl border border-slate-800 bg-slate-950/55 p-6 transition-colors hover:border-cyan-400/45 hover:bg-slate-950"
-              >
-                <div className="mb-6 h-28 rounded-lg border border-slate-800 bg-[linear-gradient(135deg,rgba(44,66,88,0.75)_0%,rgba(14,24,36,0.9)_54%,rgba(144,204,124,0.16)_100%)]" />
-                <h3 className="mb-3 flex items-center justify-between gap-4 font-display text-2xl font-semibold text-white">
-                  {vertical.title}
-                  <ArrowRight className="h-5 w-5 shrink-0 text-cyan-300 transition-transform group-hover:translate-x-1" aria-hidden="true" />
-                </h3>
-                <p className="text-body-md leading-relaxed text-slate-300">{vertical.description}</p>
-              </Link>
+              <VerticalPhotoCard key={vertical.href} {...vertical} variant="light" />
             ))}
           </div>
         </div>
       </section>
 
-      <section className="border-t border-slate-800/70 bg-slate-900/50">
-        <div className="container-default py-14 md:py-20">
-          <div className="mx-auto max-w-2xl text-center">
-            <h2 className="heading-2 mb-5 text-white">Find out what your BAS data is already showing.</h2>
-            <p className="body-large mb-8">
-              Request a Sample Analysis and LeanFM will help determine whether your existing building data contains hidden issues worth attention.
-            </p>
-            <div className="flex flex-col justify-center gap-3 sm:flex-row">
-              <TrackedButton
-                href={SAMPLE_ANALYSIS_HREF}
-                size="large"
-                eventName="cta_sample_analysis_click"
-                eventParams={{ location: 'home_final_primary' }}
-              >
-                {CTA_LABELS.primary}
-              </TrackedButton>
-              <TrackedButton
-                variant="secondary"
-                href="/what-we-find"
-                size="large"
-                eventName="cta_what_we_find_click"
-                eventParams={{ location: 'home_final_secondary' }}
-              >
-                See What We Find
-              </TrackedButton>
-            </div>
-          </div>
-        </div>
-      </section>
+      <FinalCTASection
+        headline="Find out what your HVAC trend data is already showing."
+        body="Request a Sample Analysis and LeanFM will help determine whether your existing building data contains hidden issues worth attention."
+        primaryHref={SAMPLE_ANALYSIS_HREF}
+        primaryLocation="home_final_primary"
+        secondaryLocation="home_final_secondary"
+        variant="light"
+      />
 
       <StickyCtaBar
         heroId="home-hero"
         href={SAMPLE_ANALYSIS_HREF}
-        message="Hidden BAS faults can waste energy, money, comfort, and maintenance time before alarms catch them."
+        message="Hidden HVAC faults can waste energy, money, comfort, and maintenance time before alarms catch them."
       />
     </>
   )

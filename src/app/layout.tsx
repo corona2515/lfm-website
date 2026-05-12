@@ -1,4 +1,4 @@
-import type { Metadata } from 'next'
+import type { Metadata, Viewport } from 'next'
 import { DM_Sans, DM_Mono, Space_Grotesk } from 'next/font/google'
 import { AppChrome } from '@/components/layout/AppChrome'
 import { GoogleAnalytics } from '@/components/analytics/GoogleAnalytics'
@@ -80,6 +80,11 @@ export const metadata: Metadata = {
     index: true,
     follow: true,
   },
+}
+
+export const viewport: Viewport = {
+  width: 'device-width',
+  initialScale: 1,
 }
 
 export default function RootLayout({

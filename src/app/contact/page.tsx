@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from 'react'
 import { Badge, Card } from '@/components/ui'
+import { PhotoPlaceholder } from '@/components/visual/LeanFmVisuals'
 import { trackEvent } from '@/lib/analytics'
 import { SITE_CONFIG } from '@/lib/constants'
 
@@ -32,7 +33,7 @@ const BUILDING_TYPES = [
 
 const INTENT_OPTIONS: Array<{ value: ContactIntent; label: string }> = [
   { value: 'sample-analysis', label: 'Request a Sample Analysis' },
-  { value: 'demo', label: 'Book a Demo' },
+  { value: 'demo', label: 'Talk to LeanFM' },
   { value: 'investor', label: 'Investor Inquiry' },
 ]
 
@@ -119,7 +120,7 @@ export default function ContactPage() {
       case 'sample-analysis':
         return 'Request Sample Analysis'
       case 'demo':
-        return 'Book Demo'
+        return 'Talk to LeanFM'
       case 'investor':
         return 'Send Investor Inquiry'
       default:
@@ -130,17 +131,17 @@ export default function ContactPage() {
   if (formState === 'success') {
     return (
       <>
-        <section className="relative overflow-hidden min-h-[80vh] flex items-center">
-          <div className="absolute inset-0 bg-grid" />
+        <section className="relative flex min-h-[80vh] items-center overflow-hidden bg-[linear-gradient(135deg,#f8fcff_0%,#eef8ff_48%,#f4fbef_100%)]">
+          <div className="absolute inset-0 bg-grid opacity-35" />
           <div className="container-default relative">
-            <Card className="max-w-lg mx-auto text-center py-12">
-              <div className="w-16 h-16 rounded-full bg-cyan-500/20 flex items-center justify-center mx-auto mb-6">
-                <svg className="w-8 h-8 text-cyan-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <Card className="mx-auto max-w-lg border-sky-100 bg-white py-12 text-center shadow-[0_24px_80px_rgba(30,64,175,0.14)]">
+              <div className="mx-auto mb-6 flex h-16 w-16 items-center justify-center rounded-full bg-emerald-50">
+                <svg className="h-8 w-8 text-emerald-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
                 </svg>
               </div>
-              <h1 className="heading-2 text-white mb-4">Message received</h1>
-              <p className="body-large mb-2">
+              <h1 className="heading-2 mb-4 text-slate-950">Message received</h1>
+              <p className="body-large mb-2 text-slate-700">
                 {formData.intent === 'demo'
                   ? 'Thanks for reaching out. We\'ll contact you to schedule your demo.'
                   : formData.intent === 'sample-analysis'
@@ -159,39 +160,49 @@ export default function ContactPage() {
 
   return (
     <>
-      <section className="relative overflow-hidden">
-        <div className="absolute inset-0 bg-grid" />
-        <div className="absolute top-0 right-0 w-[500px] h-[400px] bg-cyan-500/10 rounded-full blur-3xl" />
+      <section className="relative overflow-hidden border-b border-sky-100 bg-[linear-gradient(135deg,#f8fcff_0%,#eef8ff_48%,#f4fbef_100%)]">
+        <div className="absolute inset-0 bg-grid opacity-35" />
+        <div className="absolute right-0 top-0 h-[400px] w-[500px] rounded-full bg-sky-200/55 blur-3xl" />
 
         <div className="container-default relative pt-20 pb-8 md:pt-28 md:pb-12">
-          <div className="text-center max-w-2xl mx-auto">
-            <Badge className="mb-6">Contact</Badge>
-            <h1 className="heading-1 text-white mb-6">
-              Request a Sample Analysis or contact LeanFM
-            </h1>
-            <p className="body-large">
-              Share a few details and our team will follow up about your building data, demo request, or investor inquiry.
-            </p>
+          <div className="grid gap-10 lg:grid-cols-[0.92fr_1.08fr] lg:items-center">
+            <div>
+              <Badge className="mb-6">Contact</Badge>
+              <h1 className="heading-1 mb-6 text-slate-950">
+                Request a Sample Analysis or contact LeanFM
+              </h1>
+              <p className="body-large text-slate-700">
+                Share a few details and our team will follow up about your building data, demo request, or investor inquiry.
+              </p>
+            </div>
+            <PhotoPlaceholder
+              label="Facilities leader reviewing building operations data"
+              alt="Facilities leader reviewing building operations data"
+              src="/media/leanfm-images/bas-control-room.jpg"
+              aspect="video"
+              overlay={false}
+              className="border-white shadow-[0_24px_90px_rgba(30,64,175,0.18)]"
+            />
           </div>
         </div>
       </section>
 
-      <section className="section pt-8">
+      <section className="section light-form bg-white pt-8">
         <div className="container-default">
           <div className="grid lg:grid-cols-3 gap-12">
             <div className="lg:col-span-1">
-              <Card className="sticky top-24">
-                <h2 className="font-semibold text-white mb-4">Get in touch</h2>
-                <p className="text-body-sm text-slate-400 mb-6">
+              <Card className="sticky top-24 border-sky-100 bg-white shadow-[0_14px_45px_rgba(30,64,175,0.08)]">
+                <h2 className="mb-4 font-semibold text-slate-950">Get in touch</h2>
+                <p className="mb-6 text-body-sm text-slate-600">
                   Fill out the form and we&apos;ll respond within one business day.
                 </p>
-                <div className="mb-6 rounded-xl border border-slate-800 bg-slate-950/50 p-4">
-                  <p className="mb-3 text-body-xs font-semibold uppercase tracking-[0.16em] text-cyan-300">
+                <div className="mb-6 rounded-xl border border-sky-100 bg-sky-50/70 p-4">
+                  <p className="mb-3 text-body-xs font-semibold uppercase tracking-[0.16em] text-sky-700">
                     What happens next
                   </p>
                   <ul className="space-y-2">
                     {WHAT_HAPPENS_NEXT.map((item) => (
-                      <li key={item} className="text-body-xs leading-relaxed text-slate-400">
+                      <li key={item} className="text-body-xs leading-relaxed text-slate-700">
                         {item}
                       </li>
                     ))}
@@ -200,21 +211,21 @@ export default function ContactPage() {
 
                 <div className="space-y-4">
                   <div>
-                    <span className="text-body-xs text-slate-500 uppercase tracking-wider">Email</span>
+                    <span className="text-body-xs uppercase tracking-wider text-slate-500">Email</span>
                     <a
                       href={`mailto:${SITE_CONFIG.contactEmail}`}
-                      className="block text-body-md text-cyan-400 hover:text-cyan-300 transition-colors mt-1"
+                      className="mt-1 block text-body-md text-sky-700 transition-colors hover:text-sky-900"
                     >
                       {SITE_CONFIG.contactEmail}
                     </a>
                   </div>
                 </div>
 
-                <hr className="border-slate-700 my-6" />
+                <hr className="my-6 border-sky-100" />
 
                 <p className="text-body-xs text-slate-500">
                   By submitting this form, you agree to our{' '}
-                  <a href="/privacy" className="text-cyan-400 hover:underline">Privacy Policy</a>.
+                  <a href="/privacy" className="text-sky-700 hover:underline">Privacy Policy</a>.
                 </p>
               </Card>
             </div>
@@ -223,14 +234,14 @@ export default function ContactPage() {
               <form onSubmit={handleSubmit} className="space-y-6">
                 <div>
                   <label className="label">What can we help with?</label>
-                  <div className="grid md:grid-cols-3 gap-3">
+                  <div className="grid gap-3 md:grid-cols-3">
                     {INTENT_OPTIONS.map((option) => (
                       <label
                         key={option.value}
-                        className={`flex items-center gap-3 p-4 rounded-lg border cursor-pointer transition-all ${
+                        className={`flex cursor-pointer items-center gap-3 rounded-xl border p-4 transition-all ${
                           formData.intent === option.value
-                            ? 'bg-cyan-500/10 border-cyan-500/50'
-                            : 'bg-slate-800/50 border-slate-700 hover:border-slate-600'
+                            ? 'border-emerald-300 bg-emerald-50 shadow-[0_14px_40px_rgba(144,204,124,0.14)]'
+                            : 'border-sky-100 bg-white hover:border-sky-200'
                         }`}
                       >
                         <input
@@ -243,14 +254,14 @@ export default function ContactPage() {
                         />
                         <div className={`w-4 h-4 rounded-full border-2 flex items-center justify-center ${
                           formData.intent === option.value
-                            ? 'border-cyan-500'
-                            : 'border-slate-600'
+                            ? 'border-emerald-500'
+                            : 'border-sky-300'
                         }`}>
                           {formData.intent === option.value && (
-                            <div className="w-2 h-2 rounded-full bg-cyan-500" />
+                            <div className="h-2 w-2 rounded-full bg-emerald-500" />
                           )}
                         </div>
-                        <span className="text-body-sm text-slate-300">{option.label}</span>
+                        <span className="text-body-sm text-slate-900">{option.label}</span>
                       </label>
                     ))}
                   </div>

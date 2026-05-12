@@ -3,7 +3,7 @@
 import Link from 'next/link'
 import Image from 'next/image'
 import { usePathname } from 'next/navigation'
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import { cn } from '@/lib/utils'
 import { trackEvent } from '@/lib/analytics'
 import { NAV_LINKS, CTA_LABELS, SOLUTIONS_NAV_GROUPS } from '@/lib/constants'
@@ -13,6 +13,8 @@ export function Header() {
   const pathname = usePathname()
   const [isScrolled, setIsScrolled] = useState(false)
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
+  const [isExploreOpen, setIsExploreOpen] = useState(false)
+  const exploreMenuRef = useRef<HTMLDivElement>(null)
   const isSolutionsActive =
     pathname.startsWith('/solutions') ||
     pathname.startsWith('/industries') ||
@@ -71,13 +73,42 @@ export function Header() {
     return () => window.removeEventListener('keydown', handleKeyDown)
   }, [isMobileMenuOpen])
 
+  useEffect(() => {
+    setIsExploreOpen(false)
+  }, [pathname])
+
+  useEffect(() => {
+    if (!isExploreOpen) {
+      return
+    }
+
+    const handlePointerDown = (event: PointerEvent) => {
+      if (!exploreMenuRef.current?.contains(event.target as Node)) {
+        setIsExploreOpen(false)
+      }
+    }
+
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (event.key === 'Escape') {
+        setIsExploreOpen(false)
+      }
+    }
+
+    document.addEventListener('pointerdown', handlePointerDown)
+    window.addEventListener('keydown', handleKeyDown)
+    return () => {
+      document.removeEventListener('pointerdown', handlePointerDown)
+      window.removeEventListener('keydown', handleKeyDown)
+    }
+  }, [isExploreOpen])
+
   return (
     <header
       className={cn(
         'fixed top-0 left-0 right-0 z-50 transition-all duration-300',
         isScrolled || isMobileMenuOpen
-          ? 'bg-slate-950/95 backdrop-blur-xl border-b border-slate-800/70'
-          : 'bg-slate-950/85 backdrop-blur-lg border-b border-slate-800/30'
+          ? 'border-b border-sky-100 bg-white/95 shadow-[0_12px_40px_rgba(15,23,42,0.08)] backdrop-blur-xl'
+          : 'border-b border-sky-100/80 bg-white/90 backdrop-blur-lg'
       )}
     >
       <nav className="container-wide">
@@ -91,23 +122,26 @@ export function Header() {
               height={453}
               priority
               className="h-8 w-auto md:h-9 logo-cta-green"
+              style={{ height: '2.25rem', width: 'auto', maxWidth: '11rem' }}
             />
           </Link>
 
           {/* Desktop Navigation */}
           <div className="hidden lg:flex items-center gap-1">
-            <div className="group relative">
+            <div className="relative" ref={exploreMenuRef}>
               <button
                 type="button"
-                className={`inline-flex items-center gap-2 rounded-lg px-4 py-2 text-body-sm transition-colors hover:bg-slate-800/40 hover:text-white focus:outline-none focus-visible:ring-2 focus-visible:ring-cyan-300/70 ${
-                  isSolutionsActive ? 'text-white' : 'text-slate-300'
+                aria-haspopup="menu"
+                aria-expanded={isExploreOpen}
+                onClick={() => setIsExploreOpen((open) => !open)}
+                className={`inline-flex items-center gap-2 rounded-lg px-4 py-2 text-body-sm transition-colors hover:bg-sky-50 hover:text-slate-950 focus:outline-none focus-visible:ring-2 focus-visible:ring-emerald-300/70 ${
+                  isSolutionsActive ? 'text-slate-950' : 'text-slate-700'
                 }`}
-                aria-haspopup="true"
               >
                 Explore
                 <svg
                   aria-hidden="true"
-                  className="h-4 w-4 transition-transform duration-200 group-hover:rotate-180 group-focus-within:rotate-180"
+                  className={cn('h-4 w-4 transition-transform duration-200', isExploreOpen && 'rotate-180')}
                   fill="none"
                   viewBox="0 0 24 24"
                   stroke="currentColor"
@@ -116,12 +150,12 @@ export function Header() {
                 </svg>
               </button>
 
-              <div className="pointer-events-none absolute left-0 top-full z-50 pt-3 opacity-0 transition-all duration-200 group-hover:pointer-events-auto group-hover:opacity-100 group-focus-within:pointer-events-auto group-focus-within:opacity-100">
-                <div className="w-[34rem] rounded-2xl border border-slate-700/80 bg-[linear-gradient(180deg,rgba(20,34,50,0.98)_0%,rgba(7,13,20,0.98)_100%)] p-4 shadow-[0_24px_80px_rgba(2,6,23,0.52)] ring-1 ring-white/5">
+              <div className={cn('absolute left-0 top-full z-50 pt-3', isExploreOpen ? 'block' : 'hidden')}>
+                <div className="w-[34rem] rounded-2xl border border-sky-100 bg-white p-4 shadow-[0_24px_80px_rgba(30,64,175,0.16)] ring-1 ring-sky-100/70">
                   <div className="grid grid-cols-[0.9fr_1.1fr] gap-4">
                     {SOLUTIONS_NAV_GROUPS.map((group) => (
                       <div key={group.title}>
-                        <p className="mb-2 px-3 text-body-xs font-semibold uppercase tracking-[0.18em] text-cyan-300/80">
+                        <p className="mb-2 px-3 text-body-xs font-semibold uppercase tracking-[0.18em] text-emerald-700">
                           {group.title}
                         </p>
                         <div className="grid gap-1">
@@ -129,8 +163,9 @@ export function Header() {
                             <Link
                               key={link.href}
                               href={link.href}
-                              className={`rounded-xl px-3 py-2.5 text-body-sm transition-colors hover:bg-slate-800/80 hover:text-white focus:outline-none focus-visible:ring-2 focus-visible:ring-cyan-300/70 ${
-                                pathname === link.href ? 'bg-slate-800/70 text-white' : 'text-slate-300'
+                              onClick={() => setIsExploreOpen(false)}
+                              className={`rounded-xl px-3 py-2.5 text-body-sm transition-colors hover:bg-sky-50 hover:text-slate-950 focus:outline-none focus-visible:ring-2 focus-visible:ring-emerald-300/70 ${
+                                pathname === link.href ? 'bg-sky-50 text-slate-950' : 'text-slate-700'
                               }`}
                             >
                               {link.label}
@@ -148,7 +183,7 @@ export function Header() {
               <Link
                 key={link.href}
                 href={link.href}
-                className="px-4 py-2 text-body-sm text-slate-300 hover:text-white transition-colors rounded-lg hover:bg-slate-800/40"
+                className="rounded-lg px-4 py-2 text-body-sm text-slate-700 transition-colors hover:bg-sky-50 hover:text-slate-950"
               >
                 {link.label}
               </Link>
@@ -162,6 +197,7 @@ export function Header() {
                 variant="ghost"
                 size="small"
                 href="/contact?intent=demo&source=header"
+                className="text-slate-700 hover:bg-sky-50 hover:text-slate-950"
                 onClick={() => trackEvent('cta_demo_click', { location: 'header_desktop_secondary' })}
               >
                 {CTA_LABELS.secondary}
@@ -182,8 +218,8 @@ export function Header() {
             className={cn(
               'lg:hidden flex h-10 w-10 items-center justify-center rounded-xl border transition-all duration-200',
               isMobileMenuOpen
-                ? 'border-slate-700/80 bg-slate-800/80 text-white shadow-lg shadow-slate-950/30'
-                : 'border-transparent text-slate-300 hover:border-slate-800/80 hover:bg-slate-800/50 hover:text-white'
+                ? 'border-sky-200 bg-sky-50 text-slate-950 shadow-lg shadow-sky-100/70'
+                : 'border-transparent text-slate-700 hover:border-sky-100 hover:bg-sky-50 hover:text-slate-950'
             )}
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
             aria-label="Toggle menu"
@@ -223,7 +259,7 @@ export function Header() {
         aria-hidden={!isMobileMenuOpen}
         tabIndex={isMobileMenuOpen ? 0 : -1}
         className={cn(
-          'lg:hidden fixed inset-0 top-18 bg-slate-950/70 backdrop-blur-sm transition-opacity duration-300',
+          'lg:hidden fixed inset-0 top-18 bg-slate-950/25 backdrop-blur-sm transition-opacity duration-300',
           isMobileMenuOpen
             ? 'opacity-100 pointer-events-auto'
             : 'opacity-0 pointer-events-none'
@@ -239,12 +275,12 @@ export function Header() {
             : '-translate-y-3 scale-95 opacity-0 pointer-events-none'
         )}
       >
-        <div className="mx-auto max-w-md overflow-hidden rounded-[1.75rem] border border-slate-700/80 bg-[linear-gradient(180deg,rgba(20,34,50,0.98)_0%,rgba(7,13,20,0.98)_100%)] shadow-[0_28px_90px_rgba(2,6,23,0.55)] ring-1 ring-white/5">
-          <div className="border-b border-slate-800/80 px-5 py-4">
-            <p className="text-body-xs font-semibold uppercase tracking-[0.18em] text-cyan-300/80">
+        <div className="mx-auto max-w-md overflow-hidden rounded-[1.75rem] border border-sky-100 bg-white shadow-[0_28px_90px_rgba(30,64,175,0.20)] ring-1 ring-sky-100/70">
+          <div className="border-b border-sky-100 px-5 py-4">
+            <p className="text-body-xs font-semibold uppercase tracking-[0.18em] text-emerald-700">
               Navigation
             </p>
-            <p className="mt-2 max-w-xs text-body-sm text-slate-400">
+            <p className="mt-2 max-w-xs text-body-sm text-slate-600">
               {isInvestorsPage
                 ? 'Learn more about LeanFM or contact the team directly.'
                 : 'Learn more about LeanFM or request a sample analysis.'}
@@ -252,8 +288,8 @@ export function Header() {
           </div>
           <div className="max-h-[calc(100dvh-7rem)] overflow-y-auto px-3 py-3">
             <div className="flex flex-col gap-4">
-              <div className="rounded-2xl border border-slate-800/80 bg-slate-950/35 p-3">
-                <p className="px-2 pb-2 text-body-xs font-semibold uppercase tracking-[0.18em] text-cyan-300/80">
+              <div className="rounded-2xl border border-sky-100 bg-sky-50/60 p-3">
+                <p className="px-2 pb-2 text-body-xs font-semibold uppercase tracking-[0.18em] text-emerald-700">
                   Explore
                 </p>
                 {SOLUTIONS_NAV_GROUPS.map((group) => (
@@ -266,10 +302,10 @@ export function Header() {
                         <Link
                           key={link.href}
                           href={link.href}
-                          className={`rounded-xl border px-3 py-3 text-body-md font-medium transition-all hover:border-slate-700/80 hover:bg-slate-800/75 hover:text-white ${
+                          className={`rounded-xl border px-3 py-3 text-body-md font-medium transition-all hover:border-sky-200 hover:bg-white hover:text-slate-950 ${
                             pathname === link.href
-                              ? 'border-slate-700/80 bg-slate-800/75 text-white'
-                              : 'border-transparent text-slate-100'
+                              ? 'border-sky-200 bg-white text-slate-950'
+                              : 'border-transparent text-slate-700'
                           }`}
                           onClick={() => setIsMobileMenuOpen(false)}
                         >
@@ -285,20 +321,20 @@ export function Header() {
                 <Link
                   key={link.href}
                   href={link.href}
-                  className="rounded-2xl border border-transparent px-4 py-4 text-body-lg font-medium text-slate-100 transition-all hover:border-slate-700/80 hover:bg-slate-800/75 hover:text-white"
+                  className="rounded-2xl border border-transparent px-4 py-4 text-body-lg font-medium text-slate-700 transition-all hover:border-sky-200 hover:bg-sky-50 hover:text-slate-950"
                   onClick={() => setIsMobileMenuOpen(false)}
                 >
                   {link.label}
                 </Link>
               ))}
             </div>
-            <div className="mt-4 border-t border-slate-800/80 px-2 pt-4">
+            <div className="mt-4 border-t border-sky-100 px-2 pt-4">
               <div className="flex flex-col gap-3">
                 {!isInvestorsPage ? (
                   <Button
                     variant="ghost"
                     href="/contact?intent=demo&source=header_mobile"
-                    className="w-full justify-center rounded-2xl border border-slate-700/80 bg-slate-900/60"
+                    className="w-full justify-center rounded-2xl border border-sky-200 bg-white text-slate-900 hover:bg-sky-50"
                     onClick={() => trackEvent('cta_demo_click', { location: 'header_mobile_secondary' })}
                   >
                     {CTA_LABELS.secondary}

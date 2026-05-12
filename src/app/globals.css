@@ -12,10 +12,20 @@
 
   html {
     scroll-behavior: smooth;
+    overflow-x: clip;
   }
 
   body {
-    @apply bg-slate-950 text-slate-100 font-body antialiased tracking-[0.01em];
+    @apply bg-slate-50 text-slate-900 font-body antialiased tracking-[0.01em];
+    overflow-x: clip;
+  }
+
+  img,
+  picture,
+  video,
+  canvas,
+  svg {
+    max-width: 100%;
   }
 
   /* Custom scrollbar */
@@ -25,7 +35,7 @@
   }
 
   ::-webkit-scrollbar-track {
-    @apply bg-slate-900;
+    @apply bg-slate-100;
   }
 
   ::-webkit-scrollbar-thumb {
@@ -38,7 +48,7 @@
 
   /* Selection */
   ::selection {
-    @apply bg-cyan-500/30 text-white;
+    @apply bg-cyan-500/30 text-slate-950;
   }
 }
 
@@ -82,11 +92,11 @@
   }
 
   .btn-secondary {
-    @apply btn bg-slate-950/20 text-slate-200 border border-slate-600/75 hover:bg-slate-800/55 hover:border-slate-400/80 focus:ring-slate-500;
+    @apply btn border border-sky-200 bg-white text-slate-900 shadow-sm hover:-translate-y-0.5 hover:border-sky-300 hover:bg-sky-50 focus:ring-sky-300;
   }
 
   .btn-ghost {
-    @apply btn text-slate-300 hover:text-white hover:bg-slate-800/40;
+    @apply btn text-slate-700 hover:bg-sky-50 hover:text-slate-950;
   }
 
   .btn-small {
@@ -182,6 +192,18 @@
     background-position: right 0.75rem center;
     background-size: 1.5em 1.5em;
     padding-right: 2.5rem;
+  }
+
+  .light-form .input {
+    @apply bg-white border-sky-200 text-slate-950 placeholder:text-slate-400 focus:ring-sky-500/30 focus:border-sky-500;
+  }
+
+  .light-form .label {
+    @apply text-slate-700;
+  }
+
+  .light-form .select {
+    @apply bg-white border-sky-200 text-slate-950;
   }
 
   /* Badge */

@@ -12,6 +12,7 @@ import {
 import { Accordion } from '@/components/ui'
 import { TrackedButton } from '@/components/analytics/TrackedButton'
 import { StickyCtaBar } from '@/components/home/StickyCtaBar'
+import { DataToActionFlow, FinalCTASection, PhotoPlaceholder } from '@/components/visual/LeanFmVisuals'
 import { CTA_LABELS } from '@/lib/constants'
 
 const SAMPLE_ANALYSIS_HREF = '/contact?intent=sample-analysis&source=how_it_works'
@@ -159,16 +160,16 @@ const faqItems = [
   {
     question: 'Do you guarantee savings?',
     answer:
-      'No. LeanFM identifies hidden issues and estimated impact where available. Actual outcomes depend on the building and corrective actions taken.',
+      'Yes. LeanFM backs every engagement with a money-back ROI guarantee: if our analysis does not identify HVAC issues with combined estimated annual operational impact of at least 3x your engagement fee, we refund the fee. The guarantee is conditional on implementing the corrective actions in your findings report. Full mechanics live on our Terms page.',
   },
 ]
 
 function ProcessVisual() {
   return (
-    <div className="relative mx-auto w-[calc(100vw-2rem)] max-w-xl min-w-0 overflow-hidden rounded-2xl border border-slate-700/70 bg-slate-950/75 p-5 shadow-[0_28px_90px_rgba(2,6,23,0.42)] sm:w-full">
+    <div className="relative mx-auto w-[calc(100vw-2rem)] max-w-xl min-w-0 overflow-hidden rounded-2xl border border-sky-100 bg-white/90 p-5 shadow-[0_24px_80px_rgba(30,64,175,0.14)] sm:w-full">
       <div aria-hidden="true" className="absolute inset-0 rounded-2xl bg-[radial-gradient(circle_at_20%_10%,rgba(144,204,124,0.16),transparent_32%),radial-gradient(circle_at_85%_85%,rgba(59,130,246,0.12),transparent_36%)]" />
       <div className="relative">
-        <p className="mb-4 text-body-xs font-semibold uppercase tracking-[0.18em] text-slate-500">
+        <p className="mb-4 text-body-xs font-semibold uppercase tracking-[0.18em] text-sky-700">
           Existing data to action
         </p>
         <div className="grid gap-3">
@@ -177,26 +178,26 @@ function ProcessVisual() {
             ['Hidden issue review', 'Patterns across time and equipment'],
             ['Prioritized findings', 'What your team should review first'],
           ].map(([label, value], index) => (
-            <div key={label} className="grid grid-cols-[auto_1fr] gap-3 rounded-xl border border-slate-800 bg-slate-900/70 p-4">
-              <span className="flex h-10 w-10 items-center justify-center rounded-full border border-cyan-400/35 bg-cyan-500/10 font-display text-body-sm font-semibold text-cyan-200">
+            <div key={label} className="grid grid-cols-[auto_1fr] gap-3 rounded-xl border border-sky-100 bg-sky-50/70 p-4">
+              <span className="flex h-10 w-10 items-center justify-center rounded-full border border-emerald-200 bg-emerald-50 font-display text-body-sm font-semibold text-emerald-700">
                 {index + 1}
               </span>
               <div>
-                <p className="font-display text-body-lg font-semibold text-white">{label}</p>
-                <p className="mt-1 text-body-sm leading-relaxed text-slate-400">{value}</p>
+                <p className="font-display text-body-lg font-semibold text-slate-950">{label}</p>
+                <p className="mt-1 text-body-sm leading-relaxed text-slate-600">{value}</p>
               </div>
             </div>
           ))}
         </div>
-        <div className="mt-5 rounded-xl border border-cyan-400/25 bg-cyan-500/10 p-4">
-          <p className="text-body-xs font-semibold uppercase tracking-[0.18em] text-cyan-300">
+        <div className="mt-5 rounded-xl border border-emerald-200 bg-emerald-50 p-4">
+          <p className="text-body-xs font-semibold uppercase tracking-[0.18em] text-emerald-800">
             Low-disruption start
           </p>
           <div className="mt-4 grid gap-2">
             {['No new hardware', 'No BAS replacement', 'Clear review call'].map((item) => (
-              <div key={item} className="flex items-center gap-3 rounded-lg bg-slate-950/55 px-3 py-2">
-                <CheckCircle2 className="h-4 w-4 text-cyan-300" aria-hidden="true" />
-                <span className="text-body-sm text-white">{item}</span>
+              <div key={item} className="flex items-center gap-3 rounded-lg bg-white px-3 py-2 shadow-sm">
+                <CheckCircle2 className="h-4 w-4 text-emerald-700" aria-hidden="true" />
+                <span className="text-body-sm text-slate-900">{item}</span>
               </div>
             ))}
           </div>
@@ -209,25 +210,26 @@ function ProcessVisual() {
 export default function HowItWorksPage() {
   return (
     <>
-      <section id="how-it-works-hero" className="relative overflow-hidden border-b border-slate-800/70 bg-slate-950">
-        <div aria-hidden="true" className="absolute inset-0 bg-grid opacity-70" />
-        <div aria-hidden="true" className="absolute right-0 top-0 h-[34rem] w-[34rem] rounded-full bg-cyan-500/10 blur-3xl" />
+      <section id="how-it-works-hero" className="relative overflow-hidden border-b border-sky-100 bg-[linear-gradient(135deg,#f8fcff_0%,#eef8ff_48%,#f4fbef_100%)]">
+        <div aria-hidden="true" className="absolute inset-0 bg-grid opacity-35" />
+        <div aria-hidden="true" className="absolute -left-24 top-20 h-72 w-72 rounded-full bg-emerald-200/45 blur-3xl" />
+        <div aria-hidden="true" className="absolute right-0 top-0 h-[34rem] w-[34rem] rounded-full bg-sky-200/55 blur-3xl" />
         <div className="container-wide relative z-10 pt-28 pb-16 md:pt-36 md:pb-20">
           <div className="grid min-w-0 items-center gap-12 lg:grid-cols-[1.02fr_0.98fr]">
             <div className="w-[calc(100vw-2rem)] min-w-0 max-w-3xl sm:w-auto">
-              <p className="mb-5 text-body-xs font-semibold uppercase tracking-[0.2em] text-cyan-300">
+              <p className="mb-5 text-body-xs font-semibold uppercase tracking-[0.2em] text-sky-700">
                 How It Works
               </p>
-              <h1 className="mb-6 max-w-[calc(100vw-2rem)] font-body text-[3.05rem] font-semibold leading-[0.98] tracking-normal text-white md:max-w-[12ch] md:text-[4rem] lg:text-[4.55rem]">
+              <h1 className="mb-6 max-w-[calc(100vw-2rem)] font-body text-[3.05rem] font-semibold leading-[0.98] tracking-normal text-slate-950 md:max-w-[12ch] md:text-[4rem] lg:text-[4.55rem]">
                 A Clear Process for Finding Hidden Building System Issues
               </h1>
-              <p className="body-large mb-7 max-w-full md:max-w-2xl">
+              <p className="body-large mb-7 max-w-full text-slate-700 md:max-w-2xl">
                 LeanFM starts with the building system data you already have, analyzes it for hidden problems, and turns the results into prioritized findings your team can review and act on.
               </p>
               <ul className="mb-8 grid gap-3">
                 {heroBullets.map((bullet) => (
-                  <li key={bullet} className="flex gap-3 text-body-md text-slate-200">
-                    <CheckCircle2 className="mt-0.5 h-5 w-5 shrink-0 text-cyan-300" aria-hidden="true" />
+                  <li key={bullet} className="flex gap-3 text-body-md text-slate-800">
+                    <CheckCircle2 className="mt-0.5 h-5 w-5 shrink-0 text-emerald-600" aria-hidden="true" />
                     <span>{bullet}</span>
                   </li>
                 ))}
@@ -248,7 +250,7 @@ export default function HowItWorksPage() {
                   size="large"
                   eventName="cta_demo_click"
                   eventParams={{ location: 'how_it_works_hero_secondary' }}
-                  className="w-full min-w-0 sm:w-auto"
+                  className="w-full min-w-0 border-slate-300 bg-white text-slate-900 hover:border-slate-400 hover:bg-slate-50 sm:w-auto"
                 >
                   {CTA_LABELS.secondary}
                 </TrackedButton>
@@ -260,20 +262,20 @@ export default function HowItWorksPage() {
         </div>
       </section>
 
-      <section className="section-large border-y border-slate-800/70 bg-slate-900/35">
+      <section className="section-large border-y border-sky-100 bg-white">
         <div className="container-default">
           <div className="grid gap-10 lg:grid-cols-[0.82fr_1.18fr] lg:items-start">
             <div>
-              <h2 className="heading-2 mb-5 text-white">Why your BAS may not be telling you the whole story.</h2>
-              <p className="body-large">
+              <h2 className="heading-2 mb-5 text-slate-950">Why your BAS may not be telling you the whole story.</h2>
+              <p className="body-large text-slate-700">
                 BAS alarms are usually built around thresholds and obvious failures. LeanFM looks across trend behavior to find patterns that point to hidden HVAC faults, energy waste, comfort risk, and equipment wear.
               </p>
             </div>
             <div className="grid gap-3 sm:grid-cols-2">
               {['Threshold alarms miss gradual waste', 'Patterns appear across time and equipment', 'Noise makes priorities hard to rank', 'Clear corrective guidance helps teams act'].map((item) => (
-                <div key={item} className="flex min-h-20 items-center gap-3 rounded-xl border border-slate-800 bg-slate-950/55 p-4">
-                  <CheckCircle2 className="h-5 w-5 shrink-0 text-cyan-300" aria-hidden="true" />
-                  <p className="text-body-md font-medium text-slate-100">{item}</p>
+                <div key={item} className="flex min-h-20 items-center gap-3 rounded-xl border border-sky-100 bg-sky-50/70 p-4">
+                  <CheckCircle2 className="h-5 w-5 shrink-0 text-sky-700" aria-hidden="true" />
+                  <p className="text-body-md font-medium text-slate-800">{item}</p>
                 </div>
               ))}
             </div>
@@ -281,52 +283,56 @@ export default function HowItWorksPage() {
         </div>
       </section>
 
-      <section className="section-large bg-slate-950">
+      <section className="section-large bg-[linear-gradient(135deg,#f8fcff_0%,#eef8ff_58%,#f4fbef_100%)]">
         <div className="container-default">
           <div className="mb-12 max-w-3xl">
-            <h2 className="heading-2 mb-4 text-white">From Existing Data to Clear Action</h2>
+            <h2 className="heading-2 mb-4 text-slate-950">From Existing Data to Clear Action</h2>
+            <p className="body-large text-slate-700">
+              The flow is simple: existing exports, hidden patterns, and a prioritized fix list your team can review.
+            </p>
           </div>
+          <DataToActionFlow variant="light" className="mb-8" />
           <div className="grid gap-3 md:grid-cols-2 lg:grid-cols-3">
             {processSteps.map((step, index) => (
-              <div key={step} className="rounded-xl border border-slate-800 bg-slate-900/60 p-5">
-                <span className="mb-5 inline-flex h-10 w-10 items-center justify-center rounded-full border border-cyan-400/40 bg-cyan-500/10 font-display font-semibold text-cyan-200">
+              <div key={step} className="rounded-xl border border-sky-100 bg-white/85 p-5 shadow-sm">
+                <span className="mb-5 inline-flex h-10 w-10 items-center justify-center rounded-full border border-emerald-200 bg-emerald-50 font-display font-semibold text-emerald-700">
                   {index + 1}
                 </span>
-                <p className="font-display text-body-lg font-semibold leading-snug text-white">{step}</p>
+                <p className="font-display text-body-lg font-semibold leading-snug text-slate-950">{step}</p>
               </div>
             ))}
           </div>
         </div>
       </section>
 
-      <section className="section-large border-y border-slate-800/70 bg-slate-900/35">
+      <section className="section-large border-y border-sky-100 bg-white">
         <div className="container-default">
           <div className="grid gap-6">
             {detailedSteps.map(({ title, body, label, items, reassurance, Icon }) => (
-              <article key={title} className="rounded-2xl border border-slate-800 bg-slate-950/55 p-6 md:p-7">
+              <article key={title} className="rounded-2xl border border-sky-100 bg-white p-6 shadow-[0_14px_45px_rgba(30,64,175,0.07)] md:p-7">
                 <div className="grid gap-6 lg:grid-cols-[0.82fr_1.18fr] lg:items-start">
                   <div>
-                    <Icon className="mb-5 h-6 w-6 text-cyan-300" aria-hidden="true" />
-                    <h2 className="mb-4 font-display text-3xl font-semibold leading-tight text-white md:text-4xl">
+                    <Icon className="mb-5 h-6 w-6 text-sky-700" aria-hidden="true" />
+                    <h2 className="mb-4 font-display text-3xl font-semibold leading-tight text-slate-950 md:text-4xl">
                       {title}
                     </h2>
-                    <p className="body-large">{body}</p>
+                    <p className="body-large text-slate-700">{body}</p>
                     {reassurance ? (
-                      <p className="mt-5 font-display text-xl font-semibold leading-snug text-cyan-200">
+                      <p className="mt-5 font-display text-xl font-semibold leading-snug text-emerald-700">
                         {reassurance}
                       </p>
                     ) : null}
                   </div>
                   {items ? (
-                    <div className="rounded-xl border border-cyan-400/20 bg-cyan-500/10 p-5">
-                      <p className="mb-4 text-body-xs font-semibold uppercase tracking-[0.18em] text-cyan-300">
+                    <div className="rounded-xl border border-emerald-200 bg-emerald-50 p-5">
+                      <p className="mb-4 text-body-xs font-semibold uppercase tracking-[0.18em] text-emerald-800">
                         {label}
                       </p>
                       <div className="grid gap-3 sm:grid-cols-2">
                         {items.map((item) => (
-                          <div key={item} className="flex gap-3 rounded-lg bg-slate-950/55 px-3 py-3">
-                            <CheckCircle2 className="mt-0.5 h-4 w-4 shrink-0 text-cyan-300" aria-hidden="true" />
-                            <p className="text-body-sm leading-relaxed text-slate-100">{item}</p>
+                          <div key={item} className="flex gap-3 rounded-lg bg-white px-3 py-3 shadow-sm">
+                            <CheckCircle2 className="mt-0.5 h-4 w-4 shrink-0 text-emerald-700" aria-hidden="true" />
+                            <p className="text-body-sm leading-relaxed text-slate-800">{item}</p>
                           </div>
                         ))}
                       </div>
@@ -339,52 +345,29 @@ export default function HowItWorksPage() {
         </div>
       </section>
 
-      <section className="section-large bg-slate-950">
+      <section className="section-large bg-[linear-gradient(135deg,#f8fcff_0%,#eef8ff_58%,#f4fbef_100%)]">
         <div className="container-default">
           <div className="mb-10 max-w-3xl">
-            <h2 className="heading-2 mb-4 text-white">Who Does What?</h2>
-            <p className="body-large">
+            <h2 className="heading-2 mb-4 text-slate-950">Who Does What?</h2>
+            <p className="body-large text-slate-700">
               The process is designed to keep work clear between your team and LeanFM.
             </p>
           </div>
-          <div className="grid gap-4 md:grid-cols-3">
-            {whoDoesWhat.map((item) => (
-              <div key={item.title} className="rounded-xl border border-slate-800 bg-slate-900/60 p-5">
-                <h3 className="mb-3 font-display text-2xl font-semibold text-white">{item.title}</h3>
-                <p className="text-body-md leading-relaxed text-slate-300">{item.description}</p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      <section className="section-large bg-slate-950">
-        <div className="container-default">
-          <div className="mb-10 max-w-3xl">
-            <h2 className="heading-2 mb-4 text-white">What You Receive From a Sample Analysis</h2>
-          </div>
-          <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
-            {deliverables.map((deliverable) => (
-              <div key={deliverable} className="rounded-xl border border-slate-800 bg-slate-900/60 p-5">
-                <FileText className="mb-5 h-6 w-6 text-cyan-300" aria-hidden="true" />
-                <p className="font-display text-body-lg font-semibold leading-snug text-white">{deliverable}</p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      <section className="section-large border-y border-slate-800/70 bg-slate-900/35">
-        <div className="container-default">
-          <div className="grid gap-10 lg:grid-cols-[0.82fr_1.18fr] lg:items-start">
-            <div>
-              <h2 className="heading-2 mb-5 text-white">Designed to Be Practical for Busy Facilities Teams</h2>
-            </div>
-            <div className="grid gap-3 sm:grid-cols-2">
-              {lowFrictionItems.map((item) => (
-                <div key={item} className="flex min-h-20 items-center gap-3 rounded-xl border border-slate-800 bg-slate-950/55 p-4">
-                  <CheckCircle2 className="h-5 w-5 shrink-0 text-cyan-300" aria-hidden="true" />
-                  <p className="text-body-md font-medium text-slate-100">{item}</p>
+          <div className="grid gap-6 lg:grid-cols-[0.9fr_1.1fr] lg:items-center">
+            <PhotoPlaceholder
+              label="Facilities team reviewing building system findings together"
+              alt="Facilities team reviewing building system findings together"
+              src="/media/leanfm-images/k12-hvac-inspection.jpg"
+              aspect="landscape"
+              className="border-white shadow-[0_24px_90px_rgba(30,64,175,0.16)]"
+              imageClassName="object-[50%_52%]"
+              overlay={false}
+            />
+            <div className="grid gap-4 md:grid-cols-3 lg:grid-cols-1">
+              {whoDoesWhat.map((item) => (
+                <div key={item.title} className="rounded-xl border border-sky-100 bg-white/85 p-5 shadow-sm">
+                  <h3 className="mb-3 font-display text-2xl font-semibold text-slate-950">{item.title}</h3>
+                  <p className="text-body-md leading-relaxed text-slate-700">{item.description}</p>
                 </div>
               ))}
             </div>
@@ -392,21 +375,55 @@ export default function HowItWorksPage() {
         </div>
       </section>
 
-      <section className="section-large bg-slate-950">
+      <section className="section-large bg-white">
+        <div className="container-default">
+          <div className="mb-10 max-w-3xl">
+            <h2 className="heading-2 mb-4 text-slate-950">What You Receive From a Sample Analysis</h2>
+          </div>
+          <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+            {deliverables.map((deliverable) => (
+              <div key={deliverable} className="rounded-xl border border-sky-100 bg-sky-50/70 p-5">
+                <FileText className="mb-5 h-6 w-6 text-sky-700" aria-hidden="true" />
+                <p className="font-display text-body-lg font-semibold leading-snug text-slate-950">{deliverable}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="section-large border-y border-sky-100 bg-[linear-gradient(135deg,#f8fcff_0%,#eef8ff_58%,#f4fbef_100%)]">
         <div className="container-default">
           <div className="grid gap-10 lg:grid-cols-[0.82fr_1.18fr] lg:items-start">
             <div>
-              <LockKeyhole className="mb-5 h-7 w-7 text-cyan-300" aria-hidden="true" />
-              <h2 className="heading-2 mb-5 text-white">Your Building Data Is Handled Carefully</h2>
-              <p className="body-large">
+              <h2 className="heading-2 mb-5 text-slate-950">Designed to Be Practical for Busy Facilities Teams</h2>
+            </div>
+            <div className="grid gap-3 sm:grid-cols-2">
+              {lowFrictionItems.map((item) => (
+                <div key={item} className="flex min-h-20 items-center gap-3 rounded-xl border border-sky-100 bg-white/85 p-4 shadow-sm">
+                  <CheckCircle2 className="h-5 w-5 shrink-0 text-sky-700" aria-hidden="true" />
+                  <p className="text-body-md font-medium text-slate-800">{item}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section className="section-large bg-white">
+        <div className="container-default">
+          <div className="grid gap-10 lg:grid-cols-[0.82fr_1.18fr] lg:items-start">
+            <div>
+              <LockKeyhole className="mb-5 h-7 w-7 text-sky-700" aria-hidden="true" />
+              <h2 className="heading-2 mb-5 text-slate-950">Your Building Data Is Handled Carefully</h2>
+              <p className="body-large text-slate-700">
                 LeanFM works with building system data used for operational analysis.
               </p>
             </div>
             <div className="grid gap-3 sm:grid-cols-2">
               {dataHandlingItems.map((item) => (
-                <div key={item} className="rounded-xl border border-slate-800 bg-slate-900/60 p-5">
-                  <CheckCircle2 className="mb-5 h-5 w-5 text-cyan-300" aria-hidden="true" />
-                  <p className="font-display text-body-lg font-semibold leading-snug text-white">{item}</p>
+                <div key={item} className="rounded-xl border border-sky-100 bg-sky-50/70 p-5">
+                  <CheckCircle2 className="mb-5 h-5 w-5 text-sky-700" aria-hidden="true" />
+                  <p className="font-display text-body-lg font-semibold leading-snug text-slate-950">{item}</p>
                 </div>
               ))}
             </div>
@@ -414,33 +431,22 @@ export default function HowItWorksPage() {
         </div>
       </section>
 
-      <section className="section-large border-y border-slate-800/70 bg-slate-900/35">
+      <section className="section-large border-y border-sky-100 bg-white">
         <div className="container-default">
           <div className="mb-8 max-w-3xl">
-            <h2 className="heading-2 text-white">Questions Teams Ask Before Starting</h2>
+            <h2 className="heading-2 text-slate-950">Questions Teams Ask Before Starting</h2>
           </div>
-          <Accordion items={faqItems} />
+          <Accordion items={faqItems} variant="light" />
         </div>
       </section>
 
-      <section className="border-t border-slate-800/70 bg-slate-900/50">
-        <div className="container-default py-14 md:py-20">
-          <div className="mx-auto max-w-2xl text-center">
-            <h2 className="heading-2 mb-5 text-white">Use Existing Data to Find the Next Priority</h2>
-            <p className="body-large mb-8">
-              Request a Sample Analysis and LeanFM will help identify hidden issues affecting energy, comfort, and system performance.
-            </p>
-            <TrackedButton
-              href={SAMPLE_ANALYSIS_HREF}
-              size="large"
-              eventName="cta_sample_analysis_click"
-              eventParams={{ location: 'how_it_works_final_primary' }}
-            >
-              {CTA_LABELS.primary}
-            </TrackedButton>
-          </div>
-        </div>
-      </section>
+      <FinalCTASection
+        headline="Use existing data to find the next priority."
+        body="Request a Sample Analysis and LeanFM will help identify hidden issues affecting energy, comfort, and system performance."
+        primaryHref={SAMPLE_ANALYSIS_HREF}
+        primaryLocation="how_it_works_final_primary"
+        secondaryLocation="how_it_works_final_secondary"
+      />
 
       <StickyCtaBar
         heroId="how-it-works-hero"

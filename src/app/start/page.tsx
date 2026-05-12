@@ -6,6 +6,8 @@ const startVariant = {
     title: 'Start your Sample Analysis',
     description:
       'Share a few details about your building and upload available BAS trend data. LeanFM will review the data and follow up with next steps.',
+    photoLabel: 'BAS export file or facilities manager uploading building system data',
+    photoAlt: 'BAS export file or facilities manager uploading building system data',
   },
   analyticsPrefix: 'sample_upload',
   stepEventPrefix: 'start',
@@ -19,6 +21,21 @@ const startVariant = {
   },
   submitButtonLabel: 'Submit Dataset for Review',
   submittingButtonLabel: 'Submitting Dataset...',
+  offerCard: {
+    eyebrow: 'What to expect',
+    title: 'A practical first step using the data you already have.',
+    description:
+      'The upload flow is designed for a focused Sample Analysis, not a long implementation project.',
+    priceLabel: 'Trust signals',
+    priceValue: 'LeanFM review',
+    bullets: [
+      'Existing BAS data',
+      'No new hardware required to start',
+      'Review by LeanFM team',
+      'Findings walkthrough',
+    ],
+    footnote: 'We only ask for what is needed to review your sample dataset.',
+  },
   completionStates: {
     account_pending_review: {
       title: 'Sample dataset uploaded',
@@ -27,7 +44,7 @@ const startVariant = {
       actions: [
         {
           href: '/contact?intent=demo',
-          label: 'Book a Demo',
+          label: 'Talk to LeanFM',
           variant: 'primary',
           eventName: 'cta_demo_click',
           eventParams: { location: 'start_confirmation_primary' },
@@ -46,7 +63,7 @@ const startVariant = {
       actions: [
         {
           href: '/contact?intent=demo',
-          label: 'Book a Demo',
+          label: 'Talk to LeanFM',
           variant: 'primary',
           eventName: 'cta_demo_click',
           eventParams: { location: 'start_confirmation_primary' },

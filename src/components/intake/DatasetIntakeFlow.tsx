@@ -2,6 +2,7 @@
 
 import { useEffect, useMemo, useRef, useState } from 'react'
 import { Badge, Button, Card } from '@/components/ui'
+import { PhotoPlaceholder } from '@/components/visual/LeanFmVisuals'
 import { trackEvent } from '@/lib/analytics'
 
 type Step = 1 | 2 | 3 | 4
@@ -136,6 +137,8 @@ export interface DatasetIntakeVariant {
     badge: string
     title: string
     description: string
+    photoLabel?: string
+    photoAlt?: string
   }
   analyticsPrefix: string
   stepEventPrefix?: string
@@ -761,27 +764,41 @@ export function DatasetIntakeFlow({ variant }: { variant: DatasetIntakeVariant }
 
   return (
     <>
-      <section className="relative overflow-hidden border-b border-slate-800/60">
-        <div className="absolute inset-0 bg-grid" />
-        <div className="absolute top-0 right-0 h-[380px] w-[520px] rounded-full bg-cyan-500/10 blur-3xl" />
+      <section className="relative overflow-hidden border-b border-sky-100 bg-[linear-gradient(135deg,#f8fcff_0%,#eef8ff_52%,#f4fbef_100%)]">
+        <div className="absolute inset-0 bg-grid opacity-35" />
+        <div className="absolute -left-24 top-20 h-72 w-72 rounded-full bg-emerald-200/45 blur-3xl" />
+        <div className="absolute top-0 right-0 h-[380px] w-[520px] rounded-full bg-sky-200/55 blur-3xl" />
         <div className="container-default relative pt-20 pb-8 md:pt-28 md:pb-12">
-          <div className="max-w-3xl mx-auto text-center">
-            <Badge className="mb-6">{variant.hero.badge}</Badge>
-            <h1 className="heading-1 text-white mb-6">{variant.hero.title}</h1>
-            <p className="body-large">{variant.hero.description}</p>
+          <div className={variant.hero.photoLabel ? 'grid gap-10 lg:grid-cols-[0.92fr_1.08fr] lg:items-center' : 'mx-auto max-w-3xl text-center'}>
+            <div>
+              <Badge className="mb-6">{variant.hero.badge}</Badge>
+              <h1 className="heading-1 mb-6 text-slate-950">{variant.hero.title}</h1>
+              <p className="body-large text-slate-700">{variant.hero.description}</p>
+            </div>
+            {variant.hero.photoLabel ? (
+              <PhotoPlaceholder
+                label={variant.hero.photoLabel}
+                alt={variant.hero.photoAlt || variant.hero.photoLabel}
+                src="/media/leanfm-images/bas-control-room.jpg"
+                aspect="video"
+                overlay={false}
+                className="border-white shadow-[0_24px_90px_rgba(30,64,175,0.18)]"
+                imageClassName="object-[48%_50%]"
+              />
+            ) : null}
           </div>
 
           {variant.offerCard ? (
             <div className="mx-auto mt-10 max-w-5xl">
-              <Card className="border-cyan-500/20 bg-slate-950/75">
+              <Card className="border-sky-100 bg-white/90 shadow-[0_24px_80px_rgba(30,64,175,0.12)]">
                 <div className="grid gap-8 lg:grid-cols-[minmax(0,1.2fr)_minmax(260px,0.8fr)] lg:items-start">
                   <div>
-                    <p className="text-body-xs uppercase tracking-[0.2em] text-cyan-300">{variant.offerCard.eyebrow}</p>
-                    <h2 className="heading-3 mt-3 text-white">{variant.offerCard.title}</h2>
-                    <p className="mt-4 text-body-md text-slate-300">{variant.offerCard.description}</p>
+                    <p className="text-body-xs uppercase tracking-[0.2em] text-sky-700">{variant.offerCard.eyebrow}</p>
+                    <h2 className="heading-3 mt-3 text-slate-950">{variant.offerCard.title}</h2>
+                    <p className="mt-4 text-body-md text-slate-700">{variant.offerCard.description}</p>
                     <div className="mt-6 grid gap-3 sm:grid-cols-2">
                       {variant.offerCard.bullets.map((bullet) => (
-                        <div key={bullet} className="rounded-2xl border border-slate-800 bg-slate-900/70 px-4 py-3 text-body-sm text-slate-200">
+                        <div key={bullet} className="rounded-2xl border border-sky-100 bg-sky-50/70 px-4 py-3 text-body-sm text-slate-800">
                           {bullet}
                         </div>
                       ))}
@@ -791,10 +808,10 @@ export function DatasetIntakeFlow({ variant }: { variant: DatasetIntakeVariant }
                     ) : null}
                   </div>
 
-                  <div className="rounded-3xl border border-cyan-500/25 bg-[linear-gradient(180deg,rgba(144,204,124,0.14)_0%,rgba(14,24,36,0.86)_100%)] px-6 py-7">
-                    <p className="text-body-xs uppercase tracking-[0.2em] text-cyan-200">{variant.offerCard.priceLabel}</p>
-                    <p className="mt-4 text-5xl font-display font-semibold text-white glow-text">{variant.offerCard.priceValue}</p>
-                    <p className="mt-4 text-body-sm text-slate-300">Upload your BAS history once and request a single historical findings report.</p>
+                  <div className="rounded-3xl border border-emerald-200 bg-emerald-50 px-6 py-7">
+                    <p className="text-body-xs uppercase tracking-[0.2em] text-emerald-700">{variant.offerCard.priceLabel}</p>
+                    <p className="mt-4 font-display text-4xl font-semibold text-slate-950">{variant.offerCard.priceValue}</p>
+                    <p className="mt-4 text-body-sm text-slate-700">Focused review using current BAS exports.</p>
                   </div>
                 </div>
               </Card>
@@ -803,14 +820,14 @@ export function DatasetIntakeFlow({ variant }: { variant: DatasetIntakeVariant }
         </div>
       </section>
 
-      <section className="section pt-8">
+      <section className="section light-form bg-white pt-8">
         <div className="container-default max-w-5xl">
-          <Card className="mb-8">
-            <div className="mb-6 flex flex-col gap-3 border-b border-slate-800/80 pb-5 md:flex-row md:items-center md:justify-between">
+          <Card className="mb-8 border-sky-100 bg-white shadow-[0_18px_60px_rgba(30,64,175,0.08)]">
+            <div className="mb-6 flex flex-col gap-3 border-b border-sky-100 pb-5 md:flex-row md:items-center md:justify-between">
               <div>
-                <p className="text-body-sm text-white">Your progress will save as you move through the form.</p>
+                <p className="text-body-sm font-medium text-slate-900">Your progress will save as you move through the form.</p>
                 {saveState !== 'idle' ? (
-                  <p className="mt-1 text-body-xs text-slate-400">
+                  <p className="mt-1 text-body-xs text-slate-500">
                     {saveStateLabel(saveState)}{lastSavedAt ? ` · ${new Date(lastSavedAt).toLocaleTimeString()}` : ''}
                   </p>
                 ) : null}
@@ -833,15 +850,15 @@ export function DatasetIntakeFlow({ variant }: { variant: DatasetIntakeVariant }
                     <div
                       className={`w-8 h-8 rounded-full border flex items-center justify-center text-body-xs font-semibold ${
                         isCompleteStep
-                          ? 'bg-cyan-500/20 border-cyan-400/40 text-cyan-200'
+                          ? 'bg-emerald-50 border-emerald-200 text-emerald-700'
                           : isActive
-                            ? 'bg-slate-700 border-cyan-500/60 text-white'
-                            : 'bg-slate-800 border-slate-700 text-slate-400'
+                            ? 'bg-sky-50 border-sky-300 text-sky-800'
+                            : 'bg-white border-sky-100 text-slate-500'
                       }`}
                     >
                       {stepNumber}
                     </div>
-                    <span className={`text-body-sm ${isActive ? 'text-white' : 'text-slate-400'}`}>
+                    <span className={`text-body-sm ${isActive ? 'text-slate-950' : 'text-slate-500'}`}>
                       {title}
                     </span>
                   </li>
@@ -851,8 +868,8 @@ export function DatasetIntakeFlow({ variant }: { variant: DatasetIntakeVariant }
           </Card>
 
           {!isComplete ? (
-            <Card>
-              <h2 className="heading-3 text-white mb-6">{STEP_TITLES[step - 1]}</h2>
+            <Card className="border-sky-100 bg-white shadow-[0_18px_60px_rgba(30,64,175,0.08)]">
+              <h2 className="heading-3 mb-6 text-slate-950">{STEP_TITLES[step - 1]}</h2>
 
               {step === 1 ? (
                 <div className="grid md:grid-cols-2 gap-6">
@@ -933,9 +950,9 @@ export function DatasetIntakeFlow({ variant }: { variant: DatasetIntakeVariant }
                       <input ref={fileInputRef} id="dataset" type="file" accept=".csv,text/csv" className="hidden" onChange={(e) => void handleDatasetSelected(e.target.files?.[0] ?? null)} />
 
                       {formData.dataset ? (
-                        <div className="rounded-2xl border border-cyan-500/20 bg-slate-950/70 p-5">
-                          <p className="text-body-sm font-semibold text-white">{formData.dataset.fileName}</p>
-                          <p className="mt-2 text-body-xs text-slate-400">{datasetSummary}</p>
+                        <div className="rounded-2xl border border-sky-100 bg-sky-50/70 p-5">
+                          <p className="text-body-sm font-semibold text-slate-950">{formData.dataset.fileName}</p>
+                          <p className="mt-2 text-body-xs text-slate-600">{datasetSummary}</p>
                           <p className="mt-1 text-body-xs text-slate-500">
                             {datasetUploadState === 'uploading' ? 'Uploading dataset...' : 'Dataset uploaded. Your progress is saved.'}
                           </p>
@@ -960,9 +977,9 @@ export function DatasetIntakeFlow({ variant }: { variant: DatasetIntakeVariant }
                     </div>
                   </div>
 
-                  <div className="rounded-2xl border border-cyan-500/20 bg-slate-950/70 p-5">
-                    <p className="text-body-sm font-semibold text-white">Accepted formats and examples</p>
-                    <p className="mt-3 text-body-sm text-slate-400">
+                  <div className="rounded-2xl border border-sky-100 bg-sky-50/70 p-5">
+                    <p className="text-body-sm font-semibold text-slate-950">Accepted formats and examples</p>
+                    <p className="mt-3 text-body-sm text-slate-700">
                       Accepted format: CSV. Useful files include BAS trend exports, point histories, temperatures, setpoints,
                       schedules, runtime logs, and equipment-level exports.
                     </p>
@@ -976,9 +993,9 @@ export function DatasetIntakeFlow({ variant }: { variant: DatasetIntakeVariant }
 
               {step === 4 ? (
                 <div className="grid gap-6 lg:grid-cols-2">
-                  <div className="rounded-2xl border border-slate-800 bg-slate-950/60 p-5">
-                    <p className="text-body-sm font-semibold text-white">Account</p>
-                    <div className="mt-4 space-y-2 text-body-sm text-slate-300">
+                  <div className="rounded-2xl border border-sky-100 bg-sky-50/70 p-5">
+                    <p className="text-body-sm font-semibold text-slate-950">Account</p>
+                    <div className="mt-4 space-y-2 text-body-sm text-slate-700">
                       <p>{formData.name}</p>
                       <p>{formData.email}</p>
                       <p>{formData.company}</p>
@@ -986,9 +1003,9 @@ export function DatasetIntakeFlow({ variant }: { variant: DatasetIntakeVariant }
                       <p>{formData.role || 'No job title provided'}</p>
                     </div>
                   </div>
-                  <div className="rounded-2xl border border-slate-800 bg-slate-950/60 p-5">
-                    <p className="text-body-sm font-semibold text-white">Building</p>
-                    <div className="mt-4 space-y-2 text-body-sm text-slate-300">
+                  <div className="rounded-2xl border border-sky-100 bg-sky-50/70 p-5">
+                    <p className="text-body-sm font-semibold text-slate-950">Building</p>
+                    <div className="mt-4 space-y-2 text-body-sm text-slate-700">
                       <p>{formData.buildingName}</p>
                       <p>{formData.addressLine1}</p>
                       <p>{formData.city}, {formData.state} {formData.postalCode}</p>
@@ -996,9 +1013,9 @@ export function DatasetIntakeFlow({ variant }: { variant: DatasetIntakeVariant }
                       <p>{formData.portfolioSize}</p>
                     </div>
                   </div>
-                  <div className="rounded-2xl border border-slate-800 bg-slate-950/60 p-5 lg:col-span-2">
-                    <p className="text-body-sm font-semibold text-white">Dataset</p>
-                    <div className="mt-4 space-y-2 text-body-sm text-slate-300">
+                  <div className="rounded-2xl border border-sky-100 bg-sky-50/70 p-5 lg:col-span-2">
+                    <p className="text-body-sm font-semibold text-slate-950">Dataset</p>
+                    <div className="mt-4 space-y-2 text-body-sm text-slate-700">
                       <p>{datasetSummary}</p>
                       <p>{formData.basPlatform || 'BAS platform not provided'}</p>
                       <p>{formData.primaryConcern || 'Primary concern not provided'}</p>
@@ -1031,14 +1048,14 @@ export function DatasetIntakeFlow({ variant }: { variant: DatasetIntakeVariant }
               </div>
             </Card>
           ) : (
-            <Card className="text-center py-12">
-              <div className="w-16 h-16 rounded-full bg-cyan-500/20 flex items-center justify-center mx-auto mb-6">
-                <svg className="w-8 h-8 text-cyan-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <Card className="border-sky-100 bg-white py-12 text-center shadow-[0_18px_60px_rgba(30,64,175,0.08)]">
+              <div className="mx-auto mb-6 flex h-16 w-16 items-center justify-center rounded-full bg-emerald-50">
+                <svg className="h-8 w-8 text-emerald-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
                 </svg>
               </div>
-              <h2 className="heading-2 text-white mb-4">{completionContent.title}</h2>
-              <p className="body-large max-w-2xl mx-auto mb-8">{completionContent.description}</p>
+              <h2 className="heading-2 mb-4 text-slate-950">{completionContent.title}</h2>
+              <p className="body-large mx-auto mb-8 max-w-2xl text-slate-700">{completionContent.description}</p>
               <div className="flex flex-col sm:flex-row justify-center gap-4">
                 {completionContent.actions.map((action, index) => (
                   <Button

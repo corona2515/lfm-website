@@ -22,6 +22,26 @@ const nextConfig = {
         permanent: false,
       },
       {
+        source: '/industries/k-12',
+        destination: '/solutions/k-12-schools',
+        permanent: false,
+      },
+      {
+        source: '/industries/museums',
+        destination: '/solutions/museums',
+        permanent: false,
+      },
+      {
+        source: '/industries/universities',
+        destination: '/solutions/universities',
+        permanent: false,
+      },
+      {
+        source: '/industries/offices',
+        destination: '/solutions/commercial-real-estate',
+        permanent: false,
+      },
+      {
         source: '/solutions/hospitals',
         destination: '/sample-analysis',
         permanent: false,
