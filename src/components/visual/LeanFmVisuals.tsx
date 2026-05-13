@@ -143,7 +143,7 @@ export function DiagnosticInsightCard({
   return (
     <div
       className={cn(
-        'relative isolate w-full min-w-0 overflow-hidden rounded-2xl border p-5',
+        'relative isolate w-full min-w-0 overflow-hidden rounded-2xl border p-5 motion-safe:animate-fade-in motion-reduce:animate-none',
         isLight
           ? 'border-sky-100 bg-white/95 shadow-[0_24px_80px_rgba(30,64,175,0.14)]'
           : 'border-slate-700/80 bg-slate-950/90 shadow-[0_30px_100px_rgba(2,6,23,0.48)]',
@@ -163,7 +163,7 @@ export function DiagnosticInsightCard({
             </h3>
           </div>
           <span className={cn(
-            'shrink-0 rounded-full border px-3 py-1 text-body-xs font-semibold uppercase tracking-[0.14em]',
+            'shrink-0 rounded-full border px-3 py-1 text-body-xs font-semibold uppercase tracking-[0.14em] motion-safe:animate-fade-in-up motion-safe:[animation-delay:200ms] motion-safe:[animation-fill-mode:both] motion-reduce:animate-none',
             isLight ? 'border-amber-200 bg-amber-50 text-amber-700' : 'border-amber-400/40 bg-amber-400/15 text-amber-300'
           )}>
             High Priority
@@ -185,15 +185,22 @@ export function DiagnosticInsightCard({
             Evidence reviewed
           </p>
           <div className="flex flex-wrap gap-2">
-            {evidence.map((item) => (
-              <span key={item} className={cn('rounded-full border px-3 py-1 text-body-xs', isLight ? 'border-sky-100 bg-sky-50 text-slate-700' : 'border-slate-700 bg-slate-950/70 text-slate-300')}>
+            {evidence.map((item, index) => (
+              <span
+                key={item}
+                className={cn(
+                  'rounded-full border px-3 py-1 text-body-xs motion-safe:animate-fade-in-up motion-safe:[animation-fill-mode:both] motion-reduce:animate-none',
+                  isLight ? 'border-sky-100 bg-sky-50 text-slate-700' : 'border-slate-700 bg-slate-950/70 text-slate-300'
+                )}
+                style={{ animationDelay: `${320 + index * 80}ms` }}
+              >
                 {item}
               </span>
             ))}
           </div>
         </div>
 
-        <div className={cn('mt-5 rounded-xl border p-4', isLight ? 'border-emerald-200 bg-emerald-50' : 'border-cyan-400/25 bg-cyan-500/10')}>
+        <div className={cn('mt-5 rounded-xl border p-4 motion-safe:animate-fade-in-up motion-safe:[animation-delay:600ms] motion-safe:[animation-fill-mode:both] motion-reduce:animate-none', isLight ? 'border-emerald-200 bg-emerald-50' : 'border-cyan-400/25 bg-cyan-500/10')}>
           <p className={cn('mb-2 text-body-xs font-semibold uppercase tracking-[0.16em]', isLight ? 'text-emerald-800' : 'text-cyan-300')}>
             Recommended action
           </p>
@@ -231,7 +238,7 @@ export function DataToActionFlow({ variant = 'dark', className }: DataToActionFl
   ]
 
   return (
-    <div className={cn('grid gap-4 lg:grid-cols-[1fr_auto_1fr_auto_1fr] lg:items-stretch', className)}>
+    <div className={cn('group/flow grid gap-4 lg:grid-cols-[1fr_auto_1fr_auto_1fr] lg:items-stretch', className)}>
       {steps.map(({ title, details, Icon }, index) => (
         <div key={title} className="contents">
           <div
@@ -257,9 +264,43 @@ export function DataToActionFlow({ variant = 'dark', className }: DataToActionFl
           </div>
           {index < steps.length - 1 ? (
             <div className="flex items-center justify-center py-1 lg:py-0">
-              <div className={cn('flex h-10 w-10 items-center justify-center rounded-full border', variant === 'light' ? 'border-emerald-200 bg-emerald-50 text-emerald-700' : 'border-cyan-400/35 bg-cyan-500/10 text-cyan-300')}>
-                <ArrowRight className="hidden h-5 w-5 lg:block" aria-hidden="true" />
-                <ArrowRight className="h-5 w-5 rotate-90 lg:hidden" aria-hidden="true" />
+              <div className="flex items-center justify-center gap-2">
+                <div
+                  aria-hidden="true"
+                  className={cn(
+                    'relative hidden h-px w-20 overflow-hidden rounded-full lg:block',
+                    variant === 'light'
+                      ? 'bg-gradient-to-r from-emerald-200 via-sky-200 to-emerald-200'
+                      : 'bg-gradient-to-r from-cyan-400/20 via-cyan-300/45 to-cyan-400/20'
+                  )}
+                >
+                  <span
+                    className={cn(
+                      'absolute -top-1 left-0 h-2 w-2 rounded-full motion-safe:animate-flow-dot motion-reduce:animate-none group-hover/flow:[animation-play-state:paused]',
+                      variant === 'light' ? 'bg-emerald-500 shadow-[0_0_18px_rgba(16,185,129,0.45)]' : 'bg-cyan-300 shadow-[0_0_18px_rgba(103,232,249,0.45)]'
+                    )}
+                  />
+                </div>
+                <div className={cn('flex h-10 w-10 items-center justify-center rounded-full border', variant === 'light' ? 'border-emerald-200 bg-emerald-50 text-emerald-700' : 'border-cyan-400/35 bg-cyan-500/10 text-cyan-300')}>
+                  <ArrowRight className="hidden h-5 w-5 lg:block" aria-hidden="true" />
+                  <ArrowRight className="h-5 w-5 rotate-90 lg:hidden" aria-hidden="true" />
+                </div>
+                <div
+                  aria-hidden="true"
+                  className={cn(
+                    'relative hidden h-px w-20 overflow-hidden rounded-full lg:block',
+                    variant === 'light'
+                      ? 'bg-gradient-to-r from-emerald-200 via-sky-200 to-emerald-200'
+                      : 'bg-gradient-to-r from-cyan-400/20 via-cyan-300/45 to-cyan-400/20'
+                  )}
+                >
+                  <span
+                    className={cn(
+                      'absolute -top-1 left-0 h-2 w-2 rounded-full motion-safe:animate-flow-dot motion-safe:[animation-delay:1.6s] motion-reduce:animate-none group-hover/flow:[animation-play-state:paused]',
+                      variant === 'light' ? 'bg-sky-500 shadow-[0_0_18px_rgba(14,165,233,0.35)]' : 'bg-cyan-300 shadow-[0_0_18px_rgba(103,232,249,0.45)]'
+                    )}
+                  />
+                </div>
               </div>
             </div>
           ) : null}
@@ -700,7 +741,7 @@ export function VerticalPhotoCard({ title, pain, href, photoLabel, photoSrc, pho
     <Link
       href={href}
       className={cn(
-        'group relative isolate min-h-[21rem] overflow-hidden rounded-2xl border transition-all duration-200 hover:-translate-y-1',
+        'group relative isolate min-h-[21rem] overflow-hidden rounded-2xl border transition-all duration-200 hover:-translate-y-1 hover:shadow-lg',
         isLight ? 'border-sky-100 bg-white shadow-[0_18px_60px_rgba(30,64,175,0.10)] hover:border-sky-200' : 'border-slate-800 bg-slate-900 shadow-[0_18px_60px_rgba(2,6,23,0.18)] hover:border-cyan-400/45'
       )}
     >
@@ -717,7 +758,7 @@ export function VerticalPhotoCard({ title, pain, href, photoLabel, photoSrc, pho
       <div className="absolute inset-x-0 bottom-0 z-10 p-6">
         <h3 className="font-display text-2xl font-semibold text-white">{title}</h3>
         <p className="mt-3 text-body-md leading-relaxed text-slate-200">{pain}</p>
-        <div className="mt-5 inline-flex items-center gap-2 text-body-sm font-semibold text-cyan-200">
+        <div className="mt-5 inline-flex items-center gap-2 text-body-sm font-semibold text-cyan-200 transition-colors duration-200 group-hover:text-emerald-200">
           View solution
           <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" aria-hidden="true" />
         </div>

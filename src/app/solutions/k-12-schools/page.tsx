@@ -198,7 +198,7 @@ export default function K12SchoolsPage() {
                 Find the hidden HVAC issues driving complaints, waste, and maintenance strain across your district.
               </h1>
               <p className="body-large mb-7 max-w-[22rem] text-slate-700 sm:max-w-2xl">
-                LeanFM analyzes existing building system data to uncover hidden problems that waste energy, increase costs, and create comfort issues across classrooms, gyms, and district facilities—often without triggering alarms.
+                Your superintendent asks why utility costs are up 14% this year. Your facilities team has a guess. We have the data. LeanFM analyzes existing building system data to uncover hidden problems that waste energy, increase costs, and create comfort issues across classrooms, gyms, and district facilities — often without triggering alarms.
               </p>
               <ul className="mb-8 grid gap-3">
                 {heroBullets.map((bullet) => (
@@ -229,6 +229,9 @@ export default function K12SchoolsPage() {
                   {CTA_LABELS.secondary}
                 </TrackedButton>
               </div>
+              <p className="mt-4 text-body-sm text-slate-600">
+                Trusted by a Pittsburgh-area cultural institution. <a href="/results" className="font-semibold text-sky-700 underline-offset-4 hover:text-emerald-700 hover:underline">See the case study →</a>
+              </p>
             </div>
 
             <div className="w-full min-w-0 max-w-[22rem] space-y-4 sm:max-w-full lg:pl-4">

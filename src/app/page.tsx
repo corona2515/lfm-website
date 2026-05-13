@@ -1,7 +1,8 @@
 import { Metadata } from 'next'
-import { BadgeCheck, CheckCircle2, GraduationCap, TrendingDown } from 'lucide-react'
+import { BadgeCheck, CheckCircle2, GraduationCap, TrendingDown, TrendingUp } from 'lucide-react'
 import { TrackedButton } from '@/components/analytics/TrackedButton'
 import { StickyCtaBar } from '@/components/home/StickyCtaBar'
+import { HeroParallaxGlow } from '@/components/visual/HeroParallaxGlow'
 import {
   BasVsLeanFMComparison,
   CaseStudyProofBand,
@@ -43,6 +44,11 @@ const proofItems = [
     title: 'Developed at Carnegie Mellon',
     body: 'LeanFM’s methodology was developed from research at Carnegie Mellon University.',
     Icon: GraduationCap,
+  },
+  {
+    title: '$101,383 saved in year two',
+    body: 'Documented at a local museum where LeanFM identified BAS logic faults hiding in existing data.',
+    Icon: TrendingUp,
   },
 ]
 
@@ -143,16 +149,15 @@ export default function HomePage() {
 
       <section id="home-hero" className="relative overflow-hidden border-b border-sky-100 bg-[linear-gradient(135deg,#f8fcff_0%,#eef8ff_48%,#f4fbef_100%)]">
         <div aria-hidden="true" className="absolute inset-0 bg-grid opacity-35" />
-        <div aria-hidden="true" className="absolute -left-24 top-20 h-72 w-72 rounded-full bg-emerald-200/45 blur-3xl" />
-        <div aria-hidden="true" className="absolute right-0 top-0 h-[36rem] w-[36rem] rounded-full bg-sky-200/55 blur-3xl" />
+        <HeroParallaxGlow />
         <div className="container-wide relative z-10 pt-24 pb-14 md:pt-36 md:pb-20">
           <div className="grid min-w-0 max-w-full items-center gap-10 overflow-hidden lg:grid-cols-[1.02fr_0.98fr] lg:gap-12 lg:overflow-visible">
             <div className="w-full min-w-0 max-w-[22rem] sm:max-w-2xl md:max-w-3xl">
               <h1 className="mb-6 max-w-[20rem] break-words font-body text-[1.95rem] font-semibold leading-[1.04] tracking-normal text-slate-950 sm:max-w-[12ch] sm:text-[3.2rem] sm:leading-[0.98] md:text-[4.2rem] lg:text-[4.85rem]">
-                Your HVAC system is wasting money in ways your BAS isn’t catching.
+                {`Buildings don't fail loudly. They leak quietly.`}
               </h1>
               <p className="body-large mb-7 max-w-[22rem] text-slate-700 sm:max-w-2xl">
-                LeanFM analyzes existing HVAC trend data to uncover hidden faults, rank them by impact, and show your team what to fix first.
+                LeanFM analyzes existing HVAC trend data to find the hidden faults your BAS alarms aren’t catching — and ranks them so your team knows exactly what to fix first.
               </p>
               <ul className="mb-8 grid gap-3 sm:grid-cols-2">
                 {heroBullets.map((bullet) => (
@@ -183,6 +188,9 @@ export default function HomePage() {
                   See How It Works
                 </TrackedButton>
               </div>
+              <p className="mt-4 text-body-sm text-slate-600">
+                Trusted by a Pittsburgh-area cultural institution. <a href="/results" className="font-semibold text-sky-700 underline-offset-4 hover:text-emerald-700 hover:underline">See the case study →</a>
+              </p>
             </div>
 
             <div className="relative w-full min-w-0 max-w-[22rem] sm:max-w-none">
@@ -202,7 +210,7 @@ export default function HomePage() {
 
       <section className="relative overflow-hidden bg-[linear-gradient(180deg,#f8fafc_0%,#eef3f8_100%)]">
         <div className="container-wide py-8">
-          <div className="grid gap-4 md:grid-cols-3">
+          <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
             {proofItems.map((item) => {
               const Icon = item.Icon
 
@@ -242,7 +250,7 @@ export default function HomePage() {
           <div className="mb-10 max-w-3xl">
             <h2 className="heading-2 mb-4 text-slate-950">Why your building automation system may miss hidden HVAC waste.</h2>
             <p className="body-large text-slate-700">
-              Most building automation alarms are designed to flag obvious failures or out-of-range conditions. Many costly HVAC issues do not look like alarms. They show up as patterns over time.
+              BAS alarms flag obvious failures or out-of-range conditions. Many costly HVAC issues do not look like alarms. They show up as patterns over time.
             </p>
           </div>
           <BasVsLeanFMComparison variant="light" />
@@ -268,6 +276,40 @@ export default function HomePage() {
             <p className="text-body-lg leading-relaxed text-slate-600">
               LeanFM delivers findings through <strong>OnPoint</strong>, our software platform, powered by the <em>Prescriptiv</em> analytics engine developed from research at Carnegie Mellon University. Your team reviews prioritized issues in plain English — no new hardware, no dashboards to decipher.
             </p>
+          </div>
+        </div>
+      </section>
+
+      <section className="section-large border-y border-sky-100 bg-slate-50">
+        <div className="container-default">
+          <div className="grid gap-10 lg:grid-cols-[0.9fr_1.1fr] lg:items-start">
+            <div>
+              <p className="mb-5 text-body-xs font-semibold uppercase tracking-[0.2em] text-sky-700">
+                What we are
+              </p>
+              <h2 className="heading-2 mb-5 text-slate-950">Software-delivered analysis of the data you already have.</h2>
+              <p className="body-large text-slate-700">
+                Developed at Carnegie Mellon. Tested in real institutional buildings. Backed by a money-back ROI guarantee.
+              </p>
+            </div>
+            <div>
+              <p className="mb-5 text-body-xs font-semibold uppercase tracking-[0.2em] text-slate-500">
+                What we are not
+              </p>
+              <ul className="grid gap-3">
+                {[
+                  'Not a BAS replacement',
+                  'Not an energy audit',
+                  'Not enterprise AFDD with the install cost stripped out',
+                  'Not generic AI for buildings',
+                ].map((item) => (
+                  <li key={item} className="flex gap-3 rounded-xl border border-slate-200 bg-white px-4 py-3 shadow-sm">
+                    <span className="mt-1 inline-block h-2 w-2 shrink-0 rounded-full bg-slate-400" />
+                    <span className="text-body-md font-medium text-slate-700">{item}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
           </div>
         </div>
       </section>

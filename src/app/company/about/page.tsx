@@ -118,7 +118,7 @@ export default function AboutPage() {
           <div className="mx-auto max-w-3xl text-center">
             <h2 className="heading-2 mb-5 text-slate-950">Our promise</h2>
             <p className="body-large text-slate-700">
-              Every LeanFM engagement is backed by a money-back ROI guarantee. If our analysis does not identify HVAC issues with combined estimated annual operational impact of at least 3x your fee, you get your money back. The terms of the guarantee live on our Terms page.
+              Every LeanFM engagement is backed by a money-back ROI guarantee. If our analysis does not identify HVAC issues with combined estimated first-year operational impact of at least 3x your fee, you get your money back. The terms of the guarantee live on our Terms page.
             </p>
           </div>
         </div>

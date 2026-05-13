@@ -93,6 +93,7 @@ const config: Config = {
         'slide-in-left': 'slideInLeft 0.5s ease-out',
         'scale-in': 'scaleIn 0.3s ease-out',
         'pulse-glow': 'pulseGlow 2s ease-in-out infinite',
+        'flow-dot': 'flowDot 3.2s ease-in-out infinite',
       },
       keyframes: {
         accordionDown: {
@@ -130,6 +131,12 @@ const config: Config = {
         pulseGlow: {
           '0%, 100%': { boxShadow: '0 0 20px rgba(144, 204, 124, 0.3)' },
           '50%': { boxShadow: '0 0 40px rgba(144, 204, 124, 0.55)' },
+        },
+        flowDot: {
+          '0%': { opacity: '0', transform: 'translateX(0)' },
+          '12%': { opacity: '1' },
+          '82%': { opacity: '1' },
+          '100%': { opacity: '0', transform: 'translateX(4.5rem)' },
         },
       },
       backgroundImage: {

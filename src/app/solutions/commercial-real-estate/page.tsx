@@ -166,7 +166,7 @@ export default function CommercialRealEstatePage() {
                 Find the hidden HVAC waste affecting operating costs, tenant experience, and NOI.
               </h1>
               <p className="body-large text-slate-700 mb-7 max-w-2xl">
-                LeanFM analyzes existing building system data to uncover hidden problems that waste energy, increase operating costs, and impact tenant comfort across your buildings—often before they trigger alarms.
+                Your NOI is down 3% year-over-year. The utility line moved more than rent. The problem is in your BAS data — you just can’t see it yet. LeanFM analyzes existing building system data to uncover hidden problems that waste energy, increase operating costs, and impact tenant comfort across your buildings, often before they trigger alarms.
               </p>
               <ul className="mb-8 grid gap-3">
                 {heroBullets.map((bullet) => (
@@ -197,6 +197,9 @@ export default function CommercialRealEstatePage() {
                   {CTA_LABELS.secondary}
                 </TrackedButton>
               </div>
+              <p className="mt-4 text-body-sm text-slate-600">
+                Trusted by a Pittsburgh-area cultural institution. <a href="/results" className="font-semibold text-sky-700 underline-offset-4 hover:text-emerald-700 hover:underline">See the case study →</a>
+              </p>
             </div>
 
             <div className="space-y-4">
@@ -238,7 +241,7 @@ export default function CommercialRealEstatePage() {
               <h2 className="heading-2 mb-5 text-slate-950">Most Building Systems Catch Failures—But Miss What’s Costing You</h2>
               <div className="space-y-5 text-body-lg leading-relaxed text-slate-700">
                 <p>
-                  Building systems are designed to alert when something breaks. But many of the issues that impact operating costs and tenant experience are not obvious failures.
+                  Your BAS alerts you when something breaks. But many of the issues that impact operating costs and tenant experience are not obvious failures.
                 </p>
                 <p className="font-display text-2xl font-semibold leading-snug text-emerald-700">
                   The costliest problems are often the ones nobody is being alerted about.

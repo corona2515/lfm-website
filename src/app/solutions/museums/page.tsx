@@ -165,7 +165,7 @@ export default function MuseumsPage() {
                 Protect sensitive environments by finding the subtle system issues your BAS may miss.
               </h1>
               <p className="body-large text-slate-700 mb-7 max-w-2xl">
-                LeanFM analyzes existing building system data to uncover hidden problems that can impact environmental stability, energy use, and system performance—often before they trigger alarms or become visible.
+                The conservator flagged a humidity excursion last quarter. The BAS didn’t. LeanFM analyzes existing building system data to uncover hidden problems that can impact environmental stability, energy use, and system performance — often before they trigger alarms or become visible.
               </p>
               <ul className="mb-8 grid gap-3">
                 {heroBullets.map((bullet) => (
@@ -196,6 +196,9 @@ export default function MuseumsPage() {
                   {CTA_LABELS.secondary}
                 </TrackedButton>
               </div>
+              <p className="mt-4 text-body-sm text-slate-600">
+                Trusted by a Pittsburgh-area cultural institution. <a href="/results" className="font-semibold text-sky-700 underline-offset-4 hover:text-emerald-700 hover:underline">See the case study →</a>
+              </p>
             </div>
 
             <div className="space-y-4">

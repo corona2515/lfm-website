@@ -202,7 +202,7 @@ export const PRODUCT_PROMISES = [
 export const FAQ_ITEMS = [
   {
     question: 'How much can we save?',
-    answer: 'LeanFM backs every engagement with a money-back ROI guarantee: if our analysis does not identify HVAC issues with combined estimated annual operational impact of at least 3x your engagement fee, we refund the fee. Most clients see 3–5x or more once recommended corrective actions are implemented. Full guarantee mechanics live on our Terms page.',
+    answer: 'LeanFM backs every engagement with a money-back ROI guarantee: if our analysis does not identify HVAC issues with combined estimated first-year operational impact of at least 3x your engagement fee, we refund the fee. Most clients see 3–5x or more once recommended corrective actions are implemented. Full guarantee mechanics live on our Terms page.',
   },
   {
     question: 'Why not just use BAS alarms?',
@@ -219,7 +219,7 @@ export const FAQ_ITEMS = [
   },
   {
     question: 'Do you really guarantee savings?',
-    answer: 'Yes. If LeanFM does not identify HVAC issues worth at least 3x the engagement fee in estimated annual operational impact, you get your money back. The guarantee is conditional on you implementing the corrective actions in your findings report — we cannot guarantee savings on issues that go unaddressed. Full terms are on our Terms page.',
+    answer: 'Yes. If LeanFM does not identify HVAC issues worth at least 3x the engagement fee in estimated first-year operational impact, you get your money back. The guarantee is conditional on you implementing the corrective actions in your findings report — we cannot guarantee savings on issues that go unaddressed. Full terms are on our Terms page.',
   },
   {
     question: 'How secure is our data?',

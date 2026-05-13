@@ -27,13 +27,13 @@ export const metadata: Metadata = {
 
 const heroBullets = [
   'Issues that quietly increase operating costs',
-  'Problems that impact comfort but go unnoticed',
+  'Problems that hit comfort before alarms',
   'Inefficiencies that add up over time',
 ]
 
 const missedReasons = [
-  'The system may be operating “within range” but still wasting energy',
-  'Alarms may not fire because nothing has technically failed',
+  'Your system runs “within range” while still wasting energy',
+  'Alarms don’t fire because nothing has technically failed',
   'Patterns are hard to see without looking across time and equipment',
   'Facilities teams rarely have time to manually review thousands of data points',
 ]
@@ -230,6 +230,9 @@ export default function WhatWeFindPage() {
                   {CTA_LABELS.secondary}
                 </TrackedButton>
               </div>
+              <p className="mt-4 text-body-sm text-slate-600">
+                Trusted by a Pittsburgh-area cultural institution. <a href="/results" className="font-semibold text-sky-700 underline-offset-4 hover:text-emerald-700 hover:underline">See the case study →</a>
+              </p>
             </div>
 
             <FindingsVisual />
@@ -243,7 +246,7 @@ export default function WhatWeFindPage() {
             <h2 className="heading-2 text-slate-950">Most Systems Show Data—But Not the Full Picture</h2>
             <div className="space-y-5 text-body-lg leading-relaxed text-slate-700">
               <p>
-                Building systems generate large amounts of data, but many issues do not appear as clear alarms. Instead, they show up as patterns over time.
+                Building systems generate large amounts of data, but many issues never trigger alarms. Instead, they show up as patterns over time.
               </p>
               <p className="font-display text-2xl font-semibold leading-snug text-emerald-700">
                 The costliest problems are often the ones that go unnoticed.
@@ -270,7 +273,7 @@ export default function WhatWeFindPage() {
             <div>
               <h2 className="heading-2 mb-5 text-slate-950">Why These Issues Get Missed</h2>
               <p className="body-large text-slate-700">
-                Most building systems are designed to alert teams when something is clearly wrong. But waste, drift, and inefficient operation often develop gradually. They may not cross an alarm threshold, but they still affect energy use, comfort, and equipment performance.
+                Your BAS alerts you when something is clearly wrong. But waste, drift, and inefficient operation often develop gradually. They may not cross an alarm threshold, but they still affect energy use, comfort, and equipment performance.
               </p>
             </div>
             <div className="grid gap-3 sm:grid-cols-2">

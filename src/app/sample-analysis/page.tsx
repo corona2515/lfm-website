@@ -90,7 +90,7 @@ const faqItems = [
   {
     question: 'Do you guarantee results?',
     answer:
-      'Yes — LeanFM backs every engagement with a money-back ROI guarantee. If we do not identify HVAC issues worth at least 3x the engagement fee in estimated annual operational impact, you get your money back. The guarantee is conditional on implementing the corrective actions in your findings report. See our Terms page for full details.',
+      'Yes — LeanFM backs every engagement with a money-back ROI guarantee. If we do not identify HVAC issues worth at least 3x the engagement fee in estimated first-year operational impact, you get your money back. The guarantee is conditional on implementing the corrective actions in your findings report. See our Terms page for full details.',
   },
 ]
 
@@ -192,6 +192,9 @@ export default function SampleAnalysisPage() {
                   {CTA_LABELS.secondary}
                 </TrackedButton>
               </div>
+              <p className="mt-4 text-body-sm text-slate-600">
+                Trusted by a Pittsburgh-area cultural institution. <a href="/results" className="font-semibold text-sky-700 underline-offset-4 hover:text-emerald-700 hover:underline">See the case study →</a>
+              </p>
             </div>
 
             <SampleReportVisual />

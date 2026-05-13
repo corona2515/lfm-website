@@ -10,9 +10,9 @@ import {
   Network,
   School,
   Search,
-  ShieldCheck,
 } from 'lucide-react'
 import { TrackedButton } from '@/components/analytics/TrackedButton'
+import { Badge } from '@/components/ui'
 import { DataToActionFlow, PhotoPlaceholder } from '@/components/visual/LeanFmVisuals'
 
 const INVESTOR_CONTACT_HREF = '/contact?intent=investor&source=investors'
@@ -46,7 +46,7 @@ const marketDrivers = [
 ]
 
 const tractionHighlights = [
-  'The Andy Warhol Museum, part of Carnegie Museums of Pittsburgh',
+  'A Pittsburgh-area cultural institution',
   'Historical healthcare facility analyses',
   'Large commercial and mixed-use buildings',
 ]
@@ -65,7 +65,6 @@ const marketSegments = [
   { label: 'Universities', Icon: GraduationCap },
   { label: 'Commercial real estate', Icon: Building2 },
   { label: 'Museums and cultural institutions', Icon: Landmark },
-  { label: 'Healthcare systems', Icon: ShieldCheck },
 ]
 
 const scaleBullets = [
@@ -83,10 +82,10 @@ const businessModelItems = [
 ]
 
 const credibilityItems = [
-  'Carnegie Mellon connection',
-  'Technical leadership and research background',
-  'Experience working with complex building environments',
-  'Developed with leadership connected to Carnegie Mellon’s engineering and research ecosystem',
+  'Founded by Carnegie Mellon University researchers',
+  'Co-founder Burcu Akinci is a current CMU professor in facilities information technology',
+  'Co-founder Pine Liu was recognized as an IFMA Forty Under 40 honoree',
+  'Methodology developed from CMU facilities research, productized as OnPoint',
 ]
 
 function InvestorHeroVisual() {
@@ -245,6 +244,27 @@ export default function InvestorsPage() {
                 </div>
               ))}
             </div>
+          </div>
+        </div>
+      </section>
+
+      <section className="section-large border-y border-sky-100 bg-[linear-gradient(135deg,#f8fcff_0%,#eef8ff_50%,#f4fbef_100%)]">
+        <div className="container-default">
+          <div className="mb-8 max-w-3xl">
+            <Badge className="mb-6">Risk-reversed go-to-market</Badge>
+            <h2 className="heading-2 mb-4 text-slate-950">
+              Every engagement is backed by a money-back ROI guarantee.
+            </h2>
+            <p className="body-large text-slate-700">
+              If our analysis does not identify HVAC issues with combined estimated first-year operational impact of at least 3x the engagement fee, we refund the fee. The guarantee is conditional on the customer implementing the recommended corrective actions. Full terms at{' '}
+              <a href="/terms" className="font-semibold text-sky-700 underline-offset-4 hover:text-emerald-700 hover:underline">
+                /terms
+              </a>
+              .
+            </p>
+            <p className="mt-5 text-body-md leading-relaxed text-slate-700">
+              The guarantee is operationally underwritten by Sample Analysis as the entry product: we know what we will find before quoting an engagement, and the deliverable carries its own proof. This significantly lowers procurement friction in our institutional segments.
+            </p>
           </div>
         </div>
       </section>

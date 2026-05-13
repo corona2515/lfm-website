@@ -175,7 +175,7 @@ export default function UniversitiesPage() {
                 Bring clarity to complex campus building systems.
               </h1>
               <p className="body-large text-slate-700 mb-7 max-w-2xl">
-                LeanFM analyzes existing building system data to uncover hidden problems that waste energy, increase costs, and impact comfort across campus buildings—often before they trigger alarms or surface clearly.
+                You manage 80 buildings across three eras of construction. Your team prioritizes maintenance from memory. LeanFM analyzes existing building system data to uncover hidden problems that waste energy, increase costs, and impact comfort across campus buildings — often before they trigger alarms or surface clearly.
               </p>
               <ul className="mb-8 grid gap-3">
                 {heroBullets.map((bullet) => (
@@ -206,6 +206,9 @@ export default function UniversitiesPage() {
                   {CTA_LABELS.secondary}
                 </TrackedButton>
               </div>
+              <p className="mt-4 text-body-sm text-slate-600">
+                Trusted by a Pittsburgh-area cultural institution. <a href="/results" className="font-semibold text-sky-700 underline-offset-4 hover:text-emerald-700 hover:underline">See the case study →</a>
+              </p>
             </div>
 
             <div className="space-y-4">

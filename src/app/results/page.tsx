@@ -11,6 +11,7 @@ import {
 } from 'lucide-react'
 import { TrackedButton } from '@/components/analytics/TrackedButton'
 import { StickyCtaBar } from '@/components/home/StickyCtaBar'
+import { AnimatedStatValue } from '@/components/visual/AnimatedStatValue'
 import { FinalCTASection, PhotoPlaceholder, VisualTimeline } from '@/components/visual/LeanFmVisuals'
 import { CTA_LABELS } from '@/lib/constants'
 
@@ -38,15 +39,19 @@ const projectDetails = [
 
 const warholResults = [
   {
-    value: '$56,386',
+    end: 56386,
+    prefix: '$',
     label: 'Reported first-year savings',
   },
   {
-    value: '$101,383',
+    end: 101383,
+    prefix: '$',
     label: 'Reported second-year savings',
   },
   {
-    value: '$100K+',
+    end: 100,
+    prefix: '$',
+    suffix: 'K+',
     label: 'Ongoing annual savings shown in the case study',
   },
 ]
@@ -392,7 +397,12 @@ export default function ResultsPage() {
                 <div className="grid gap-4 md:grid-cols-3">
                   {warholResults.map((result) => (
                     <div key={result.label} className="rounded-xl border border-emerald-200 bg-white p-5 shadow-sm">
-                      <p className="font-display text-3xl font-semibold text-slate-950">{result.value}</p>
+                      <AnimatedStatValue
+                        end={result.end}
+                        prefix={result.prefix}
+                        suffix={result.suffix}
+                        className="font-display text-3xl font-semibold text-slate-950"
+                      />
                       <p className="mt-2 text-body-sm leading-relaxed text-slate-600">{result.label}</p>
                     </div>
                   ))}
@@ -447,10 +457,10 @@ export default function ResultsPage() {
             <h2 className="heading-2 mb-4 text-slate-950">Examples of Issues LeanFM Has Identified</h2>
             <div className="space-y-4">
               <p className="body-large text-slate-700">
-                Across complex buildings, LeanFM has identified recurring patterns that traditional alarm workflows can miss.
+                LeanFM&apos;s methodology has been applied across complex building portfolios. Our current focus is K-12 school districts, museums, universities, and commercial real estate — but the same analytical approach has surfaced issues in adjacent verticals:
               </p>
               <p className="font-display text-2xl font-semibold leading-snug text-emerald-700">
-                Additional historical examples from complex facilities include:
+                Historical examples include:
               </p>
             </div>
           </div>

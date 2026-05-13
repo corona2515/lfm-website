@@ -167,7 +167,7 @@ export default function BuildingDataActionPage() {
                 OnPoint analyzes existing BAS exports to surface hidden HVAC faults, estimate likely impact, and help teams decide what to fix first.
               </p>
               <p className="body-default mb-8 max-w-2xl animate-fade-in-up delay-200 text-slate-700">
-                OnPoint is LeanFM’s building system intelligence product for turning trend data into clear operational priorities.
+                OnPoint is LeanFM’s building system intelligence product for turning trend data into clear operational priorities. It is powered by the <em>Prescriptiv</em> analytics engine, developed from research at Carnegie Mellon University.
               </p>
 
               <div className="flex flex-col gap-4 sm:flex-row animate-fade-in-up delay-300">
@@ -380,11 +380,6 @@ export default function BuildingDataActionPage() {
               </p>
             </div>
           </div>
-
-          <p className="mt-5 text-body-xs text-slate-600">
-            Results vary based on building type, existing conditions, data quality, and
-            implementation of recommended actions. Actual outcomes depend on your specific situation.
-          </p>
         </div>
       </section>
 
