@@ -1,6 +1,18 @@
+/* Geist + Geist Mono for the dark thermal-cinema React pages.
+   (Not yet in the next/font catalog for this Next.js version, so loaded via CSS
+   import — Instrument Serif still comes through next/font.) */
+@import url("https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600&family=Geist+Mono:wght@400;500&display=swap");
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+/* Thermal-cinema font families.
+   --font-thermal-serif is injected by next/font (Instrument Serif). */
+:root {
+  --font-thermal-sans: "Geist";
+  --font-thermal-mono: "Geist Mono";
+}
 
 @layer base {
   :root {
@@ -204,6 +216,91 @@
 
   .light-form .select {
     @apply bg-white border-sky-200 text-slate-950;
+  }
+
+  /* ============================================================
+     Thermal-cinema scope — dark React flow pages (/start, etc.)
+     Applied via AppChrome to non-admin routes only.
+     ============================================================ */
+  .thermal {
+    font-family: var(--font-thermal-sans, var(--font-dm-sans)), system-ui, sans-serif;
+    color: #f5f3ee;
+    background: #0a0b0e;
+  }
+
+  .thermal-serif {
+    font-family: var(--font-thermal-serif, var(--font-instrument)), Georgia, serif;
+    font-weight: 400;
+    letter-spacing: 0;
+  }
+
+  .thermal-mono {
+    font-family: var(--font-thermal-mono, var(--font-dm-mono)), monospace;
+  }
+
+  /* Dark form controls — override the shared .input/.label/.select inside the
+     thermal form scope, mirroring how .light-form overrides them. */
+  .thermal-form .input {
+    @apply w-full rounded-xl border bg-[#0f1116] px-4 py-3 text-[#f5f3ee] placeholder:text-[#868d99] transition-all focus:outline-none;
+    border-color: rgba(244, 242, 237, 0.1);
+  }
+
+  .thermal-form .input:focus {
+    border-color: #f5b020;
+    box-shadow: 0 0 0 3px rgba(245, 176, 32, 0.18);
+  }
+
+  .thermal-form .label {
+    @apply mb-2 block text-body-sm font-medium text-[#99a1ad];
+  }
+
+  .thermal-form .select {
+    @apply w-full appearance-none rounded-xl border bg-[#0f1116] bg-no-repeat px-4 py-3 text-[#f5f3ee] transition-all focus:outline-none;
+    border-color: rgba(244, 242, 237, 0.1);
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%2399a1ad' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='M6 8l4 4 4-4'/%3e%3c/svg%3e");
+    background-position: right 0.75rem center;
+    background-size: 1.5em 1.5em;
+    padding-right: 2.5rem;
+  }
+
+  .thermal-form .select:focus {
+    border-color: #f5b020;
+    box-shadow: 0 0 0 3px rgba(245, 176, 32, 0.18);
+  }
+
+  .thermal-form .select option {
+    background: #14171e;
+    color: #f5f3ee;
+  }
+
+  /* Thermal buttons — override shared .btn-primary / .btn-secondary in scope. */
+  .thermal-btn-primary {
+    @apply inline-flex items-center justify-center gap-2 rounded-full border-0 px-6 py-3 font-medium text-[#0a0b0e] transition-all duration-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#f5b020]/70 focus-visible:ring-offset-2 focus-visible:ring-offset-[#0a0b0e] disabled:pointer-events-none disabled:opacity-60;
+    background: linear-gradient(95deg, #f5b020, #f2622e);
+  }
+
+  .thermal-btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 14px 44px -10px rgba(242, 98, 46, 0.75);
+  }
+
+  .thermal-btn-secondary {
+    @apply inline-flex items-center justify-center gap-2 rounded-full px-6 py-3 font-medium text-[#f5f3ee] transition-all duration-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#f5b020]/50 focus-visible:ring-offset-2 focus-visible:ring-offset-[#0a0b0e] disabled:pointer-events-none disabled:opacity-50;
+    border: 1px solid rgba(244, 242, 237, 0.16);
+  }
+
+  .thermal-btn-secondary:hover {
+    border-color: rgba(245, 243, 238, 0.4);
+    background: rgba(245, 243, 238, 0.04);
+    transform: translateY(-2px);
+  }
+
+  .thermal-text {
+    background: linear-gradient(90deg, #6366f1 0%, #22d3ee 28%, #2dd4a7 46%, #f5b020 68%, #f2622e 86%, #e0451f 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    color: transparent;
   }
 
   /* Badge */

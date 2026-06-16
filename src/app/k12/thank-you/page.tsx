@@ -11,5 +11,5 @@ export const metadata: Metadata = {
 }
 
 export default function K12ThankYouRedirectPage() {
-  redirect('/solutions/k-12-schools')
+  redirect('/industries.html#k12')
 }

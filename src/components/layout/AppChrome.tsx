@@ -17,10 +17,10 @@ export function AppChrome({ children, contactEmail }: AppChromeProps) {
   }
 
   return (
-    <>
+    <div className="thermal flex min-h-screen flex-1 flex-col bg-[#0a0b0e] text-[#f5f3ee]">
       <Header />
-      <main className="flex-1 pt-18">{children}</main>
+      <main className="flex-1 pt-[76px]">{children}</main>
       <Footer contactEmail={contactEmail} />
-    </>
+    </div>
   )
 }

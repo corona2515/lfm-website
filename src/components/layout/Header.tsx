@@ -6,26 +6,33 @@ import { usePathname } from 'next/navigation'
 import { useState, useEffect, useRef } from 'react'
 import { cn } from '@/lib/utils'
 import { trackEvent } from '@/lib/analytics'
-import { NAV_LINKS, CTA_LABELS, SOLUTIONS_NAV_GROUPS } from '@/lib/constants'
-import { Button } from '@/components/ui'
+
+const WHITE_LOGO = { filter: 'brightness(0) invert(1)' } as const
+
+const PLATFORM_LINKS = [
+  { href: '/platform.html', label: 'Platform', sub: 'The platform, end to end' },
+  { href: '/air.html', label: 'AIR', sub: 'The performance score' },
+  { href: '/maple.html', label: 'Maple', sub: 'The virtual engineer' },
+  { href: '/fdd.html', label: 'Fault detection', sub: 'Prescriptiv engine' },
+  { href: '/reporting.html', label: 'Executive reporting', sub: 'Dollars, not data dumps' },
+  { href: '/portfolio.html', label: 'Portfolio', sub: 'Every building, ranked' },
+] as const
+
+const COMPANY_LINKS = [
+  { href: '/industries.html', label: 'Industries', sub: 'Where LeanFM works' },
+  { href: '/results.html', label: 'Results', sub: 'Found money, on the record' },
+  { href: '/about.html', label: 'About', sub: 'Born at Carnegie Mellon' },
+  { href: '/contact.html', label: 'Contact', sub: 'Talk to LeanFM' },
+] as const
+
+const HAIRLINE = 'rgba(244,242,237,0.10)'
 
 export function Header() {
   const pathname = usePathname()
   const [isScrolled, setIsScrolled] = useState(false)
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
-  const [isExploreOpen, setIsExploreOpen] = useState(false)
-  const exploreMenuRef = useRef<HTMLDivElement>(null)
-  const isSolutionsActive =
-    pathname.startsWith('/solutions') ||
-    pathname.startsWith('/industries') ||
-    pathname === '/k12' ||
-    pathname === '/sample-analysis' ||
-    pathname === '/how-it-works' ||
-    pathname === '/what-we-find' ||
-    pathname === '/results' ||
-    pathname === '/building-data-to-action' ||
-    pathname === '/start'
-  const isInvestorsPage = pathname === '/investors'
+  const [openMenu, setOpenMenu] = useState<null | 'platform' | 'company'>(null)
+  const navRef = useRef<HTMLElement>(null)
 
   useEffect(() => {
     const handleScroll = () => {
@@ -35,7 +42,7 @@ export function Header() {
     return () => window.removeEventListener('scroll', handleScroll)
   }, [])
 
-  // Close mobile menu on resize
+  // Close mobile menu on resize to desktop
   useEffect(() => {
     const handleResize = () => {
       if (window.innerWidth >= 1024) {
@@ -62,194 +69,180 @@ export function Header() {
     if (!isMobileMenuOpen) {
       return
     }
-
     const handleKeyDown = (event: KeyboardEvent) => {
       if (event.key === 'Escape') {
         setIsMobileMenuOpen(false)
       }
     }
-
     window.addEventListener('keydown', handleKeyDown)
     return () => window.removeEventListener('keydown', handleKeyDown)
   }, [isMobileMenuOpen])
 
+  // Close menus on route change
   useEffect(() => {
-    setIsExploreOpen(false)
+    setOpenMenu(null)
+    setIsMobileMenuOpen(false)
   }, [pathname])
 
+  // Close dropdowns on outside click / Escape
   useEffect(() => {
-    if (!isExploreOpen) {
+    if (!openMenu) {
       return
     }
-
     const handlePointerDown = (event: PointerEvent) => {
-      if (!exploreMenuRef.current?.contains(event.target as Node)) {
-        setIsExploreOpen(false)
+      if (!navRef.current?.contains(event.target as Node)) {
+        setOpenMenu(null)
       }
     }
-
     const handleKeyDown = (event: KeyboardEvent) => {
       if (event.key === 'Escape') {
-        setIsExploreOpen(false)
+        setOpenMenu(null)
       }
     }
-
     document.addEventListener('pointerdown', handlePointerDown)
     window.addEventListener('keydown', handleKeyDown)
     return () => {
       document.removeEventListener('pointerdown', handlePointerDown)
       window.removeEventListener('keydown', handleKeyDown)
     }
-  }, [isExploreOpen])
+  }, [openMenu])
 
-  return (
-    <header
-      className={cn(
-        'fixed top-0 left-0 right-0 z-50 transition-all duration-300',
-        isScrolled || isMobileMenuOpen
-          ? 'border-b border-sky-100 bg-white/95 shadow-[0_12px_40px_rgba(15,23,42,0.08)] backdrop-blur-xl'
-          : 'border-b border-sky-100/80 bg-white/90 backdrop-blur-lg'
-      )}
-    >
-      <nav className="container-wide">
-        <div className="flex items-center justify-between h-18">
-          {/* Logo */}
-          <Link href="/" className="flex items-center">
-            <Image
-              src="/brand/lfm-logo-color-rgb-large-transparent.png"
-              alt="LeanFM Technologies"
-              width={1920}
-              height={453}
-              priority
-              className="h-8 w-auto md:h-9 logo-cta-green"
-              style={{ height: '2.25rem', width: 'auto', maxWidth: '11rem' }}
+  const renderDropdown = (
+    key: 'platform' | 'company',
+    label: string,
+    links: ReadonlyArray<{ href: string; label: string; sub: string }>
+  ) => {
+    const isOpen = openMenu === key
+    return (
+      <div
+        className="relative"
+        onMouseEnter={() => setOpenMenu(key)}
+        onMouseLeave={() => setOpenMenu((current) => (current === key ? null : current))}
+      >
+        <button
+          type="button"
+          aria-haspopup="menu"
+          aria-expanded={isOpen}
+          onClick={() => setOpenMenu((current) => (current === key ? null : key))}
+          className={cn(
+            'inline-flex items-center gap-1.5 rounded-lg px-3 py-2 text-[14.5px] transition-colors',
+            isOpen ? 'text-[#f5f3ee]' : 'text-[#99a1ad] hover:text-[#f5f3ee]'
+          )}
+        >
+          {label}
+          <svg
+            aria-hidden="true"
+            className={cn('h-3.5 w-3.5 transition-transform duration-200', isOpen && 'rotate-180')}
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+          >
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 9l6 6 6-6" />
+          </svg>
+        </button>
+
+        <div className={cn('absolute left-0 top-full z-50 pt-3', isOpen ? 'block' : 'hidden')}>
+          <div
+            className="relative min-w-[16rem] overflow-hidden rounded-2xl border border-[#f4f2ed]/[0.16] bg-[#12151c]/95 p-2 shadow-[0_26px_64px_-22px_rgba(0,0,0,0.75)] backdrop-blur-xl"
+          >
+            <span
+              className="absolute inset-x-0 top-0 h-px opacity-60"
+              style={{ background: 'linear-gradient(90deg,#6366f1,#22d3ee,#2dd4a7,#f5b020,#f2622e)' }}
             />
-          </Link>
-
-          {/* Desktop Navigation */}
-          <div className="hidden lg:flex items-center gap-1">
-            <div className="relative" ref={exploreMenuRef}>
-              <button
-                type="button"
-                aria-haspopup="menu"
-                aria-expanded={isExploreOpen}
-                onClick={() => setIsExploreOpen((open) => !open)}
-                className={`inline-flex items-center gap-2 rounded-lg px-4 py-2 text-body-sm transition-colors hover:bg-sky-50 hover:text-slate-950 focus:outline-none focus-visible:ring-2 focus-visible:ring-emerald-300/70 ${
-                  isSolutionsActive ? 'text-slate-950' : 'text-slate-700'
-                }`}
-              >
-                Explore
-                <svg
-                  aria-hidden="true"
-                  className={cn('h-4 w-4 transition-transform duration-200', isExploreOpen && 'rotate-180')}
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke="currentColor"
-                >
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 9l6 6 6-6" />
-                </svg>
-              </button>
-
-              <div className={cn('absolute left-0 top-full z-50 pt-3', isExploreOpen ? 'block' : 'hidden')}>
-                <div className="w-[34rem] rounded-2xl border border-sky-100 bg-white p-4 shadow-[0_24px_80px_rgba(30,64,175,0.16)] ring-1 ring-sky-100/70">
-                  <div className="grid grid-cols-[0.9fr_1.1fr] gap-4">
-                    {SOLUTIONS_NAV_GROUPS.map((group) => (
-                      <div key={group.title}>
-                        <p className="mb-2 px-3 text-body-xs font-semibold uppercase tracking-[0.18em] text-emerald-700">
-                          {group.title}
-                        </p>
-                        <div className="grid gap-1">
-                          {group.links.map((link) => (
-                            <Link
-                              key={link.href}
-                              href={link.href}
-                              onClick={() => setIsExploreOpen(false)}
-                              className={`rounded-xl px-3 py-2.5 text-body-sm transition-colors hover:bg-sky-50 hover:text-slate-950 focus:outline-none focus-visible:ring-2 focus-visible:ring-emerald-300/70 ${
-                                pathname === link.href ? 'bg-sky-50 text-slate-950' : 'text-slate-700'
-                              }`}
-                            >
-                              {link.label}
-                            </Link>
-                          ))}
-                        </div>
-                      </div>
-                    ))}
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            {NAV_LINKS.map((link) => (
+            {links.map((link) => (
               <Link
                 key={link.href}
                 href={link.href}
-                className="rounded-lg px-4 py-2 text-body-sm text-slate-700 transition-colors hover:bg-sky-50 hover:text-slate-950"
+                onClick={() => setOpenMenu(null)}
+                className="flex flex-col gap-0.5 rounded-lg px-3 py-2.5 transition-colors hover:bg-white/5"
               >
-                {link.label}
+                <span className="text-[14px] font-medium text-[#f5f3ee]">{link.label}</span>
+                <span className="text-[12px] text-[#868d99]">{link.sub}</span>
               </Link>
             ))}
           </div>
-
-          {/* Desktop CTAs */}
-          <div className="hidden lg:flex items-center gap-2">
-            {!isInvestorsPage ? (
-              <Button
-                variant="ghost"
-                size="small"
-                href="/contact?intent=demo&source=header"
-                className="text-slate-700 hover:bg-sky-50 hover:text-slate-950"
-                onClick={() => trackEvent('cta_demo_click', { location: 'header_desktop_secondary' })}
-              >
-                {CTA_LABELS.secondary}
-              </Button>
-            ) : null}
-            <Button
-              size="small"
-              href={isInvestorsPage ? '/contact?intent=investor&source=header_investors' : '/contact?intent=sample-analysis&source=header'}
-              onClick={() => trackEvent(isInvestorsPage ? 'cta_investor_click' : 'cta_sample_analysis_click', { location: 'header_desktop_primary' })}
-            >
-              {isInvestorsPage ? 'Contact LeanFM' : CTA_LABELS.primary}
-            </Button>
-          </div>
-
-          {/* Mobile Menu Button */}
-          <button
-            type="button"
-            className={cn(
-              'lg:hidden flex h-10 w-10 items-center justify-center rounded-xl border transition-all duration-200',
-              isMobileMenuOpen
-                ? 'border-sky-200 bg-sky-50 text-slate-950 shadow-lg shadow-sky-100/70'
-                : 'border-transparent text-slate-700 hover:border-sky-100 hover:bg-sky-50 hover:text-slate-950'
-            )}
-            onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-            aria-label="Toggle menu"
-            aria-expanded={isMobileMenuOpen}
-            aria-controls="mobile-navigation"
-          >
-            <svg
-              className="w-6 h-6"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
-            >
-              {isMobileMenuOpen ? (
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M6 18L18 6M6 6l12 12"
-                />
-              ) : (
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M4 6h16M4 12h16M4 18h16"
-                />
-              )}
-            </svg>
-          </button>
         </div>
+      </div>
+    )
+  }
+
+  return (
+    <header
+      ref={navRef}
+      className={cn(
+        'fixed inset-x-0 top-0 z-50 h-[76px] transition-all duration-300',
+        isScrolled || isMobileMenuOpen
+          ? 'border-b bg-[#0a0b0e]/80 backdrop-blur-xl backdrop-saturate-150'
+          : 'border-b border-transparent bg-[#0a0b0e]/30 backdrop-blur-md'
+      )}
+      style={isScrolled || isMobileMenuOpen ? { borderBottomColor: HAIRLINE } : undefined}
+    >
+      <nav className="mx-auto flex h-full w-full max-w-[1240px] items-center gap-11 px-6 lg:px-10">
+        {/* Logo */}
+        <Link href="/" className="flex items-center" aria-label="LeanFM Technologies">
+          <Image
+            src="/assets/img/leanfm-logo.png"
+            alt="LeanFM Technologies"
+            width={480}
+            height={113}
+            priority
+            className="w-auto opacity-95"
+            style={{ height: '28px', ...WHITE_LOGO }}
+          />
+        </Link>
+
+        {/* Desktop Navigation */}
+        <div className="hidden items-center gap-1 lg:flex">
+          {renderDropdown('platform', 'Platform', PLATFORM_LINKS)}
+          <Link
+            href="/results.html"
+            className="rounded-lg px-3 py-2 text-[14.5px] text-[#99a1ad] transition-colors hover:text-[#f5f3ee]"
+          >
+            Results
+          </Link>
+          {renderDropdown('company', 'Company', COMPANY_LINKS)}
+        </div>
+
+        {/* Desktop CTAs */}
+        <div className="ml-auto hidden items-center gap-4 lg:flex">
+          <Link
+            href="/sample-report.html"
+            className="thermal-btn-secondary !px-5 !py-2.5 !text-[14px]"
+            onClick={() => trackEvent('cta_sample_report_click', { location: 'header_desktop_secondary' })}
+          >
+            See a sample report
+          </Link>
+          <Link
+            href="/start"
+            className="thermal-btn-primary !px-5 !py-2.5 !text-[14px]"
+            onClick={() => trackEvent('cta_sample_analysis_click', { location: 'header_desktop_primary' })}
+          >
+            Request a sample analysis
+          </Link>
+        </div>
+
+        {/* Mobile Menu Button */}
+        <button
+          type="button"
+          className={cn(
+            'ml-auto flex h-11 w-11 items-center justify-center rounded-xl border transition-all duration-200 lg:hidden',
+            isMobileMenuOpen
+              ? 'border-[#f4f2ed]/20 bg-white/5 text-[#f5f3ee]'
+              : 'border-transparent text-[#f5f3ee] hover:bg-white/5'
+          )}
+          onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+          aria-label="Toggle menu"
+          aria-expanded={isMobileMenuOpen}
+          aria-controls="mobile-navigation"
+        >
+          <svg className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            {isMobileMenuOpen ? (
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+            ) : (
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
+            )}
+          </svg>
+        </button>
       </nav>
 
       {/* Mobile Menu */}
@@ -259,95 +252,87 @@ export function Header() {
         aria-hidden={!isMobileMenuOpen}
         tabIndex={isMobileMenuOpen ? 0 : -1}
         className={cn(
-          'lg:hidden fixed inset-0 top-18 bg-slate-950/25 backdrop-blur-sm transition-opacity duration-300',
-          isMobileMenuOpen
-            ? 'opacity-100 pointer-events-auto'
-            : 'opacity-0 pointer-events-none'
+          'fixed inset-0 top-[76px] bg-[#0a0b0e]/70 backdrop-blur-sm transition-opacity duration-300 lg:hidden',
+          isMobileMenuOpen ? 'pointer-events-auto opacity-100' : 'pointer-events-none opacity-0'
         )}
         onClick={() => setIsMobileMenuOpen(false)}
       />
       <div
         id="mobile-navigation"
         className={cn(
-          'lg:hidden fixed left-4 right-4 top-[5.25rem] origin-top transition-all duration-300',
+          'fixed inset-x-4 top-[5.25rem] origin-top transition-all duration-300 lg:hidden',
           isMobileMenuOpen
-            ? 'translate-y-0 scale-100 opacity-100 pointer-events-auto'
-            : '-translate-y-3 scale-95 opacity-0 pointer-events-none'
+            ? 'pointer-events-auto translate-y-0 scale-100 opacity-100'
+            : 'pointer-events-none -translate-y-3 scale-95 opacity-0'
         )}
       >
-        <div className="mx-auto max-w-md overflow-hidden rounded-[1.75rem] border border-sky-100 bg-white shadow-[0_28px_90px_rgba(30,64,175,0.20)] ring-1 ring-sky-100/70">
-          <div className="border-b border-sky-100 px-5 py-4">
-            <p className="text-body-xs font-semibold uppercase tracking-[0.18em] text-emerald-700">
-              Navigation
-            </p>
-            <p className="mt-2 max-w-xs text-body-sm text-slate-600">
-              {isInvestorsPage
-                ? 'Learn more about LeanFM or contact the team directly.'
-                : 'Learn more about LeanFM or request a sample analysis.'}
+        <div
+          className="mx-auto max-h-[calc(100dvh-7rem)] max-w-md overflow-y-auto rounded-[1.75rem] border bg-[#14171e] shadow-[0_28px_90px_rgba(0,0,0,0.6)]"
+          style={{ borderColor: HAIRLINE }}
+        >
+          <div className="border-b px-5 py-4" style={{ borderColor: HAIRLINE }}>
+            <p className="thermal-mono text-[11px] uppercase tracking-[0.18em] text-[#868d99]">Navigation</p>
+            <p className="mt-2 max-w-xs text-[14px] text-[#99a1ad]">
+              Building performance intelligence. Born at Carnegie Mellon.
             </p>
           </div>
-          <div className="max-h-[calc(100dvh-7rem)] overflow-y-auto px-3 py-3">
-            <div className="flex flex-col gap-4">
-              <div className="rounded-2xl border border-sky-100 bg-sky-50/60 p-3">
-                <p className="px-2 pb-2 text-body-xs font-semibold uppercase tracking-[0.18em] text-emerald-700">
-                  Explore
-                </p>
-                {SOLUTIONS_NAV_GROUPS.map((group) => (
-                  <div key={group.title} className="py-2">
-                    <p className="px-2 pb-2 text-body-xs font-semibold uppercase tracking-[0.14em] text-slate-500">
-                      {group.title}
-                    </p>
-                    <div className="grid gap-1">
-                      {group.links.map((link) => (
-                        <Link
-                          key={link.href}
-                          href={link.href}
-                          className={`rounded-xl border px-3 py-3 text-body-md font-medium transition-all hover:border-sky-200 hover:bg-white hover:text-slate-950 ${
-                            pathname === link.href
-                              ? 'border-sky-200 bg-white text-slate-950'
-                              : 'border-transparent text-slate-700'
-                          }`}
-                          onClick={() => setIsMobileMenuOpen(false)}
-                        >
-                          {link.label}
-                        </Link>
-                      ))}
-                    </div>
-                  </div>
-                ))}
-              </div>
-
-              {NAV_LINKS.map((link) => (
+          <div className="px-4 py-4">
+            <p className="thermal-mono px-1 pb-2 text-[11px] uppercase tracking-[0.14em] text-[#868d99]">Platform</p>
+            <div className="grid gap-1">
+              {PLATFORM_LINKS.map((link) => (
                 <Link
                   key={link.href}
                   href={link.href}
-                  className="rounded-2xl border border-transparent px-4 py-4 text-body-lg font-medium text-slate-700 transition-all hover:border-sky-200 hover:bg-sky-50 hover:text-slate-950"
+                  className="rounded-xl px-3 py-3 text-[16px] font-medium text-[#f5f3ee] transition-colors hover:bg-white/5"
                   onClick={() => setIsMobileMenuOpen(false)}
                 >
                   {link.label}
                 </Link>
               ))}
             </div>
-            <div className="mt-4 border-t border-sky-100 px-2 pt-4">
-              <div className="flex flex-col gap-3">
-                {!isInvestorsPage ? (
-                  <Button
-                    variant="ghost"
-                    href="/contact?intent=demo&source=header_mobile"
-                    className="w-full justify-center rounded-2xl border border-sky-200 bg-white text-slate-900 hover:bg-sky-50"
-                    onClick={() => trackEvent('cta_demo_click', { location: 'header_mobile_secondary' })}
-                  >
-                    {CTA_LABELS.secondary}
-                  </Button>
-                ) : null}
-                <Button
-                  href={isInvestorsPage ? '/contact?intent=investor&source=header_investors_mobile' : '/contact?intent=sample-analysis&source=header_mobile'}
-                  className="w-full justify-center rounded-2xl"
-                  onClick={() => trackEvent(isInvestorsPage ? 'cta_investor_click' : 'cta_sample_analysis_click', { location: 'header_mobile_primary' })}
+
+            <p className="thermal-mono px-1 pb-2 pt-5 text-[11px] uppercase tracking-[0.14em] text-[#868d99]">Company</p>
+            <div className="grid gap-1">
+              <Link
+                href="/results.html"
+                className="rounded-xl px-3 py-3 text-[16px] font-medium text-[#f5f3ee] transition-colors hover:bg-white/5"
+                onClick={() => setIsMobileMenuOpen(false)}
+              >
+                Results
+              </Link>
+              {COMPANY_LINKS.map((link) => (
+                <Link
+                  key={link.href}
+                  href={link.href}
+                  className="rounded-xl px-3 py-3 text-[16px] font-medium text-[#f5f3ee] transition-colors hover:bg-white/5"
+                  onClick={() => setIsMobileMenuOpen(false)}
                 >
-                  {isInvestorsPage ? 'Contact LeanFM' : CTA_LABELS.primary}
-                </Button>
-              </div>
+                  {link.label}
+                </Link>
+              ))}
+            </div>
+
+            <div className="mt-5 flex flex-col gap-3 border-t pt-5" style={{ borderColor: HAIRLINE }}>
+              <Link
+                href="/sample-report.html"
+                className="thermal-btn-secondary w-full"
+                onClick={() => {
+                  trackEvent('cta_sample_report_click', { location: 'header_mobile_secondary' })
+                  setIsMobileMenuOpen(false)
+                }}
+              >
+                See a sample report
+              </Link>
+              <Link
+                href="/start"
+                className="thermal-btn-primary w-full"
+                onClick={() => {
+                  trackEvent('cta_sample_analysis_click', { location: 'header_mobile_primary' })
+                  setIsMobileMenuOpen(false)
+                }}
+              >
+                Request a sample analysis
+              </Link>
             </div>
           </div>
         </div>

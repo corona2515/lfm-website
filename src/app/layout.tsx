@@ -1,10 +1,23 @@
 import type { Metadata, Viewport } from 'next'
-import { DM_Sans, DM_Mono, Space_Grotesk } from 'next/font/google'
+import { DM_Sans, DM_Mono, Space_Grotesk, Instrument_Serif } from 'next/font/google'
 import { AppChrome } from '@/components/layout/AppChrome'
 import { GoogleAnalytics } from '@/components/analytics/GoogleAnalytics'
 import { SITE_CONFIG } from '@/lib/constants'
 import './globals.css'
 
+// --- Thermal-cinema design fonts (dark React pages: /start, /historical-report) ---
+// Display / headings — Instrument Serif via next/font.
+// Geist + Geist Mono are loaded via a Google Fonts <link> below (not yet in the
+// next/font catalog for this Next.js version); their CSS vars live in globals.css.
+const instrumentSerif = Instrument_Serif({
+  subsets: ['latin'],
+  weight: '400',
+  style: ['normal', 'italic'],
+  variable: '--font-thermal-serif',
+  display: 'swap',
+})
+
+// --- Legacy fonts (kept for the light /admin theme + existing utilities) ---
 // Display font - Space Grotesk for headings (geometric, technical)
 const spaceGrotesk = Space_Grotesk({
   subsets: ['latin'],
@@ -95,7 +108,7 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${spaceGrotesk.variable} ${dmSans.variable} ${dmMono.variable}`}
+      className={`${spaceGrotesk.variable} ${dmSans.variable} ${dmMono.variable} ${instrumentSerif.variable}`}
     >
       <body className="min-h-screen flex flex-col">
         {googleAnalyticsId ? (

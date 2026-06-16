@@ -2,137 +2,111 @@
 
 import Link from 'next/link'
 import Image from 'next/image'
-import { usePathname } from 'next/navigation'
-import { FOOTER_LINKS, CTA_LABELS, FOOTER_SUSTAINABILITY_LINE } from '@/lib/constants'
-import { TrackedButton } from '@/components/analytics/TrackedButton'
 
 interface FooterProps {
   contactEmail: string
 }
 
-export function Footer({ contactEmail }: FooterProps) {
-  const pathname = usePathname()
-  const hideFooterCta =
-    pathname === '/' ||
-    pathname === '/contact' ||
-    pathname === '/building-data-to-action' ||
-    pathname === '/investors' ||
-    pathname === '/sample-analysis' ||
-    pathname === '/how-it-works' ||
-    pathname === '/what-we-find' ||
-    pathname === '/results' ||
-    pathname === '/start' ||
-    pathname === '/company/about' ||
-    pathname.startsWith('/solutions') ||
-    pathname.startsWith('/industries')
-  const currentYear = new Date().getFullYear()
-  const footerSections = [
-    { title: 'Product', links: FOOTER_LINKS.product },
-    { title: 'Industries', links: FOOTER_LINKS.industries },
-    { title: 'Company', links: FOOTER_LINKS.company },
-    { title: 'Legal', links: FOOTER_LINKS.legal },
-  ].filter((section) => section.links.length > 0)
+const WHITE_LOGO = { filter: 'brightness(0) invert(1)' } as const
+const HAIRLINE = 'rgba(244,242,237,0.10)'
+
+const PLATFORM_LINKS = [
+  { href: '/platform.html', label: 'Overview' },
+  { href: '/air.html', label: 'AIR' },
+  { href: '/maple.html', label: 'Maple' },
+  { href: '/fdd.html', label: 'Fault detection' },
+  { href: '/reporting.html', label: 'Executive reporting' },
+  { href: '/portfolio.html', label: 'Portfolio' },
+]
+
+const EXPLORE_LINKS = [
+  { href: '/industries.html', label: 'Industries' },
+  { href: '/results.html', label: 'Results' },
+  { href: '/sample-report.html', label: 'Sample report' },
+  { href: '/methodology.html', label: 'AIR methodology' },
+  { href: '/insights.html', label: 'Insights' },
+]
+
+const COMPANY_LINKS = [
+  { href: '/about.html', label: 'About' },
+  { href: '/contact.html', label: 'Contact' },
+  { href: '/security.html', label: 'Security' },
+  { href: '/investors.html', label: 'Investors' },
+]
+
+export function Footer(_props: FooterProps) {
+  const columns = [
+    { title: 'Platform', links: PLATFORM_LINKS },
+    { title: 'Explore', links: EXPLORE_LINKS },
+    { title: 'Company', links: COMPANY_LINKS },
+  ]
 
   return (
-    <footer className="border-t border-sky-100 bg-[linear-gradient(180deg,#f8fcff_0%,#eef8ff_100%)]">
-      {!hideFooterCta ? (
-        <>
-          {/* CTA Section */}
-          <div className="container-default py-16">
-            <div className="text-center max-w-2xl mx-auto">
-              <h2 className="heading-2 mb-4 text-slate-950">
-                Ready to review existing building data?
-              </h2>
-              <p className="body-large mb-8 text-slate-700">
-                Start with a focused review of existing building system data and get a walkthrough of the hidden issues that may deserve attention first.
-              </p>
-              <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                <TrackedButton
-                  href="/contact?intent=sample-analysis&source=footer"
-                  size="large"
-                  eventName="cta_sample_analysis_click"
-                  eventParams={{ location: 'footer_primary' }}
-                >
-                  {CTA_LABELS.primary}
-                </TrackedButton>
-                <TrackedButton
-                  variant="secondary"
-                  href="/contact?intent=demo&source=footer"
-                  size="large"
-                  eventName="cta_demo_click"
-                  eventParams={{ location: 'footer_secondary' }}
-                >
-                  {CTA_LABELS.secondary}
-                </TrackedButton>
-              </div>
-            </div>
-          </div>
-        </>
-      ) : null}
-
-      {/* Links Section */}
-      <div className="border-t border-sky-100">
-        <div className="container-default py-12">
-          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8 lg:gap-12">
-            {/* Brand */}
-            <div className="col-span-2 md:col-span-3 lg:col-span-1">
-              <Link href="/" className="inline-flex items-center mb-4">
-                <Image
-                  src="/brand/lfm-logo-color-rgb-large-transparent.png"
-                  alt="LeanFM Technologies"
-                  width={1920}
-                  height={453}
-                  className="h-8 w-auto logo-cta-green"
-                  style={{ height: '2rem', width: 'auto', maxWidth: '10rem' }}
-                />
-              </Link>
-              <p className="text-body-sm text-slate-600 max-w-xs">
-                Building intelligence for finding hidden system problems using existing building data.
-              </p>
-              <p className="mt-3 text-body-sm text-emerald-700 max-w-xs">
-                {FOOTER_SUSTAINABILITY_LINE}
-              </p>
-            </div>
-
-            {footerSections.map((section) => (
-              <div key={section.title}>
-                <h3 className="text-body-sm font-semibold text-slate-950 mb-4 uppercase tracking-wider">
-                  {section.title}
-                </h3>
-                <ul className="space-y-3">
-                  {section.links.map((link) => (
-                    <li key={link.href}>
-                      <Link
-                        href={link.href}
-                        className="text-body-sm text-slate-600 transition-colors hover:text-emerald-700"
-                      >
-                        {link.label}
-                      </Link>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            ))}
-          </div>
-        </div>
-      </div>
-
-      {/* Bottom Bar */}
-      <div className="border-t border-sky-100">
-        <div className="container-default py-6">
-          <div className="flex flex-col md:flex-row justify-between items-center gap-4">
-            <p className="text-body-xs text-slate-500">
-              &copy; {currentYear} LeanFM Technologies. All rights reserved.
+    <footer className="border-t bg-[#0a0b0e]" style={{ borderColor: HAIRLINE }}>
+      <div className="mx-auto w-full max-w-[1240px] px-6 lg:px-10">
+        {/* Columns */}
+        <div className="grid grid-cols-2 gap-10 py-16 md:grid-cols-4 md:gap-12">
+          <div className="col-span-2 md:col-span-1">
+            <Link href="/" className="inline-flex items-center" aria-label="LeanFM Technologies">
+              <Image
+                src="/assets/img/leanfm-logo.png"
+                alt="LeanFM Technologies"
+                width={480}
+                height={113}
+                className="w-auto opacity-95"
+                style={{ height: '28px', ...WHITE_LOGO }}
+              />
+            </Link>
+            <p className="mt-5 max-w-xs text-[14px] leading-relaxed text-[#99a1ad]">
+              Building performance intelligence. Born at Carnegie Mellon.
             </p>
-            <div className="flex items-center gap-6">
-              <a
-                href={`mailto:${contactEmail}`}
-                className="text-body-xs text-slate-500 transition-colors hover:text-emerald-700"
-              >
-                {contactEmail}
-              </a>
-            </div>
           </div>
+
+          {columns.map((column) => (
+            <div key={column.title}>
+              <p className="thermal-mono mb-4 text-[11px] uppercase tracking-[0.16em] text-[#868d99]">
+                {column.title}
+              </p>
+              <ul className="space-y-3">
+                {column.links.map((link) => (
+                  <li key={link.href}>
+                    <Link
+                      href={link.href}
+                      className="text-[14px] text-[#99a1ad] transition-colors hover:text-[#f5f3ee]"
+                    >
+                      {link.label}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          ))}
+        </div>
+
+        {/* Bottom bar */}
+        <div
+          className="flex flex-col items-start gap-4 border-t py-6 md:flex-row md:items-center md:justify-between"
+          style={{ borderColor: HAIRLINE }}
+        >
+          <span className="text-[12.5px] text-[#868d99]">© 2026 LeanFM Technologies</span>
+          <span className="thermal-mono text-[11px] uppercase tracking-[0.14em] text-[#868d99]">
+            Born at Carnegie Mellon University
+          </span>
+          <nav className="flex items-center gap-6">
+            <Link href="/privacy.html" className="text-[12.5px] text-[#868d99] transition-colors hover:text-[#f5f3ee]">
+              Privacy
+            </Link>
+            <Link href="/terms.html" className="text-[12.5px] text-[#868d99] transition-colors hover:text-[#f5f3ee]">
+              Terms
+            </Link>
+            <a
+              href="https://www.linkedin.com/company/leanfm-technologies"
+              rel="noopener"
+              className="text-[12.5px] text-[#868d99] transition-colors hover:text-[#f5f3ee]"
+            >
+              LinkedIn
+            </a>
+          </nav>
         </div>
       </div>
     </footer>

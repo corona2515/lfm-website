@@ -1,7 +1,7 @@
 'use client'
 
 import { useEffect, useMemo, useRef, useState } from 'react'
-import { Badge, Button, Card } from '@/components/ui'
+import Link from 'next/link'
 import { PhotoPlaceholder } from '@/components/visual/LeanFmVisuals'
 import { trackEvent } from '@/lib/analytics'
 
@@ -763,17 +763,29 @@ export function DatasetIntakeFlow({ variant }: { variant: DatasetIntakeVariant }
   }
 
   return (
-    <>
-      <section className="relative overflow-hidden border-b border-sky-100 bg-[linear-gradient(135deg,#f8fcff_0%,#eef8ff_52%,#f4fbef_100%)]">
-        <div className="absolute inset-0 bg-grid opacity-35" />
-        <div className="absolute -left-24 top-20 h-72 w-72 rounded-full bg-emerald-200/45 blur-3xl" />
-        <div className="absolute top-0 right-0 h-[380px] w-[520px] rounded-full bg-sky-200/55 blur-3xl" />
-        <div className="container-default relative pt-20 pb-8 md:pt-28 md:pb-12">
+    <div className="thermal-form">
+      <section className="relative overflow-hidden border-b bg-[#0a0b0e]" style={{ borderColor: 'rgba(244,242,237,0.10)' }}>
+        <div className="absolute inset-0 bg-grid opacity-40" />
+        <div
+          className="pointer-events-none absolute -left-24 top-10 h-72 w-72 rounded-full opacity-70 blur-[80px]"
+          style={{ background: 'radial-gradient(circle, rgba(242,98,46,0.45), transparent 70%)' }}
+        />
+        <div
+          className="pointer-events-none absolute -right-16 top-0 h-[380px] w-[520px] rounded-full opacity-60 blur-[90px]"
+          style={{ background: 'radial-gradient(circle, rgba(34,211,238,0.30), transparent 70%)' }}
+        />
+        <div
+          className="pointer-events-none absolute inset-x-0 top-0 h-px opacity-50"
+          style={{ background: 'linear-gradient(90deg,#6366f1,#22d3ee,#2dd4a7,#f5b020,#f2622e)' }}
+        />
+        <div className="container-default relative pt-24 pb-10 md:pt-28 md:pb-14">
           <div className={variant.hero.photoLabel ? 'grid gap-10 lg:grid-cols-[0.92fr_1.08fr] lg:items-center' : 'mx-auto max-w-3xl text-center'}>
             <div>
-              <Badge className="mb-6">{variant.hero.badge}</Badge>
-              <h1 className="heading-1 mb-6 text-slate-950">{variant.hero.title}</h1>
-              <p className="body-large text-slate-700">{variant.hero.description}</p>
+              <span className="thermal-mono mb-6 inline-flex items-center gap-3 rounded-full border px-4 py-1.5 text-[11px] uppercase tracking-[0.18em] text-[#f5b020]" style={{ borderColor: 'rgba(245,176,32,0.3)' }}>
+                {variant.hero.badge}
+              </span>
+              <h1 className="thermal-serif mb-6 text-[clamp(40px,5vw,72px)] leading-[1.02] tracking-[-0.01em] text-[#f5f3ee]">{variant.hero.title}</h1>
+              <p className="text-[clamp(18px,1.5vw,21px)] leading-[1.55] text-[#99a1ad]">{variant.hero.description}</p>
             </div>
             {variant.hero.photoLabel ? (
               <PhotoPlaceholder
@@ -782,7 +794,7 @@ export function DatasetIntakeFlow({ variant }: { variant: DatasetIntakeVariant }
                 src="/media/leanfm-images/bas-control-room.jpg"
                 aspect="video"
                 overlay={false}
-                className="border-white shadow-[0_24px_90px_rgba(30,64,175,0.18)]"
+                className="border-[#1b1f28] shadow-[0_24px_90px_rgba(0,0,0,0.5)]"
                 imageClassName="object-[48%_50%]"
               />
             ) : null}
@@ -790,52 +802,53 @@ export function DatasetIntakeFlow({ variant }: { variant: DatasetIntakeVariant }
 
           {variant.offerCard ? (
             <div className="mx-auto mt-10 max-w-5xl">
-              <Card className="border-sky-100 bg-white/90 shadow-[0_24px_80px_rgba(30,64,175,0.12)]">
+              <div className="rounded-2xl border bg-[#14171e] p-6 shadow-[0_24px_80px_rgba(0,0,0,0.45)]" style={{ borderColor: 'rgba(244,242,237,0.10)' }}>
                 <div className="grid gap-8 lg:grid-cols-[minmax(0,1.2fr)_minmax(260px,0.8fr)] lg:items-start">
                   <div>
-                    <p className="text-body-xs uppercase tracking-[0.2em] text-sky-700">{variant.offerCard.eyebrow}</p>
-                    <h2 className="heading-3 mt-3 text-slate-950">{variant.offerCard.title}</h2>
-                    <p className="mt-4 text-body-md text-slate-700">{variant.offerCard.description}</p>
+                    <p className="thermal-mono text-[11px] uppercase tracking-[0.2em] text-[#22d3ee]">{variant.offerCard.eyebrow}</p>
+                    <h2 className="thermal-serif mt-3 text-[clamp(24px,2.6vw,34px)] leading-[1.15] text-[#f5f3ee]">{variant.offerCard.title}</h2>
+                    <p className="mt-4 text-body-md text-[#99a1ad]">{variant.offerCard.description}</p>
                     <div className="mt-6 grid gap-3 sm:grid-cols-2">
                       {variant.offerCard.bullets.map((bullet) => (
-                        <div key={bullet} className="rounded-2xl border border-sky-100 bg-sky-50/70 px-4 py-3 text-body-sm text-slate-800">
+                        <div key={bullet} className="rounded-xl border bg-[#0f1116] px-4 py-3 text-body-sm text-[#f5f3ee]" style={{ borderColor: 'rgba(244,242,237,0.10)' }}>
                           {bullet}
                         </div>
                       ))}
                     </div>
                     {variant.offerCard.footnote ? (
-                      <p className="mt-5 text-body-xs text-slate-500">{variant.offerCard.footnote}</p>
+                      <p className="mt-5 text-body-xs text-[#868d99]">{variant.offerCard.footnote}</p>
                     ) : null}
                   </div>
 
-                  <div className="rounded-3xl border border-emerald-200 bg-emerald-50 px-6 py-7">
-                    <p className="text-body-xs uppercase tracking-[0.2em] text-emerald-700">{variant.offerCard.priceLabel}</p>
-                    <p className="mt-4 font-display text-4xl font-semibold text-slate-950">{variant.offerCard.priceValue}</p>
-                    <p className="mt-4 text-body-sm text-slate-700">Focused review using current BAS exports.</p>
+                  <div className="rounded-2xl border px-6 py-7" style={{ borderColor: 'rgba(245,176,32,0.25)', background: 'linear-gradient(160deg, rgba(245,176,32,0.10), rgba(242,98,46,0.06))' }}>
+                    <p className="thermal-mono text-[11px] uppercase tracking-[0.2em] text-[#f5b020]">{variant.offerCard.priceLabel}</p>
+                    <p className="thermal-serif mt-4 text-4xl text-[#f5f3ee]">{variant.offerCard.priceValue}</p>
+                    <p className="mt-4 text-body-sm text-[#99a1ad]">Focused review using current BAS exports.</p>
                   </div>
                 </div>
-              </Card>
+              </div>
             </div>
           ) : null}
         </div>
       </section>
 
-      <section className="section light-form bg-white pt-8">
+      <section className="section bg-[#0a0b0e] pt-10">
         <div className="container-default max-w-5xl">
-          <Card className="mb-8 border-sky-100 bg-white shadow-[0_18px_60px_rgba(30,64,175,0.08)]">
-            <div className="mb-6 flex flex-col gap-3 border-b border-sky-100 pb-5 md:flex-row md:items-center md:justify-between">
+          <div className="mb-8 rounded-2xl border bg-[#14171e] p-6" style={{ borderColor: 'rgba(244,242,237,0.10)' }}>
+            <div className="mb-6 flex flex-col gap-3 border-b pb-5 md:flex-row md:items-center md:justify-between" style={{ borderColor: 'rgba(244,242,237,0.10)' }}>
               <div>
-                <p className="text-body-sm font-medium text-slate-900">Your progress will save as you move through the form.</p>
+                <p className="text-body-sm font-medium text-[#f5f3ee]">Your progress will save as you move through the form.</p>
                 {saveState !== 'idle' ? (
-                  <p className="mt-1 text-body-xs text-slate-500">
+                  <p className="mt-1 flex items-center gap-2 text-body-xs text-[#99a1ad]">
+                    <span className="inline-block h-1.5 w-1.5 rounded-full" style={{ background: '#34e0b4', boxShadow: '0 0 8px #34e0b4' }} />
                     {saveStateLabel(saveState)}{lastSavedAt ? ` · ${new Date(lastSavedAt).toLocaleTimeString()}` : ''}
                   </p>
                 ) : null}
               </div>
               {draftToken ? (
-                <p className="text-body-xs text-slate-500">You can return in this browser if you need to finish later.</p>
+                <p className="text-body-xs text-[#868d99]">You can return in this browser if you need to finish later.</p>
               ) : (
-                <p className="text-body-xs text-slate-500">We only ask for what is needed to review your sample dataset.</p>
+                <p className="text-body-xs text-[#868d99]">We only ask for what is needed to review your sample dataset.</p>
               )}
             </div>
 
@@ -848,28 +861,41 @@ export function DatasetIntakeFlow({ variant }: { variant: DatasetIntakeVariant }
                 return (
                   <li key={title} className="flex items-center gap-3">
                     <div
-                      className={`w-8 h-8 rounded-full border flex items-center justify-center text-body-xs font-semibold ${
+                      className={`flex h-8 w-8 items-center justify-center rounded-full border text-body-xs font-semibold transition-colors ${
                         isCompleteStep
-                          ? 'bg-emerald-50 border-emerald-200 text-emerald-700'
+                          ? 'border-transparent text-[#0a0b0e]'
                           : isActive
-                            ? 'bg-sky-50 border-sky-300 text-sky-800'
-                            : 'bg-white border-sky-100 text-slate-500'
+                            ? 'border-transparent text-[#0a0b0e]'
+                            : 'bg-[#0f1116] text-[#868d99]'
                       }`}
+                      style={
+                        isCompleteStep
+                          ? { background: '#34e0b4', boxShadow: '0 0 18px -4px rgba(52,224,180,0.6)' }
+                          : isActive
+                            ? { background: 'linear-gradient(95deg,#f5b020,#f2622e)', boxShadow: '0 0 18px -4px rgba(242,98,46,0.6)' }
+                            : { borderColor: 'rgba(244,242,237,0.10)' }
+                      }
                     >
-                      {stepNumber}
+                      {isCompleteStep && !isActive ? (
+                        <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M5 13l4 4L19 7" />
+                        </svg>
+                      ) : (
+                        stepNumber
+                      )}
                     </div>
-                    <span className={`text-body-sm ${isActive ? 'text-slate-950' : 'text-slate-500'}`}>
+                    <span className={`text-body-sm ${isActive ? 'text-[#f5f3ee]' : 'text-[#868d99]'}`}>
                       {title}
                     </span>
                   </li>
                 )
               })}
             </ol>
-          </Card>
+          </div>
 
           {!isComplete ? (
-            <Card className="border-sky-100 bg-white shadow-[0_18px_60px_rgba(30,64,175,0.08)]">
-              <h2 className="heading-3 mb-6 text-slate-950">{STEP_TITLES[step - 1]}</h2>
+            <div className="rounded-2xl border bg-[#14171e] p-6 shadow-[0_18px_60px_rgba(0,0,0,0.4)]" style={{ borderColor: 'rgba(244,242,237,0.10)' }}>
+              <h2 className="thermal-serif mb-6 text-[clamp(24px,2.6vw,34px)] leading-[1.15] text-[#f5f3ee]">{STEP_TITLES[step - 1]}</h2>
 
               {step === 1 ? (
                 <div className="grid md:grid-cols-2 gap-6">
@@ -950,24 +976,33 @@ export function DatasetIntakeFlow({ variant }: { variant: DatasetIntakeVariant }
                       <input ref={fileInputRef} id="dataset" type="file" accept=".csv,text/csv" className="hidden" onChange={(e) => void handleDatasetSelected(e.target.files?.[0] ?? null)} />
 
                       {formData.dataset ? (
-                        <div className="rounded-2xl border border-sky-100 bg-sky-50/70 p-5">
-                          <p className="text-body-sm font-semibold text-slate-950">{formData.dataset.fileName}</p>
-                          <p className="mt-2 text-body-xs text-slate-600">{datasetSummary}</p>
-                          <p className="mt-1 text-body-xs text-slate-500">
-                            {datasetUploadState === 'uploading' ? 'Uploading dataset...' : 'Dataset uploaded. Your progress is saved.'}
+                        <div className="rounded-xl border bg-[#0f1116] p-5" style={{ borderColor: 'rgba(244,242,237,0.10)' }}>
+                          <p className="text-body-sm font-semibold text-[#f5f3ee]">{formData.dataset.fileName}</p>
+                          <p className="mt-2 text-body-xs text-[#99a1ad]">{datasetSummary}</p>
+                          <p className="mt-1 flex items-center gap-2 text-body-xs text-[#34e0b4]">
+                            {datasetUploadState === 'uploading' ? (
+                              'Uploading dataset...'
+                            ) : (
+                              <>
+                                <svg className="h-3.5 w-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M5 13l4 4L19 7" />
+                                </svg>
+                                Dataset uploaded. Your progress is saved.
+                              </>
+                            )}
                           </p>
                           <div className="mt-4 flex flex-wrap gap-3">
-                            <button type="button" className="btn-secondary" onClick={() => fileInputRef.current?.click()}>Replace File</button>
-                            <button type="button" className="btn-secondary" onClick={() => void handleRemoveDataset()}>Remove File</button>
+                            <button type="button" className="thermal-btn-secondary" onClick={() => fileInputRef.current?.click()}>Replace File</button>
+                            <button type="button" className="thermal-btn-secondary" onClick={() => void handleRemoveDataset()}>Remove File</button>
                           </div>
                         </div>
                       ) : (
-                        <div className="space-y-3">
-                          <button type="button" className="btn-secondary" onClick={() => fileInputRef.current?.click()} disabled={datasetUploadState === 'uploading'}>
+                        <div className="space-y-3 rounded-xl border border-dashed bg-[#0f1116] p-6" style={{ borderColor: 'rgba(244,242,237,0.16)' }}>
+                          <button type="button" className="thermal-btn-primary" onClick={() => fileInputRef.current?.click()} disabled={datasetUploadState === 'uploading'}>
                             {datasetUploadState === 'uploading' ? 'Uploading CSV...' : 'Choose CSV File'}
                           </button>
-                          <p className="text-body-xs text-slate-500">{datasetSummary}</p>
-                          <p className="text-body-xs text-slate-500">CSV only. 2-5 minute intervals are recommended. Upload as much history as you have available.</p>
+                          <p className="text-body-xs text-[#99a1ad]">{datasetSummary}</p>
+                          <p className="text-body-xs text-[#868d99]">CSV only. 2-5 minute intervals are recommended. Upload as much history as you have available.</p>
                         </div>
                       )}
                     </div>
@@ -977,14 +1012,14 @@ export function DatasetIntakeFlow({ variant }: { variant: DatasetIntakeVariant }
                     </div>
                   </div>
 
-                  <div className="rounded-2xl border border-sky-100 bg-sky-50/70 p-5">
-                    <p className="text-body-sm font-semibold text-slate-950">Accepted formats and examples</p>
-                    <p className="mt-3 text-body-sm text-slate-700">
+                  <div className="rounded-xl border bg-[#0f1116] p-5" style={{ borderColor: 'rgba(244,242,237,0.10)' }}>
+                    <p className="text-body-sm font-semibold text-[#f5f3ee]">Accepted formats and examples</p>
+                    <p className="mt-3 text-body-sm text-[#99a1ad]">
                       Accepted format: CSV. Useful files include BAS trend exports, point histories, temperatures, setpoints,
                       schedules, runtime logs, and equipment-level exports.
                     </p>
-                    <a href="/templates/sample-bas-template.csv" download className="btn-secondary mt-5 inline-flex">Download Sample CSV</a>
-                    <p className="mt-4 text-body-xs text-slate-500">
+                    <a href="/templates/sample-bas-template.csv" download className="thermal-btn-secondary mt-5 inline-flex">Download Sample CSV</a>
+                    <p className="mt-4 text-body-xs text-[#868d99]">
                       LeanFM uses uploaded data only to perform the requested review and prepare next steps.
                     </p>
                   </div>
@@ -993,9 +1028,9 @@ export function DatasetIntakeFlow({ variant }: { variant: DatasetIntakeVariant }
 
               {step === 4 ? (
                 <div className="grid gap-6 lg:grid-cols-2">
-                  <div className="rounded-2xl border border-sky-100 bg-sky-50/70 p-5">
-                    <p className="text-body-sm font-semibold text-slate-950">Account</p>
-                    <div className="mt-4 space-y-2 text-body-sm text-slate-700">
+                  <div className="rounded-xl border bg-[#0f1116] p-5" style={{ borderColor: 'rgba(244,242,237,0.10)' }}>
+                    <p className="thermal-mono text-[11px] uppercase tracking-[0.16em] text-[#22d3ee]">Account</p>
+                    <div className="mt-4 space-y-2 text-body-sm text-[#99a1ad]">
                       <p>{formData.name}</p>
                       <p>{formData.email}</p>
                       <p>{formData.company}</p>
@@ -1003,9 +1038,9 @@ export function DatasetIntakeFlow({ variant }: { variant: DatasetIntakeVariant }
                       <p>{formData.role || 'No job title provided'}</p>
                     </div>
                   </div>
-                  <div className="rounded-2xl border border-sky-100 bg-sky-50/70 p-5">
-                    <p className="text-body-sm font-semibold text-slate-950">Building</p>
-                    <div className="mt-4 space-y-2 text-body-sm text-slate-700">
+                  <div className="rounded-xl border bg-[#0f1116] p-5" style={{ borderColor: 'rgba(244,242,237,0.10)' }}>
+                    <p className="thermal-mono text-[11px] uppercase tracking-[0.16em] text-[#22d3ee]">Building</p>
+                    <div className="mt-4 space-y-2 text-body-sm text-[#99a1ad]">
                       <p>{formData.buildingName}</p>
                       <p>{formData.addressLine1}</p>
                       <p>{formData.city}, {formData.state} {formData.postalCode}</p>
@@ -1013,9 +1048,9 @@ export function DatasetIntakeFlow({ variant }: { variant: DatasetIntakeVariant }
                       <p>{formData.portfolioSize}</p>
                     </div>
                   </div>
-                  <div className="rounded-2xl border border-sky-100 bg-sky-50/70 p-5 lg:col-span-2">
-                    <p className="text-body-sm font-semibold text-slate-950">Dataset</p>
-                    <div className="mt-4 space-y-2 text-body-sm text-slate-700">
+                  <div className="rounded-xl border bg-[#0f1116] p-5 lg:col-span-2" style={{ borderColor: 'rgba(244,242,237,0.10)' }}>
+                    <p className="thermal-mono text-[11px] uppercase tracking-[0.16em] text-[#22d3ee]">Dataset</p>
+                    <div className="mt-4 space-y-2 text-body-sm text-[#99a1ad]">
                       <p>{datasetSummary}</p>
                       <p>{formData.basPlatform || 'BAS platform not provided'}</p>
                       <p>{formData.primaryConcern || 'Primary concern not provided'}</p>
@@ -1026,52 +1061,52 @@ export function DatasetIntakeFlow({ variant }: { variant: DatasetIntakeVariant }
               ) : null}
 
               {errorMessage ? (
-                <div className="mt-6 p-4 rounded-lg bg-red-500/10 border border-red-500/30 text-body-sm text-red-400">
+                <div className="mt-6 rounded-xl border p-4 text-body-sm text-[#f2622e]" style={{ borderColor: 'rgba(242,98,46,0.35)', background: 'rgba(242,98,46,0.10)' }}>
                   {errorMessage}
                 </div>
               ) : null}
 
-              <div className="mt-8 flex flex-col-reverse sm:flex-row gap-3 sm:justify-between">
-                <button type="button" className="btn-secondary" onClick={() => void handleBack()} disabled={step === 1 || submissionState === 'submitting'}>
+              <div className="mt-8 flex flex-col-reverse gap-3 sm:flex-row sm:justify-between">
+                <button type="button" className="thermal-btn-secondary" onClick={() => void handleBack()} disabled={step === 1 || submissionState === 'submitting'}>
                   Back
                 </button>
 
                 {step < 4 ? (
-                  <button type="button" className="btn-primary" onClick={() => void handleNext()} disabled={datasetUploadState === 'uploading'}>
+                  <button type="button" className="thermal-btn-primary" onClick={() => void handleNext()} disabled={datasetUploadState === 'uploading'}>
                     Continue
                   </button>
                 ) : (
-                  <button type="button" className="btn-primary" onClick={() => void handleSubmit()} disabled={submissionState === 'submitting'}>
+                  <button type="button" className="thermal-btn-primary" onClick={() => void handleSubmit()} disabled={submissionState === 'submitting'}>
                     {submissionState === 'submitting' ? variant.submittingButtonLabel : variant.submitButtonLabel}
                   </button>
                 )}
               </div>
-            </Card>
+            </div>
           ) : (
-            <Card className="border-sky-100 bg-white py-12 text-center shadow-[0_18px_60px_rgba(30,64,175,0.08)]">
-              <div className="mx-auto mb-6 flex h-16 w-16 items-center justify-center rounded-full bg-emerald-50">
-                <svg className="h-8 w-8 text-emerald-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <div className="rounded-2xl border bg-[#14171e] py-12 text-center shadow-[0_18px_60px_rgba(0,0,0,0.4)]" style={{ borderColor: 'rgba(244,242,237,0.10)' }}>
+              <div className="mx-auto mb-6 flex h-16 w-16 items-center justify-center rounded-full" style={{ background: 'rgba(52,224,180,0.12)', boxShadow: '0 0 30px -6px rgba(52,224,180,0.5)' }}>
+                <svg className="h-8 w-8 text-[#34e0b4]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
                 </svg>
               </div>
-              <h2 className="heading-2 mb-4 text-slate-950">{completionContent.title}</h2>
-              <p className="body-large mx-auto mb-8 max-w-2xl text-slate-700">{completionContent.description}</p>
-              <div className="flex flex-col sm:flex-row justify-center gap-4">
+              <h2 className="thermal-serif mb-4 text-[clamp(36px,4.6vw,56px)] leading-[1.04] text-[#f5f3ee]">{completionContent.title}</h2>
+              <p className="mx-auto mb-8 max-w-2xl text-[clamp(18px,1.5vw,21px)] leading-[1.55] text-[#99a1ad]">{completionContent.description}</p>
+              <div className="flex flex-col justify-center gap-4 sm:flex-row">
                 {completionContent.actions.map((action, index) => (
-                  <Button
+                  <Link
                     key={[action.href, action.label, index].join('-')}
                     href={action.href}
-                    variant={action.variant || (index === 0 ? 'primary' : 'secondary')}
+                    className={(action.variant || (index === 0 ? 'primary' : 'secondary')) === 'primary' ? 'thermal-btn-primary' : 'thermal-btn-secondary'}
                     onClick={action.eventName ? () => trackEvent(action.eventName as string, action.eventParams || {}) : undefined}
                   >
                     {action.label}
-                  </Button>
+                  </Link>
                 ))}
               </div>
-            </Card>
+            </div>
           )}
         </div>
       </section>
-    </>
+    </div>
   )
 }
