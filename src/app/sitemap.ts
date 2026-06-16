@@ -1,35 +1,38 @@
 import { MetadataRoute } from 'next'
 import { SITE_CONFIG } from '@/lib/constants'
-import { INDUSTRY_SLUGS } from '@/lib/industry-pages'
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const baseUrl = SITE_CONFIG.url
 
+  // New static marketing pages (served from public/) + the live /start flow.
   const routes = [
     '/',
-    '/sample-analysis',
-    '/how-it-works',
-    '/what-we-find',
-    '/results',
-    '/solutions/k-12-schools',
-    '/solutions/commercial-real-estate',
-    '/solutions/universities',
-    '/solutions/museums',
+    '/platform.html',
+    '/air.html',
+    '/maple.html',
+    '/fdd.html',
+    '/reporting.html',
+    '/portfolio.html',
+    '/methodology.html',
+    '/industries.html',
+    '/results.html',
+    '/about.html',
+    '/contact.html',
+    '/investors.html',
+    '/sample-report.html',
+    '/request.html',
+    '/security.html',
+    '/insights.html',
+    '/insights-hidden-waste.html',
+    '/privacy.html',
+    '/terms.html',
     '/start',
-    '/company/about',
-    '/investors',
-    '/contact',
-    '/building-data-to-action',
-    '/privacy',
-    ...INDUSTRY_SLUGS
-      .filter((slug) => slug !== 'k-12')
-      .map((slug) => `/industries/${slug}`),
   ]
 
   return routes.map((route) => ({
     url: `${baseUrl}${route}`,
     lastModified: new Date(),
     changeFrequency: 'monthly',
-    priority: 0.8,
+    priority: route === '/' ? 1 : 0.8,
   }))
 }

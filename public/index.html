@@ -1,0 +1,524 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>LeanFM — See the waste before it finds your budget</title>
+  <meta name="description" content="LeanFM reads the building automation data you already collect and surfaces hidden HVAC faults, energy waste, and comfort risks — ranked by dollar impact. No new sensors." />
+  <meta property="og:title" content="LeanFM — Building performance intelligence" />
+  <meta property="og:description" content="The hidden faults your BAS can't alarm on, surfaced from data you already have. Ranked in dollars." />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://leanfmtech.com/" />
+  <meta property="og:image" content="https://leanfmtech.com/assets/img/og/home.png" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <link rel="icon" href="assets/img/favicon.ico" sizes="any" />
+  <link rel="icon" href="assets/img/icon.svg" type="image/svg+xml" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Geist:wght@400;500;600&family=Geist+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="assets/css/styles-b.css?v=15" />
+</head>
+<body>
+
+<!-- NAV -->
+<header class="nav" id="nav">
+  <div class="nav__in">
+    <a class="brand" href="index.html" aria-label="LeanFM Technologies"><img class="brand-logo" src="assets/img/leanfm-logo.png" alt="LeanFM Technologies" /></a>
+    <nav class="nav__links" aria-label="Primary">
+      <div class="nav__item">
+        <button class="nav__trigger" aria-expanded="false" aria-haspopup="true"><span data-i18n="nav.platform">Platform</span> <span class="cv" aria-hidden="true">▾</span></button>
+        <div class="nav__menu" role="menu">
+          <a href="platform.html"><strong>OnPoint</strong><span data-i18n="sub.onpoint">The platform, end to end</span></a>
+          <a href="air.html"><strong>AIR</strong><span data-i18n="sub.air">The performance score</span></a>
+          <a href="maple.html"><strong>Maple</strong><span data-i18n="nav.maple_sub">The virtual engineer</span></a>
+          <a href="fdd.html"><strong data-i18n="nav.fdd">Fault detection</strong><span data-i18n="sub.fdd">Prescriptiv engine</span></a>
+          <a href="reporting.html"><strong data-i18n="nav.reporting">Executive reporting</strong><span data-i18n="sub.reporting">Dollars, not data dumps</span></a>
+          <a href="portfolio.html"><strong data-i18n="nav.portfolio">Portfolio</strong><span data-i18n="sub.portfolio">Every building, ranked</span></a>
+        </div>
+      </div>
+      <div class="nav__item">
+        <button class="nav__trigger" aria-expanded="false" aria-haspopup="true"><span data-i18n="nav.industries">Industries</span> <span class="cv" aria-hidden="true">▾</span></button>
+        <div class="nav__menu" role="menu">
+          <a href="industries.html#higher-ed"><strong data-i18n="nav.higher_ed">Higher education</strong></a>
+          <a href="industries.html#k12"><strong data-i18n="nav.k12">K-12 schools</strong></a>
+          <a href="industries.html#museums"><strong data-i18n="nav.museums">Museums &amp; cultural</strong></a>
+          <a href="industries.html#healthcare"><strong data-i18n="nav.healthcare">Healthcare</strong></a>
+          <a href="industries.html#commercial"><strong data-i18n="nav.commercial">Commercial real estate</strong></a>
+        </div>
+      </div>
+      <a href="results.html" class="nav__flat" data-i18n="nav.results">Results</a>
+      <div class="nav__item">
+        <button class="nav__trigger" aria-expanded="false" aria-haspopup="true"><span data-i18n="nav.company">Company</span> <span class="cv" aria-hidden="true">▾</span></button>
+        <div class="nav__menu" role="menu">
+          <a href="about.html"><strong data-i18n="nav.about">About</strong><span data-i18n="sub.about">Born at Carnegie Mellon</span></a>
+          <a href="contact.html"><strong data-i18n="nav.contact">Contact</strong><span data-i18n="sub.contact">Talk to LeanFM</span></a>
+        </div>
+      </div>
+    </nav>
+    <div class="nav__cta"><select class="langsel" aria-label="Select language" title="Language"><option value="en">EN</option><option value="es">ES</option><option value="zh">中文</option></select>
+      <a class="btn btn--ghost" href="sample-report.html" data-i18n="cta.report">See a sample report</a>
+      <a class="btn btn--glow" href="request.html?intent=sample-analysis&amp;source=header" data-i18n="cta.request">Request a sample analysis</a>
+    </div>
+    <button class="burger" aria-label="Menu" aria-expanded="false"><span></span><span></span><span></span></button>
+  </div>
+</header>
+<nav class="mobile" aria-label="Mobile">
+  <p class="mlabel" data-i18n="m.platform">Platform</p>
+  <a href="platform.html">OnPoint</a>
+  <a href="air.html">AIR</a>
+  <a href="maple.html">Maple</a><a href="fdd.html">Fault detection</a><a href="reporting.html">Executive reporting</a><a href="portfolio.html">Portfolio</a>
+  <p class="mlabel" data-i18n="m.industries">Industries</p>
+  <a href="industries.html">Industries</a>
+  <p class="mlabel" data-i18n="m.company">Company</p>
+  <a href="results.html">Results</a><a href="about.html">About</a><a href="contact.html">Contact</a>
+  <a href="sample-report.html">Sample report</a>
+  <a href="request.html?intent=sample-analysis&amp;source=header_mobile">Request a sample analysis</a>
+</nav>
+
+<!-- HERO — scroll-scrub building fly-in -->
+<section class="heroscrub" id="hero">
+  <div class="heroscrub__stage">
+    <div class="hs-sky" aria-hidden="true"></div>
+    <div class="hs-photo" aria-hidden="true">
+      <video class="hs-video" id="heroVideo" muted loop playsinline preload="none" poster="assets/img/hero-aerial.jpg" data-src="assets/img/hero-aerial.mp4"></video>
+    </div>
+    <div class="heatfield" aria-hidden="true" id="heatfield"></div>
+    <div class="hs-skyline" aria-hidden="true">
+      <svg viewBox="0 0 1440 300" preserveAspectRatio="xMidYMax slice">
+        <path d="M0 300 L0 210 L90 210 L90 160 L150 160 L150 230 L240 230 L240 120 L260 120 L260 100 L330 100 L330 240 L420 240 L420 180 L500 180 L500 250 L590 250 L590 140 L680 140 L680 220 L760 220 L760 190 L850 190 L850 240 L950 240 L950 110 L970 110 L970 90 L1040 90 L1040 230 L1130 230 L1130 170 L1220 170 L1220 250 L1320 250 L1320 200 L1440 200 L1440 300 Z" fill="#0b0f13"/>
+        <path d="M0 300 L0 260 L120 260 L120 235 L300 235 L300 270 L520 270 L520 245 L740 245 L740 275 L980 275 L980 250 L1200 250 L1200 272 L1440 272 L1440 300 Z" fill="#161d24"/>
+      </svg>
+    </div>
+    <div class="wrap hs-grid">
+      <div class="hs-copy">
+        <span class="kicker" data-i18n="hero.kicker">Building Performance Intelligence</span>
+        <h1 class="display hs-title" data-i18n-rich="hero.title"><span class="hs-line">Find hidden <span class="thermal-text">HVAC waste</span></span><span class="hs-line">before it becomes a problem.</span></h1>
+        <p class="lead hs-sub" data-i18n="hero.sub">LeanFM reads the building automation data you already collect — analyzed by Prescriptiv, our engine developed from Carnegie Mellon research — to uncover energy waste, comfort issues, and maintenance risks. No new sensors required.</p>
+        <div class="hs-cta">
+          <a class="btn btn--glow" href="request.html"><span data-i18n="cta.request">Request a sample analysis</span> <span class="arr">→</span></a>
+          <a class="btn btn--ghost" href="sample-report.html" data-i18n="cta.report">See a sample report</a>
+        </div>
+        <p class="hs-proof"><span class="stat" data-i18n="hero.proof_stat">$105,000/yr identified</span> · <span data-i18n="hero.proof_meta">220,000 sq ft school · existing BAS data only</span></p>
+        <p class="hs-proof" style="margin-top:14px"><span class="guarantee" data-i18n="hero.guarantee">Backed by our 3–5× money-back guarantee.</span></p>
+      </div>
+      <div class="hs-scene" aria-hidden="true">
+        <div class="hs-total">
+          <span class="num" data-count="36500" data-prefix="$" data-suffix="/yr" data-manual="1">$0</span>
+          <p>in hidden waste — surfaced from data this building already had.</p>
+        </div>
+        <svg viewBox="0 0 560 480">
+          <polygon points="62,108 388,108 450,71 124,71" fill="#1c232a"/>
+          <polygon points="388,108 450,71 450,366 388,403" fill="#171d23"/>
+          <rect x="62" y="108" width="326" height="295" fill="#10161c" stroke="#39434c" stroke-width="1.5"/>
+          <rect x="186" y="59" width="53" height="28" fill="#242c34" stroke="#4a555f"/>
+          <rect x="295" y="53" width="53" height="28" fill="#242c34" stroke="#4a555f"/>
+          <g class="hs-facade">
+            <rect x="80" y="124" width="44" height="32" fill="#1d2630"/>
+            <rect x="141" y="124" width="44" height="32" fill="#d9a76a" opacity="0.65"/>
+            <rect x="202" y="124" width="44" height="32" fill="#1d2630"/>
+            <rect x="263" y="124" width="44" height="32" fill="#1d2630"/>
+            <rect x="324" y="124" width="44" height="32" fill="#d9a76a" opacity="0.5"/>
+            <rect x="80" y="222" width="44" height="32" fill="#d9a76a" opacity="0.6"/>
+            <rect x="141" y="222" width="44" height="32" fill="#1d2630"/>
+            <rect x="202" y="222" width="44" height="32" fill="#d9a76a" opacity="0.4"/>
+            <rect x="263" y="222" width="44" height="32" fill="#d9a76a" opacity="0.7"/>
+            <rect x="324" y="222" width="44" height="32" fill="#1d2630"/>
+            <rect x="80" y="320" width="44" height="32" fill="#1d2630"/>
+            <rect x="141" y="320" width="44" height="32" fill="#1d2630"/>
+            <rect x="202" y="320" width="44" height="32" fill="#d9a76a" opacity="0.55"/>
+            <rect x="263" y="320" width="44" height="32" fill="#1d2630"/>
+            <rect x="324" y="320" width="44" height="32" fill="#d9a76a" opacity="0.45"/>
+          </g>
+          <g class="hs-cutaway">
+            <line x1="62" y1="206" x2="388" y2="206" stroke="#2a323a"/>
+            <line x1="62" y1="304" x2="388" y2="304" stroke="#2a323a"/>
+            <path class="duct-line" d="M212 87 L212 392"/>
+            <path class="duct-line" d="M212 155 L96 155 M212 155 L354 155"/>
+            <path class="duct-line" d="M212 253 L96 253 M212 253 L354 253"/>
+            <path class="duct-line" d="M212 351 L96 351 M212 351 L354 351"/>
+            <path class="air-line" d="M212 87 L212 392"/>
+            <path class="air-line" d="M212 155 L96 155"/>
+            <path class="air-line" d="M212 155 L354 155"/>
+            <path class="air-line" d="M212 253 L96 253"/>
+            <path class="air-line" d="M212 253 L354 253"/>
+            <path class="air-line" d="M212 351 L96 351"/>
+            <path class="air-line" d="M212 351 L354 351"/>
+            <rect class="zone" x="78" y="120" width="90" height="22" rx="3"/>
+            <rect class="zone zone--warm" x="258" y="120" width="114" height="22" rx="3"/>
+            <rect class="zone zone--warm" x="78" y="218" width="90" height="22" rx="3" style="animation-delay:-3s"/>
+            <rect class="zone" x="258" y="218" width="114" height="22" rx="3"/>
+            <rect class="zone" x="78" y="316" width="90" height="22" rx="3"/>
+            <rect class="zone zone--warm" x="258" y="316" width="114" height="22" rx="3" style="animation-delay:-5.5s"/>
+            <g><circle class="fault-ring" cx="354" cy="155" r="13"/><circle class="fault-dot" cx="354" cy="155" r="5"/></g>
+            <g><circle class="fault-ring" cx="96" cy="253" r="13" style="animation-delay:-0.9s"/><circle class="fault-dot" cx="96" cy="253" r="5"/></g>
+            <g><circle class="fault-ring" cx="322" cy="67" r="13" style="animation-delay:-1.6s"/><circle class="fault-dot" cx="322" cy="67" r="5"/></g>
+            <g class="hero-tag hero-tag--1"><rect x="370" y="178" width="178" height="46" rx="5"/><text class="tag-fault" x="382" y="197">RTU-2 · simul. htg/clg</text><text class="tag-cost" x="382" y="214">$18,400/yr</text></g>
+            <g class="hero-tag hero-tag--2"><rect x="8" y="276" width="172" height="46" rx="5"/><text class="tag-fault" x="20" y="295">VAV-2-08 · schedule fault</text><text class="tag-cost" x="20" y="312">$6,200/yr</text></g>
+            <g class="hero-tag hero-tag--3"><rect x="382" y="8" width="166" height="46" rx="5"/><text class="tag-fault" x="394" y="27">AHU-1 · economizer</text><text class="tag-cost" x="394" y="44">$11,900/yr</text></g>
+            <g><rect x="62" y="428" width="326" height="34" rx="5" fill="#13212c" stroke="#2e4a5e"/><text x="76" y="450" font-family="Geist Mono, monospace" font-size="12" fill="#22d3ee">Reading existing BAS trend data…</text><text x="372" y="450" font-family="Geist Mono, monospace" font-size="12" fill="#34e0b4" text-anchor="end">live</text></g>
+          </g>
+        </svg>
+      </div>
+    </div>
+    <div class="hs-rail" aria-hidden="true">
+      <span class="active">01 · The building</span>
+      <span>02 · The data</span>
+      <span>03 · The faults</span>
+      <span>04 · The dollars</span>
+    </div>
+    <div class="hs-hint" aria-hidden="true">Scroll<i></i></div>
+  </div>
+</section>
+
+<!-- TICKER -->
+<div class="ticker" aria-hidden="true">
+  <div class="ticker__t">
+    <span>RTU-2 · simultaneous heating + cooling</span>
+    <span class="hot">$18,400/yr · heating + cooling the same air</span>
+    <span>AHU-1 · economizer stuck · 11 weeks</span>
+    <span class="hot">$11,900/yr · free cooling left unused</span>
+    <span>VAV-2-08 · schedule ≠ occupancy</span>
+    <span class="hot">$6,200/yr · conditioning an empty wing</span>
+    <span class="good">$105,000/yr identified · one school</span>
+    <span class="cool">0 new sensors · read-only connection</span>
+    <span>RTU-2 · simultaneous heating + cooling</span>
+    <span class="hot">$18,400/yr · heating + cooling the same air</span>
+    <span>AHU-1 · economizer stuck · 11 weeks</span>
+    <span class="hot">$11,900/yr · free cooling left unused</span>
+    <span>VAV-2-08 · schedule ≠ occupancy</span>
+    <span class="hot">$6,200/yr · conditioning an empty wing</span>
+    <span class="good">$105,000/yr identified · one school</span>
+    <span class="cool">0 new sensors · read-only connection</span>
+  </div>
+</div>
+
+<!-- LOGOS -->
+<section class="logos">
+  <div class="wrap">
+    <p class="small">Born at Carnegie Mellon. Proven in the field.</p>
+    <div class="logos__row rv">
+      <span>Carnegie Mellon</span>
+      <span>The Andy Warhol Museum</span>
+    </div>
+  </div>
+</section>
+
+<!-- PROBLEM -->
+<section class="section section--tight">
+  <div class="wrap">
+    <div class="eyebrow-row rv">
+      <span class="kicker" data-i18n="p.eyebrow">01 — The problem</span>
+      <h2 class="h2" data-i18n-rich="p.h2" data-i18n-hl="italic thermal-text">Buildings don't fail loudly. <span class="italic thermal-text">They leak quietly.</span></h2>
+      <p class="lead">Your BAS alarms on thresholds — a fan fails, a sensor flatlines, you hear about it. But simultaneous heating and cooling, a stuck economizer, a schedule that never matched occupancy? Those run silently, sometimes for years, quietly burning five to six figures a year in a single building.</p>
+      <div class="statband">
+        <div class="s"><div class="n warm">Up to 30%<a class="fn" href="#fn-research" role="doc-noteref" aria-label="Footnote 1">1</a></div><p>of HVAC energy spend is lost to hidden faults like these.</p></div>
+        <div class="s"><div class="n good">3–5×<a class="fn" href="#fn-research" role="doc-noteref" aria-label="Footnote 1">1</a></div><p>typical return on finding and fixing them.</p></div>
+      </div>
+    </div>
+    <div class="contrast rv">
+      <div class="panel panel--dead">
+        <div class="panel__h"><span class="mono">BAS alarm summary</span><span class="tag-ok">● Normal</span></div>
+        <div class="rows">
+          <div class="row"><span>RTU-2 · heating / cooling</span><span class="ok">OK</span></div>
+          <div class="row"><span>AHU-1 · economizer</span><span class="ok">OK</span></div>
+          <div class="row"><span>VAV-2-08 · schedule</span><span class="ok">OK</span></div>
+          <div class="row"><span>AHU-3 · supply fan</span><span class="ok">OK</span></div>
+          <div class="row"><span>CHW plant · pumps</span><span class="ok">OK</span></div>
+        </div>
+        <p class="zero zero--ok">0 active alarms</p>
+      </div>
+      <div class="panel panel--live">
+        <div class="panel__h"><span class="mono">Same points · LeanFM analysis</span><span class="tag-bad">6 findings</span></div>
+        <div class="trace" data-preset="sat-fault" data-color="cool" data-axis="1" data-ticks="day 1,day 7,day 14"
+             data-flags='[{"x":0.3,"label":"setpoint drift"},{"x":0.62,"label":"htg + clg overlap"},{"x":0.88,"label":"never recovers"}]'></div>
+        <p class="zero zero--bad">Waste accruing daily</p>
+      </div>
+    </div>
+    <p class="same">Same building. Same day.</p>
+    <p class="footnote" id="fn-research" role="doc-footnote"><span class="fn" aria-hidden="true">1</span> Figures from independent building retro-commissioning research. Individual results vary by building; LeanFM's findings are reported per building from your own data.</p>
+  </div>
+</section>
+
+<!-- WHAT WE FIND -->
+<section class="section section--tight">
+  <div class="wrap">
+    <div class="eyebrow-row rv">
+      <span class="kicker">02 — Detection</span>
+      <h2 class="h2">Eight faults that hide in plain sight.</h2>
+      <p class="lead">Read-only access to the trend data you already produce — analyzed by Prescriptiv, our fault-detection engine developed from Carnegie Mellon research, then reviewed by engineers who do commissioning.</p>
+    </div>
+    <div class="finds rvg">
+      <div class="find"><div class="spark" data-preset="spark-4" data-color="hot"></div><h4>Simultaneous heating &amp; cooling</h4><p>Two systems fighting in the same air — comfort holds, cost doubles.</p></div>
+      <div class="find"><div class="spark" data-preset="spark-2" data-color="hot"></div><h4>Economizer faults</h4><p>Dampers stuck or mis-sequenced, paying for cooling the weather would do free.</p></div>
+      <div class="find"><div class="spark" data-preset="spark-3" data-color="hot"></div><h4>Schedule vs. occupancy</h4><p>Equipment running nights and weekends for empty rooms.</p></div>
+      <div class="find"><div class="spark" data-preset="spark-1" data-color="hot"></div><h4>Sensor drift &amp; failure</h4><p>Sensors reading wrong, so controls act wrong everywhere downstream.</p></div>
+      <div class="find"><div class="spark" data-preset="spark-1" data-color="hot"></div><h4>Setpoint drift</h4><p>Overrides that never got reset, compounding year over year.</p></div>
+      <div class="find"><div class="spark" data-preset="spark-3" data-color="hot"></div><h4>Runtime inefficiencies</h4><p>Cycling, short-starts, and hours far beyond what load requires.</p></div>
+      <div class="find"><div class="spark" data-preset="spark-4" data-color="hot"></div><h4>Control sequence problems</h4><p>Loops that hunt, resets that never engage, sequences drifted from design.</p></div>
+      <div class="find"><div class="spark" data-preset="spark-2" data-color="hot"></div><h4>Airflow sensor failures</h4><p>Flow stations reporting fiction while the BAS reports normal.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- CINEMATIC BAND -->
+<section class="band" aria-label="Building systems and controls">
+  <div class="band__img" style="background-image:url(assets/img/bas-control-room.jpg)"></div>
+  <div class="band__scrim"></div>
+  <div class="wrap band__in">
+    <h2 class="h2 serif rv">We find them in the data<br>your controls already produce.</h2>
+    <p class="lead rv">No sensors to install. No sequences touched. Just the trend logs your building has been writing all along — finally read closely.</p>
+  </div>
+</section>
+
+<!-- AIR -->
+<section class="section air-sec" id="air">
+  <div class="wrap air-grid">
+    <div class="air-copy rv">
+      <span class="kicker" data-i18n="air.eyebrow">03 — The score</span>
+      <h2 class="h2" style="margin-top:22px" data-i18n="air.h2">One score for the whole building — and it shows its work.</h2>
+      <p class="lead">AIR (Asset Intelligence Rating) rates building performance from 0–100 across energy, comfort, maintenance risk, and controls health — computed from your BAS trend data and updated with every analysis run. Open any rating and see the findings behind it: which equipment, which fault, which dollars.</p>
+      <a class="tlink" href="request.html">Get your building's AIR score</a>
+    </div>
+    <div class="arc-stage rv">
+      <div class="arc-wrap">
+        <svg viewBox="0 0 440 400" id="airArc" aria-label="AIR score 74 of 100">
+          <defs>
+            <linearGradient id="thermal" x1="0" y1="0" x2="1" y2="0">
+              <stop offset="0" stop-color="#6366f1"/><stop offset="0.3" stop-color="#22d3ee"/>
+              <stop offset="0.5" stop-color="#2dd4a7"/><stop offset="0.72" stop-color="#f5b020"/>
+              <stop offset="1" stop-color="#f2622e"/>
+            </linearGradient>
+          </defs>
+          <path class="arc-bg"></path>
+          <path class="arc-fg" stroke="url(#thermal)"></path>
+          <circle class="arc-ind" r="9"></circle>
+        </svg>
+        <div class="arc-center">
+          <span class="arc-score" id="airScore">0</span>
+          <span class="arc-of">/ 100 · AIR</span>
+        </div>
+      </div>
+      <div class="arc-dims">
+        <div class="dim"><div class="dh"><span class="dname">Energy efficiency</span><span class="dval" style="color:var(--t-warm)">69</span></div><div class="dbar"><i data-fill="69" style="background:var(--t-warm)"></i></div></div>
+        <div class="dim"><div class="dh"><span class="dname">Occupant comfort</span><span class="dval" style="color:var(--t-teal)">82</span></div><div class="dbar"><i data-fill="82" style="background:var(--t-teal)"></i></div></div>
+        <div class="dim"><div class="dh"><span class="dname">Maintenance risk</span><span class="dval" style="color:var(--t-hot)">66</span></div><div class="dbar"><i data-fill="66" style="background:var(--t-hot)"></i></div></div>
+        <div class="dim"><div class="dh"><span class="dname">Controls health</span><span class="dval" style="color:var(--t-cool)">79</span></div><div class="dbar"><i data-fill="79" style="background:var(--t-cool)"></i></div></div>
+      </div>
+      <p class="air-foot">Illustrative score · every rating opens to its evidence</p>
+    </div>
+  </div>
+</section>
+
+<!-- MAPLE -->
+<section class="section" id="maple">
+  <div class="wrap maple-grid">
+    <div class="rv">
+      <span class="kicker">04 — The advisor</span>
+      <h2 class="h2" style="margin:22px 0">Meet Maple. Your virtual commissioning engineer.</h2>
+      <p class="lead" style="margin-bottom:22px">Ask why the third floor runs hot, why a unit's runtime jumped, or what to fix first before budget season. Maple answers like a senior engineer — with the trend data, the root cause, and the recommended action. Not a chatbot. A colleague grounded in your building's data.</p>
+      <a class="tlink" href="request.html">See Maple on your data</a>
+    </div>
+    <div class="console rv">
+      <div class="console__bar">
+        <span class="d" aria-hidden="true"></span><span class="d" aria-hidden="true"></span><span class="d" aria-hidden="true"></span>
+        <span class="ttl" style="margin-left:14px">maple · commissioning advisor</span>
+      </div>
+      <div class="console__body">
+        <p class="q"><span class="pr">▸</span> Why did our gas usage jump in March?</p>
+        <div class="a-head">
+          <svg class="leaf" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 3 L13.5 8 L18 6.5 L15.5 10.5 L21 12 L15.5 13.5 L18 17.5 L13.5 16 L12 21 L10.5 16 L6 17.5 L8.5 13.5 L3 12 L8.5 10.5 L6 6.5 L10.5 8 Z" stroke="#34e0b4" stroke-width="1.3" stroke-linejoin="round"/></svg>
+          <span class="nm">Maple</span>
+        </div>
+        <p class="diag" data-text="Three of your six rooftop units began heating and cooling simultaneously on March 4th, after a sequence change on RTU-3 propagated a faulty discharge-air setpoint. Estimated cost so far: $4,120. Evidence below."></p>
+        <div class="trace" data-preset="gas-spike" data-color="hot" data-axis="1" data-ticks="mar 1,mar 14,mar 27"></div>
+        <div class="cites">
+          <span class="cite">RTU-3 · DAT setpoint · 03/04</span>
+          <span class="cite">RTU-1/2/3 · htg + clg cmd</span>
+          <span class="cite">Gas meter · daily · 03/01–03/27</span>
+        </div>
+        <div class="rec">
+          <p><strong style="color:var(--bright)">Recommended:</strong> restore the prior reset schedule — about 30 minutes for your controls contractor.</p>
+          <span class="imp">$4,120 so far</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- RESULTS -->
+<section class="section section--tight" id="results">
+  <div class="wrap">
+    <div class="eyebrow-row rv">
+      <span class="kicker">05 — Proof</span>
+      <h2 class="h2">Found money, on the record.</h2>
+    </div>
+    <div class="results rvg">
+      <div class="result">
+        <span class="lbl">K-12 · 220,000 sq ft</span>
+        <span class="big" data-count="105000" data-prefix="$" data-suffix="/yr">$0</span>
+        <p>In annual savings opportunities identified in one school — led by simultaneous heating and cooling and schedule faults that never tripped an alarm.</p>
+        <a class="tlink" href="request.html">Get a complimentary analysis</a>
+      </div>
+      <div class="result">
+        <span class="lbl">The Andy Warhol Museum</span>
+        <span class="big" data-count="56386" data-prefix="$">$0</span>
+        <p>Reported first-year savings — growing to $101,383 in year two — in one of the most demanding climate environments there is: art conservation.</p>
+        <a class="tlink" href="request.html">Get a complimentary analysis</a>
+      </div>
+      <div class="result">
+        <span class="lbl">Research origin</span>
+        <span class="big neutral">Carnegie Mellon</span>
+        <p>Where the Prescriptiv engine was developed — the Carnegie Mellon research behind every analysis we run.</p>
+        <a class="tlink" href="request.html">Get a complimentary analysis</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- REPORT -->
+<section class="section" id="report">
+  <div class="wrap report-grid">
+    <div class="rv">
+      <span class="kicker">06 — Reporting</span>
+      <h2 class="h2" style="margin:22px 0">The report your CFO reads to the end.</h2>
+      <p class="lead" style="margin-bottom:30px">Every analysis: your AIR score, the top findings ranked by dollar impact, what was fixed, and what it returned. One dataset, three altitudes — board, finance, operations.</p>
+      <a class="btn btn--ghost" href="request.html">Download a sample report</a>
+    </div>
+    <div class="fan rv">
+      <div class="sheet sheet--1">
+        <p class="rk">LeanFM · quarterly summary</p>
+        <p class="rt">Building performance — AIR</p>
+        <p class="rbig">74</p><p class="rsmall">AIR score · up 3 this quarter</p>
+        <div class="rr"><span>Energy efficiency</span><strong>69</strong></div>
+        <div class="rr"><span>Occupant comfort</span><strong>82</strong></div>
+        <div class="rr"><span>Maintenance risk</span><strong>66</strong></div>
+        <div class="rr"><span>Controls health</span><strong>79</strong></div>
+      </div>
+      <div class="sheet sheet--2">
+        <p class="rk">Findings · ranked by impact</p>
+        <p class="rt">Top open findings</p>
+        <div class="rr"><span>RTU-2 simul. htg/clg</span><span class="hot">$18,400</span></div>
+        <div class="rr"><span>AHU-1 economizer</span><span class="hot">$11,900</span></div>
+        <div class="rr"><span>VAV-2-08 schedule</span><span class="hot">$6,200</span></div>
+        <div class="rr"><span>DAT reset disabled</span><span class="hot">$4,100</span></div>
+        <div class="rr"><span>CHW pump staging</span><span class="hot">$3,800</span></div>
+      </div>
+      <div class="sheet sheet--3">
+        <p class="rk">Savings · identified vs captured</p>
+        <p class="rt">What was fixed, what it returned</p>
+        <div class="rbars">
+          <i style="height:62%;background:rgba(244,242,237,.14)"></i><i style="height:38%;background:var(--verified)"></i>
+          <i style="height:78%;background:rgba(244,242,237,.14)"></i><i style="height:55%;background:var(--verified)"></i>
+          <i style="height:88%;background:rgba(244,242,237,.14)"></i><i style="height:71%;background:var(--verified)"></i>
+        </div>
+        <div class="rr" style="margin-top:12px"><span>Identified</span><strong>gray</strong></div>
+        <div class="rr"><span>Captured</span><span class="good">verified only</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ROI -->
+<section class="section section--tight">
+  <div class="wrap">
+    <div class="eyebrow-row rv" style="text-align:center;margin-left:auto;margin-right:auto">
+      <span class="kicker" style="justify-content:center">07 — Your building</span>
+      <h2 class="h2">What's hiding in yours?</h2>
+    </div>
+    <div class="roi rv">
+      <div class="roi-r">
+        <span class="mono">Building type</span>
+        <div class="chips">
+          <button data-type="k12" aria-pressed="true">K-12 school</button>
+          <button data-type="highered" aria-pressed="false">Higher education</button>
+          <button data-type="museum" aria-pressed="false">Museum / cultural</button>
+          <button data-type="healthcare" aria-pressed="false">Healthcare</button>
+          <button data-type="office" aria-pressed="false">Commercial office</button>
+        </div>
+      </div>
+      <div class="roi-r">
+        <span class="mono">Building size</span>
+        <div class="srow">
+          <input type="range" id="sqft" min="50000" max="1000000" step="10000" value="220000" aria-label="Building square footage" />
+          <output id="sqftOut" for="sqft">220,000 sq ft</output>
+        </div>
+      </div>
+      <div class="roi-out">
+        <span class="mono">Estimated hidden waste</span>
+        <p class="roi-fig" id="roiFig">$0 – $0 / yr</p>
+        <p class="roi-basis">Based on $/sq ft identified across LeanFM deployments in buildings like yours.</p>
+      </div>
+      <div class="roi-cta">
+        <p class="small" style="color:var(--faint)">An estimate from deployment averages.</p>
+        <a class="btn btn--glow" href="request.html">Get the verified number <span class="arr">→</span></a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TRUST -->
+<section class="section section--tight">
+  <div class="wrap">
+    <div class="eyebrow-row rv">
+      <span class="kicker">Why teams trust it</span>
+      <h2 class="h2">Built like research. Delivered like a service.</h2>
+    </div>
+    <div class="trust rvg">
+      <div class="t"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 3 L21 7.5 V12 C21 17 17 20.5 12 22 C7 20.5 3 17 3 12 V7.5 Z"/></svg></div><h4>Born at Carnegie Mellon</h4><p>Prescriptiv, our fault-detection engine, grew out of Carnegie Mellon research.</p></div>
+      <div class="t"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg></div><h4>Explainable by design</h4><p>Every finding shows its evidence — the trend, the root cause, the dollars. No black box.</p></div>
+      <div class="t"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="4" y="10" width="16" height="11" rx="2"/><path d="M8 10V7a4 4 0 018 0v3"/></svg></div><h4>Read-only by default</h4><p>We analyze a data export. Nothing connects to your controls; nothing changes in your building.</p></div>
+      <div class="t"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 12h4l3 8 4-16 3 8h4"/></svg></div><h4>Engineers behind the engine</h4><p>Findings are reviewed by people who do commissioning before they reach you.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="section cta" id="request">
+  <div class="cta__img" aria-hidden="true"></div>
+  <div class="heatfield" aria-hidden="true" id="heatfield2"></div>
+  <div class="wrap rv">
+    <span class="kicker" style="justify-content:center" data-i18n="cta.eyebrow">Request a sample analysis</span>
+    <h2 class="h2" style="margin-top:24px" data-i18n="cta.h2">See what your building is hiding.</h2>
+    <p class="lead" data-i18n="cta.lead">Send us trend data from one building and we'll return a sample analysis — real findings with real dollar values, no commitment. We'll confirm timing on a 20-minute scoping call.</p>
+    <div class="cta__row">
+      <a class="btn btn--glow" href="mailto:nick@leanfmtech.com?subject=Sample%20analysis%20request">Request a sample analysis <span class="arr">→</span></a>
+      <a class="btn btn--ghost" href="sample-report.html">Or read a sample report first</a>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="wrap">
+    <div class="footer__cols">
+      <div class="footer__brand">
+        <a class="brand" href="index.html" aria-label="LeanFM Technologies"><img class="brand-logo" src="assets/img/leanfm-logo.png" alt="LeanFM Technologies" /></a>
+        <p class="footer__tag" data-i18n="foot.tagline">Building performance intelligence. Born at Carnegie Mellon.</p>
+      </div>
+      <div class="footer__col">
+        <p class="footer__h" data-i18n="foot.platform">Platform</p>
+        <a href="platform.html">OnPoint</a><a href="air.html">AIR</a><a href="maple.html">Maple</a><a href="fdd.html">Fault detection</a><a href="reporting.html">Executive reporting</a><a href="portfolio.html">Portfolio</a>
+      </div>
+      <div class="footer__col">
+        <p class="footer__h" data-i18n="foot.explore">Explore</p>
+        <a href="industries.html">Industries</a><a href="results.html">Results</a><a href="sample-report.html">Sample report</a><a href="methodology.html">AIR methodology</a><a href="insights.html">Insights</a>
+      </div>
+      <div class="footer__col">
+        <p class="footer__h" data-i18n="foot.company">Company</p>
+        <a href="about.html">About</a><a href="contact.html">Contact</a><a href="security.html">Security</a><a href="investors.html">Investors</a>
+      </div>
+    </div>
+    <div class="footer__bot">
+      <span>© 2026 LeanFM Technologies</span>
+      <span class="cmu" data-i18n="foot.cmu">Born at Carnegie Mellon University</span>
+      <nav><a href="privacy.html" data-i18n="foot.privacy">Privacy</a><a href="terms.html" data-i18n="foot.terms">Terms</a><a href="https://www.linkedin.com/company/leanfm-technologies" rel="noopener">LinkedIn</a></nav>
+    </div>
+  </div>
+</footer>
+
+<script src="assets/js/main-b.js?v=9"></script>
+<script src="assets/js/i18n.js?v=2"></script>
+</body>
+</html>

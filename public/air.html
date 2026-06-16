@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AIR — A score that shows its work | LeanFM</title>
+  <meta name="description" content="AIR rates building performance 0–100 across energy, comfort, maintenance risk, and controls health — computed from your BAS trend data, with the findings behind every rating." />
+  <meta property="og:title" content="AIR — A score that shows its work" />
+  <meta property="og:description" content="An explainable building performance score. Open any rating and see the equipment, fault, and dollars behind it." />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://leanfmtech.com/air.html" />
+  <meta property="og:image" content="https://leanfmtech.com/assets/img/og/air.png" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <link rel="icon" href="assets/img/favicon.ico" sizes="any" />
+  <link rel="icon" href="assets/img/icon.svg" type="image/svg+xml" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Geist:wght@400;500;600&family=Geist+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="assets/css/styles-b.css?v=15" />
+</head>
+<body>
+
+<header class="nav" id="nav">
+  <div class="nav__in">
+    <a class="brand" href="index.html" aria-label="LeanFM Technologies"><img class="brand-logo" src="assets/img/leanfm-logo.png" alt="LeanFM Technologies" /></a>
+    <nav class="nav__links" aria-label="Primary">
+      <div class="nav__item">
+        <button class="nav__trigger" aria-expanded="false" aria-haspopup="true"><span data-i18n="nav.platform">Platform</span> <span class="cv" aria-hidden="true">▾</span></button>
+        <div class="nav__menu" role="menu">
+          <a href="platform.html"><strong>OnPoint</strong><span data-i18n="sub.onpoint">The platform, end to end</span></a>
+          <a href="air.html"><strong>AIR</strong><span data-i18n="sub.air">The performance score</span></a>
+          <a href="maple.html"><strong>Maple</strong><span data-i18n="nav.maple_sub">The virtual engineer</span></a>
+          <a href="fdd.html"><strong data-i18n="nav.fdd">Fault detection</strong><span data-i18n="sub.fdd">Prescriptiv engine</span></a>
+          <a href="reporting.html"><strong data-i18n="nav.reporting">Executive reporting</strong><span data-i18n="sub.reporting">Dollars, not data dumps</span></a>
+          <a href="portfolio.html"><strong data-i18n="nav.portfolio">Portfolio</strong><span data-i18n="sub.portfolio">Every building, ranked</span></a>
+        </div>
+      </div>
+      <div class="nav__item">
+        <button class="nav__trigger" aria-expanded="false" aria-haspopup="true"><span data-i18n="nav.industries">Industries</span> <span class="cv" aria-hidden="true">▾</span></button>
+        <div class="nav__menu" role="menu">
+          <a href="industries.html#higher-ed"><strong data-i18n="nav.higher_ed">Higher education</strong></a>
+          <a href="industries.html#k12"><strong data-i18n="nav.k12">K-12 schools</strong></a>
+          <a href="industries.html#museums"><strong data-i18n="nav.museums">Museums &amp; cultural</strong></a>
+          <a href="industries.html#healthcare"><strong data-i18n="nav.healthcare">Healthcare</strong></a>
+          <a href="industries.html#commercial"><strong data-i18n="nav.commercial">Commercial real estate</strong></a>
+        </div>
+      </div>
+      <a href="results.html" class="nav__flat" data-i18n="nav.results">Results</a>
+      <div class="nav__item">
+        <button class="nav__trigger" aria-expanded="false" aria-haspopup="true"><span data-i18n="nav.company">Company</span> <span class="cv" aria-hidden="true">▾</span></button>
+        <div class="nav__menu" role="menu">
+          <a href="about.html"><strong data-i18n="nav.about">About</strong><span data-i18n="sub.about">Born at Carnegie Mellon</span></a>
+          <a href="contact.html"><strong data-i18n="nav.contact">Contact</strong><span data-i18n="sub.contact">Talk to LeanFM</span></a>
+        </div>
+      </div>
+    </nav>
+    <div class="nav__cta"><select class="langsel" aria-label="Select language" title="Language"><option value="en">EN</option><option value="es">ES</option><option value="zh">中文</option></select>
+      <a class="btn btn--ghost" href="sample-report.html" data-i18n="cta.report">See a sample report</a>
+      <a class="btn btn--glow" href="request.html?intent=sample-analysis&amp;source=header" data-i18n="cta.request">Request a sample analysis</a>
+    </div>
+    <button class="burger" aria-label="Menu" aria-expanded="false"><span></span><span></span><span></span></button>
+  </div>
+</header>
+<nav class="mobile" aria-label="Mobile">
+  <p class="mlabel" data-i18n="m.platform">Platform</p>
+  <a href="platform.html">OnPoint</a>
+  <a href="air.html">AIR</a>
+  <a href="maple.html">Maple</a><a href="fdd.html">Fault detection</a><a href="reporting.html">Executive reporting</a><a href="portfolio.html">Portfolio</a>
+  <p class="mlabel" data-i18n="m.industries">Industries</p>
+  <a href="industries.html">Industries</a>
+  <p class="mlabel" data-i18n="m.company">Company</p>
+  <a href="results.html">Results</a><a href="about.html">About</a><a href="contact.html">Contact</a>
+  <a href="sample-report.html">Sample report</a>
+  <a href="request.html?intent=sample-analysis&amp;source=header_mobile">Request a sample analysis</a>
+</nav>
+
+<!-- HERO -->
+<section class="page-hero">
+  <div class="heatfield" aria-hidden="true" id="heatfield"></div>
+  <div class="wrap page-hero__grid air">
+    <div>
+      <span class="kicker" data-i18n="air.1">AIR · Asset Intelligence Rating</span>
+      <h1 class="display" style="font-size:clamp(48px,6.4vw,96px);margin-top:20px" data-i18n-rich="air.2" data-i18n-hl="italic thermal-text">A score that <span class="italic thermal-text">shows its work.</span></h1>
+      <p class="lead" data-i18n="air.3">AIR rates building performance from 0–100 across energy efficiency, occupant comfort, maintenance risk, and controls health — computed by the Prescriptiv engine from your BAS trend data, and updated with every analysis run. Open any rating and see the findings behind it.</p>
+      <div class="btnrow"><a class="btn btn--glow" href="request.html">Get your building's AIR score <span class="arr">→</span></a></div>
+    </div>
+    <div class="arc-stage">
+      <div class="arc-wrap">
+        <svg viewBox="0 0 440 400" id="airArc" aria-label="AIR score 74 of 100">
+          <defs>
+            <linearGradient id="thermal" x1="0" y1="0" x2="1" y2="0">
+              <stop offset="0" stop-color="#6366f1"/><stop offset="0.3" stop-color="#22d3ee"/>
+              <stop offset="0.5" stop-color="#2dd4a7"/><stop offset="0.72" stop-color="#f5b020"/>
+              <stop offset="1" stop-color="#f2622e"/>
+            </linearGradient>
+          </defs>
+          <path class="arc-bg"></path>
+          <path class="arc-fg" stroke="url(#thermal)"></path>
+          <circle class="arc-ind" r="9"></circle>
+        </svg>
+        <div class="arc-center">
+          <span class="arc-score" id="airScore">0</span>
+          <span class="arc-of">/ 100 · AIR</span>
+        </div>
+      </div>
+      <div class="arc-dims">
+        <div class="dim"><div class="dh"><span class="dname" data-i18n="air.4">Energy efficiency</span><span class="dval" style="color:var(--t-warm)">69</span></div><div class="dbar"><i data-fill="69" style="background:var(--t-warm)"></i></div></div>
+        <div class="dim"><div class="dh"><span class="dname" data-i18n="air.5">Occupant comfort</span><span class="dval" style="color:var(--t-teal)">82</span></div><div class="dbar"><i data-fill="82" style="background:var(--t-teal)"></i></div></div>
+        <div class="dim"><div class="dh"><span class="dname" data-i18n="air.6">Maintenance risk</span><span class="dval" style="color:var(--t-hot)">66</span></div><div class="dbar"><i data-fill="66" style="background:var(--t-hot)"></i></div></div>
+        <div class="dim"><div class="dh"><span class="dname" data-i18n="air.7">Controls health</span><span class="dval" style="color:var(--t-cool)">79</span></div><div class="dbar"><i data-fill="79" style="background:var(--t-cool)"></i></div></div>
+      </div>
+      <p class="air-foot" data-i18n="air.8">Illustrative score · every rating opens to its evidence</p>
+    </div>
+  </div>
+</section>
+
+<div class="thermal-line thermal-line--dim"></div>
+
+<!-- WHAT IT MEASURES -->
+<section class="section">
+  <div class="wrap">
+    <div class="eyebrow-row rv">
+      <span class="kicker" data-i18n="air.9">01 — What it measures</span>
+      <h2 class="h2" data-i18n="air.10">Four dimensions. One number your whole team can use.</h2>
+    </div>
+    <div class="finds rvg" style="grid-template-columns:repeat(4,1fr)">
+      <div class="find"><h4 style="color:var(--t-warm)" data-i18n="air.11">Energy efficiency</h4><p data-i18n="air.12">How much of your energy spend does useful work — and how much leaks through faults, overlap, and excess runtime.</p></div>
+      <div class="find"><h4 style="color:var(--t-teal)" data-i18n="air.13">Occupant comfort</h4><p data-i18n="air.14">How consistently zones hold their comfort bands — and which equipment is behind the rooms people complain about.</p></div>
+      <div class="find"><h4 style="color:var(--t-hot)" data-i18n="air.15">Maintenance risk</h4><p data-i18n="air.16">Early behavioral signatures of failing equipment — cycling, hunting, drift — surfaced before they become work orders.</p></div>
+      <div class="find"><h4 style="color:var(--t-cool)" data-i18n="air.17">Controls health</h4><p data-i18n="air.18">Whether your sequences still do what they were designed to — resets engaging, loops stable, schedules honest.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- EXPLAINABILITY -->
+<section class="section air-sec">
+  <div class="wrap">
+    <div class="eyebrow-row rv">
+      <span class="kicker" data-i18n="air.19">02 — Explainability</span>
+      <h2 class="h2" data-i18n="air.20">From score to setpoint in two clicks.</h2>
+      <p class="lead" data-i18n="air.21">A score nobody can interrogate is a score nobody trusts. Every AIR rating opens to its findings; every finding opens to the trend data that produced it.</p>
+    </div>
+    <div class="finds rvg" style="grid-template-columns:repeat(3,1fr)">
+      <div class="find"><span class="who" style="font-family:var(--font-mono);font-size:11px;color:var(--faint);letter-spacing:.06em" data-i18n="air.22">STEP 01</span><h4 style="margin-top:10px" data-i18n="air.23">The score</h4><p data-i18n="air.24">AIR 74, with maintenance risk down 2 this run. That movement is a question worth asking.</p></div>
+      <div class="find"><span class="who" style="font-family:var(--font-mono);font-size:11px;color:var(--faint);letter-spacing:.06em" data-i18n="air.25">STEP 02</span><h4 style="margin-top:10px" data-i18n="air.26">The findings</h4><p data-i18n="air.27">Open the rating: six maintenance findings, ranked. The top one is a short-cycling supply fan on AHU-3.</p></div>
+      <div class="find"><span class="who" style="font-family:var(--font-mono);font-size:11px;color:var(--faint);letter-spacing:.06em" data-i18n="air.28">STEP 03</span><h4 style="margin-top:10px" data-i18n="air.29">The evidence</h4><p data-i18n="air.30">Open the finding: the actual trend, the diagnosis, the recommended fix, and what it's worth annually.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- FOR OPS / FOR FINANCE -->
+<section class="section">
+  <div class="wrap">
+    <div class="duo">
+      <div class="rv">
+        <span class="kicker" data-i18n="air.31">03 — For operations</span>
+        <h3 class="h3" style="margin:18px 0 14px" data-i18n="air.32">Your operators get a punch list.</h3>
+        <p class="lead" data-i18n="air.33">Findings ranked by dollar impact, each with the evidence and the fix — many of them schedule and setpoint changes your team can make in normal maintenance windows, not capital projects.</p>
+      </div>
+      <div class="rv">
+        <span class="kicker" data-i18n="air.34">04 — For finance</span>
+        <h3 class="h3" style="margin:18px 0 14px" data-i18n="air.35">Your CFO gets a defensible metric.</h3>
+        <p class="lead" data-i18n="air.36">One number that moves when the building improves, with an auditable trail from score movement to the work that caused it. Budget requests stop being arguments and start being evidence.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- OVER TIME -->
+<section class="section air-sec">
+  <div class="wrap air-grid" style="align-items:center">
+    <div class="rv">
+      <span class="kicker" data-i18n="air.37">05 — Over time</span>
+      <h2 class="h2" style="margin:22px 0" data-i18n="air.38">The number that tracks the work.</h2>
+      <p class="lead" style="margin-bottom:24px" data-i18n="air.39">AIR is recalculated with every analysis run, so fixes show up in the score — and backsliding shows up too. The trend line becomes the operations story you bring to leadership.</p>
+      <div class="note-card">
+        <p class="small" style="color:var(--mute)"><strong style="color:var(--bright);font-weight:500">How it's calculated:</strong> AIR weights findings by verified dollar impact, comfort deviation, and failure-risk signatures, normalized for building size and type. <a class="tlink" href="methodology.html">Read the full AIR methodology</a>.</p>
+      </div>
+    </div>
+    <div class="console rv">
+      <div class="console__bar"><span class="ttl" data-i18n="air.40">AIR · trailing 12 months</span><span class="ttl" style="margin-left:auto;color:var(--verified)" data-i18n="air.41">▲ trending up</span></div>
+      <div class="console__body">
+        <div class="trace" data-preset="air-up" data-color="teal" data-axis="1" data-ticks="12 mo ago,6 mo ago,now" data-duration="1000"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="section cta">
+  <div class="heatfield" aria-hidden="true" id="heatfield2"></div>
+  <div class="wrap rv">
+    <span class="kicker" style="justify-content:center" data-i18n="air.42">Get your building's AIR score</span>
+    <h2 class="h2" style="margin-top:24px" data-i18n="air.43">See what your building scores today.</h2>
+    <p class="lead" data-i18n="air.44">The sample analysis includes your building's first AIR score — every rating opened to its evidence, walked through with our engineers.</p>
+    <div class="cta__row">
+      <a class="btn btn--glow" href="request.html">Request a sample analysis <span class="arr">→</span></a>
+      <a class="tlink" href="maple.html">AIR shows where you stand. Maple explains why</a>
+    </div>
+  </div>
+</section>
+
+<footer class="footer">
+  <div class="wrap">
+    <div class="footer__cols">
+      <div class="footer__brand">
+        <a class="brand" href="index.html" aria-label="LeanFM Technologies"><img class="brand-logo" src="assets/img/leanfm-logo.png" alt="LeanFM Technologies" /></a>
+        <p class="footer__tag" data-i18n="foot.tagline">Building performance intelligence. Born at Carnegie Mellon.</p>
+      </div>
+      <div class="footer__col">
+        <p class="footer__h" data-i18n="foot.platform">Platform</p>
+        <a href="platform.html">OnPoint</a><a href="air.html">AIR</a><a href="maple.html">Maple</a><a href="fdd.html">Fault detection</a><a href="reporting.html">Executive reporting</a><a href="portfolio.html">Portfolio</a>
+      </div>
+      <div class="footer__col">
+        <p class="footer__h" data-i18n="foot.explore">Explore</p>
+        <a href="industries.html">Industries</a><a href="results.html">Results</a><a href="sample-report.html">Sample report</a><a href="methodology.html">AIR methodology</a><a href="insights.html">Insights</a>
+      </div>
+      <div class="footer__col">
+        <p class="footer__h" data-i18n="foot.company">Company</p>
+        <a href="about.html">About</a><a href="contact.html">Contact</a><a href="security.html">Security</a><a href="investors.html">Investors</a>
+      </div>
+    </div>
+    <div class="footer__bot">
+      <span>© 2026 LeanFM Technologies</span>
+      <span class="cmu" data-i18n="foot.cmu">Born at Carnegie Mellon University</span>
+      <nav><a href="privacy.html" data-i18n="foot.privacy">Privacy</a><a href="terms.html" data-i18n="foot.terms">Terms</a><a href="https://www.linkedin.com/company/leanfm-technologies" rel="noopener">LinkedIn</a></nav>
+    </div>
+  </div>
+</footer>
+
+<script src="assets/js/main-b.js?v=9"></script>
+<script src="assets/js/i18n.js?v=2"></script>
+<script src="assets/i18n/air.js?v=1"></script>
+</body>
+</html>

@@ -10,48 +10,33 @@ const nextConfig = {
   // Disable x-powered-by header for security
   poweredByHeader: false,
   async redirects() {
-    return [
-      {
-        source: '/industries/hospitals',
-        destination: '/sample-analysis',
-        permanent: false,
-      },
-      {
-        source: '/industries/hotels',
-        destination: '/sample-analysis',
-        permanent: false,
-      },
-      {
-        source: '/industries/k-12',
-        destination: '/solutions/k-12-schools',
-        permanent: false,
-      },
-      {
-        source: '/industries/museums',
-        destination: '/solutions/museums',
-        permanent: false,
-      },
-      {
-        source: '/industries/universities',
-        destination: '/solutions/universities',
-        permanent: false,
-      },
-      {
-        source: '/industries/offices',
-        destination: '/solutions/commercial-real-estate',
-        permanent: false,
-      },
-      {
-        source: '/solutions/hospitals',
-        destination: '/sample-analysis',
-        permanent: false,
-      },
-      {
-        source: '/solutions/hotels',
-        destination: '/sample-analysis',
-        permanent: false,
-      },
+    // Old Next.js routes -> new static .html pages. The functional routes
+    // /start, /k12, /historical-report, /admin and /api are intentionally NOT
+    // redirected (they remain live React/API routes in this same app).
+    const moves = [
+      ['/explore', '/platform.html'], ['/product', '/platform.html'], ['/onpoint', '/platform.html'],
+      ['/prescriptiv', '/platform.html'], ['/how-it-works', '/platform.html'],
+      ['/building-data-to-action', '/platform.html'], ['/what-we-find', '/fdd.html'],
+      ['/air', '/air.html'], ['/maple', '/maple.html'], ['/results', '/results.html'],
+      ['/company/about', '/about.html'], ['/investors', '/investors.html'],
+      ['/powering-the-ai-economy', '/insights-hidden-waste.html'],
+      ['/industries', '/industries.html'], ['/solutions', '/industries.html'],
+      ['/solutions/universities', '/industries.html#higher-ed'], ['/solutions/k-12-schools', '/industries.html#k12'],
+      ['/solutions/museums', '/industries.html#museums'], ['/solutions/commercial-real-estate', '/industries.html#commercial'],
+      ['/solutions/hospitals', '/industries.html#healthcare'], ['/solutions/hotels', '/industries.html'],
+      ['/industries/higher-education', '/industries.html#higher-ed'], ['/industries/universities', '/industries.html#higher-ed'],
+      ['/industries/k12', '/industries.html#k12'], ['/industries/k-12', '/industries.html#k12'],
+      ['/industries/museums', '/industries.html#museums'], ['/industries/hospitals', '/industries.html#healthcare'],
+      ['/industries/offices', '/industries.html#commercial'], ['/industries/hotels', '/industries.html'],
+      ['/sample-analysis', '/request.html'], ['/pricing', '/request.html'], ['/sample', '/sample-report.html'],
+      ['/security', '/security.html'], ['/privacy', '/privacy.html'], ['/terms', '/terms.html'],
+      ['/contact', '/contact.html'],
     ]
+    return moves.map(([source, destination]) => ({ source, destination, permanent: true }))
+  },
+  async rewrites() {
+    // Serve the new static homepage at "/" (public/index.html).
+    return [{ source: '/', destination: '/index.html' }]
   },
 }
 

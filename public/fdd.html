@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Fault Detection &amp; Diagnostics — Find what alarms miss | LeanFM</title>
+  <meta name="description" content="Prescriptiv, LeanFM's fault-detection engine, reads your BAS trend data to find the faults alarms can't see — simultaneous heating/cooling, economizer faults, schedule drift — ranked by dollar impact." />
+  <meta property="og:title" content="Fault Detection &amp; Diagnostics — find what alarms miss" />
+  <meta property="og:description" content="Eight fault types alarms never catch, detected from data you already have and ranked in dollars. Powered by Prescriptiv." />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://leanfmtech.com/fdd.html" />
+  <meta property="og:image" content="https://leanfmtech.com/assets/img/og/fdd.png" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <link rel="icon" href="assets/img/favicon.ico" sizes="any" />
+  <link rel="icon" href="assets/img/icon.svg" type="image/svg+xml" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Geist:wght@400;500;600&family=Geist+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="assets/css/styles-b.css?v=15" />
+</head>
+<body>
+
+<header class="nav" id="nav">
+  <div class="nav__in">
+    <a class="brand" href="index.html" aria-label="LeanFM Technologies"><img class="brand-logo" src="assets/img/leanfm-logo.png" alt="LeanFM Technologies" /></a>
+    <nav class="nav__links" aria-label="Primary">
+      <div class="nav__item">
+        <button class="nav__trigger" aria-expanded="false" aria-haspopup="true"><span data-i18n="nav.platform">Platform</span> <span class="cv" aria-hidden="true">▾</span></button>
+        <div class="nav__menu" role="menu">
+          <a href="platform.html"><strong>OnPoint</strong><span data-i18n="sub.onpoint">The platform, end to end</span></a>
+          <a href="air.html"><strong>AIR</strong><span data-i18n="sub.air">The performance score</span></a>
+          <a href="maple.html"><strong>Maple</strong><span data-i18n="nav.maple_sub">The virtual engineer</span></a>
+          <a href="fdd.html"><strong data-i18n="nav.fdd">Fault detection</strong><span data-i18n="sub.fdd">Prescriptiv engine</span></a>
+          <a href="reporting.html"><strong data-i18n="nav.reporting">Executive reporting</strong><span data-i18n="sub.reporting">Dollars, not data dumps</span></a>
+          <a href="portfolio.html"><strong data-i18n="nav.portfolio">Portfolio</strong><span data-i18n="sub.portfolio">Every building, ranked</span></a>
+        </div>
+      </div>
+      <div class="nav__item">
+        <button class="nav__trigger" aria-expanded="false" aria-haspopup="true"><span data-i18n="nav.industries">Industries</span> <span class="cv" aria-hidden="true">▾</span></button>
+        <div class="nav__menu" role="menu">
+          <a href="industries.html#higher-ed"><strong data-i18n="nav.higher_ed">Higher education</strong></a>
+          <a href="industries.html#k12"><strong data-i18n="nav.k12">K-12 schools</strong></a>
+          <a href="industries.html#museums"><strong data-i18n="nav.museums">Museums &amp; cultural</strong></a>
+          <a href="industries.html#healthcare"><strong data-i18n="nav.healthcare">Healthcare</strong></a>
+          <a href="industries.html#commercial"><strong data-i18n="nav.commercial">Commercial real estate</strong></a>
+        </div>
+      </div>
+      <a href="results.html" class="nav__flat" data-i18n="nav.results">Results</a>
+      <div class="nav__item">
+        <button class="nav__trigger" aria-expanded="false" aria-haspopup="true"><span data-i18n="nav.company">Company</span> <span class="cv" aria-hidden="true">▾</span></button>
+        <div class="nav__menu" role="menu">
+          <a href="about.html"><strong data-i18n="nav.about">About</strong><span data-i18n="sub.about">Born at Carnegie Mellon</span></a>
+          <a href="contact.html"><strong data-i18n="nav.contact">Contact</strong><span data-i18n="sub.contact">Talk to LeanFM</span></a>
+        </div>
+      </div>
+    </nav>
+    <div class="nav__cta"><select class="langsel" aria-label="Select language" title="Language"><option value="en">EN</option><option value="es">ES</option><option value="zh">中文</option></select>
+      <a class="btn btn--ghost" href="sample-report.html" data-i18n="cta.report">See a sample report</a>
+      <a class="btn btn--glow" href="request.html?intent=sample-analysis&amp;source=header" data-i18n="cta.request">Request a sample analysis</a>
+    </div>
+    <button class="burger" aria-label="Menu" aria-expanded="false"><span></span><span></span><span></span></button>
+  </div>
+</header>
+<nav class="mobile" aria-label="Mobile">
+  <p class="mlabel" data-i18n="m.platform">Platform</p>
+  <a href="platform.html">OnPoint</a><a href="air.html">AIR</a><a href="maple.html">Maple</a><a href="fdd.html">Fault detection</a><a href="reporting.html">Executive reporting</a><a href="portfolio.html">Portfolio</a>
+  <p class="mlabel" data-i18n="m.industries">Industries</p><a href="industries.html">Industries</a>
+  <p class="mlabel" data-i18n="m.company">Company</p><a href="results.html">Results</a><a href="about.html">About</a><a href="contact.html">Contact</a>
+  <a href="sample-report.html">Sample report</a><a href="request.html?intent=sample-analysis&amp;source=header_mobile">Request a sample analysis</a>
+</nav>
+
+<!-- HERO -->
+<section class="page-hero" style="padding-bottom:40px">
+  <div class="heatfield" aria-hidden="true" id="heatfield"></div>
+  <div class="wrap">
+    <span class="kicker" data-i18n="fdd.1">Fault Detection &amp; Diagnostics</span>
+    <h1 class="display" style="font-size:clamp(46px,6vw,96px);margin-top:20px" data-i18n-rich="fdd.2" data-i18n-hl="italic thermal-text">Find what alarms <span class="italic thermal-text">miss.</span></h1>
+    <p class="lead" style="max-width:62ch" data-i18n="fdd.3">Your BAS alarms when a value crosses a threshold. But the most expensive problems never cross one — they run inside the normal band, for years. Prescriptiv, our fault-detection engine, reads the trend data your BAS already produces and surfaces them, ranked by what they cost.</p>
+    <div class="btnrow"><a class="btn btn--glow" href="request.html">Request a sample analysis <span class="arr">→</span></a><a class="btn btn--ghost" href="sample-report.html" data-i18n="cta.report">See a sample report</a></div>
+  </div>
+</section>
+
+<div class="thermal-line thermal-line--dim"></div>
+
+<!-- ALARMS VS FDD -->
+<section class="section">
+  <div class="wrap">
+    <div class="eyebrow-row rv">
+      <span class="kicker" data-i18n="fdd.4">01 — The difference</span>
+      <h2 class="h2" data-i18n="fdd.5">Threshold alarms tell you when something broke. We tell you what's leaking.</h2>
+    </div>
+    <div class="case-cols rv">
+      <div>
+        <h4 class="h4" style="margin-bottom:18px;color:var(--mute)" data-i18n="fdd.6">Your BAS alarms</h4>
+        <ul>
+          <li data-i18n="fdd.7">Fire only when a value crosses a fixed limit</li>
+          <li data-i18n="fdd.8">Catch obvious, hard failures — after they happen</li>
+          <li data-i18n="fdd.9">Stay silent on waste that runs inside the normal band</li>
+          <li data-i18n="fdd.10">No ranking, no dollars, no root cause</li>
+        </ul>
+      </div>
+      <div>
+        <h4 class="h4" style="margin-bottom:18px" data-i18n="fdd.11">LeanFM fault detection</h4>
+        <ul>
+          <li class="done" data-i18n="fdd.12">Detects patterns and relationships, not just thresholds</li>
+          <li class="done" data-i18n="fdd.13">Surfaces faults that never trip an alarm</li>
+          <li class="done" data-i18n="fdd.14">Ranks every finding by annual dollar impact</li>
+          <li class="done" data-i18n="fdd.15">Shows the evidence, the root cause, and the fix</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- THE 8 FAULTS -->
+<section class="section air-sec">
+  <div class="wrap">
+    <div class="eyebrow-row rv">
+      <span class="kicker" data-i18n="fdd.16">02 — The fault library</span>
+      <h2 class="h2" data-i18n="fdd.17">Eight faults that hide in plain sight — and how we find them.</h2>
+      <p class="lead" data-i18n="fdd.18">Prescriptiv screens your trend data for each of these patterns. The library grew out of Carnegie Mellon research and keeps expanding as deployments surface new failure modes.</p>
+    </div>
+    <div class="finds rvg" style="grid-template-columns:repeat(2,1fr);gap:18px">
+      <div class="find"><div class="spark" data-preset="spark-4" data-color="hot"></div><h4 data-i18n="fdd.19">Simultaneous heating &amp; cooling</h4><p data-i18n="fdd.20">Two systems fighting in the same air — comfort holds, so nobody sees it, but you pay to heat and cool at once.</p><footer style="font-family:var(--font-mono);font-size:11.5px;letter-spacing:.04em;text-transform:uppercase;color:var(--faint);border-top:1px solid var(--hairline);padding-top:12px;margin-top:4px" data-i18n="fdd.21">Detected from valve/command overlap vs. zone temps</footer></div>
+      <div class="find"><div class="spark" data-preset="spark-2" data-color="hot"></div><h4 data-i18n="fdd.22">Economizer faults</h4><p data-i18n="fdd.23">Dampers stuck or mis-sequenced, paying for mechanical cooling during hours the weather would cool for free.</p><footer style="font-family:var(--font-mono);font-size:11.5px;letter-spacing:.04em;text-transform:uppercase;color:var(--faint);border-top:1px solid var(--hairline);padding-top:12px;margin-top:4px" data-i18n="fdd.24">Detected from damper position vs. outdoor-air temp</footer></div>
+      <div class="find"><div class="spark" data-preset="spark-3" data-color="hot"></div><h4 data-i18n="fdd.25">Schedule vs. occupancy</h4><p data-i18n="fdd.26">Equipment running nights, weekends, and early mornings for spaces that are empty.</p><footer style="font-family:var(--font-mono);font-size:11.5px;letter-spacing:.04em;text-transform:uppercase;color:var(--faint);border-top:1px solid var(--hairline);padding-top:12px;margin-top:4px" data-i18n="fdd.27">Detected from runtime vs. occupancy &amp; schedule</footer></div>
+      <div class="find"><div class="spark" data-preset="spark-1" data-color="hot"></div><h4 data-i18n="fdd.28">Sensor drift &amp; failure</h4><p data-i18n="fdd.29">Sensors reading wrong, so controls act wrong everywhere downstream — while the BAS reports normal.</p><footer style="font-family:var(--font-mono);font-size:11.5px;letter-spacing:.04em;text-transform:uppercase;color:var(--faint);border-top:1px solid var(--hairline);padding-top:12px;margin-top:4px" data-i18n="fdd.30">Detected from cross-point consistency checks</footer></div>
+      <div class="find"><div class="spark" data-preset="spark-1" data-color="hot"></div><h4 data-i18n="fdd.31">Setpoint drift</h4><p data-i18n="fdd.32">Overrides and one-off tweaks that never got reset, compounding quietly year over year.</p><footer style="font-family:var(--font-mono);font-size:11.5px;letter-spacing:.04em;text-transform:uppercase;color:var(--faint);border-top:1px solid var(--hairline);padding-top:12px;margin-top:4px" data-i18n="fdd.33">Detected from setpoint history vs. design intent</footer></div>
+      <div class="find"><div class="spark" data-preset="spark-3" data-color="hot"></div><h4 data-i18n="fdd.34">Runtime inefficiencies</h4><p data-i18n="fdd.35">Cycling, short-starts, and hours far beyond what the load actually requires.</p><footer style="font-family:var(--font-mono);font-size:11.5px;letter-spacing:.04em;text-transform:uppercase;color:var(--faint);border-top:1px solid var(--hairline);padding-top:12px;margin-top:4px" data-i18n="fdd.36">Detected from runtime &amp; cycling patterns</footer></div>
+      <div class="find"><div class="spark" data-preset="spark-4" data-color="hot"></div><h4 data-i18n="fdd.37">Control sequence problems</h4><p data-i18n="fdd.38">Loops that hunt, resets that never engage, sequences that drifted from their design intent.</p><footer style="font-family:var(--font-mono);font-size:11.5px;letter-spacing:.04em;text-transform:uppercase;color:var(--faint);border-top:1px solid var(--hairline);padding-top:12px;margin-top:4px" data-i18n="fdd.39">Detected from loop behavior &amp; reset engagement</footer></div>
+      <div class="find"><div class="spark" data-preset="spark-2" data-color="hot"></div><h4 data-i18n="fdd.40">Airflow sensor failures</h4><p data-i18n="fdd.41">Flow stations reporting fiction — boxes starve or overblow while the BAS shows everything normal.</p><footer style="font-family:var(--font-mono);font-size:11.5px;letter-spacing:.04em;text-transform:uppercase;color:var(--faint);border-top:1px solid var(--hairline);padding-top:12px;margin-top:4px" data-i18n="fdd.42">Detected from flow vs. damper &amp; command logic</footer></div>
+    </div>
+  </div>
+</section>
+
+<!-- RANKED FINDINGS -->
+<section class="section">
+  <div class="wrap">
+    <div class="eyebrow-row rv">
+      <span class="kicker" data-i18n="fdd.43">03 — The output</span>
+      <h2 class="h2" data-i18n="fdd.44">Every finding, ranked by what it costs.</h2>
+      <p class="lead" data-i18n="fdd.45">You don't get a wall of alerts. You get a prioritized list — each finding with the equipment, the evidence, the recommended fix, and the annual dollar value.</p>
+    </div>
+    <div class="report-sheet rv" style="max-width:none">
+      <p class="rk" data-i18n="fdd.46">Sample finding set · ranked by annual impact</p>
+      <table>
+        <thead><tr><th>#</th><th data-i18n="fdd.47">Finding</th><th data-i18n="fdd.48">Equipment</th><th data-i18n="fdd.49">Fix effort</th><th data-i18n="fdd.50">Est. annual impact</th></tr></thead>
+        <tbody>
+          <tr><td class="num">01</td><td data-i18n="fdd.51">Simultaneous heating and cooling, weekday occupied hours</td><td class="num">RTU-2</td><td data-i18n="fdd.52">Sequence change</td><td class="num"><span class="warm">$18,400</span></td></tr>
+          <tr><td class="num">02</td><td data-i18n="fdd.53">Economizer at minimum position through free-cooling weather</td><td class="num">AHU-1</td><td data-i18n="fdd.54">Repair / recommission</td><td class="num"><span class="warm">$11,900</span></td></tr>
+          <tr><td class="num">03</td><td data-i18n="fdd.55">Occupied schedule running 4am and weekends, space unoccupied</td><td class="num">VAV-2-08</td><td data-i18n="fdd.56">Schedule change</td><td class="num"><span class="warm">$6,200</span></td></tr>
+          <tr><td class="num">04</td><td data-i18n="fdd.57">Discharge-air reset disabled after a sequence change</td><td class="num">AHU-2</td><td data-i18n="fdd.58">Re-enable reset</td><td class="num"><span class="warm">$4,100</span></td></tr>
+          <tr><td class="num">05</td><td data-i18n="fdd.59">Chilled-water pumps staging early against false demand</td><td class="num">CHW plant</td><td data-i18n="fdd.60">Staging tune</td><td class="num"><span class="warm">$3,800</span></td></tr>
+        </tbody>
+      </table>
+      <p class="small" style="color:var(--faint);margin-top:20px" data-i18n="fdd.61">Representative of real deployments. Most top findings are schedule and sequence changes a controls contractor can make in normal maintenance windows — not capital projects.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ENGINE + HUMANS -->
+<section class="section air-sec">
+  <div class="wrap">
+    <div class="duo">
+      <div class="rv">
+        <span class="kicker" data-i18n="fdd.62">04 — The engine</span>
+        <h3 class="h3" style="margin:18px 0 14px" data-i18n="fdd.63">Prescriptiv does the screening.</h3>
+        <p class="lead">Developed from Carnegie Mellon research, Prescriptiv evaluates every relevant point against the fault library — relationships and patterns a threshold alarm structurally can't see. <a class="tlink" href="platform.html">See how it fits the platform</a></p>
+      </div>
+      <div class="rv">
+        <span class="kicker" data-i18n="fdd.64">05 — The engineers</span>
+        <h3 class="h3" style="margin:18px 0 14px" data-i18n="fdd.65">People review it before you see it.</h3>
+        <p class="lead" data-i18n="fdd.66">Every finding is checked by LeanFM engineers who do commissioning — so what reaches you is real, prioritized, and actionable, not a noisy feed of false positives.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CASE PULL -->
+<section class="section">
+  <div class="wrap" style="text-align:center">
+    <p class="case-num rv" data-count="105000" data-prefix="$" data-suffix="/yr" style="margin:0 auto">$0</p>
+    <p class="case-num-cap rv" style="margin:12px auto 24px;max-width:46ch" data-i18n="fdd.67">identified in a single 220,000 sq ft school — led by exactly these faults, none of which tripped an alarm.</p>
+    <a class="tlink rv" href="results.html#k12">Read the K-12 findings</a>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="section cta">
+  <div class="heatfield" aria-hidden="true" id="heatfield2"></div>
+  <div class="wrap rv">
+    <span class="kicker" style="justify-content:center" data-i18n="fdd.68">See what's hiding in your building</span>
+    <h2 class="h2" style="margin-top:24px" data-i18n="fdd.69">Point the fault library at your data.</h2>
+    <p class="lead" data-i18n="fdd.70">Send us one building's trend data and we'll return the findings — ranked, in dollars, with the evidence. No new hardware.</p>
+    <div class="cta__row">
+      <a class="btn btn--glow" href="request.html">Request a sample analysis <span class="arr">→</span></a>
+      <a class="tlink" href="sample-report.html">Or read a sample report first</a>
+    </div>
+  </div>
+</section>
+
+<footer class="footer">
+  <div class="wrap">
+    <div class="footer__cols">
+      <div class="footer__brand">
+        <a class="brand" href="index.html" aria-label="LeanFM Technologies"><img class="brand-logo" src="assets/img/leanfm-logo.png" alt="LeanFM Technologies" /></a>
+        <p class="footer__tag" data-i18n="foot.tagline">Building performance intelligence. Born at Carnegie Mellon.</p>
+      </div>
+      <div class="footer__col">
+        <p class="footer__h" data-i18n="foot.platform">Platform</p>
+        <a href="platform.html">OnPoint</a><a href="air.html">AIR</a><a href="maple.html">Maple</a><a href="fdd.html">Fault detection</a><a href="reporting.html">Executive reporting</a><a href="portfolio.html">Portfolio</a>
+      </div>
+      <div class="footer__col">
+        <p class="footer__h" data-i18n="foot.explore">Explore</p>
+        <a href="industries.html">Industries</a><a href="results.html">Results</a><a href="sample-report.html">Sample report</a><a href="methodology.html">AIR methodology</a><a href="insights.html">Insights</a>
+      </div>
+      <div class="footer__col">
+        <p class="footer__h" data-i18n="foot.company">Company</p>
+        <a href="about.html">About</a><a href="contact.html">Contact</a><a href="security.html">Security</a><a href="investors.html">Investors</a>
+      </div>
+    </div>
+    <div class="footer__bot">
+      <span>© 2026 LeanFM Technologies</span>
+      <span class="cmu" data-i18n="foot.cmu">Born at Carnegie Mellon University</span>
+      <nav><a href="privacy.html" data-i18n="foot.privacy">Privacy</a><a href="terms.html" data-i18n="foot.terms">Terms</a><a href="https://www.linkedin.com/company/leanfm-technologies" rel="noopener">LinkedIn</a></nav>
+    </div>
+  </div>
+</footer>
+
+<script src="assets/js/main-b.js?v=9"></script>
+<script src="assets/js/i18n.js?v=2"></script>
+<script src="assets/i18n/fdd.js?v=1"></script>
+</body>
+</html>

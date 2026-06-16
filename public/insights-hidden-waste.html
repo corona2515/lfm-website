@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>The 30% you can't see — why your BAS misses the costliest faults | LeanFM</title>
+  <meta name="description" content="Threshold alarms catch obvious failures. The most expensive HVAC waste runs inside the normal band, never tripping an alarm. Here's why — and how data-driven fault detection finds it." />
+  <meta property="og:title" content="The 30% you can't see" />
+  <meta property="og:description" content="Why threshold alarms miss the costliest HVAC faults — and how reading the trend data you already have surfaces them, ranked in dollars." />
+  <meta property="og:type" content="article" />
+  <meta property="og:url" content="https://leanfmtech.com/insights-hidden-waste.html" />
+  <meta property="og:image" content="https://leanfmtech.com/assets/img/og/insights-hidden-waste.png" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <link rel="icon" href="assets/img/favicon.ico" sizes="any" />
+  <link rel="icon" href="assets/img/icon.svg" type="image/svg+xml" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Geist:wght@400;500;600&family=Geist+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="assets/css/styles-b.css?v=15" />
+</head>
+<body>
+
+<header class="nav" id="nav">
+  <div class="nav__in">
+    <a class="brand" href="index.html" aria-label="LeanFM Technologies"><img class="brand-logo" src="assets/img/leanfm-logo.png" alt="LeanFM Technologies" /></a>
+    <nav class="nav__links" aria-label="Primary">
+      <div class="nav__item">
+        <button class="nav__trigger" aria-expanded="false" aria-haspopup="true"><span data-i18n="nav.platform">Platform</span> <span class="cv" aria-hidden="true">▾</span></button>
+        <div class="nav__menu" role="menu">
+          <a href="platform.html"><strong>OnPoint</strong><span data-i18n="sub.onpoint">The platform, end to end</span></a>
+          <a href="air.html"><strong>AIR</strong><span data-i18n="sub.air">The performance score</span></a>
+          <a href="maple.html"><strong>Maple</strong><span data-i18n="nav.maple_sub">The virtual engineer</span></a>
+          <a href="fdd.html"><strong data-i18n="nav.fdd">Fault detection</strong><span data-i18n="sub.fdd">Prescriptiv engine</span></a>
+          <a href="reporting.html"><strong data-i18n="nav.reporting">Executive reporting</strong><span data-i18n="sub.reporting">Dollars, not data dumps</span></a>
+          <a href="portfolio.html"><strong data-i18n="nav.portfolio">Portfolio</strong><span data-i18n="sub.portfolio">Every building, ranked</span></a>
+        </div>
+      </div>
+      <div class="nav__item">
+        <button class="nav__trigger" aria-expanded="false" aria-haspopup="true"><span data-i18n="nav.industries">Industries</span> <span class="cv" aria-hidden="true">▾</span></button>
+        <div class="nav__menu" role="menu">
+          <a href="industries.html#higher-ed"><strong data-i18n="nav.higher_ed">Higher education</strong></a>
+          <a href="industries.html#k12"><strong data-i18n="nav.k12">K-12 schools</strong></a>
+          <a href="industries.html#museums"><strong data-i18n="nav.museums">Museums &amp; cultural</strong></a>
+          <a href="industries.html#healthcare"><strong data-i18n="nav.healthcare">Healthcare</strong></a>
+          <a href="industries.html#commercial"><strong data-i18n="nav.commercial">Commercial real estate</strong></a>
+        </div>
+      </div>
+      <a href="results.html" class="nav__flat" data-i18n="nav.results">Results</a>
+      <div class="nav__item">
+        <button class="nav__trigger" aria-expanded="false" aria-haspopup="true"><span data-i18n="nav.company">Company</span> <span class="cv" aria-hidden="true">▾</span></button>
+        <div class="nav__menu" role="menu">
+          <a href="about.html"><strong data-i18n="nav.about">About</strong><span data-i18n="sub.about">Born at Carnegie Mellon</span></a>
+          <a href="contact.html"><strong data-i18n="nav.contact">Contact</strong><span data-i18n="sub.contact">Talk to LeanFM</span></a>
+        </div>
+      </div>
+    </nav>
+    <div class="nav__cta"><select class="langsel" aria-label="Select language" title="Language"><option value="en">EN</option><option value="es">ES</option><option value="zh">中文</option></select>
+      <a class="btn btn--ghost" href="sample-report.html" data-i18n="cta.report">See a sample report</a>
+      <a class="btn btn--glow" href="request.html?intent=sample-analysis&amp;source=header" data-i18n="cta.request">Request a sample analysis</a>
+    </div>
+    <button class="burger" aria-label="Menu" aria-expanded="false"><span></span><span></span><span></span></button>
+  </div>
+</header>
+<nav class="mobile" aria-label="Mobile">
+  <p class="mlabel" data-i18n="m.platform">Platform</p>
+  <a href="platform.html">OnPoint</a><a href="air.html">AIR</a><a href="maple.html">Maple</a><a href="fdd.html">Fault detection</a><a href="reporting.html">Executive reporting</a><a href="portfolio.html">Portfolio</a>
+  <p class="mlabel" data-i18n="m.industries">Industries</p><a href="industries.html">Industries</a>
+  <p class="mlabel" data-i18n="m.company">Company</p><a href="results.html">Results</a><a href="about.html">About</a><a href="contact.html">Contact</a>
+  <a href="sample-report.html">Sample report</a><a href="request.html?intent=sample-analysis&amp;source=header_mobile">Request a sample analysis</a>
+</nav>
+
+<!-- ARTICLE -->
+<article class="page-hero" style="padding-bottom:80px">
+  <div class="wrap article">
+    <p class="article__meta"><a class="tlink" href="insights.html" style="color:var(--t-warm)">← Insights</a><span>·</span><span>Fault detection</span><span>·</span><span>6 min read</span></p>
+    <h1 class="display" style="font-size:clamp(40px,5vw,76px);margin-top:18px" data-i18n="insights-hidden-waste.1">The 30% you can't see.</h1>
+    <div class="article__body">
+      <p class="lead-p" data-i18n="insights-hidden-waste.2">Threshold alarms are good at one thing: telling you when something has already broken. A fan trips, a sensor flatlines, a temperature blows past a limit — and you get a page. But the most expensive problems in a building rarely break that loudly. They run quietly, inside the normal band, for years.</p>
+
+      <p>Independent retro-commissioning research puts the hidden waste at up to <strong>30% of a building's HVAC energy spend</strong>, with a typical 3–5× return on finding and fixing it.<a href="#fn1" id="r1">¹</a> That's a staggering number, and the natural question is: if it's that large, why doesn't the building automation system already catch it?</p>
+
+      <p>The answer is structural. A BAS alarms on <em>thresholds</em> — fixed limits on individual points. That works for hard failures. It is fundamentally blind to faults that live in the <em>relationships</em> between points, where nothing crosses a limit but the building is quietly burning money.</p>
+
+      <h2 data-i18n="insights-hidden-waste.3">What "normal" hides</h2>
+
+      <p data-i18n="insights-hidden-waste.4">Consider three of the most common offenders we find:</p>
+
+      <ul>
+        <li><strong>Simultaneous heating and cooling.</strong> A unit heats and cools the same air at the same time. The space temperature stays perfectly within range — comfort holds, no alarm — while you pay for both. The cost is invisible at the point level and obvious only when you compare valve and damper commands against each other.</li>
+        <li><strong>A stuck economizer.</strong> An outdoor-air damper that should swing open on a cool day to provide free cooling instead sits at minimum. Mechanical cooling carries the load, the zone hits its setpoint, and the BAS reports a healthy building. The fault only appears when you compare damper position against outdoor-air temperature over hundreds of hours.</li>
+        <li><strong>Schedules that drift from occupancy.</strong> Equipment runs at 4am and through weekends for spaces that are empty. Every reading is in range; the building is simply conditioning nobody. You see it only by comparing runtime against how the building is actually used.</li>
+      </ul>
+
+      <p data-i18n="insights-hidden-waste.5">None of these trip an alarm. All of them cost five to six figures a year in a single building. And every one of them is sitting in trend data the building already records — it just needs to be read closely enough.</p>
+
+      <blockquote>
+        <p data-i18n="insights-hidden-waste.6">The fault isn't in any one point. It's in the pattern between them — which is exactly what a threshold can't see.</p>
+      </blockquote>
+
+      <h2 data-i18n="insights-hidden-waste.7">From thresholds to patterns</h2>
+
+      <p>This is the shift underway in building operations: from threshold alarms to <strong>data-driven fault detection and diagnostics</strong>. Instead of watching individual points for limit crossings, an FDD engine evaluates the relationships and behaviors across the whole system — valve versus temperature, damper versus weather, runtime versus schedule, this week versus design intent.</p>
+
+      <p>The hard part was never finding anomalies. It's making them <em>trustworthy</em>. A fault you can't explain is a fault no engineer will act on, and a feed full of false positives is worse than no feed at all. So the work that matters is in two places: ranking findings by what they actually cost, and showing the evidence behind every one — the trend, the root cause, the recommended fix, the dollar value.</p>
+
+      <p>That's the principle behind LeanFM. The <a href="fdd.html">Prescriptiv engine</a>, developed from Carnegie Mellon research, screens the trend data your BAS already produces; <a href="air.html">AIR</a> rolls the findings into one explainable score; and every finding opens to its evidence, reviewed by engineers who do commissioning before it ever reaches you.</p>
+
+      <h2 data-i18n="insights-hidden-waste.8">The cheapest money in the building</h2>
+
+      <p>What makes this waste worth chasing isn't just its size — it's that recovering it requires no capital project. Most of the findings are schedule and sequence changes a controls contractor can make in a normal maintenance window. No bond, no retrofit, no new sensors. In one 220,000 sq ft school, that added up to <a href="results.html#k12">$105,000 a year</a> in identified opportunity, almost all of it from faults that never tripped an alarm.</p>
+
+      <p data-i18n="insights-hidden-waste.9">The 30% has been hiding in plain sight the whole time. The only thing that's changed is that the data can finally be read closely enough to find it.</p>
+
+      <p id="fn1" class="footnote" style="margin-top:40px"><a href="#r1">1.</a> Figures from independent building retro-commissioning research. Individual results vary by building; LeanFM reports findings per building from your own data.</p>
+    </div>
+
+    <div class="article__cta">
+      <h3 class="h3" style="margin-bottom:14px" data-i18n="insights-hidden-waste.10">See what's hiding in your building.</h3>
+      <p class="lead" style="margin-bottom:24px" data-i18n="insights-hidden-waste.11">Send us one building's trend data and we'll return the findings — ranked, in dollars, with the evidence.</p>
+      <div class="cta__row" style="justify-content:flex-start">
+        <a class="btn btn--glow" href="request.html?intent=sample-analysis&amp;source=insights">Request a sample analysis <span class="arr">→</span></a>
+        <a class="tlink" href="sample-report.html">Or read a sample report</a>
+      </div>
+    </div>
+  </div>
+</article>
+
+<footer class="footer">
+  <div class="wrap">
+    <div class="footer__cols">
+      <div class="footer__brand">
+        <a class="brand" href="index.html" aria-label="LeanFM Technologies"><img class="brand-logo" src="assets/img/leanfm-logo.png" alt="LeanFM Technologies" /></a>
+        <p class="footer__tag" data-i18n="foot.tagline">Building performance intelligence. Born at Carnegie Mellon.</p>
+      </div>
+      <div class="footer__col">
+        <p class="footer__h" data-i18n="foot.platform">Platform</p>
+        <a href="platform.html">OnPoint</a><a href="air.html">AIR</a><a href="maple.html">Maple</a><a href="fdd.html">Fault detection</a><a href="reporting.html">Executive reporting</a><a href="portfolio.html">Portfolio</a>
+      </div>
+      <div class="footer__col">
+        <p class="footer__h" data-i18n="foot.explore">Explore</p>
+        <a href="industries.html">Industries</a><a href="results.html">Results</a><a href="sample-report.html">Sample report</a><a href="methodology.html">AIR methodology</a><a href="insights.html">Insights</a>
+      </div>
+      <div class="footer__col">
+        <p class="footer__h" data-i18n="foot.company">Company</p>
+        <a href="about.html">About</a><a href="contact.html">Contact</a><a href="security.html">Security</a><a href="investors.html">Investors</a>
+      </div>
+    </div>
+    <div class="footer__bot">
+      <span>© 2026 LeanFM Technologies</span>
+      <span class="cmu" data-i18n="foot.cmu">Born at Carnegie Mellon University</span>
+      <nav><a href="privacy.html" data-i18n="foot.privacy">Privacy</a><a href="terms.html" data-i18n="foot.terms">Terms</a><a href="https://www.linkedin.com/company/leanfm-technologies" rel="noopener">LinkedIn</a></nav>
+    </div>
+  </div>
+</footer>
+
+<script src="assets/js/main-b.js?v=9"></script>
+<script src="assets/js/i18n.js?v=2"></script>
+<script src="assets/i18n/insights-hidden-waste.js?v=1"></script>
+</body>
+</html>

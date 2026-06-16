@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>The AIR Methodology — How the score is calculated | LeanFM</title>
+  <meta name="description" content="How LeanFM's AIR score is built: the 0–100 scale, the four dimensions and their inputs, how findings roll up, and how buildings are kept comparable. Designed to be interrogated." />
+  <meta property="og:title" content="The AIR Methodology — how the score is calculated" />
+  <meta property="og:description" content="The scale, the four dimensions, how findings roll up, and how buildings stay comparable. AIR is meant to be interrogated." />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://leanfmtech.com/methodology.html" />
+  <meta property="og:image" content="https://leanfmtech.com/assets/img/og/methodology.png" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <link rel="icon" href="assets/img/favicon.ico" sizes="any" />
+  <link rel="icon" href="assets/img/icon.svg" type="image/svg+xml" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Geist:wght@400;500;600&family=Geist+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="assets/css/styles-b.css?v=15" />
+</head>
+<body>
+
+<header class="nav" id="nav">
+  <div class="nav__in">
+    <a class="brand" href="index.html" aria-label="LeanFM Technologies"><img class="brand-logo" src="assets/img/leanfm-logo.png" alt="LeanFM Technologies" /></a>
+    <nav class="nav__links" aria-label="Primary">
+      <div class="nav__item">
+        <button class="nav__trigger" aria-expanded="false" aria-haspopup="true"><span data-i18n="nav.platform">Platform</span> <span class="cv" aria-hidden="true">▾</span></button>
+        <div class="nav__menu" role="menu">
+          <a href="platform.html"><strong>OnPoint</strong><span data-i18n="sub.onpoint">The platform, end to end</span></a>
+          <a href="air.html"><strong>AIR</strong><span data-i18n="sub.air">The performance score</span></a>
+          <a href="maple.html"><strong>Maple</strong><span data-i18n="nav.maple_sub">The virtual engineer</span></a>
+          <a href="fdd.html"><strong data-i18n="nav.fdd">Fault detection</strong><span data-i18n="sub.fdd">Prescriptiv engine</span></a>
+          <a href="reporting.html"><strong data-i18n="nav.reporting">Executive reporting</strong><span data-i18n="sub.reporting">Dollars, not data dumps</span></a>
+          <a href="portfolio.html"><strong data-i18n="nav.portfolio">Portfolio</strong><span data-i18n="sub.portfolio">Every building, ranked</span></a>
+        </div>
+      </div>
+      <div class="nav__item">
+        <button class="nav__trigger" aria-expanded="false" aria-haspopup="true"><span data-i18n="nav.industries">Industries</span> <span class="cv" aria-hidden="true">▾</span></button>
+        <div class="nav__menu" role="menu">
+          <a href="industries.html#higher-ed"><strong data-i18n="nav.higher_ed">Higher education</strong></a>
+          <a href="industries.html#k12"><strong data-i18n="nav.k12">K-12 schools</strong></a>
+          <a href="industries.html#museums"><strong data-i18n="nav.museums">Museums &amp; cultural</strong></a>
+          <a href="industries.html#healthcare"><strong data-i18n="nav.healthcare">Healthcare</strong></a>
+          <a href="industries.html#commercial"><strong data-i18n="nav.commercial">Commercial real estate</strong></a>
+        </div>
+      </div>
+      <a href="results.html" class="nav__flat" data-i18n="nav.results">Results</a>
+      <div class="nav__item">
+        <button class="nav__trigger" aria-expanded="false" aria-haspopup="true"><span data-i18n="nav.company">Company</span> <span class="cv" aria-hidden="true">▾</span></button>
+        <div class="nav__menu" role="menu">
+          <a href="about.html"><strong data-i18n="nav.about">About</strong><span data-i18n="sub.about">Born at Carnegie Mellon</span></a>
+          <a href="contact.html"><strong data-i18n="nav.contact">Contact</strong><span data-i18n="sub.contact">Talk to LeanFM</span></a>
+        </div>
+      </div>
+    </nav>
+    <div class="nav__cta"><select class="langsel" aria-label="Select language" title="Language"><option value="en">EN</option><option value="es">ES</option><option value="zh">中文</option></select>
+      <a class="btn btn--ghost" href="sample-report.html" data-i18n="cta.report">See a sample report</a>
+      <a class="btn btn--glow" href="request.html?intent=sample-analysis&amp;source=header" data-i18n="cta.request">Request a sample analysis</a>
+    </div>
+    <button class="burger" aria-label="Menu" aria-expanded="false"><span></span><span></span><span></span></button>
+  </div>
+</header>
+<nav class="mobile" aria-label="Mobile">
+  <p class="mlabel" data-i18n="m.platform">Platform</p>
+  <a href="platform.html">OnPoint</a><a href="air.html">AIR</a><a href="maple.html">Maple</a><a href="fdd.html">Fault detection</a><a href="reporting.html">Executive reporting</a><a href="portfolio.html">Portfolio</a>
+  <p class="mlabel" data-i18n="m.industries">Industries</p><a href="industries.html">Industries</a>
+  <p class="mlabel" data-i18n="m.company">Company</p><a href="results.html">Results</a><a href="about.html">About</a><a href="contact.html">Contact</a>
+  <a href="sample-report.html">Sample report</a><a href="request.html?intent=sample-analysis&amp;source=header_mobile">Request a sample analysis</a>
+</nav>
+
+<!-- HERO -->
+<section class="page-hero" style="padding-bottom:40px">
+  <div class="heatfield" aria-hidden="true" id="heatfield"></div>
+  <div class="wrap">
+    <span class="kicker" data-i18n="methodology.1">The AIR Methodology</span>
+    <h1 class="display" style="font-size:clamp(44px,5.6vw,88px);margin-top:20px" data-i18n-rich="methodology.2" data-i18n-hl="italic thermal-text">How the score is <span class="italic thermal-text">calculated.</span></h1>
+    <p class="lead" style="max-width:64ch" data-i18n="methodology.3">AIR (Asset Intelligence Rating) is meant to be interrogated. This page explains how the score is built — the scale, the four dimensions, how findings roll up, and how we keep buildings comparable. The full technical methodology is available to evaluators on request.</p>
+    <div class="btnrow"><a class="btn btn--glow" href="request.html">Get your building's AIR score <span class="arr">→</span></a><a class="btn btn--ghost" href="contact.html">Request the full methodology</a></div>
+  </div>
+</section>
+
+<div class="thermal-line thermal-line--dim"></div>
+
+<!-- THE SCALE -->
+<section class="section">
+  <div class="wrap" style="max-width:900px">
+    <span class="kicker rv" data-i18n="methodology.4">01 — The scale</span>
+    <h2 class="h2 rv" style="margin:22px 0 18px" data-i18n="methodology.5">A 0–100 operational score.</h2>
+    <p class="lead rv" style="margin-bottom:36px">AIR rates how well a building is <em>operating</em> against what's achievable for a building of its kind — not how it was designed, and not its raw energy use. Higher is better. The bands below are guidance, not hard cutoffs; what matters is the findings behind the number and the direction it's moving.</p>
+    <div class="rv" style="margin-bottom:10px"><div style="height:8px;border-radius:6px;background:var(--spectrum)"></div></div>
+    <div class="finds rv" style="display:grid;grid-template-columns:repeat(4,1fr);gap:14px">
+      <div><p style="font-family:var(--font-mono);font-size:13px;color:#f2622e">0–59</p><p class="small" style="color:var(--mute);margin-top:4px" data-i18n="methodology.6">Significant opportunity</p></div>
+      <div><p style="font-family:var(--font-mono);font-size:13px;color:#f5b020">60–74</p><p class="small" style="color:var(--mute);margin-top:4px" data-i18n="methodology.7">Room to improve</p></div>
+      <div><p style="font-family:var(--font-mono);font-size:13px;color:#2dd4a7">75–89</p><p class="small" style="color:var(--mute);margin-top:4px" data-i18n="methodology.8">Strong</p></div>
+      <div><p style="font-family:var(--font-mono);font-size:13px;color:#22d3ee">90–100</p><p class="small" style="color:var(--mute);margin-top:4px" data-i18n="methodology.9">Excellent</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- THE FOUR DIMENSIONS -->
+<section class="section air-sec">
+  <div class="wrap">
+    <div class="eyebrow-row rv">
+      <span class="kicker" data-i18n="methodology.10">02 — The four dimensions</span>
+      <h2 class="h2" data-i18n="methodology.11">The score is a composite of four things you can act on.</h2>
+      <p class="lead" data-i18n="methodology.12">Each dimension is computed from your trend data and is itself fully traceable to the findings beneath it.</p>
+    </div>
+    <div class="report-sheet rv" style="max-width:none">
+      <p class="rk" data-i18n="methodology.13">AIR dimensions · inputs</p>
+      <table>
+        <thead><tr><th data-i18n="methodology.14">Dimension</th><th data-i18n="methodology.15">What it measures</th><th data-i18n="methodology.16">Primary inputs</th></tr></thead>
+        <tbody>
+          <tr><td><strong style="color:var(--t-warm);font-weight:500" data-i18n="methodology.17">Energy efficiency</strong></td><td data-i18n="methodology.18">How much energy spend does useful work vs. leaks through faults</td><td data-i18n="methodology.19">Simultaneous heating/cooling, economizer behavior, runtime, reset effectiveness</td></tr>
+          <tr><td><strong style="color:var(--t-teal);font-weight:500" data-i18n="methodology.20">Occupant comfort</strong></td><td data-i18n="methodology.21">How consistently zones hold their comfort bands</td><td data-i18n="methodology.22">Zone temp vs. setpoint, recovery times, deviation frequency and duration</td></tr>
+          <tr><td><strong style="color:#f2622e;font-weight:500" data-i18n="methodology.23">Maintenance risk</strong></td><td data-i18n="methodology.24">Early behavioral signatures of failing equipment</td><td data-i18n="methodology.25">Short-cycling, hunting, drift, abnormal runtime and start patterns</td></tr>
+          <tr><td><strong style="color:var(--t-cool);font-weight:500" data-i18n="methodology.26">Controls health</strong></td><td data-i18n="methodology.27">Whether sequences still perform as designed</td><td data-i18n="methodology.28">Reset engagement, loop stability, schedule adherence, setpoint integrity</td></tr>
+        </tbody>
+      </table>
+      <p class="small" style="color:var(--faint);margin-top:18px" data-i18n="methodology.29">The exact weighting of dimensions into the composite is calibrated by building type and shared, in full, with technical evaluators.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ROLL-UP + NORMALIZATION -->
+<section class="section">
+  <div class="wrap">
+    <div class="duo">
+      <div class="rv">
+        <span class="kicker" data-i18n="methodology.30">03 — How findings roll up</span>
+        <h3 class="h3" style="margin:18px 0 14px" data-i18n="methodology.31">Weighted by what it actually costs.</h3>
+        <p class="lead" data-i18n="methodology.32">Within each dimension, findings are weighted by their severity — verified dollar impact for energy, deviation magnitude and duration for comfort, and failure-risk for maintenance. A handful of expensive faults move the score more than a long tail of trivial ones, because that's where your attention should go.</p>
+      </div>
+      <div class="rv">
+        <span class="kicker" data-i18n="methodology.33">04 — How buildings stay comparable</span>
+        <h3 class="h3" style="margin:18px 0 14px" data-i18n="methodology.34">Normalized for size and type.</h3>
+        <p class="lead" data-i18n="methodology.35">A 200,000 sq ft school and a 600,000 sq ft research lab have very different baselines. AIR normalizes for building size and type so the score reflects operational performance relative to what's achievable for that class of building — which is what makes ranking a whole portfolio meaningful.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- WHAT IT IS / ISN'T -->
+<section class="section air-sec">
+  <div class="wrap">
+    <div class="eyebrow-row rv">
+      <span class="kicker" data-i18n="methodology.36">05 — Scope, honestly</span>
+      <h2 class="h2" data-i18n="methodology.37">What AIR is — and what it isn't.</h2>
+    </div>
+    <div class="case-cols rv">
+      <div>
+        <h4 class="h4" style="margin-bottom:18px" data-i18n="methodology.38">AIR is</h4>
+        <ul>
+          <li class="done" data-i18n="methodology.39">An operational-health score from your BAS trend data</li>
+          <li class="done" data-i18n="methodology.40">Fully traceable — every point of the score opens to its findings</li>
+          <li class="done" data-i18n="methodology.41">Comparable across buildings of different size and type</li>
+          <li class="done" data-i18n="methodology.42">Updated with every analysis run, so it tracks real change</li>
+        </ul>
+      </div>
+      <div>
+        <h4 class="h4" style="margin-bottom:18px;color:var(--mute)" data-i18n="methodology.43">AIR is not</h4>
+        <ul>
+          <li data-i18n="methodology.44">An energy audit or a measurement-and-verification study</li>
+          <li data-i18n="methodology.45">A code-compliance or ENERGY STAR-style benchmark rating</li>
+          <li data-i18n="methodology.46">A judgment of the building's design — it measures operation</li>
+          <li data-i18n="methodology.47">A guarantee; savings are confirmed separately, in the data</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROVENANCE -->
+<section class="section">
+  <div class="wrap" style="max-width:820px">
+    <span class="kicker rv" data-i18n="methodology.48">06 — Provenance &amp; review</span>
+    <h2 class="h2 rv" style="margin:22px 0 18px" data-i18n="methodology.49">Research lineage, human review.</h2>
+    <p class="lead rv" style="margin-bottom:16px" data-i18n="methodology.50">AIR is built on the same Prescriptiv fault-detection engine that grew out of Carnegie Mellon research, and the findings that drive the score are reviewed by LeanFM engineers who do commissioning before they reach you. The methodology evolves as deployments surface new failure modes — and every change is reflected the next time your building is analyzed.</p>
+    <div class="note-card rv">
+      <p class="small" style="color:var(--mute)"><strong style="color:var(--bright);font-weight:500">For technical evaluators:</strong> we share the full methodology — dimension weightings, normalization approach, and detection logic — under NDA. <a class="tlink" href="contact.html">Request it here</a>.</p>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="section cta">
+  <div class="heatfield" aria-hidden="true" id="heatfield2"></div>
+  <div class="wrap rv">
+    <span class="kicker" style="justify-content:center" data-i18n="methodology.51">See the score on your building</span>
+    <h2 class="h2" style="margin-top:24px" data-i18n="methodology.52">A number you can defend.</h2>
+    <p class="lead" data-i18n="methodology.53">Request a sample analysis and we'll compute your building's first AIR score — with every rating opened to its evidence.</p>
+    <div class="cta__row">
+      <a class="btn btn--glow" href="request.html">Request a sample analysis <span class="arr">→</span></a>
+      <a class="tlink" href="air.html">Back to AIR</a>
+    </div>
+  </div>
+</section>
+
+<footer class="footer">
+  <div class="wrap">
+    <div class="footer__cols">
+      <div class="footer__brand">
+        <a class="brand" href="index.html" aria-label="LeanFM Technologies"><img class="brand-logo" src="assets/img/leanfm-logo.png" alt="LeanFM Technologies" /></a>
+        <p class="footer__tag" data-i18n="foot.tagline">Building performance intelligence. Born at Carnegie Mellon.</p>
+      </div>
+      <div class="footer__col">
+        <p class="footer__h" data-i18n="foot.platform">Platform</p>
+        <a href="platform.html">OnPoint</a><a href="air.html">AIR</a><a href="maple.html">Maple</a><a href="fdd.html">Fault detection</a><a href="reporting.html">Executive reporting</a><a href="portfolio.html">Portfolio</a>
+      </div>
+      <div class="footer__col">
+        <p class="footer__h" data-i18n="foot.explore">Explore</p>
+        <a href="industries.html">Industries</a><a href="results.html">Results</a><a href="sample-report.html">Sample report</a><a href="methodology.html">AIR methodology</a><a href="insights.html">Insights</a>
+      </div>
+      <div class="footer__col">
+        <p class="footer__h" data-i18n="foot.company">Company</p>
+        <a href="about.html">About</a><a href="contact.html">Contact</a><a href="security.html">Security</a><a href="investors.html">Investors</a>
+      </div>
+    </div>
+    <div class="footer__bot">
+      <span>© 2026 LeanFM Technologies</span>
+      <span class="cmu" data-i18n="foot.cmu">Born at Carnegie Mellon University</span>
+      <nav><a href="privacy.html" data-i18n="foot.privacy">Privacy</a><a href="terms.html" data-i18n="foot.terms">Terms</a><a href="https://www.linkedin.com/company/leanfm-technologies" rel="noopener">LinkedIn</a></nav>
+    </div>
+  </div>
+</footer>
+
+<script src="assets/js/main-b.js?v=9"></script>
+<script src="assets/js/i18n.js?v=2"></script>
+<script src="assets/i18n/methodology.js?v=1"></script>
+</body>
+</html>
