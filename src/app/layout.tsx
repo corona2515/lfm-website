@@ -40,7 +40,10 @@ const dmMono = DM_Mono({
   display: 'swap',
 })
 
-const googleAnalyticsId = process.env.GOOGLE_ANALYTICS_ID
+// GA4 measurement IDs are public; fall back to the literal so analytics works
+// even if the GOOGLE_ANALYTICS_ID env var isn't set on the host. An env value
+// (e.g. a different property) still overrides it.
+const googleAnalyticsId = process.env.GOOGLE_ANALYTICS_ID || 'G-3XNEWN806F'
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_CONFIG.url),
