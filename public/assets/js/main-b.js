@@ -99,8 +99,8 @@ function runCount(node) {
   const t0 = performance.now();
   (function f(t) { const p = Math.min((t - t0) / 1100, 1); set(v * EASE(p)); if (p < 1) requestAnimationFrame(f); })(t0);
 }
-/* [data-manual] counters (the hero total) are fired by the scrub controller */
-document.querySelectorAll("[data-count]:not([data-manual])").forEach((node) =>
+/* count-up stats fire when scrolled into view — the hero total sits above the fold so it animates on load, and the safety net finishes it in hidden/reduced/no-IO contexts */
+document.querySelectorAll("[data-count]").forEach((node) =>
   onView(node, () => runCount(node), () => (node.textContent = fmtCount(node, parseFloat(node.dataset.count))), 0.6));
 
 /* dimension bars */
@@ -210,7 +210,7 @@ document.querySelectorAll(".diag").forEach((d) => {
 (function () {
   const card = document.querySelector(".roi"); if (!card) return;
   const RATES = { k12: [.25, .55], highered: [.30, .60], museum: [.40, .80], healthcare: [.40, .85], office: [.20, .45] };
-  let type = "k12", last = [0, 0];
+  let type = "k12", last = [55000, 121000];
   const chips = card.querySelectorAll(".chips button"), slider = card.querySelector("#sqft"),
         out = card.querySelector("#sqftOut"), fig = card.querySelector("#roiFig");
   const animate = (lo, hi) => {
@@ -303,7 +303,6 @@ const scrub = document.querySelector(".heroscrub");
 if (scrub) {
   const wide = matchMedia("(min-width: 810px)");
   const rail = scrub.querySelectorAll(".hs-rail span");
-  let totalFired = false;
   const onScroll = () => {
     if (scrub.classList.contains("hs-static")) return;
     const total = scrub.offsetHeight - innerHeight;
@@ -317,11 +316,6 @@ if (scrub) {
     scrub.classList.toggle("b4", p > 0.85);
     const beat = p > 0.85 ? 3 : p > 0.46 ? 2 : p > 0.26 ? 1 : 0;
     rail.forEach((s, i) => s.classList.toggle("active", i === beat));
-    if (p > 0.85 && !totalFired) {
-      totalFired = true;
-      const c = scrub.querySelector(".hs-total [data-count]");
-      if (c) runCount(c);
-    }
   };
   const applyMode = () => {
     scrub.classList.toggle("hs-static", REDUCED || !wide.matches);
