@@ -27,7 +27,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Geist:wght@400;500;600&family=Geist+Mono:wght@400;500&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="assets/css/styles-b.css?v=15" />
+  <link rel="stylesheet" href="assets/css/styles-b.css?v=16" />
 </head>
 <body>
 
@@ -98,7 +98,7 @@
   <div class="wrap">
     <div class="eyebrow-row rv">
       <span class="kicker" data-i18n="fdd.4">01 — The difference</span>
-      <h2 class="h2" data-i18n="fdd.5">Threshold alarms tell you when something broke. We tell you what's leaking.</h2>
+      <h2 class="h2" data-i18n="fdd.5">Threshold alarms tell you when something broke. We tell you the problems hiding in your data.</h2>
     </div>
     <div class="case-cols rv">
       <div>
@@ -139,7 +139,7 @@
       <div class="find"><div class="spark" data-preset="spark-1" data-color="hot"></div><h4 data-i18n="fdd.31">Setpoint drift</h4><p data-i18n="fdd.32">Overrides and one-off tweaks that never got reset, compounding quietly year over year.</p><footer style="font-family:var(--font-mono);font-size:11.5px;letter-spacing:.04em;text-transform:uppercase;color:var(--faint);border-top:1px solid var(--hairline);padding-top:12px;margin-top:4px" data-i18n="fdd.33">Detected from setpoint history vs. design intent</footer></div>
       <div class="find"><div class="spark" data-preset="spark-3" data-color="hot"></div><h4 data-i18n="fdd.34">Runtime inefficiencies</h4><p data-i18n="fdd.35">Cycling, short-starts, and hours far beyond what the load actually requires.</p><footer style="font-family:var(--font-mono);font-size:11.5px;letter-spacing:.04em;text-transform:uppercase;color:var(--faint);border-top:1px solid var(--hairline);padding-top:12px;margin-top:4px" data-i18n="fdd.36">Detected from runtime &amp; cycling patterns</footer></div>
       <div class="find"><div class="spark" data-preset="spark-4" data-color="hot"></div><h4 data-i18n="fdd.37">Control sequence problems</h4><p data-i18n="fdd.38">Loops that hunt, resets that never engage, sequences that drifted from their design intent.</p><footer style="font-family:var(--font-mono);font-size:11.5px;letter-spacing:.04em;text-transform:uppercase;color:var(--faint);border-top:1px solid var(--hairline);padding-top:12px;margin-top:4px" data-i18n="fdd.39">Detected from loop behavior &amp; reset engagement</footer></div>
-      <div class="find"><div class="spark" data-preset="spark-2" data-color="hot"></div><h4 data-i18n="fdd.40">Airflow sensor failures</h4><p data-i18n="fdd.41">Flow stations reporting fiction — boxes starve or overblow while the BAS shows everything normal.</p><footer style="font-family:var(--font-mono);font-size:11.5px;letter-spacing:.04em;text-transform:uppercase;color:var(--faint);border-top:1px solid var(--hairline);padding-top:12px;margin-top:4px" data-i18n="fdd.42">Detected from flow vs. damper &amp; command logic</footer></div>
+      <div class="find"><div class="spark" data-preset="spark-2" data-color="hot"></div><h4 data-i18n="fdd.40">Airflow sensor failures</h4><p data-i18n="fdd.41">Flow stations reading wrong — boxes starve or over-supply while the BAS shows everything normal.</p><footer style="font-family:var(--font-mono);font-size:11.5px;letter-spacing:.04em;text-transform:uppercase;color:var(--faint);border-top:1px solid var(--hairline);padding-top:12px;margin-top:4px" data-i18n="fdd.42">Detected from flow vs. damper &amp; command logic</footer></div>
     </div>
   </div>
 </section>
@@ -166,6 +166,9 @@
       </table>
       <p class="small" style="color:var(--faint);margin-top:20px" data-i18n="fdd.61">Representative of real deployments. Most top findings are schedule and sequence changes a controls contractor can make in normal maintenance windows — not capital projects.</p>
     </div>
+    <div class="note-card rv" style="margin-top:28px">
+      <p class="small"><strong style="color:var(--bright);font-weight:500">Often a fix, not a project:</strong> many of the most expensive findings are control-logic problems — a stuck or changed sequence, a schedule that drifted, a disabled reset, a setpoint override left in place. Those get fixed by changing settings, not buying equipment, so a controls contractor can make them in a normal maintenance window, often at little or no cost. Some faults do need capital work, and we flag those plainly when they do.</p>
+    </div>
   </div>
 </section>
 
@@ -179,9 +182,9 @@
         <p class="lead">Developed from Carnegie Mellon research, Prescriptiv evaluates every relevant point against the fault library — relationships and patterns a threshold alarm structurally can't see. <a class="tlink" href="platform.html">See how it fits the platform</a></p>
       </div>
       <div class="rv">
-        <span class="kicker" data-i18n="fdd.64">05 — The engineers</span>
-        <h3 class="h3" style="margin:18px 0 14px" data-i18n="fdd.65">People review it before you see it.</h3>
-        <p class="lead" data-i18n="fdd.66">Every finding is checked by LeanFM engineers who do commissioning — so what reaches you is real, prioritized, and actionable, not a noisy feed of false positives.</p>
+        <span class="kicker" data-i18n="fdd.64">05 — Track &amp; report</span>
+        <h3 class="h3" style="margin:18px 0 14px" data-i18n="fdd.65">See every issue through to fixed.</h3>
+        <p class="lead" data-i18n="fdd.66">Track each issue's status, add notes as your team works it, and see trends roll up by issue, by building, and across your portfolio — all on one dashboard.</p>
       </div>
     </div>
   </div>
@@ -215,7 +218,7 @@
     <div class="footer__cols">
       <div class="footer__brand">
         <a class="brand" href="index.html" aria-label="LeanFM Technologies"><img class="brand-logo" src="assets/img/leanfm-logo.png" alt="LeanFM Technologies" /></a>
-        <p class="footer__tag" data-i18n="foot.tagline">Building performance intelligence. Born at Carnegie Mellon.</p>
+        <p class="footer__tag" data-i18n="foot.tagline">Building performance intelligence.</p>
       </div>
       <div class="footer__col">
         <p class="footer__h" data-i18n="foot.platform">Platform</p>
@@ -238,7 +241,7 @@
   </div>
 </footer>
 
-<script src="assets/js/main-b.js?v=10"></script>
+<script src="assets/js/main-b.js?v=11"></script>
 <script src="assets/js/i18n.js?v=2"></script>
 <script src="assets/i18n/fdd.js?v=1"></script>
 </body>

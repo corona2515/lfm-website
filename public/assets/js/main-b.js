@@ -99,8 +99,8 @@ function runCount(node) {
   const t0 = performance.now();
   (function f(t) { const p = Math.min((t - t0) / 1100, 1); set(v * EASE(p)); if (p < 1) requestAnimationFrame(f); })(t0);
 }
-/* count-up stats fire when scrolled into view — the hero total sits above the fold so it animates on load, and the safety net finishes it in hidden/reduced/no-IO contexts */
-document.querySelectorAll("[data-count]").forEach((node) =>
+/* count-up stats fire when scrolled into view; the hero $-total is data-manual — fired by the scrub at the dollars beat so it counts up as it appears */
+document.querySelectorAll("[data-count]:not([data-manual])").forEach((node) =>
   onView(node, () => runCount(node), () => (node.textContent = fmtCount(node, parseFloat(node.dataset.count))), 0.6));
 
 /* dimension bars */
@@ -303,25 +303,27 @@ const scrub = document.querySelector(".heroscrub");
 if (scrub) {
   const wide = matchMedia("(min-width: 810px)");
   const rail = scrub.querySelectorAll(".hs-rail span");
-  const onScroll = () => {
+  let totalFired = false, ticking = false, lastP = -1;
+  const render = () => {
+    ticking = false;
     if (scrub.classList.contains("hs-static")) return;
     const total = scrub.offsetHeight - innerHeight;
-    const p = Math.min(Math.max(-scrub.getBoundingClientRect().top / total, 0), 1);
-    scrub.style.setProperty("--p", p.toFixed(4));
-    scrub.classList.toggle("b2", p > 0.26);
-    scrub.classList.toggle("b3", p > 0.46);
-    scrub.classList.toggle("t1", p > 0.5);
-    scrub.classList.toggle("t2", p > 0.6);
-    scrub.classList.toggle("t3", p > 0.7);
-    scrub.classList.toggle("b4", p > 0.85);
-    const beat = p > 0.85 ? 3 : p > 0.46 ? 2 : p > 0.26 ? 1 : 0;
+    const p = total > 0 ? Math.min(Math.max(-scrub.getBoundingClientRect().top / total, 0), 1) : 0;
+    if (p === lastP) return;
+    lastP = p;
+    scrub.style.setProperty("--p", p.toFixed(3));
+    const beat = p > 0.60 ? 3 : p > 0.30 ? 2 : p > 0.07 ? 1 : 0;
     rail.forEach((s, i) => s.classList.toggle("active", i === beat));
+    if (p > 0.61 && !totalFired) { totalFired = true; const c = scrub.querySelector(".hs-total [data-count]"); if (c) runCount(c); }
+    else if (p < 0.5) { totalFired = false; }
   };
+  const onScroll = () => { if (!ticking) { ticking = true; requestAnimationFrame(render); } };
   const applyMode = () => {
     scrub.classList.toggle("hs-static", REDUCED || !wide.matches);
-    if (!scrub.classList.contains("hs-static")) onScroll();
+    if (!scrub.classList.contains("hs-static")) { lastP = -1; render(); }
   };
   addEventListener("scroll", onScroll, { passive: true });
+  addEventListener("resize", onScroll, { passive: true });
   wide.addEventListener("change", applyMode);
   applyMode();
 }
